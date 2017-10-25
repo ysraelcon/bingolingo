@@ -42,7 +42,7 @@
 <div id="dvti">
   <h1 id="h1ti">BingoLingo</h1>
    <div id="dvlg">
-<a href="/home">Log in</a>
+<a href=""><%= user.firstnm %></a>
 </div>
 </div><!-- header -->
   
@@ -56,7 +56,14 @@
       
     </div>
     
-<div id="dvmedc"></div>
+<div id="dvmedc">
+  <p>User info</p>
+<p>First Name: <%= user.firstnm %></p>
+<p>Last Name: <%= user.lastnm %></p>
+
+   <div>
+ <a href="/logout" >Logout</a>
+</div>
     
 </div><!-- middle -->
   
