@@ -28,7 +28,7 @@ Ap.get("/tabs",function(req,res){
 
 
 Ap.post('/signup',pssp.authenticate('register',{
- successRedirect:'/tabs',
+ successRedirect:'/profile',
  failureRedirect:'/home',
  failureFlash:true
 }));//post
