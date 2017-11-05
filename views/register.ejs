@@ -9,14 +9,14 @@
   
   
  <div class="container">
- <h1>login here:</h1>
+ <h1>Register here:</h1>
    <hr>
    <% if(message.length>0){ %>
      <div class="alert alert-danger"><%= message %></div>
    <% } %>
 </div>
   
-  <form action="/login" method="post">
+  <form action="/register" method="post">
 <div class="form-group">
 <label for="email">email</label>
 <input type="email" class="form-control" name="email" required>
@@ -28,12 +28,13 @@
 <input type="password" class="form-control" name="password" required>
 
 </div>
-<button type="submit" class="btn btn-lg btn-success">Login</button>
+<button type="submit" class="btn btn-lg btn-success">Register</button>
 
 </form>
   <hr>
-  <p><a href="/register">Register</a></p>
+  <p><a href="/login">Login</a></p>
 <p><a href="/">Home</a></p>
+  
   
 </body>
 

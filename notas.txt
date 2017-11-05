@@ -1,4 +1,14 @@
-html:
+practica de: https://github.com/sikandar114/node-auth-pass-local
 
-icon
- <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+en https://www.youtube.com/watch?v=1R1lh-VLbJU&list=PLZURtcoL43SWxdWMHrL60kyoS19F_VXoc&index=2
+
+errors: 
+ https://stackoverflow.com/questions/41526065/getting-throw-er-unhandled-error-event-for-node-passport
+
+
+----
+socket.io passport
+ https://www.codementor.io/tips/0217388244/sharing-passport-js-sessions-with-both-express-and-socket-io
+ 
+ 
+ 

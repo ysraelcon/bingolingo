@@ -1,6 +1,5 @@
-var lclstrtg=require('passport-local').Strategy;
-var User=require('../app/models/user');
-
+var lclstrtg=require('passport-local').Strategy,
+ User=require('../models/user');
 
 module.exports=function(pssp){
   
@@ -32,20 +31,16 @@ pssp.use('register',new lclstrtg({
 }else{
   
  var newUser=new User();
-  
+ newUser.name=req.body.name;
  newUser.email=email;
- newUser.firstnm=req.body.firstnm;
- newUser.lastnm=req.body.lastnm;
-  console.log(req.body.firstnm);
  newUser.password=newUser.generateHash(password);
-  
  newUser.save(function(err){
   if(err){throw err};
   return done(null,newUser);
   });//save
 }//else 
 });//findone
-}));//lclstrtg use register
+}));//lclstrtg use
 
 
 pssp.use('login',new lclstrtg({
@@ -60,10 +55,10 @@ pssp.use('login',new lclstrtg({
     
   if(err){return done(err);}
   if(!user){
-   return done(null,false,req.flash('loginMsg',"Incorrect username"));
+   return done(null,false,req.flash('loginMessage',"Incorrect username"));
 }//if
   if(!user.validPassword(password)){
- return done(null,false,req.flash('loginMsg',"Incorrect password"));
+ return done(null,false,req.flash('loginMessage',"Incorrect password"));
 }//if
 
 return done(null,user);
@@ -72,4 +67,8 @@ return done(null,user);
 }));//lclstrtg use
 
 };//exports
+
+
+
+
 
