@@ -6,80 +6,48 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width">
   
-  <link id="favicon" rel="icon" href="https://cdn.glitch.com/55f963f5-bf15-449c-b526-e46a7cd2b96f%2Fbingolingobw.ico?1508699920097" type="image/x-icon">
+  <link id="favicon" rel="icon"
+  href="https://cdn.glitch.com/55f963f5-bf15-449c-b526-e46a7cd2b96f%2Fbingolingovene.ico?1509504155870"
+        type="image/x-icon">
   <title>BingoLingo!</title>
 
   <!-- <link rel="stylesheet" href="/style.css"> -->
+  <!--<script src="https://code.jquery.com/jquery.js"></script>-->
   
 <style>
   *{box-sizing:border-box;}
   
- body{display:-webkit-flex;
-  -webkit-flex-direction:column;
-    border:1px solid grey;
-    height:100%;
-    width:100%;
-   margin:0px;}
-  html{
-    border:1px dotted grey;
+ html{
    height:100%;
-   margin:0px;}
-   
+  border:1px dotted grey;margin:0px;} 
+  
+ body{
+   display:flex;flex-direction:column;
+   height:100%; width:100%;
+  border:1px solid grey;margin:0px;
+   background-color:#e6e6fa;}/*#e6e6fa*/
+
   div{margin:5px;}
 
- #h1ti{
-   color:white;
-  margin:auto;
-  font-family:arial;
-  display:inline-block}
-
+/*style title..*/
 #dvti{
-  border:1px solid grey;
- border-radius:5px 55px;
   text-align:center;
-  background-color:black;}
-
+ border:1px solid grey;border-radius:5px 55px;
+  background-color:#00ff7f;}
+  
+  #h1ti{
+   display:inline-block;
+  margin:auto;
+   font-family:arial;
+   color:black;}
+/*..style title*/
+  
   #dvmed{
-   border:1px solid grey;
-   border-radius:5px;
-   height:100%;
-   display:-webkit-flex;
-  -webkit-flex-direction:column;}
+    height:100%;
+   border:1px solid grey;border-radius:5px;}
   
   
-  
-  #dvfnd{
-    border:1px solid grey;
-   border-radius:5px 20px;
-   background-color:#aaa;
-   font-family:arial;}
-
-  #dvmtb{border:1px solid grey;
-    display:-webkit-flex;
-  -webkit-flex-direction:row;
-   -webkit-justify-content:space-evenly}
-  
-  #dvmtb>div{
-  border:1px solid grey;
-  width:100%;
-  text-align:center;
-  border-radius:5px;
-  font-family:arial;}
-  
-  #dvmtb>div:hover{
-    background-color:#009A79;}
-  
-#dvmedc{border:1px solid grey;
-  height:100%;}
-  
-  #dvlg{position:absolute;
-   right:20px;
-   top:15px;}
-  #dvlg>a{color:black;
-   border:1px solid grey;
-   border-radius:5px;
-   background-color:white;
-   text-decoration:none;}
+   
   </style>
   
 </head>
@@ -87,7 +55,296 @@
 
  <%- body %>
   
+ <!-- layout de aqui para abajo -->
+  
+  
+<style>
+/*style footer..*/
+ 
+  #dvfnd{
+    border:1px solid grey;border-radius:5px 20px;
+    font-family:arial;
+    background-color:#aaa;}
+  
+/*..style footer*/
+</style>
+  
+  <div id="dvfnd">
+    Supported by <a href="https://glitch.com/" target="_blank">glitch.com</a>
+    /
+      source code: <a href="https://glitch.com/edit/#!/bingolingo-test?path=README.md:1:0" target="_blank">code</a>
+      /
+      send your : <a href="https://shrib.com/#bingolingo-suggestions" target="_blank">Suggestion</a>
+      <br>
+      Made with 
+      <img src="https://png.icons8.com/potato/color/24" title="Potato" width="24" height="24">
+       by BingoLingo Team
+      <br>
+      
+   
+</div><!-- footer -->
+  
   <!-- <script src="/client.js"></script> -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
+<script src="/socket.io/socket.io.js"></script> 
+<!--   <script src="https://cors-anywhere.herokuapp.com/https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> -->
+<script>
+
+jQuery(function($) {
+  var Sk=io.connect();
+  
+  var $dvmtbcht= $("#dvmtbcht");
+  
+  var $dvchtuc= $("#dvchtuc");
+  
+
+
+$dvmtbcht.on("click",function(e){
+ e.preventDefault();
+ Sk.emit("userva","hola");
+});//click tab chat
+  
+  
+Sk.on("usernames",function(dt){
+ var html="";
+for(var usrnm in dt){
+ html+="<tr>";
+  html+="<td>"+dt[usrnm].firstnm+" "+dt[usrnm].lastnm+"</td>";
+  html+="<td>"+(dt[usrnm].gender||"-")+"</td>";
+  html+="<td>"+(dt[usrnm].age||"-")+"</td>";
+  html+="<td>"+(dt[usrnm].country||"-")+"</td>";
+  html+="<td>"+(dt[usrnm].learning||"-")+"</td>";
+  html+="<td>"+(dt[usrnm].speaks||"-")+"</td>";
+ html+="</tr>";
+}//for
+$("#tblusrsbd").html(html);
+});//skon usernames table
+  
+ 
+  
+lige.onclick=function(){
+
+var nudiv=document.createElement("DIV");
+nudiv.id="dvicht";
+/*  
+var dvichtt=document.createElement("DIV");
+  dvichtt.id="dvichtt";
+ 
+dvichtt.innerHTML="General";
+  
+var dvichtcu=document.createElement("DIV"); 
+  dvichtcu.id="dvichtcu";
+var dvichtc=document.createElement("DIV"); 
+  dvichtc.id="dvichtc";
+var dvichtu=document.createElement("DIV"); 
+  dvichtu.id="dvichtu";
+dvichtcu.appendChild(dvichtc);
+dvichtcu.appendChild(dvichtu);
+  
+var dvichtmsg=document.createElement("DIV"); 
+  dvichtmsg.id="dvichtmsg";
+var fmisndmsg=document.createElement("form"); 
+  fmisndmsg.id="fmisndmsg";
+var inimsg=document.createElement("input"); 
+  inimsg.id="inimsg";
+  inimsg.type="text";
+  inimsg.placeholder="write your message";
+var btnimsg=document.createElement("button");
+  btnimsg.type="submit";
+  btnimsg.innerHTML="send";
+fmisndmsg.appendChild(inimsg);
+fmisndmsg.appendChild(btnimsg);
+
+dvichtmsg.appendChild(fmisndmsg);
+
+nudiv.appendChild(dvichtt);
+nudiv.appendChild(dvichtcu);
+nudiv.appendChild(dvichtmsg);  
+  */
+  /*
+  var el = $('<a href="#">test</a>');
+
+$("#div_element").append(el);
+
+el.click(function(){alert("test")});
+
+// or preferrably:
+el.on('click', function(){alert("test")});
+  */
+  
+ 
+nudiv.innerHTML='<div id="dvichtt">'+
+    '<div id="dvichttn">General</div>'+
+  '<div id="dvichttm">-</div>'+
+  '<div id="dvichttx">x</div>'+
+  '</div>'+
+  '<div id="dvichtcu">'+
+  '<div id="dvichtc"></div><div id="dvichtu"></div>'+
+  '</div>'+  
+  '<div id="dvichtmsg"><form id="fmisndmsg">'+
+  '<input type="text" id="inimsg" placeholder="write your message">'+
+  '<button id="btnimsg" type="submit">send</button>'+
+  '</form></div>';
+  
+dvchtc.appendChild(nudiv);
+  
+//$("#dvicht").draggable();
+/*  {
+  handle: $('#dvichtc', $("#dvicht"))
+});*/
+var draggableDiv = $('#dvicht').draggable();
+$('#dvichtc', draggableDiv).mousedown(function(ev) {
+  draggableDiv.draggable('disable');
+}).mouseup(function(ev) {
+  draggableDiv.draggable('enable');
+});
+  
+$("#dvicht").resizable();
+  
+  //minimize, toggle class
+  $("#dvichttm").click(function(){
+  
+    if($("#dvichttm").html()=="-"){
+    $("#dvicht").height(30);
+      $("#dvichttm").html("+");
+      $("#dvichtcu").hide();
+      $("#dvichtmsg").hide();
+      $("#dvicht").resizable("disable");
+      $('#dvicht').css('z-index', 9999);
+      
+    }//if -
+    else{
+      $("#dvicht").height(200);
+      $("#dvichttm").html("-");
+      $("#dvichtcu").show();
+      $("#dvichtmsg").show();
+      $("#dvicht").resizable("enable");
+    }//else +
+    
+    
+ });//minimizar
+  
+  
+  //cerrar
+ $("#dvichttx").click(function(){
+  $("#dvicht").remove();
+  Sk.emit("cerrgnrl");
+ });//cerrar
+
+Sk.emit("opngnrl");
+   
+};//general onclick dar dvcht
+  
+
+ 
+ 
+$("#dvchtc").on("click","#fmisndmsg",function(){
+
+$(this).submit(function(e) {
+   e.preventDefault();
+   if($("#inimsg").val()!='')
+     Sk.emit('send message', $("#inimsg").val());
+  
+  $("#inimsg").val('');
+  
+  //$("#dvichtc").scrollTop($('#dvichtc').get(0).scrollHeight);//$("#dvichtc").height()
+  
+  
+  
+  //$('#dvichtc').animate({
+  //scrollTop: $('#dvichtc').get(0).scrollHeight}, 2000);
+  
+  //var myDiv = $("#dvichtc");
+//myDiv.animate({ scrollTop: myDiv.attr("scrollHeight") - myDiv.height() }, 3000);
+  
+});//on send msg
+});//
+  
+Sk.on('new message', function(data) {
+  $("#dvichtc").append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
+  $("#dvichtc").stop().animate({ scrollTop: $("#dvichtc")[0].scrollHeight}, 300);
+});//on receive msg
+ 
+//Sk.on()
+  
+Sk.on("mndusrgnrl",function(dt){
+  var html=""
+  
+  for(var nombr in dt){
+    html+=nombr+"<br>";
+  }
+  $("#dvichtu").html("");
+  $("#dvichtu").html(html);
+  
+});//skon mandaron el usuario
+  
+
+var roomj="roomjue";  
+
+Sk.on("mndusrjue",function(dt){
+  var html=""
+  
+  for(var nombr in dt){
+    html+=nombr+"<br>";
+  }
+  $("#dvjuse").html("");
+  $("#dvjuse").html(html);
+}); //se juntaron al juego
+  
+ Sk.on('new messagejue', function(data) {
+  
+   if(/bingo/.test(data.msg)){
+     $("#dvjcon").append('<b>'+data.nick+":</b> "+data.msg+"<br/>"+
+                        "BINGO, you guessed the word!");
+   }else{
+     $("#dvjcon").append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
+   }
+  $("#dvjcon").stop().animate({ scrollTop: $("#dvjcon")[0].scrollHeight}, 100);
+});//on receive msg
+  
+  
+btncrtgm.onclick=function(){
+    console.log("crear juego");
+var nudivj=document.createElement("DIV");
+nudivj.id="dvjue";
+
+nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
+'<div id="dvjnm">Explain The Word</div>'+
+'<div id="dvjexp">Explains: <span>wordX</span'+
+'><span id="sptmr">00</span></div></div>'+
+'<div id="dvjcu">'+
+'<div id="dvjcon"></div>'+
+'<div id="dvjuse">Users</div>'+
+'</div><div id="dvjmsg">'+
+'<form id="fmjmsg" onsubmit="return false">'+
+'<input type="text" id="injmsg" placeholder="write your text..."'+
+'><input type="submit" value="Send" id="btnjsndm" >'+
+'</form></div></div>';
+
+  dvgmc.appendChild(nudivj);
+  
+  Sk.emit("entroomj",roomj);
+  
+};//crear juego
+  
+  $("#dvgmc").on("click","#fmjmsg",function(){
+
+$(this).submit(function(e) {
+   e.preventDefault();
+   if($("#injmsg").val()!='')
+     Sk.emit('send messagejue', $("#injmsg").val());
+  
+  $("#injmsg").val('');
+  
+  
+});//on send msg
+});//send msg juego
+  
+})//jquery
+</script>
   
 </body>
 </html>

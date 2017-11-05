@@ -1,0 +1,539 @@
+    <style>
+    #dvmed{
+     display:flex;
+     flex-direction:column;}
+    
+    
+      #dvmtb{border:1px solid grey;
+        display:flex;
+      flex-direction:row;
+       justify-content:space-evenly}
+    
+      
+      #dvmtb>div{
+      border:1px solid grey;
+      width:100%;
+      text-align:center;
+      border-radius:5px;
+      font-family:arial;
+      cursor:pointer;
+      background-color:white;}
+      
+      #dvmtb div:hover{
+        background-color:black;
+        color:white;}
+      
+    #dvmedc{border:1px solid grey;
+      height:100%;
+      position:relative;}
+      
+      
+    @media only screen and (min-width:400px){
+    #dvlg{
+     position:absolute;
+     top:15px;
+     right:20px;}
+    }/*media*/
+      
+      #dvlg{color:black;
+       border:1px solid grey;
+       border-radius:5px;
+       background-color:white;
+       cursor:pointer;}
+    
+    #dvmedc>div:nth-child(-n+4){
+      /*border:1px dotted grey;*/
+      height:99%;width:99%;
+      position:absolute;
+      display:none;}
+    
+    #dvchtc{background-color:white;}  
+      
+    #dvgmc{background-color:#deb887;} 
+      
+    #dvlssc{background-color:#2f4f4f;
+      color:white;}
+     
+    #dvcmmc{background-color:#0079a9;
+      color:white;}
+    
+
+    </style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    <div id="dvti">
+      <h1 id="h1ti">BingoLingo</h1>
+       <div id="dvlg" onclick="opntB(event,'#dvusrc',this)"
+        ><%= user.firstnm %></div>
+    </div><!-- header -->
+      
+      <div id="dvmed">
+        
+        <div id="dvmtb">
+    <div id="dvmtbcht"  onclick="opntB(event,'#dvchtc',this)"
+         >Chat</div>
+    <div id="dvmtbgm"  onclick="opntB(event,'#dvgmc',this)"
+         >Game</div>
+    <div id="dvmtbcmm"  onclick="opntB(event,'#dvcmmc',this)"
+         >Community</div>
+    <div id="dvmtblss"  onclick="opntB(event,'#dvlssc',this)"
+         >Lesson</div>
+          
+        </div><!-- div tabs -->
+      
+   <style>
+   #dvchtc>*>div{
+    border:1px solid grey;
+    border-radius:5px;}
+   #dvchtrnm,#dvchtunm{
+    border:1px solid grey;
+    border-radius:5px;
+    background-color:black;
+    color:white;
+    display:inline-block;
+    font-family:arial;}
+
+   #lige{
+    cursor:pointer;}
+  
+  #dvicht{
+        position:absolute;
+        left:20%; top:20%;}
+     
+/*style chat*/
+     
+   #dvicht{
+        border:1px solid grey;
+        width:240px;
+        height:200px;
+        background-color:white;
+        display:-webkit-flex;
+        -webkit-flex-direction:column;}
+      
+      #dvicht div{border:1px solid grey;
+       border-radius:5px;}
+      
+      #dvichtt{
+        text-align:center;
+        background-color:black;
+        color:white;
+        font-family:arial;
+        cursor:move;}
+     
+     #dvichtcu{display:flex;
+       flex-direction:row;
+       height:100%;}
+      
+      #dvichtc{
+        width:100%;
+        height:98%;
+        overflow-y:auto;}
+        
+      #dvichtu{
+        width:100px;
+        height:98%;
+        float:right;}
+     
+     #dvichtmsg{width:100%;}
+     #inimsg{width:70%;}
+     
+     
+ /*tabla users chat*/
+     
+#tblusrs{
+  width:100%;
+  border-collapse:collapse;}
+
+caption{
+ background-color:black;
+ color:white;
+ border:1px solid grey;
+ border-radius:5px;
+ font-family:arial;}
+ 
+th{
+  font-family:arial
+  font-weight:normal;}
+  
+tr:not(:first-child){
+  border:1px dashed grey;}
+     
+tr:not(:first-child):hover{
+  background-color: silver;}
+     
+th, td{
+    text-align: center;}
+     
+   </style>     
+
+    <div id="dvmedc">
+
+      <div id="dvchtc">
+        <div id="dvchtru">
+          <div id="dvchtr">
+          <div id="dvchtrnm">Rooms</div>
+          <div id="dvchtrc">
+            <li id="lige">General</li>
+          </div>
+          </div>
+          <div id="dvchtu">
+<table id="tblusrs">
+  <caption>Users</caption>
+  <tr>
+    <th>Name</th>
+    <th>Gender</th>
+    <th>Age</th>
+<th>Country</th>
+<th>Learning</th>
+<th>Speaks</th>
+  </tr>
+</table>
+   
+          <div id="dvchtuc"></div>
+          </div>
+          </div>
+      </div>
+
+      <div id="dvgmc">In construction.</div>
+      <div id="dvcmmc">In future.</div>
+      <div id="dvlssc">The teacher has not arrived yet.</div>
+
+<style>
+   /*div user info*/
+  
+#dvusri{
+ background-color:black;
+ color:white;
+ border:1px solid grey;
+ border-radius:5px;
+ font-family:arial;
+ text-align:center;}
+</style>        
+        
+<div id="dvusrc">
+      <div id="dvusri">User info</div>
+  
+ <form action="/edit" method="post">
+
+First Name: <input type="text"
+name="firstnm" value="<%= user.firstnm %>"><br>
+
+Last Name: <input type="text" name="lastnm" value="<%= user.lastnm %>"><br>
+
+Gender: <input type="radio" name="gender" value="M"> Male
+  <input type="radio" name="gender" value="F"> Female<br>
+
+Age: <input type="number" name="age" value="<%= user.age %>"><br>
+
+Country: <select name="country">
+<option value="">Country...</option>
+<option value="AF">Afghanistan</option>
+<option value="AL">Albania</option>
+<option value="DZ">Algeria</option>
+<option value="AS">American Samoa</option>
+<option value="AD">Andorra</option>
+<option value="AG">Angola</option>
+<option value="AI">Anguilla</option>
+<option value="AG">Antigua &amp; Barbuda</option>
+<option value="AR">Argentina</option>
+<option value="AA">Armenia</option>
+<option value="AW">Aruba</option>
+<option value="AU">Australia</option>
+<option value="AT">Austria</option>
+<option value="AZ">Azerbaijan</option>
+<option value="BS">Bahamas</option>
+<option value="BH">Bahrain</option>
+<option value="BD">Bangladesh</option>
+<option value="BB">Barbados</option>
+<option value="BY">Belarus</option>
+<option value="BE">Belgium</option>
+<option value="BZ">Belize</option>
+<option value="BJ">Benin</option>
+<option value="BM">Bermuda</option>
+<option value="BT">Bhutan</option>
+<option value="BO">Bolivia</option>
+<option value="BL">Bonaire</option>
+<option value="BA">Bosnia &amp; Herzegovina</option>
+<option value="BW">Botswana</option>
+<option value="BR">Brazil</option>
+<option value="BC">British Indian Ocean Ter</option>
+<option value="BN">Brunei</option>
+<option value="BG">Bulgaria</option>
+<option value="BF">Burkina Faso</option>
+<option value="BI">Burundi</option>
+<option value="KH">Cambodia</option>
+<option value="CM">Cameroon</option>
+<option value="CA">Canada</option>
+<option value="IC">Canary Islands</option>
+<option value="CV">Cape Verde</option>
+<option value="KY">Cayman Islands</option>
+<option value="CF">Central African Republic</option>
+<option value="TD">Chad</option>
+<option value="CD">Channel Islands</option>
+<option value="CL">Chile</option>
+<option value="CN">China</option>
+<option value="CI">Christmas Island</option>
+<option value="CS">Cocos Island</option>
+<option value="CO">Colombia</option>
+<option value="CC">Comoros</option>
+<option value="CG">Congo</option>
+<option value="CK">Cook Islands</option>
+<option value="CR">Costa Rica</option>
+<option value="CT">Cote D'Ivoire</option>
+<option value="HR">Croatia</option>
+<option value="CU">Cuba</option>
+<option value="CB">Curacao</option>
+<option value="CY">Cyprus</option>
+<option value="CZ">Czech Republic</option>
+<option value="DK">Denmark</option>
+<option value="DJ">Djibouti</option>
+<option value="DM">Dominica</option>
+<option value="DO">Dominican Republic</option>
+<option value="TM">East Timor</option>
+<option value="EC">Ecuador</option>
+<option value="EG">Egypt</option>
+<option value="SV">El Salvador</option>
+<option value="GQ">Equatorial Guinea</option>
+<option value="ER">Eritrea</option>
+<option value="EE">Estonia</option>
+<option value="ET">Ethiopia</option>
+<option value="FA">Falkland Islands</option>
+<option value="FO">Faroe Islands</option>
+<option value="FJ">Fiji</option>
+<option value="FI">Finland</option>
+<option value="FR">France</option>
+<option value="GF">French Guiana</option>
+<option value="PF">French Polynesia</option>
+<option value="FS">French Southern Ter</option>
+<option value="GA">Gabon</option>
+<option value="GM">Gambia</option>
+<option value="GE">Georgia</option>
+<option value="DE">Germany</option>
+<option value="GH">Ghana</option>
+<option value="GI">Gibraltar</option>
+<option value="GB">Great Britain</option>
+<option value="GR">Greece</option>
+<option value="GL">Greenland</option>
+<option value="GD">Grenada</option>
+<option value="GP">Guadeloupe</option>
+<option value="GU">Guam</option>
+<option value="GT">Guatemala</option>
+<option value="GN">Guinea</option>
+<option value="GY">Guyana</option>
+<option value="HT">Haiti</option>
+<option value="HW">Hawaii</option>
+<option value="HN">Honduras</option>
+<option value="HK">Hong Kong</option>
+<option value="HU">Hungary</option>
+<option value="IS">Iceland</option>
+<option value="IN">India</option>
+<option value="ID">Indonesia</option>
+<option value="IA">Iran</option>
+<option value="IQ">Iraq</option>
+<option value="IR">Ireland</option>
+<option value="IM">Isle of Man</option>
+<option value="IL">Israel</option>
+<option value="IT">Italy</option>
+<option value="JM">Jamaica</option>
+<option value="JP">Japan</option>
+<option value="JO">Jordan</option>
+<option value="KZ">Kazakhstan</option>
+<option value="KE">Kenya</option>
+<option value="KI">Kiribati</option>
+<option value="NK">Korea North</option>
+<option value="KS">Korea South</option>
+<option value="KW">Kuwait</option>
+<option value="KG">Kyrgyzstan</option>
+<option value="LA">Laos</option>
+<option value="LV">Latvia</option>
+<option value="LB">Lebanon</option>
+<option value="LS">Lesotho</option>
+<option value="LR">Liberia</option>
+<option value="LY">Libya</option>
+<option value="LI">Liechtenstein</option>
+<option value="LT">Lithuania</option>
+<option value="LU">Luxembourg</option>
+<option value="MO">Macau</option>
+<option value="MK">Macedonia</option>
+<option value="MG">Madagascar</option>
+<option value="MY">Malaysia</option>
+<option value="MW">Malawi</option>
+<option value="MV">Maldives</option>
+<option value="ML">Mali</option>
+<option value="MT">Malta</option>
+<option value="MH">Marshall Islands</option>
+<option value="MQ">Martinique</option>
+<option value="MR">Mauritania</option>
+<option value="MU">Mauritius</option>
+<option value="ME">Mayotte</option>
+<option value="MX">Mexico</option>
+<option value="MI">Midway Islands</option>
+<option value="MD">Moldova</option>
+<option value="MC">Monaco</option>
+<option value="MN">Mongolia</option>
+<option value="MS">Montserrat</option>
+<option value="MA">Morocco</option>
+<option value="MZ">Mozambique</option>
+<option value="MM">Myanmar</option>
+<option value="NA">Nambia</option>
+<option value="NU">Nauru</option>
+<option value="NP">Nepal</option>
+<option value="AN">Netherland Antilles</option>
+<option value="NL">Netherlands (Holland, Europe)</option>
+<option value="NV">Nevis</option>
+<option value="NC">New Caledonia</option>
+<option value="NZ">New Zealand</option>
+<option value="NI">Nicaragua</option>
+<option value="NE">Niger</option>
+<option value="NG">Nigeria</option>
+<option value="NW">Niue</option>
+<option value="NF">Norfolk Island</option>
+<option value="NO">Norway</option>
+<option value="OM">Oman</option>
+<option value="PK">Pakistan</option>
+<option value="PW">Palau Island</option>
+<option value="PS">Palestine</option>
+<option value="PA">Panama</option>
+<option value="PG">Papua New Guinea</option>
+<option value="PY">Paraguay</option>
+<option value="PE">Peru</option>
+<option value="PH">Philippines</option>
+<option value="PO">Pitcairn Island</option>
+<option value="PL">Poland</option>
+<option value="PT">Portugal</option>
+<option value="PR">Puerto Rico</option>
+<option value="QA">Qatar</option>
+<option value="ME">Republic of Montenegro</option>
+<option value="RS">Republic of Serbia</option>
+<option value="RE">Reunion</option>
+<option value="RO">Romania</option>
+<option value="RU">Russia</option>
+<option value="RW">Rwanda</option>
+<option value="NT">St Barthelemy</option>
+<option value="EU">St Eustatius</option>
+<option value="HE">St Helena</option>
+<option value="KN">St Kitts-Nevis</option>
+<option value="LC">St Lucia</option>
+<option value="MB">St Maarten</option>
+<option value="PM">St Pierre &amp; Miquelon</option>
+<option value="VC">St Vincent &amp; Grenadines</option>
+<option value="SP">Saipan</option>
+<option value="SO">Samoa</option>
+<option value="AS">Samoa American</option>
+<option value="SM">San Marino</option>
+<option value="ST">Sao Tome &amp; Principe</option>
+<option value="SA">Saudi Arabia</option>
+<option value="SN">Senegal</option>
+<option value="RS">Serbia</option>
+<option value="SC">Seychelles</option>
+<option value="SL">Sierra Leone</option>
+<option value="SG">Singapore</option>
+<option value="SK">Slovakia</option>
+<option value="SI">Slovenia</option>
+<option value="SB">Solomon Islands</option>
+<option value="OI">Somalia</option>
+<option value="ZA">South Africa</option>
+<option value="ES">Spain</option>
+<option value="LK">Sri Lanka</option>
+<option value="SD">Sudan</option>
+<option value="SR">Suriname</option>
+<option value="SZ">Swaziland</option>
+<option value="SE">Sweden</option>
+<option value="CH">Switzerland</option>
+<option value="SY">Syria</option>
+<option value="TA">Tahiti</option>
+<option value="TW">Taiwan</option>
+<option value="TJ">Tajikistan</option>
+<option value="TZ">Tanzania</option>
+<option value="TH">Thailand</option>
+<option value="TG">Togo</option>
+<option value="TK">Tokelau</option>
+<option value="TO">Tonga</option>
+<option value="TT">Trinidad &amp; Tobago</option>
+<option value="TN">Tunisia</option>
+<option value="TR">Turkey</option>
+<option value="TU">Turkmenistan</option>
+<option value="TC">Turks &amp; Caicos Is</option>
+<option value="TV">Tuvalu</option>
+<option value="UG">Uganda</option>
+<option value="UA">Ukraine</option>
+<option value="AE">United Arab Emirates</option>
+<option value="GB">United Kingdom</option>
+<option value="US">United States of America</option>
+<option value="UY">Uruguay</option>
+<option value="UZ">Uzbekistan</option>
+<option value="VU">Vanuatu</option>
+<option value="VS">Vatican City State</option>
+<option value="VE">Venezuela</option>
+<option value="VN">Vietnam</option>
+<option value="VB">Virgin Islands (Brit)</option>
+<option value="VA">Virgin Islands (USA)</option>
+<option value="WK">Wake Island</option>
+<option value="WF">Wallis &amp; Futana Is</option>
+<option value="YE">Yemen</option>
+<option value="ZR">Zaire</option>
+<option value="ZM">Zambia</option>
+<option value="ZW">Zimbabwe</option>
+</select><br>
+
+Learning: <input type="text" name="learning" value="<%= user.learning %>"><br>
+
+Speaks: <input type="text" name="speaks" value="<%= user.speaks %>"><br>
+
+
+<input type="submit" value="Update">
+
+</form>
+  
+</div>
+
+    </div>
+        
+    </div><!-- middle -->
+      
+   <script>
+    function opntB(evt,idnm,thel){
+      var dvmcs= document.querySelectorAll("#dvmedc>div");
+      for(var i=0;i<dvmcs.length;i++){
+        dvmcs[i].style.display="none";
+      }//for
+      document.querySelector(idnm).
+       style.display="block";
+
+      var dvmtbs=document.querySelectorAll("#dvmtb>div");
+      for(var i=0;i<dvmtbs.length;i++){
+        dvmtbs[i].style.backgroundColor="";
+        dvmtbs[i].style.color="";
+      }//for
+      
+      if(thel.id!="dvlg"){
+       var tb=document.getElementById(thel.id);
+        tb.style.backgroundColor="black";
+        tb.style.color="white";
+      }//if not dvlg
+
+    }//opentab
+     
+/*    
+lige.onclick=function(){
+
+var nudiv=document.createElement("DIV");
+nudiv.id="dvicht";
+nudiv.innerHTML='<div id="dvichtt">General</div>'+
+  '<div id="dvichtc"></div><div id="dvichtu"></div>'+
+  '<div id="dvichtmsg"><form id="fmisndmsg">'+
+  '<input type="text" id="inimsg" placeholder="write your message">'+
+  '<button type="submit">send</button></form></div>';
+
+dvchtc.appendChild(nudiv);
+  
+$("#dvicht").draggable();
+};//general onclick dar dvcht
+*/
+     
+function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}//insert after
+     
+   </script> 
