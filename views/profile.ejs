@@ -1,104 +1,343 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
- <title>Autenticación app</title>
-  
- <link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
-  <style>
-    #dvcht{display:none;}
-  </style>
-  <script src="https://code.jquery.com/jquery.js"></script>
-  
-</head>
-<body>
-  
-  
- <div class="container">
- <h1>Profile page:</h1>
-   <hr>
-<p>User info</p>
-<p>id: <%= user._id %></p>
-<p>email: <%= user.email %></p>
-<p>password: <%= user.password %></p>
-   <div>
- <a href="/logout" class="btn btn-info btn-lg pull-right">Logout</a>
-</div>
-   <hr>
-  <p><a href="/">Home</a></p>
-</div>
-  
-  <input type="button" id="btcht"
- value="chat">
-  <div id="dvcht">
-    
-    
-    <div id="dvchtu">users</div>
-    <div id="dvchtc"></div>
-    
-    <div id="dvchtmsg">
-<form id="fmsndmsg">
 
-<input type="text" id="inmsg"
- placeholder="write your message...">
-<button type="submit">
-<span class="glyphicon glyphicon-send"></span>Send</button>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-</form>
-</div>
-    
-  </div>
-  
-  <!--  scripts -->
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-
-jQuery(function($) {
- var Sk=io.connect();
+<style>
+/*style title..*/
+@media only screen and (min-width:400px){
+    #dvlg{
+     position:absolute;top:15px; right:20px;}
+    }/*media*/
       
-var $fmsndmsg = $('#fmsndmsg');
-var $inmsg = $('#inmsg');
-  
-var $dvchtc = $('#dvchtc');
-  
-var $dvchtu = $('#dvchtu');
+  #dvlg{
+    border:1px solid grey; border-radius:5px;
+    background-color:white; color:black;
+    cursor:pointer;}
+/*..style title*/
+</style>
 
-var $btcht=$("#btcht");
+<div id="dvti">
+      <h1 id="h1ti">BingoLingo</h1>
+       <div id="dvlg" onclick="opntB(event,'#dvusrc',this)"
+        ><%= user.firstnm %></div>
+    </div><!-- header -->
+
+<style>
+/*style middle..*/
+  #dvmed{
+     display:flex;flex-direction:column;}
+    
+    
+#dvmtb{
+  display:flex;flex-direction:row;justify-content:space-evenly;
+ border:1px solid grey;}
+    
+ #dvmtb>div{
+   text-align:center;
+   width:100%;
+  border:1px solid grey; border-radius:5px;
+   font-family:arial;
+   background-color:white;
+   cursor:pointer;}
+      
+  #dvmtb div:hover{
+    background-color:black;color:white;}
+      
+ #dvmedc{
+   position:relative;
+   height:100%;
+  border:1px solid grey; }
+      
+    
+    
+ #dvmedc>div:nth-child(-n+4){
+   /*border:1px dotted grey;*/
+   display:none;
+   position:absolute;
+   height:100%;width:100%;}
+
+    
+  #dvchtc{
+    border:1px dotted grey;margin:0px;
+    background-color:white;}  
+      
+  #dvgmc{
+    border:1px dotted grey;margin:0px;
+    background-color:#deb887;} 
+      
+  #dvcmmc{
+    border:1px dotted grey;margin:0px;
+    background-color:#0079a9;color:white;}
+  
+  #dvlssc{
+    border:1px dotted grey;margin:0px;
+    background-color:#2f4f4f;color:white;}
  
-$btcht.click(function(e){
-e.preventDefault();
-Sk.emit("ev1","hola");//skemt
-  $("#dvcht").show();
-  
-});
-  
-$fmsndmsg.submit(function(e) {
-  e.preventDefault();
-   if($inmsg.val()!=''){
- Sk.emit('send message',
-  $inmsg.val());}
+/*..style middle*/
+</style>
 
-$inmsg.val("");
-});//fm submit
-  
-Sk.on("new message",
- function(dt){
+      <div id="dvmed">
+        
+        <div id="dvmtb">
+    <div id="dvmtbcht"  onclick="opntB(event,'#dvchtc',this)"
+         >Chat</div>
+    <div id="dvmtbgm"  onclick="opntB(event,'#dvgmc',this)"
+         >Game</div>
+    <div id="dvmtbcmm"  onclick="opntB(event,'#dvcmmc',this)"
+         >Community</div>
+    <div id="dvmtblss"  onclick="opntB(event,'#dvlssc',this)"
+         >Lesson</div>
+          
+        </div><!-- div tabs -->
+      
+   <style>
+     /*style chat..*/
+   #dvchtc>*>div{
+    border:1px solid grey;border-radius:5px;}
 
-$dvchtc.append('<b>'+dt.nick+":</b> "+dt.msg+"<br>");
-})//skon new msg
-  
-Sk.on("usernames",
- function(dt){
-var html="";
-for(var usrnm in dt){
-html+=usrnm+"<br>";
-}//for
-$dvchtu.html(html);
-})//skon usernames
-              
-})//jQuery
-  </script>            
-  
-</body>
+  #dvchtrnm,#dvchtunm{
+    display:inline-block;
+   border:1px solid grey;border-radius:5px;
+    font-family:arial;
+    background-color:black;color:white;}
 
-</html>
+   #lige{
+    cursor:pointer;}
+  
+  #dvicht{
+        position:absolute;
+        left:20%; top:20%;}
+     
+
+#dvicht{
+  display:flex;flex-direction:column;
+  position:absolute;
+  width:240px;height:200px;
+ border:1px solid grey;
+  background-color:white;}
+        
+      
+#dvicht div{
+  border:1px solid grey;border-radius:5px;margin:0px;}
+      
+ #dvichtt{
+   display:flex;flex-direction:row;justify-content:center;
+   height:30px;
+  font-family:arial;}
+        
+  #dvichttn{
+    display:flex;flex-direction:column;justify-content:center;
+    width:80%;height:100%;
+   background-color:black;color:white;
+    cursor:move;}
+        
+      
+#dvichttm{
+   display:flex;flex-direction:column;justify-content:center;text-align:center;
+   width:10%;height:100%;
+   cursor:default;}
+      
+    
+#dvichttx{
+   display:flex;flex-direction:column;justify-content:center;text-align:center;
+   width:10%;height:100%;
+  background-color:red;color:white;
+   cursor:default;}
+     
+     
+  #dvichtcu{
+    display:flex;flex-direction:row;
+    height:100%;}
+      
+  #dvichtc{
+    overflow-y:auto; word-wrap:break-word;
+    width:100%;height:98%;}
+        
+        
+#dvichtu{
+  float:right;
+  width:100px;height:98%;}
+        
+  #dvichtmsg{
+    width:100%;}
+  #inimsg{
+    width:70%;}
+     
+ /*tabla users chat*/
+     
+#tblusrs{
+  border-collapse:collapse;
+  width:100%;}
+  
+
+caption{
+ border:1px solid grey;border-radius:5px;
+ font-family:arial;
+ background-color:black;color:white;}
+ 
+th{
+  font-family:arial;font-weight:bold;}
+  
+tr:not(:first-child){
+  border:1px dashed grey;}
+     
+tr:not(:first-child):hover{
+  background-color: silver;}
+     
+th, td{
+    text-align: center;}
+     
+</style>     
+
+    <div id="dvmedc">
+
+      <div id="dvchtc">
+        <div id="dvchtru">
+          <div id="dvchtr">
+          <div id="dvchtrnm">Rooms</div>
+          <div id="dvchtrc">
+            <li id="lige">General</li>
+          </div>
+          </div>
+          <div id="dvchtu">
+<table id="tblusrs">
+  <caption>Users</caption>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Gender</th>
+    <th>Age</th>
+<th>Country</th>
+<th>Learning</th>
+<th>Speaks</th>
+  </tr>
+  </thead>
+  <tbody id="tblusrsbd">
+  </tbody>
+</table>
+  
+          <div id="dvchtuc"></div>
+          </div>
+          </div>
+      </div>
+
+
+     
+      
+<div id="dvgmc">
+  <style>
+/*style game..*/
+#dvjue, #dvjue div{
+  border:1px solid grey;border-radius:5px;}    
+    
+#dvjue{
+  display:flex;flex-direction:column;overflow:auto;resize:both;
+  position:relative;
+  width:250px;height:250px;}
+
+#dvjnm{
+  text-align:center;
+ font-family:arial;
+  background-color:black;color:white;}
+
+#sptmr{
+  float:right;
+  border:1px solid black;}
+
+#dvjcu{
+  display:flex;flex-direction:row;
+  height:100%;}
+
+#dvjuse{
+  width:100px;height:100%;}
+
+#dvjcon{
+  overflow-y:auto;
+  width:100%;height:100%;}
+
+#injmsg{width:70%;}
+
+
+</style> 
+  <input type="button" value="create game" id="btncrtgm">    
+</div>
+      
+      
+      <div id="dvcmmc">In future.</div>
+      <div id="dvlssc">The teacher has not arrived yet.</div>
+
+<style>
+/*style div user info..*/
+  
+#dvusri{
+  text-align:center;
+ border:1px solid grey;border-radius:5px;
+  font-family:arial;
+  background-color:black;color:white;}
+  
+/*..style div user info*/
+</style>        
+        
+<div id="dvusrc">
+      <div id="dvusri">User info</div>
+ <p>First Name: <%= user.firstnm %></p>
+ <p>Last Name: <%= user.lastnm %></p>
+<p>Gender: <%= user.gender||"" %></p>
+<p>Age: <%= user.age || "" %></p>
+<p>Country: <%= user.country || "" %></p>
+<p>Learning: <%= user.learning || "" %></p>
+<p>Speaks: <%= user.speaks || "" %></p>
+
+  <a href="/edit" >Edit profile</a><br> 
+ <a href="/logout" >Logout</a>
+</div>
+
+    </div>
+        
+    </div><!-- middle -->
+      
+   <script>
+    function opntB(evt,idnm,thel){
+      var dvmcs= document.querySelectorAll("#dvmedc>div");
+      for(var i=0;i<dvmcs.length;i++){
+        dvmcs[i].style.display="none";
+      }//for
+      document.querySelector(idnm).
+       style.display="block";
+
+      var dvmtbs=document.querySelectorAll("#dvmtb>div");
+      for(var i=0;i<dvmtbs.length;i++){
+        dvmtbs[i].style.backgroundColor="";
+        dvmtbs[i].style.color="";
+      }//for
+      
+      if(thel.id!="dvlg"){
+       var tb=document.getElementById(thel.id);
+        tb.style.backgroundColor="black";
+        tb.style.color="white";
+      }//if not dvlg
+
+    }//opentab
+     
+/*    
+lige.onclick=function(){
+
+var nudiv=document.createElement("DIV");
+nudiv.id="dvicht";
+nudiv.innerHTML='<div id="dvichtt">General</div>'+
+  '<div id="dvichtc"></div><div id="dvichtu"></div>'+
+  '<div id="dvichtmsg"><form id="fmisndmsg">'+
+  '<input type="text" id="inimsg" placeholder="write your message">'+
+  '<button type="submit">send</button></form></div>';
+
+dvchtc.appendChild(nudiv);
+  
+$("#dvicht").draggable();
+};//general onclick dar dvcht
+*/
+     
+function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}//insert after
+     
+   </script>

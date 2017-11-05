@@ -1,40 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
- <title>Autenticación app</title>
- <link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
-</head>
-<body>
+<style>
+
+  #dvmed{text-align:center;}
   
+  h2{font-family:arial}
+    
+  #dvmlgi{border:1px solid grey;
+   display:inline-block;
+   text-align:center;
+   border-radius:2px;
+   margin:auto;}
   
- <div class="container">
- <h1>login here:</h1>
-   <hr>
-   <% if(message.length>0){ %>
-     <div class="alert alert-danger"><%= message %></div>
+  #dvmlgi a{color:grey;}
+  
+  #dvmlgi *{margin:2px;}
+  
+</style>
+
+<div id="dvti">
+  <h1 id="h1ti">BingoLingo</h1>
+   
+</div><!-- header -->
+  
+<div id="dvmed">
+    
+ 
+    <div id="dvmtx">
+<h2>Welcome to BingoLingo</h2>
+<h3>A language exchange page where you can chat, play games, learn lessons and more.</h3>
+</div>  
+    
+<div id="dvmlgi">
+
+<h2>BingoLingo</h2>
+  
+  <% if(msg.length>0){ %>
+     <div ><%= msg %></div>
    <% } %>
-</div>
-  
-  <form action="/login" method="post">
-<div class="form-group">
-<label for="email">email</label>
-<input type="email" class="form-control" name="email" required>
 
-</div>
+<form action="/login" method="post">
 
-<div class="form-group">
-<label for="password">password</label>
-<input type="password" class="form-control" name="password" required>
+<input type="email" name="email"
+ placeholder="Email"><br>
+<input type="password" name="password"
+ placeholder="Password"><br>
 
-</div>
-<button type="submit" class="btn btn-lg btn-success">Login</button>
+<a href="">Forgot password?</a><br>
+
+<button type="submit">Login</button><br>
+
+<p>Don't have a BingoLingo account yet? <a 
+ href="/signup">Sign up!</a></p>
 
 </form>
-  <hr>
-  <p><a href="/register">Register</a></p>
-<p><a href="/">Home</a></p>
-  
-</body>
-
-</html>
+</div>
+    
+</div><!-- middle -->
