@@ -1,0 +1,535 @@
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+<div id="dvti">
+      <h1 id="h1ti">BingoLingo</h1>
+       <div id="dvlg" onclick="opntB(event,'#dvusrc',this)"
+        >{{user.firstnm}} </div>
+    </div><!-- header -->
+
+<style>
+/*style middle..*/
+  #dvmed{
+    display:flex;flex-direction:column;
+    height:100%;
+   border:1px solid grey;border-radius:5px;}
+  
+#dvmtb{
+  display:flex;flex-direction:row;justify-content:space-evenly;
+  height:35px;
+ border:1px solid grey;}
+    
+ #dvmtb>div{
+   text-align:center;
+   width:100%;
+  border:1px solid grey; border-radius:5px;
+   font-family:arial;
+   background-color:white;
+   cursor:pointer;}
+      
+  #dvmtb div:hover{
+    background-color:black;color:white;}
+      
+ #dvmedc{
+   position:relative;
+   height:100%;
+  border:1px solid grey; }
+      
+    
+    /*dv chtc gmc cmmc lssc*/
+ #dvmedc>div:nth-child(-n+4){
+   /*border:1px dotted grey;*/
+   display:none;overflow-y:auto;
+   position:absolute;
+   height:100%;width:100%;
+  border:1px dotted grey;margin:0px;}
+
+   
+  #dvusrc{
+    overflow-y:auto;
+    position:absolute;
+    height:100%;width:100%;
+   border:1px dotted grey; margin:0px;}
+  
+  #dvchtc{
+    background-color:white;}  
+      
+  #dvgmc{
+    background-color:#deb887;} 
+      
+  #dvcmmc{
+    background-color:#0079a9;color:white;}
+  
+  #dvlssc{
+    background-color:#2f4f4f;color:white;}
+ 
+/*..style middle*/
+</style>
+
+      <div id="dvmed">
+        
+        <div id="dvmtb">
+    <div id="dvmtbcht"  onclick="opntB(event,'#dvchtc',this)"
+         >Chat</div>
+    <div id="dvmtbgm"  onclick="opntB(event,'#dvgmc',this)"
+         >Game</div>
+    <div id="dvmtbcmm"  onclick="opntB(event,'#dvcmmc',this)"
+         >Community</div>
+    <div id="dvmtblss"  onclick="opntB(event,'#dvlssc',this)"
+         >Lesson</div>
+          
+        </div><!-- div tabs -->
+      
+   <style>
+     /*style chat..*/
+   #dvchtc>*>div{
+    border:1px solid grey;border-radius:5px;}
+
+  #dvchtrnm{
+    text-align:center;
+   border:1px solid grey;border-radius:5px;
+    font-family:arial;
+    background-color:black;color:white;}
+
+   #lige{
+    cursor:pointer;}
+  
+  #dvicht{
+        /*overflow:auto;resize:both;*/
+        position:absolute;
+        left:20%; top:20%;}
+     
+
+#dvicht{
+  display:flex;flex-direction:column;
+  position:absolute;
+  width:240px;height:200px;
+ border:1px solid grey;
+  background-color:white;}
+        
+      
+#dvicht div{
+  border:1px solid grey;border-radius:5px;margin:0px;}
+      
+ #dvichtt{
+   display:flex;flex-direction:row;justify-content:center;
+   height:30px;
+  font-family:arial;}
+        
+  #dvichttn{
+    display:flex;flex-direction:column;justify-content:center;text-align:center;
+    width:80%;height:100%;
+   background-color:black;color:white;
+    cursor:move;}
+        
+      
+#dvichttm{
+   display:flex;flex-direction:column;justify-content:center;text-align:center;
+   width:10%;height:100%;
+   cursor:default;}
+      
+    
+#dvichttx{
+   display:flex;flex-direction:column;justify-content:center;text-align:center;
+   width:10%;height:100%;
+  background-color:red;color:white;
+   cursor:default;}
+     
+     
+  #dvichtcu{
+    display:flex;flex-direction:row;
+    height:100%;}
+      
+  #dvichtc{
+    overflow-y:auto; word-wrap:break-word;
+    width:100%;height:98%;}
+        
+        
+#dvichtu{
+  float:right;
+  width:100px;height:98%;}
+        
+  #dvichtmsg{
+    width:100%;}
+  #inimsg{
+    width:70%;}
+     
+ /*tabla users chat*/
+     
+#tblusrs{
+  border-collapse:collapse;
+  width:100%;}
+  
+
+caption{
+ border:1px solid grey;border-radius:5px;
+ font-family:arial;/*font-weight:bold;*/
+ background-color:black;color:white;}
+ 
+th{
+  font-family:arial;font-weight:bold;}
+  
+tr:not(:first-child){
+  border:1px dashed grey;}
+     
+tr:not(:first-child):hover{
+  background-color: silver;}
+     
+th, td{
+    text-align: center;}
+     
+</style>     
+
+    <div id="dvmedc">
+
+      <div id="dvchtc">
+        <div id="dvchtru">
+          <div id="dvchtr">
+          <div id="dvchtrnm">Rooms</div>
+          <div id="dvchtrc">
+            <li id="lige">General</li>
+          </div>
+          </div>
+          <div id="dvchtu">
+<table id="tblusrs">
+  <caption>Users</caption>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Gender</th>
+    <th>Age</th>
+<th>Country</th>
+<th>Learning</th>
+<th>Speaks</th>
+  </tr>
+  </thead>
+  <tbody id="tblusrsbd">
+  </tbody>
+</table>
+  
+          <div id="dvchtuc"></div>
+          </div>
+          </div>
+      </div><!-- div chat -->
+
+
+     
+      
+<div id="dvgmc">
+  <style>
+/*style game..*/
+#dvjue, #dvjue div{
+  border:1px solid grey;border-radius:5px;}    
+    
+#dvjue{
+  display:flex;flex-direction:column;overflow:auto;resize:both;
+  position:relative;
+  width:250px;height:250px;}
+
+#dvjnm{
+  text-align:center;
+ font-family:arial;
+  background-color:black;color:white;}
+
+#sptmr{
+  float:right;
+  border:1px solid black;}
+
+#dvjcu{
+  display:flex;flex-direction:row;
+  height:100%;}
+
+#dvjuse{
+  width:100px;height:100%;}
+
+#dvjcon{
+  overflow-y:auto;
+  width:100%;height:100%;}
+
+#injmsg{width:70%;}
+
+
+</style> 
+  <input type="button" value="create game" id="btncrtgm">    
+</div><!-- div juego -->
+      
+      
+      <div id="dvcmmc">In future.</div>
+      <div id="dvlssc">The teacher has not arrived yet.</div>
+
+      
+      
+<style>
+/*style div user info..*/
+  
+#dvusri{
+  text-align:center;
+ border:1px solid grey;border-radius:5px;
+  font-family:arial;
+  background-color:black;color:white;}
+  
+/*..style div user info*/
+</style>        
+        
+<div id="dvusrc">
+      <div id="dvusri">User info</div>
+ <p>First Name: {{user.firstnm}} </p>
+ <p>Last Name: {{user.lastnm}} </p>
+<p>Gender: {{user.gender||""}} </p>
+<p>Age:  {{user.age || ""}} </p>
+<p>Country: {{user.country || ""}} </p>
+<p>Learning: {{user.learning || ""}} </p>
+<p>Speaks:  {{user.speaks || ""}} </p>
+
+  <a href="#/edit" >Edit profile</a><br> 
+ <a href="/logout" >Logout</a>
+</div><!-- div user -->
+
+    </div><!-- middle content -->
+        
+    </div><!-- middle -->
+      
+   <script>
+    function opntB(evt,idnm,thel){
+      var dvmcs= document.querySelectorAll("#dvmedc>div");
+      for(var i=0;i<dvmcs.length;i++){
+        dvmcs[i].style.display="none";
+      }//for
+      document.querySelector(idnm).
+       style.display="block";
+
+      var dvmtbs=document.querySelectorAll("#dvmtb>div");
+      for(var i=0;i<dvmtbs.length;i++){
+        dvmtbs[i].style.backgroundColor="";
+        dvmtbs[i].style.color="";
+      }//for
+      
+      if(thel.id!="dvlg"){
+       var tb=document.getElementById(thel.id);
+        tb.style.backgroundColor="black";
+        tb.style.color="white";
+      }//if not dvlg
+
+    }//opentab
+     
+function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}//insert after
+     
+   </script>
+
+
+<app-fondo></app-fondo>
+
+
+  
+<script src="/socket.io/socket.io.js"></script> 
+<!--   <script src="https://cors-anywhere.herokuapp.com/https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> -->
+<script>
+
+jQuery(function($) {
+  var Sk=io.connect();
+  
+  var $dvmtbcht= $("#dvmtbcht");
+  
+  var $dvchtuc= $("#dvchtuc");
+  
+
+
+$dvmtbcht.on("click",function(e){
+ e.preventDefault();
+ Sk.emit("userva","hola");
+});//click tab chat
+  
+  
+  
+Sk.on("usernames",function(dt){
+ var html="";
+for(var usrnm in dt){
+ html+="<tr>";
+  html+="<td>"+dt[usrnm].firstnm+" "+dt[usrnm].lastnm+"</td>";
+  html+="<td>"+(dt[usrnm].gender||"-")+"</td>";
+  html+="<td>"+(dt[usrnm].age||"-")+"</td>";
+  html+="<td>"+(dt[usrnm].country||"-")+"</td>";
+  html+="<td>"+(dt[usrnm].learning||"-")+"</td>";
+  html+="<td>"+(dt[usrnm].speaks||"-")+"</td>";
+ html+="</tr>";
+}//for
+$("#tblusrsbd").html(html);
+});//skon usernames table
+  
+ 
+  
+lige.onclick=function(){
+
+var nudiv=document.createElement("DIV");
+nudiv.id="dvicht";
+
+
+nudiv.innerHTML='<div id="dvichtt">'+
+    '<div id="dvichttn">General</div>'+
+  '<div id="dvichttm">-</div>'+
+  '<div id="dvichttx">x</div>'+
+  '</div>'+
+  '<div id="dvichtcu">'+
+  '<div id="dvichtc"></div><div id="dvichtu"></div>'+
+  '</div>'+  
+  '<div id="dvichtmsg"><form id="fmisndmsg">'+
+  '<input type="text" id="inimsg" placeholder="write your message">'+
+  '<button id="btnimsg" type="submit">send</button>'+
+  '</form></div>';
+  
+dvchtc.appendChild(nudiv);
+  
+//$("#dvicht").draggable();
+/*  {
+  handle: $('#dvichtc', $("#dvicht"))
+});*/
+var draggableDiv = $('#dvicht').draggable();
+$('#dvichtc', draggableDiv).mousedown(function(ev) {
+  draggableDiv.draggable('disable');
+}).mouseup(function(ev) {
+  draggableDiv.draggable('enable');
+});
+  
+$("#dvicht").resizable();
+  
+  //minimize, toggle class
+  $("#dvichttm").click(function(){
+  
+    if($("#dvichttm").html()=="-"){
+    $("#dvicht").height(30);
+      $("#dvichttm").html("+");
+      $("#dvichtcu").hide();
+      $("#dvichtmsg").hide();
+      $("#dvicht").resizable("disable");
+      $('#dvicht').css('z-index', 9999);
+      
+    }//if -
+    else{
+      $("#dvicht").height(200);
+      $("#dvichttm").html("-");
+      $("#dvichtcu").show();
+      $("#dvichtmsg").show();
+      $("#dvicht").resizable("enable");
+    }//else +
+    
+    
+ });//minimizar
+  
+  
+  //cerrar
+ $("#dvichttx").click(function(){
+  $("#dvicht").remove();
+  Sk.emit("cerrgnrl");
+ });//cerrar
+
+Sk.emit("opngnrl");
+   
+};//general onclick dar dvcht
+  
+
+ 
+ 
+$("#dvchtc").on("click","#fmisndmsg",function(){
+
+$(this).submit(function(e) {
+   e.preventDefault();
+   if($("#inimsg").val()!=''){
+     Sk.emit('send message', $("#inimsg").val());
+   }//if no vacio
+  
+  $("#inimsg").val('');
+    
+});//on send msg
+});//fmisndmsg
+  
+  
+  
+Sk.on('new message', function(data) {
+  $("#dvichtc").append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
+  $("#dvichtc").stop().animate({ scrollTop: $("#dvichtc")[0].scrollHeight}, 300);
+});//on receive msg
+
+  
+  
+Sk.on("mndusrgnrl",function(dt){
+  var html=""
+  
+  for(var nombr in dt){
+    html+=nombr+"<br>";
+  }
+  $("#dvichtu").html("");
+  $("#dvichtu").html(html);
+  
+});//skon mandaron el usuario
+  
+
+  
+var roomj="roomjue";  
+
+Sk.on("mndusrjue",function(dt){
+  var html=""
+  
+  for(var nombr in dt){
+    html+=nombr+"<br>";
+  }
+  $("#dvjuse").html("");
+  $("#dvjuse").html(html);
+}); //se juntaron al juego
+  
+ Sk.on('new messagejue', function(data) {
+  
+   if(/bingo/i.test(data.msg)){
+     $("#dvjcon").append('<b>'+data.nick+":</b> "+data.msg+"<br/>"+
+                        "BINGO, you guessed the word!<br>");
+   }else{
+     $("#dvjcon").append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
+   }
+  $("#dvjcon").stop().animate({ scrollTop: $("#dvjcon")[0].scrollHeight}, 100);
+});//on receive msg
+  
+  
+btncrtgm.onclick=function(){
+    console.log("crear juego");
+var nudivj=document.createElement("DIV");
+nudivj.id="dvjue";
+
+nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
+'<div id="dvjnm">Explain The Word</div>'+
+'<div id="dvjexp">Explains: <span>wordX</span'+
+'><span id="sptmr">00</span></div></div>'+
+'<div id="dvjcu">'+
+'<div id="dvjcon"></div>'+
+'<div id="dvjuse">Users</div>'+
+'</div><div id="dvjmsg">'+
+'<form id="fmjmsg" onsubmit="return false">'+
+'<input type="text" id="injmsg" placeholder="write your text..."'+
+'><input type="submit" value="Send" id="btnjsndm" >'+
+'</form></div></div>';
+
+  dvgmc.appendChild(nudivj);
+  
+  Sk.emit("entroomj",roomj);
+  
+};//crear juego
+  
+  
+  $("#dvgmc").on("click","#fmjmsg",function(){
+
+$(this).submit(function(e) {
+   e.preventDefault();
+   if($("#injmsg").val()!='')
+     Sk.emit('send messagejue', $("#injmsg").val());
+  
+  $("#injmsg").val('');
+ 
+});//on send msg
+});//send msg juego
+  
+  
+})//jquery
+</script>

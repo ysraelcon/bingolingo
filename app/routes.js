@@ -1,31 +1,33 @@
 var User=require('../app/models/user');
 module.exports=function(Ap,pssp){
-
+/*
 Ap.get("/",function(req,res){
- res.render("login.ejs",{msg:""});
-});
-
+ //res.render("login.ejs",{msg:""});
+});*/
+/*
 Ap.get("/home",function(req,res){
- res.render("home.ejs");
-});
+ 
+  //res.render("home.ejs");
+});*/
 
+  /*
 Ap.get("/signup",function(req,res){
  res.render("signup.ejs");
-});
-
+});*/
+/*
 Ap.get("/login",function(req,res){
- res.render("login.ejs",{msg:req.flash('loginMsg')});
-});
+ //res.render("login.ejs",{msg:req.flash('loginMsg')});
+});*/
   
 Ap.post("/login",pssp.authenticate('login',{
   successRedirect:'/profile',
   failureRedirect:'/login',
   failureFlash:true
 }));//post login
-
+/*
 Ap.get("/tabs",function(req,res){
  res.render("tabs.ejs");
-});
+});*/
 
 
 Ap.post('/signup',pssp.authenticate('register',{
@@ -35,11 +37,13 @@ Ap.post('/signup',pssp.authenticate('register',{
 }));//post
 
 Ap.get('/profile',isLoggedIn,function(req,res){
- res.render('profile.ejs',{user:req.user});
+ res.json(req.user);
+  //res.render('profile.ejs',{user:req.user});
 });//get
   
 Ap.get('/edit',isLoggedIn,function(req,res){
- res.render('edit.ejs',{user:req.user});
+ res.json(req.user);
+  //res.render('edit.ejs',{user:req.user});
 });//get 
   
 Ap.post('/edit',isLoggedIn,function(req,res){

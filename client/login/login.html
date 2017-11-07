@@ -1,0 +1,61 @@
+<style>
+
+  #dvmed{text-align:center;}
+  
+  h2{font-family:arial}
+    
+  #dvmlgi{border:1px solid grey;
+   display:inline-block;
+   text-align:center;
+   border-radius:2px;
+   margin:auto;}
+  
+  #dvmlgi a{color:grey;}
+  
+  #dvmlgi *{margin:2px;}
+  
+</style>
+
+<div id="dvti">
+  <h1 id="h1ti">BingoLingo</h1>
+   
+</div><!-- header -->
+  
+<div id="dvmed">
+    
+ 
+    <div id="dvmtx">
+
+      <h2>Join to BingoLingo</h2>
+</div>  
+    
+<div id="dvmlgi">
+
+<h2>BingoLingo</h2>
+  
+  
+  <div ng-show="msg">{{msg}}</div>
+   
+
+<form name="fmlogin" novalidate>
+
+<input type="email" name="email"
+       ng-model="user.email"
+ placeholder="Email" required><br>
+<input type="password" name="password" 
+       ng-model="user.password"
+ placeholder="Password" required><br>
+
+<a href="">Forgot password?</a><br>
+
+<button type="submit" ng-click="logiN()">Login</button><br>
+
+<p>Don't have a BingoLingo account yet? <a 
+ href="#/signup">Sign up!</a></p>
+
+</form>
+</div>
+    
+</div><!-- middle -->
+
+<app-fondo></app-fondo>

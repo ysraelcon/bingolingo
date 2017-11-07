@@ -16,6 +16,7 @@ var Ss= require('express-session');
 var expvtr= require('express-validator');
 var mngstr= require('connect-mongo')(Ss);
 var pssp= require('passport');
+var emoji= require('node-emoji');
 
 var port=process.env.PORT||3000;
 svr.listen(port, process.env.IP);
@@ -25,7 +26,7 @@ var sesstr=new mngstr({mongooseConnection:Mgs.connection});
 
 
 require('./config/passport')(pssp);
-//Ap.use(Exp.static(__dirname+'/client')); //para activar angularjs
+Ap.use(Exp.static(__dirname+'/client')); //para activar angularjs
 Ap.use(bdp.json());
 Ap.use(bdp.urlencoded({extended:true}));
 Ap.use(expvtr());
@@ -85,18 +86,40 @@ updtusrscnnT();
 });//skon user va
   
 
-socket.on("opngnrl",function(){
-  usrsgnrl[socket.request.user.firstnm]=1;
-  io.sockets.emit('mndusrgnrl',usrsgnrl);
-});//skon abre general  
   
   socket.on('send message', function(data) {
+    data=emoji.emojify(data);
    io.sockets.emit('new message', {msg: data, nick: socket.nickname});
 });//sk send msg
 
+
+    
+  socket.on('entroomj',function(room){
+socket.join(room);
+usrjue[socket.nickname]=socket.nickname;
+socket.emit("mndusrjue",usrjue);
+});//skon entra juego
+ 
   socket.on('send messagejue', function(data) {
    io.sockets.emit('new messagejue', {msg: data, nick: socket.nickname});
 });//sk send msg juego
+  
+  
+  
+  socket.on("opngnrl",function(){
+  usrsgnrl[socket.request.user.firstnm]=1;
+  io.sockets.emit('mndusrgnrl',usrsgnrl);
+});//skon abre general
+  
+  socket.on("cerrgnrl",function(){
+    //console.log(usrsgnrl);
+    if(!socket.request.user.firstnm) return;
+        delete usrsgnrl[socket.request.user.firstnm];
+        updtusrsgnrL();
+    
+  });//skon cerrar general
+  
+  
   
   socket.on('disconnect', function(data) {
     
@@ -110,24 +133,11 @@ socket.on("opngnrl",function(){
     });//skon disconnect
   
   
+  
   function updtusrscnnT() {
     //console.log("manda users");
         io.sockets.emit('usernames', usrscnnt);
     }//update nicknames
-  
-  socket.on('entroomj',function(room){
-socket.join(room);
-usrjue[socket.nickname]=socket.nickname;
-socket.emit("mndusrjue",usrjue);
-});//skon entra juego
-  
-  socket.on("cerrgnrl",function(){
-    //console.log(usrsgnrl);
-    if(!socket.request.user.firstnm) return;
-        delete usrsgnrl[socket.request.user.firstnm];
-        updtusrsgnrL();
-    
-  });//skon cerrar general
   
   function updtusrsgnrL() {
     
