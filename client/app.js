@@ -1,7 +1,7 @@
 
 var app= angular.module('laApp',['ngRoute',
           'laApp.home','laApp.login',
-              'laApp.profile','laApp.edit'])
+              'laApp.profile'])
 
  .config(['$routeProvider','$locationProvider', 
    function($routeProvider,$locationProvider){
@@ -18,4 +18,11 @@ app.directive("appFondo",function(){
     strict:"E",
     templateUrl:"directive/fondo.html"
   };
-});
+});//app-fondo
+
+app.directive("appEditProfile",function(){
+  return {
+    strict:"E",
+    templateUrl:"directive/edit.html"
+  };
+});//app-edit-profile

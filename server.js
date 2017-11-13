@@ -66,6 +66,7 @@ Ap.use(Fl());
 //Ap.use(require('./app/routes'));
 require('./app/routes')(Ap,pssp);
 
+var Chat=require('./app/models/chat');
 
 var usrscnnt={};
 var usrsgnrl={};
@@ -86,38 +87,69 @@ updtusrscnnT();
 });//skon user va
   
 
+   socket.on('opngnrl',function(){
+    
+  usrsgnrl[socket.request.user.firstnm]=1;
+    
+Chat.findOne({_id:"5a03c2696602c617ed34b85f"},function(err,cht){
+
+ io.sockets.emit('mndusrgnrl',usrsgnrl,cht.chats.general);     
+
+});//findone
+      
+});//skon abre general
   
   socket.on('send message', function(data) {
     data=emoji.emojify(data);
+    
+    Chat.findOne({_id:"5a03c2696602c617ed34b85f"},function(err,cht){
+
+cht.chats.general.shift();
+      
+cht.chats.general.push(socket.nickname+": "+data);
+
+cht.save((err)=>{
+if(err) throw err;
+});//cht.save
+
+});//findone
+    
    io.sockets.emit('new message', {msg: data, nick: socket.nickname});
 });//sk send msg
 
 
-    
-  socket.on('entroomj',function(room){
-socket.join(room);
-usrjue[socket.nickname]=socket.nickname;
-socket.emit("mndusrjue",usrjue);
-});//skon entra juego
- 
-  socket.on('send messagejue', function(data) {
-   io.sockets.emit('new messagejue', {msg: data, nick: socket.nickname});
-});//sk send msg juego
-  
-  
-  
-  socket.on("opngnrl",function(){
-  usrsgnrl[socket.request.user.firstnm]=1;
-  io.sockets.emit('mndusrgnrl',usrsgnrl);
-});//skon abre general
-  
-  socket.on("cerrgnrl",function(){
+   socket.on("cerrgnrl",function(){
     //console.log(usrsgnrl);
     if(!socket.request.user.firstnm) return;
         delete usrsgnrl[socket.request.user.firstnm];
         updtusrsgnrL();
     
   });//skon cerrar general
+  
+  
+  
+    
+  socket.on('entroomj',function(room){
+socket.join(room);
+usrjue[socket.request.user._id]=socket.request.user.firstnm;
+io.sockets.emit("mndusrjue",usrjue);
+    
+});//skon entra juego
+ 
+  socket.on('send messagejue', function(data) {
+  
+   io.sockets.emit('new messagejue', {msg: data, nick: socket.request.user.firstnm});
+});//sk send msg juego
+  
+   
+  
+  socket.on("slrjue",function(dt){
+    console.log("sale del jue"),
+     // console.log(socket.request.user.firstnm);
+    delete usrjue[socket.request.user._id];
+    io.sockets.emit("mndusrjue",usrjue);
+  });
+  
   
   
   

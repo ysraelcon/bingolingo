@@ -1,0 +1,122 @@
+/*style chat..*/
+   #dvchtc>*>div{
+    border:1px solid grey;border-radius:5px;}
+
+  #dvchtrnm{
+    display:inline-block;/*text-align:center;*/
+   border:1px solid grey;border-radius:5px;
+    font-family:arial;
+    background-color:#2E8B57;color:white;}
+
+   #lige{
+    border:1px outset grey;
+    font-size:25px;font-weight:bold;
+    cursor:pointer;}
+     
+
+#dvicht{
+  display:flex;flex-direction:column;/*overflow:auto;resize:both;*/
+  position:absolute;left:15%;top:20%;
+  width:300px;height:200px;
+ border:1px solid grey;
+  background-color:white;}
+        
+      
+#dvicht div{
+  border:1px solid grey;border-radius:5px;margin:0px;}
+      
+ #dvichtt{
+   display:flex;flex-direction:row;justify-content:center;
+   height:30px;
+  font-family:arial;}
+        
+  #dvichttn{
+    display:flex;flex-direction:column;justify-content:center;text-align:center;
+    width:80%;height:100%;
+   background-color:#2E8B57;color:white;
+    cursor:move;}
+        
+      
+#dvichttm{
+   display:flex;flex-direction:column;justify-content:center;text-align:center;
+   width:10%;height:100%;
+   cursor:default;}
+      
+    
+#dvichttx{
+   display:flex;flex-direction:column;justify-content:center;text-align:center;
+   width:10%;height:100%;
+  background-color:#800000;color:white;/*#800000 #4B0082*/
+   cursor:default;}
+     
+     
+  #dvichtcu{
+    display:flex;flex-direction:row;
+    height:100%;}
+      
+  #dvichtc{
+    overflow-y:auto; word-wrap:break-word;
+    width:100%;height:98%;
+   background-color:#DEB887;}
+        
+        
+#dvichtu{
+  float:right;
+  width:100px;height:98%;
+  font-weight:bold;
+ background-color:#FFA07A;color:black;}
+        
+  #dvichtmsg{
+    width:100%;}
+  #inimsg{
+    width:70%;}
+     
+ /*tabla users chat*/
+     
+#tblusrs{
+  border-collapse:collapse;
+  width:100%;}
+  
+
+caption{
+ border:1px solid grey;border-radius:5px;
+ font-family:arial;/*font-weight:bold;*/
+ background-color:#2E8B57;color:white;}
+ 
+th{
+  font-family:arial;font-weight:bold;}
+  
+tbody>tr{/*:not(:first-child)*/
+  border:1px dashed grey;
+   background-color:#008080;color:white;}/*#FF7F50 #2F4F4F*/
+     
+tbody>tr:hover{/*:not(:first-child):hover*/
+  background-color: silver;
+  cursor:pointer;}
+     
+th, td{
+    text-align: center;}
+
+/*style inf user cht rqs..*/
+
+#dvinfusr{
+        display:inline-flex;flex-direction:row;
+        border:1px solid grey;}
+        
+        #dvinfusr>div{
+        border:1px dashed grey;padding-right:5px;}
+          
+    #dvcrrprfcht{
+      display:flex;flex-direction:column;justify-content:center;
+      padding:5px;}
+      
+    #dvcrrprfcht:hover{
+    background-color:grey;
+      cursor:pointer;}
+      
+      #dvinfprfcht>li:hover{
+    background-color:grey;
+      cursor:pointer;}
+      
+
+

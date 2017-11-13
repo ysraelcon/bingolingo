@@ -1,21 +1,23 @@
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 
 
 <div id="dvti">
-      <h1 id="h1ti">BingoLingo</h1>
+      <h1 id="h1ti">BesTalk</h1>
        <div id="dvlg" onclick="opntB(event,'#dvusrc',this)"
         >{{user.firstnm}} </div>
     </div><!-- header -->
+
+
+
+
 
 <style>
 /*style middle..*/
   #dvmed{
     display:flex;flex-direction:column;
     height:100%;
-   border:1px solid grey;border-radius:5px;}
+   border:1px solid grey;border-radius:5px;
+    background-color:#ffffe0;}
   
 #dvmtb{
   display:flex;flex-direction:row;justify-content:space-evenly;
@@ -31,7 +33,7 @@
    cursor:pointer;}
       
   #dvmtb div:hover{
-    background-color:black;color:white;}
+    background-color:#2E8B57;color:white;}
       
  #dvmedc{
    position:relative;
@@ -52,13 +54,14 @@
     overflow-y:auto;
     position:absolute;
     height:100%;width:100%;
-   border:1px dotted grey; margin:0px;}
+   border:1px dotted grey; margin:0px;
+    background-color:#5F9EA0;} /*#6495ED #D3D3D3*/
   
   #dvchtc{
-    background-color:white;}  
+    background-color:#f5f5f5} /*#fff8dc #eee8aa */ 
       
   #dvgmc{
-    background-color:#deb887;} 
+    background-color:#D2B48C;} /*#D2B48C #deb887*/
       
   #dvcmmc{
     background-color:#0079a9;color:white;}
@@ -69,10 +72,12 @@
 /*..style middle*/
 </style>
 
+
+
       <div id="dvmed">
         
         <div id="dvmtb">
-    <div id="dvmtbcht"  onclick="opntB(event,'#dvchtc',this)"
+    <div id="dvmtbcht"  onclick="opntB(event,'#dvchtc',this);entrchT();"
          >Chat</div>
     <div id="dvmtbgm"  onclick="opntB(event,'#dvgmc',this)"
          >Game</div>
@@ -83,117 +88,25 @@
           
         </div><!-- div tabs -->
       
-   <style>
-     /*style chat..*/
-   #dvchtc>*>div{
-    border:1px solid grey;border-radius:5px;}
-
-  #dvchtrnm{
-    text-align:center;
-   border:1px solid grey;border-radius:5px;
-    font-family:arial;
-    background-color:black;color:white;}
-
-   #lige{
-    cursor:pointer;}
-  
-  #dvicht{
-        /*overflow:auto;resize:both;*/
-        position:absolute;
-        left:20%; top:20%;}
-     
-
-#dvicht{
-  display:flex;flex-direction:column;
-  position:absolute;
-  width:240px;height:200px;
- border:1px solid grey;
-  background-color:white;}
-        
-      
-#dvicht div{
-  border:1px solid grey;border-radius:5px;margin:0px;}
-      
- #dvichtt{
-   display:flex;flex-direction:row;justify-content:center;
-   height:30px;
-  font-family:arial;}
-        
-  #dvichttn{
-    display:flex;flex-direction:column;justify-content:center;text-align:center;
-    width:80%;height:100%;
-   background-color:black;color:white;
-    cursor:move;}
-        
-      
-#dvichttm{
-   display:flex;flex-direction:column;justify-content:center;text-align:center;
-   width:10%;height:100%;
-   cursor:default;}
-      
-    
-#dvichttx{
-   display:flex;flex-direction:column;justify-content:center;text-align:center;
-   width:10%;height:100%;
-  background-color:red;color:white;
-   cursor:default;}
-     
-     
-  #dvichtcu{
-    display:flex;flex-direction:row;
-    height:100%;}
-      
-  #dvichtc{
-    overflow-y:auto; word-wrap:break-word;
-    width:100%;height:98%;}
-        
-        
-#dvichtu{
-  float:right;
-  width:100px;height:98%;}
-        
-  #dvichtmsg{
-    width:100%;}
-  #inimsg{
-    width:70%;}
-     
- /*tabla users chat*/
-     
-#tblusrs{
-  border-collapse:collapse;
-  width:100%;}
-  
-
-caption{
- border:1px solid grey;border-radius:5px;
- font-family:arial;/*font-weight:bold;*/
- background-color:black;color:white;}
- 
-th{
-  font-family:arial;font-weight:bold;}
-  
-tr:not(:first-child){
-  border:1px dashed grey;}
-     
-tr:not(:first-child):hover{
-  background-color: silver;}
-     
-th, td{
-    text-align: center;}
-     
-</style>     
+<link rel="stylesheet" href="/styles/chat.css">    
 
     <div id="dvmedc">
 
-      <div id="dvchtc">
-        <div id="dvchtru">
-          <div id="dvchtr">
+      
+      
+<div id="dvchtc">
+  
+<div id="dvchtru">
+          
+<div id="dvchtr">
           <div id="dvchtrnm">Rooms</div>
           <div id="dvchtrc">
-            <li id="lige">General</li>
+            <li id="lige" onclick="entrgnrL()">General</li>
           </div>
-          </div>
-          <div id="dvchtu">
+          </div><!-- dv rooms -->
+          
+  
+<div id="dvchtu">
 <table id="tblusrs">
   <caption>Users</caption>
   <thead>
@@ -210,9 +123,9 @@ th, td{
   </tbody>
 </table>
   
-          <div id="dvchtuc"></div>
-          </div>
-          </div>
+</div><!-- dv users -->
+          </div><!-- dv chat room user -->
+  
       </div><!-- div chat -->
 
 
@@ -228,12 +141,26 @@ th, td{
   display:flex;flex-direction:column;overflow:auto;resize:both;
   position:relative;
   width:250px;height:250px;}
+    
+    #dvjue div{margin:0px;}
 
 #dvjnm{
+  display:flex;flex-direction:row;
+  font-family:arial;}
+
+#dvjnmtit{
   text-align:center;
- font-family:arial;
+  width:70%;
   background-color:black;color:white;}
 
+#dvjnmmin,#dvjnmmit,#dvjnmcrr{
+  text-align:center;
+  width:10%;
+  cursor:pointer;}
+
+#dvjnmcrr{
+  background-color:red;color:white;}    
+    
 #sptmr{
   float:right;
   border:1px solid black;}
@@ -253,8 +180,11 @@ th, td{
 
 
 </style> 
-  <input type="button" value="create game" id="btncrtgm">    
-</div><!-- div juego -->
+  <p>In construction...</p>
+  <input type="button" value="create game"
+         id="btncrtgm" onclick="crtgaM()">   
+</div><!-- div juego style="display:none"-->
+      
       
       
       <div id="dvcmmc">In future.</div>
@@ -269,13 +199,17 @@ th, td{
   text-align:center;
  border:1px solid grey;border-radius:5px;
   font-family:arial;
-  background-color:black;color:white;}
+  background-color:#2E8B57;color:white;}
   
 /*..style div user info*/
 </style>        
         
 <div id="dvusrc">
-      <div id="dvusri">User info</div>
+  <div id="dvusri">User info</div>
+  
+  <span ng-switch="edit">
+  <span id="spusrprf" ng-switch-when="false">
+      
  <p>First Name: {{user.firstnm}} </p>
  <p>Last Name: {{user.lastnm}} </p>
 <p>Gender: {{user.gender||""}} </p>
@@ -283,8 +217,27 @@ th, td{
 <p>Country: {{user.country || ""}} </p>
 <p>Learning: {{user.learning || ""}} </p>
 <p>Speaks:  {{user.speaks || ""}} </p>
-
-  <a href="#/edit" >Edit profile</a><br> 
+    
+  </span>
+  
+  
+  <span id="spusredtprf" ng-switch-when="true">
+    <app-edit-profile></app-edit-profile>
+    
+  </span> 
+    
+  </span>
+ 
+  
+<input type="button"
+       value="Edit Profile" ng-init="edit=false"
+       ng-click="edit=true" ng-show="!edit">
+  
+<input type="button"
+       value="Cancel" ng-show="edit"
+       ng-click="edit=false">
+  
+  <br>  
  <a href="/logout" >Logout</a>
 </div><!-- div user -->
 
@@ -309,7 +262,7 @@ th, td{
       
       if(thel.id!="dvlg"){
        var tb=document.getElementById(thel.id);
-        tb.style.backgroundColor="black";
+        tb.style.backgroundColor="#2E8B57";
         tb.style.color="white";
       }//if not dvlg
 
@@ -326,210 +279,19 @@ function insertAfter(referenceNode, newNode) {
 
 
   
-<script src="/socket.io/socket.io.js"></script> 
-<!--   <script src="https://cors-anywhere.herokuapp.com/https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> -->
-<script>
-
-jQuery(function($) {
-  var Sk=io.connect();
-  
-  var $dvmtbcht= $("#dvmtbcht");
-  
-  var $dvchtuc= $("#dvchtuc");
-  
-
-
-$dvmtbcht.on("click",function(e){
- e.preventDefault();
- Sk.emit("userva","hola");
-});//click tab chat
-  
-  
-  
-Sk.on("usernames",function(dt){
- var html="";
-for(var usrnm in dt){
- html+="<tr>";
-  html+="<td>"+dt[usrnm].firstnm+" "+dt[usrnm].lastnm+"</td>";
-  html+="<td>"+(dt[usrnm].gender||"-")+"</td>";
-  html+="<td>"+(dt[usrnm].age||"-")+"</td>";
-  html+="<td>"+(dt[usrnm].country||"-")+"</td>";
-  html+="<td>"+(dt[usrnm].learning||"-")+"</td>";
-  html+="<td>"+(dt[usrnm].speaks||"-")+"</td>";
- html+="</tr>";
-}//for
-$("#tblusrsbd").html(html);
-});//skon usernames table
-  
- 
-  
-lige.onclick=function(){
-
-var nudiv=document.createElement("DIV");
-nudiv.id="dvicht";
-
-
-nudiv.innerHTML='<div id="dvichtt">'+
-    '<div id="dvichttn">General</div>'+
-  '<div id="dvichttm">-</div>'+
-  '<div id="dvichttx">x</div>'+
-  '</div>'+
-  '<div id="dvichtcu">'+
-  '<div id="dvichtc"></div><div id="dvichtu"></div>'+
-  '</div>'+  
-  '<div id="dvichtmsg"><form id="fmisndmsg">'+
-  '<input type="text" id="inimsg" placeholder="write your message">'+
-  '<button id="btnimsg" type="submit">send</button>'+
-  '</form></div>';
-  
-dvchtc.appendChild(nudiv);
-  
-//$("#dvicht").draggable();
-/*  {
-  handle: $('#dvichtc', $("#dvicht"))
-});*/
-var draggableDiv = $('#dvicht').draggable();
-$('#dvichtc', draggableDiv).mousedown(function(ev) {
-  draggableDiv.draggable('disable');
-}).mouseup(function(ev) {
-  draggableDiv.draggable('enable');
-});
-  
-$("#dvicht").resizable();
-  
-  //minimize, toggle class
-  $("#dvichttm").click(function(){
-  
-    if($("#dvichttm").html()=="-"){
-    $("#dvicht").height(30);
-      $("#dvichttm").html("+");
-      $("#dvichtcu").hide();
-      $("#dvichtmsg").hide();
-      $("#dvicht").resizable("disable");
-      $('#dvicht').css('z-index', 9999);
-      
-    }//if -
-    else{
-      $("#dvicht").height(200);
-      $("#dvichttm").html("-");
-      $("#dvichtcu").show();
-      $("#dvichtmsg").show();
-      $("#dvicht").resizable("enable");
-    }//else +
-    
-    
- });//minimizar
-  
-  
-  //cerrar
- $("#dvichttx").click(function(){
-  $("#dvicht").remove();
-  Sk.emit("cerrgnrl");
- });//cerrar
-
-Sk.emit("opngnrl");
    
-};//general onclick dar dvcht
-  
+<script src="/socket.io/socket.io.js"></script> 
+<script src="/scripts/socketdsp.js"></script>
+<!--   <script src="https://cors-anywhere.herokuapp.com/https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> -->
 
- 
- 
-$("#dvchtc").on("click","#fmisndmsg",function(){
 
-$(this).submit(function(e) {
-   e.preventDefault();
-   if($("#inimsg").val()!=''){
-     Sk.emit('send message', $("#inimsg").val());
-   }//if no vacio
-  
-  $("#inimsg").val('');
-    
-});//on send msg
-});//fmisndmsg
-  
-  
-  
-Sk.on('new message', function(data) {
-  $("#dvichtc").append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-  $("#dvichtc").stop().animate({ scrollTop: $("#dvichtc")[0].scrollHeight}, 300);
-});//on receive msg
 
+<script>
   
+   function dainfU(ele){
+    alert(ele.id);
+  }//da info user id
   
-Sk.on("mndusrgnrl",function(dt){
-  var html=""
-  
-  for(var nombr in dt){
-    html+=nombr+"<br>";
-  }
-  $("#dvichtu").html("");
-  $("#dvichtu").html(html);
-  
-});//skon mandaron el usuario
-  
-
-  
-var roomj="roomjue";  
-
-Sk.on("mndusrjue",function(dt){
-  var html=""
-  
-  for(var nombr in dt){
-    html+=nombr+"<br>";
-  }
-  $("#dvjuse").html("");
-  $("#dvjuse").html(html);
-}); //se juntaron al juego
-  
- Sk.on('new messagejue', function(data) {
-  
-   if(/bingo/i.test(data.msg)){
-     $("#dvjcon").append('<b>'+data.nick+":</b> "+data.msg+"<br/>"+
-                        "BINGO, you guessed the word!<br>");
-   }else{
-     $("#dvjcon").append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-   }
-  $("#dvjcon").stop().animate({ scrollTop: $("#dvjcon")[0].scrollHeight}, 100);
-});//on receive msg
-  
-  
-btncrtgm.onclick=function(){
-    console.log("crear juego");
-var nudivj=document.createElement("DIV");
-nudivj.id="dvjue";
-
-nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
-'<div id="dvjnm">Explain The Word</div>'+
-'<div id="dvjexp">Explains: <span>wordX</span'+
-'><span id="sptmr">00</span></div></div>'+
-'<div id="dvjcu">'+
-'<div id="dvjcon"></div>'+
-'<div id="dvjuse">Users</div>'+
-'</div><div id="dvjmsg">'+
-'<form id="fmjmsg" onsubmit="return false">'+
-'<input type="text" id="injmsg" placeholder="write your text..."'+
-'><input type="submit" value="Send" id="btnjsndm" >'+
-'</form></div></div>';
-
-  dvgmc.appendChild(nudivj);
-  
-  Sk.emit("entroomj",roomj);
-  
-};//crear juego
-  
-  
-  $("#dvgmc").on("click","#fmjmsg",function(){
-
-$(this).submit(function(e) {
-   e.preventDefault();
-   if($("#injmsg").val()!='')
-     Sk.emit('send messagejue', $("#injmsg").val());
-  
-  $("#injmsg").val('');
- 
-});//on send msg
-});//send msg juego
-  
-  
-})//jquery
 </script>
+
+

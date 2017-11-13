@@ -1,4 +1,4 @@
-Welcome to Bingolingo
+Welcome to BesTalk
 =========================
 
 Suggestions for the page can be sent on here: [suggestions](https://shrib.com/#bingolingo-suggestions).

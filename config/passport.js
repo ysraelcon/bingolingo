@@ -36,7 +36,7 @@ pssp.use('register',new lclstrtg({
  newUser.email=email;
  newUser.firstnm=req.body.firstnm;
  newUser.lastnm=req.body.lastnm;
-  console.log(req.body.firstnm);
+  //console.log(req.body.firstnm);
  newUser.password=newUser.generateHash(password);
   
  newUser.save(function(err){

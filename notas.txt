@@ -2,3 +2,10 @@ html:
 
 icon
  <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+ 
++errores:
+-mensaje cuando se logea mal, ej: incorrect password
+
++por completar:
+-en juego, minimizar, restaurar tamaño
+-sala general, restaurar tamaño de ventana, para mobile

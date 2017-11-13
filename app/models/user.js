@@ -10,7 +10,8 @@ var usrsch=Mng.Schema({
   learning:String,
   speaks:String,
 email:{type:String,unique:true},
-password:{type:String}
+password:{type:String},
+  chats:[]
 });
 
 usrsch.methods.generateHash=function(password){
