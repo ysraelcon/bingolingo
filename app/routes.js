@@ -2,10 +2,10 @@ var User=require('../app/models/user');
 var Chat=require('../app/models/chat');
 
 module.exports=function(Ap,pssp){
-/*
+
 Ap.get("/",function(req,res){
  //res.render("login.ejs",{msg:""});
-});*/
+});
 
   /*
 Ap.get("/home",function(req,res){
@@ -22,10 +22,10 @@ Ap.get("/home",function(req,res){
 Ap.get("/signup",function(req,res){
  res.render("signup.ejs");
 });*/
-/*
+
 Ap.get("/login",function(req,res){
  //res.render("login.ejs",{msg:req.flash('loginMsg')});
-});*/
+});
   
 Ap.post("/login",pssp.authenticate('login',{
   successRedirect:'/profile',
@@ -46,8 +46,9 @@ Ap.post('/signup',pssp.authenticate('register',{
 
 Ap.get('/profile',isLoggedIn,function(req,res){
  res.json(req.user);
+  //res.render('/profile/profile.html',{user:req.user});
   //res.render('profile.ejs',{user:req.user});
-});//get
+});//get 
   
 Ap.get('/edit',isLoggedIn,function(req,res){
  res.json(req.user);

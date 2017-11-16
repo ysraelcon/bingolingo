@@ -1,12 +1,14 @@
 angular.module('laApp.home',['ngRoute'])
 
- .config(['$routeProvider',function($routeProvider){
-
+ .config(['$routeProvider',//'$locationProvider',
+          function($routeProvider){
+//$locationProvider.html5Mode(true);
  $routeProvider.when('/',{
    
 templateUrl:'home/home.html',
 controller:'homeCtrl'
 });//when
+   // $locationProvider.html5Mode(true);
 }])//config
 
 .controller('homeCtrl',

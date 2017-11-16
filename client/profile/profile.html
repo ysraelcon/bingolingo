@@ -2,11 +2,11 @@
 
 
 <div id="dvti">
-      <h1 id="h1ti">BesTalk</h1>
-       <div id="dvlg" onclick="opntB(event,'#dvusrc',this)"
-        >{{user.firstnm}} </div>
-    </div><!-- header -->
-
+  <h1 id="h1ti">BesTalk</h1>
+  <div id="dvlg"
+      onclick="opntB(event,'#dvusrc',this)"
+      >{{user.firstnm}} </div>
+</div><!-- header -->
 
 
 
@@ -14,13 +14,16 @@
 <style>
 /*style middle..*/
   #dvmed{
-    display:flex;flex-direction:column;
+    display:flex;
+      flex-direction:column;
     height:100%;
    border:1px solid grey;border-radius:5px;
     background-color:#ffffe0;}
   
 #dvmtb{
-  display:flex;flex-direction:row;justify-content:space-evenly;
+  display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
   height:35px;
  border:1px solid grey;}
     
@@ -33,7 +36,7 @@
    cursor:pointer;}
       
   #dvmtb div:hover{
-    background-color:#2E8B57;color:white;}
+    background-color:#9370DB;color:white;}
       
  #dvmedc{
    position:relative;
@@ -42,7 +45,7 @@
       
     
     /*dv chtc gmc cmmc lssc*/
- #dvmedc>div:nth-child(-n+4){
+ #dvmedc>div:nth-child(-n+5){
    /*border:1px dotted grey;*/
    display:none;overflow-y:auto;
    position:absolute;
@@ -81,7 +84,8 @@
          >Chat</div>
     <div id="dvmtbgm"  onclick="opntB(event,'#dvgmc',this)"
          >Game</div>
-    <div id="dvmtbcmm"  onclick="opntB(event,'#dvcmmc',this)"
+    <div id="dvmtbcmm"
+      onclick="opntB(event,'#dvcmmc',this)"
          >Community</div>
     <div id="dvmtblss"  onclick="opntB(event,'#dvlssc',this)"
          >Lesson</div>
@@ -130,56 +134,11 @@
 
 
      
+ <link rel="stylesheet" href="/styles/game.css">    
+     
       
 <div id="dvgmc">
-  <style>
-/*style game..*/
-#dvjue, #dvjue div{
-  border:1px solid grey;border-radius:5px;}    
-    
-#dvjue{
-  display:flex;flex-direction:column;overflow:auto;resize:both;
-  position:relative;
-  width:250px;height:250px;}
-    
-    #dvjue div{margin:0px;}
-
-#dvjnm{
-  display:flex;flex-direction:row;
-  font-family:arial;}
-
-#dvjnmtit{
-  text-align:center;
-  width:70%;
-  background-color:black;color:white;}
-
-#dvjnmmin,#dvjnmmit,#dvjnmcrr{
-  text-align:center;
-  width:10%;
-  cursor:pointer;}
-
-#dvjnmcrr{
-  background-color:red;color:white;}    
-    
-#sptmr{
-  float:right;
-  border:1px solid black;}
-
-#dvjcu{
-  display:flex;flex-direction:row;
-  height:100%;}
-
-#dvjuse{
-  width:100px;height:100%;}
-
-#dvjcon{
-  overflow-y:auto;
-  width:100%;height:100%;}
-
-#injmsg{width:70%;}
-
-
-</style> 
+  
   <p>In construction...</p>
   <input type="button" value="create game"
          id="btncrtgm" onclick="crtgaM()">   
@@ -199,7 +158,7 @@
   text-align:center;
  border:1px solid grey;border-radius:5px;
   font-family:arial;
-  background-color:#2E8B57;color:white;}
+  background-color:#9370DB;color:white;}
   
 /*..style div user info*/
 </style>        
@@ -262,7 +221,7 @@
       
       if(thel.id!="dvlg"){
        var tb=document.getElementById(thel.id);
-        tb.style.backgroundColor="#2E8B57";
+        tb.style.backgroundColor="#9370DB";
         tb.style.color="white";
       }//if not dvlg
 

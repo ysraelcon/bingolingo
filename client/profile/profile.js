@@ -1,7 +1,7 @@
 angular.module('laApp.profile',['ngRoute'])
- .config(['$routeProvider',
+ .config(['$routeProvider',//'$locationProvider',
           function($routeProvider){
-
+//$locationProvider.html5Mode(true);
  $routeProvider.when('/profile',{
 templateUrl:'profile/profile.html',
 controller:'profileCtrl'

@@ -6,18 +6,19 @@
     display:inline-block;/*text-align:center;*/
    border:1px solid grey;border-radius:5px;
     font-family:arial;
-    background-color:#2E8B57;color:white;}
+    background-color:#9370DB;color:white;}
 
    #lige{
     border:1px outset grey;
     font-size:25px;font-weight:bold;
     cursor:pointer;}
      
+/*chat general*/
 
 #dvicht{
   display:flex;flex-direction:column;/*overflow:auto;resize:both;*/
   position:absolute;left:15%;top:20%;
-  width:300px;height:200px;
+  width:250px;height:200px;
  border:1px solid grey;
   background-color:white;}
         
@@ -32,8 +33,8 @@
         
   #dvichttn{
     display:flex;flex-direction:column;justify-content:center;text-align:center;
-    width:80%;height:100%;
-   background-color:#2E8B57;color:white;
+    width:70%;height:100%;
+   background-color:#9370DB;color:white;
     cursor:move;}
         
       
@@ -41,12 +42,16 @@
    display:flex;flex-direction:column;justify-content:center;text-align:center;
    width:10%;height:100%;
    cursor:default;}
-      
+
+#dvichttl{
+  display:flex;flex-direction:column;justify-content:center;text-align:center;
+   width:10%;height:100%;
+   cursor:default;}
     
 #dvichttx{
    display:flex;flex-direction:column;justify-content:center;text-align:center;
    width:10%;height:100%;
-  background-color:#800000;color:white;/*#800000 #4B0082*/
+  background-color:#9370DB;color:white;/*#800000 #4B0082*/
    cursor:default;}
      
      
@@ -57,14 +62,14 @@
   #dvichtc{
     overflow-y:auto; word-wrap:break-word;
     width:100%;height:98%;
-   background-color:#DEB887;}
+   background-color:#FFDAB9;}
         
         
 #dvichtu{
   float:right;
   width:100px;height:98%;
   font-weight:bold;
- background-color:#FFA07A;color:black;}
+ background-color:#FFF0F5;color:black;}
         
   #dvichtmsg{
     width:100%;}
@@ -81,13 +86,13 @@
 caption{
  border:1px solid grey;border-radius:5px;
  font-family:arial;/*font-weight:bold;*/
- background-color:#2E8B57;color:white;}
+ background-color:#9370DB;color:white;}
  
 th{
   font-family:arial;font-weight:bold;}
   
 tbody>tr{/*:not(:first-child)*/
-  border:1px dashed grey;
+  /*border:1px dashed grey;*/
    background-color:#008080;color:white;}/*#FF7F50 #2F4F4F*/
      
 tbody>tr:hover{/*:not(:first-child):hover*/
@@ -118,5 +123,104 @@ th, td{
     background-color:grey;
       cursor:pointer;}
       
+/*waiting section chtrqs..*/
+
+#dvwti{
+      display:flex;flex-direction:row;justify-content:space-evenly;
+      width:200px;
+      border:1px solid grey;border-radius:5px;}
+    #dvwti>div{
+      border:1px solid grey;border-radius:5px;}
+    #dvwti_t{
+      text-align:center;
+      width:90%;
+      background-color:#2e8b57;color:white;}
+    #dvwti_x{
+      text-align:center;
+      width:10%;
+      background-color:#800000;color:white;}
+
+/*receiving chat request..*/
+
+#dvchtrqsof{
+      display:flex;flex-direction:row;justify-content:space-evenly;
+      width:200px;
+      border:1px solid grey;border-radius:5px;}
+    #dvchtrqsof>div{
+      border:1px solid grey;border-radius:5px;}
+    #dvchtrqsof_t{
+      text-align:center;
+      width:80%;
+      background-color:#2e8b57;color:white;}
+    #dvchtrqsof_m{
+      text-align:center;
+      width:10%;}
+    #dvchtrqsof_x{
+      text-align:center;
+      width:10%;
+      background-color:#800000;color:white;}
+
+/*chat request..*/
+
+#dvchtrqswth{
+  display:flex;flex-direction:column;/*overflow:auto;resize:both;*/
+  position:absolute;left:15%;top:20%;
+  width:250px;height:200px;
+ border:1px solid grey;
+  background-color:white;}
+        
+      
+#dvchtrqswth div{
+  border:1px solid grey;border-radius:5px;margin:0px;}
+      
+ #dvchtr_t{
+   display:flex;flex-direction:row;justify-content:center;
+   height:30px;
+  font-family:arial;}
+        
+  #dvchtr_tn{
+    display:flex;flex-direction:column;justify-content:center;text-align:center;
+    width:70%;height:100%;
+   background-color:#2E8B57;color:white;
+    cursor:move;}
+        
+      
+#dvchtr_tm{
+   display:flex;flex-direction:column;justify-content:center;text-align:center;
+   width:10%;height:100%;
+   cursor:default;}
+
+#dvchtr_tl{
+  display:flex;flex-direction:column;justify-content:center;text-align:center;
+   width:10%;height:100%;
+   cursor:default;}
+    
+#dvchtr_tx{
+   display:flex;flex-direction:column;justify-content:center;text-align:center;
+   width:10%;height:100%;
+  background-color:#800000;color:white;/*#800000 #4B0082*/
+   cursor:default;}
+     
+     
+  #dvchtr_cu{
+    display:flex;flex-direction:row;
+    height:100%;}
+      
+  #dvchtr_c{
+    overflow-y:auto; word-wrap:break-word;
+    width:100%;height:98%;
+   background-color:#DEB887;}
+        
+        
+#dvchtr_u{
+  float:right;
+  width:100px;height:98%;
+  font-weight:bold;
+ background-color:#FFA07A;color:black;}
+        
+  #dvchtr_msg{
+    width:100%;}
+  #inr_msg{
+    width:70%;}
 
 

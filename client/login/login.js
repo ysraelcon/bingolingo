@@ -1,12 +1,14 @@
 angular.module('laApp.login',['ngRoute'])
 
- .config(['$routeProvider',function($routeProvider){
-
+ .config(['$routeProvider',//'$locationProvider',
+          function($routeProvider){
+//$locationProvider.html5Mode(true);
  $routeProvider.when('/login',{
    
 templateUrl:'login/login.html',
 controller:'loginCtrl'
 });//when
+  //$locationProvider.html5Mode(true);
 }])//config
 
 .controller('loginCtrl',
