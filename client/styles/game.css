@@ -1,22 +1,27 @@
 /*style game..*/
 #dvjue, #dvjue div{
-  border:1px solid grey;border-radius:5px;}    
+  border:1px solid grey;
+    border-radius:5px;}    
     
 #dvjue{
-  display:flex;flex-direction:column;/*overflow:auto;resize:both;*/
+  display:flex;
+    flex-direction:column;
+  /*overflow:auto;resize:both;*/
   position:relative;
   width:250px;height:250px;}
     
     #dvjue div{margin:0px;}
 
 #dvjnm{
-  display:flex;flex-direction:row;
+  display:flex;
+    flex-direction:row;
   font-family:arial;}
 
 #dvjnmtit{
   text-align:center;
   width:70%;
-  background-color:#2E8B57;color:white;}
+  background-color:#2E8B57;
+    color:white;}
 
 #dvjnmmin,#dvjnmmit,#dvjnmcrr{
   text-align:center;
@@ -24,14 +29,16 @@
   cursor:pointer;}
 
 #dvjnmcrr{
-  background-color:red;color:white;}    
+  background-color:red;
+    color:white;}    
     
 #sptmr{
   float:right;
   border:1px solid black;}
 
 #dvjcu{
-  display:flex;flex-direction:row;
+  display:flex;
+    flex-direction:row;
   height:100%;}
 
 #dvjuse{

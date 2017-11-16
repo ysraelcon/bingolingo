@@ -20,7 +20,6 @@ pssp.use('register',new lclstrtg({
  usernameField:'email',
  passwordField:'password',
  passReqToCallback:true},
-
  function(req,email,password,done){
   
   User.findOne({email:email},
@@ -28,7 +27,8 @@ pssp.use('register',new lclstrtg({
     
   if(err){return done(err);}
   if(user){
-   return done(null,false,req.flash('registerMessage',"email is already taken"));
+   return done(null,false,
+               req.flash('registerMessage', "email is already taken"));
 }else{
   
  var newUser=new User();
@@ -37,7 +37,7 @@ pssp.use('register',new lclstrtg({
  newUser.firstnm=req.body.firstnm;
  newUser.lastnm=req.body.lastnm;
   //console.log(req.body.firstnm);
- newUser.password=newUser.generateHash(password);
+ newUser.password= newUser.generateHash(password);
   
  newUser.save(function(err){
   if(err){throw err};
@@ -52,7 +52,6 @@ pssp.use('login',new lclstrtg({
  usernameField:'email',
  passwordField:'password',
  passReqToCallback:true},
-
  function(req,email,password,done){
   
   User.findOne({email:email},
@@ -60,10 +59,12 @@ pssp.use('login',new lclstrtg({
     
   if(err){return done(err);}
   if(!user){
-   return done(null,false,req.flash('loginMsg',"Incorrect username"));
+   return done(null,false,
+               req.flash('loginMsg',"Incorrect username"));
 }//if
   if(!user.validPassword(password)){
- return done(null,false,req.flash('loginMsg',"Incorrect password"));
+ return done(null,false,
+             req.flash('loginMsg',"Incorrect password"));
 }//if
 
 return done(null,user);

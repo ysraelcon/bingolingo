@@ -7,5 +7,4 @@ icon
 -mensaje cuando se logea mal, ej: incorrect password
 
 +por completar:
--en juego, minimizar, restaurar tamaño
--sala general, restaurar tamaño de ventana, para mobile
+-salas de chat con tamaño completo de la pantalla

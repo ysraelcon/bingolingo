@@ -1,25 +1,26 @@
 <form id="fmedt">
 
 First Name: <input type="text"
-        ng-model="user.firstnm"
-name="firstnm" value="{{user.firstnm}}"><br>
+        ng-model="user.firstnm" name="firstnm"
+                   value="{{user.firstnm}}"><br>
 
-Last Name: <input type="text" name="lastnm" 
-      ng-model="user.lastnm"
-          value="{{user.lastnm}}"><br>
+Last Name: <input type="text"
+                  name="lastnm" ng-model="user.lastnm"
+              value="{{user.lastnm}}"><br>
 
-Gender: <input type="radio" name="gender"
-        ng-model="user.gender"       
-        value="M"> Male
-  <input type="radio" name="gender"
-         ng-model="user.gender"
+Gender: <input type="radio"
+               name="gender" ng-model="user.gender"       
+             value="M"> Male
+  <input type="radio"
+         name="gender" ng-model="user.gender"
          value="F"> Female<br>
 
-Age: <input type="number" name="age"
-     ng-model="user.age"      
-      value="{{user.age}}" required><br>
+Age: <input type="number"
+            name="age" ng-model="user.age"      
+          value="{{user.age}}" required><br>
 
-Country: <select name="country" ng-model="user.country">
+Country: <select name="country"
+                 ng-model="user.country">
 <option value="">Country...</option>
 <option value="AF">Afghanistan</option>
 <option value="AL">Albania</option>
@@ -270,16 +271,16 @@ Country: <select name="country" ng-model="user.country">
 <option value="ZW">Zimbabwe</option>
 </select><br>
 
-Learning: <input type="text" name="learning"
-          ng-model="user.learning"
+Learning: <input type="text"
+                 name="learning" ng-model="user.learning"
           value="{{user.learning}}"><br>
 
-Speaks: <input type="text" name="speaks"
-        ng-model="user.speaks"
+Speaks: <input type="text"
+               name="speaks" ng-model="user.speaks"
         value="{{user.speaks}}"><br>
 
 
-<input type="submit" value="Update"
-       ng-click="ediT(user)">
+<input type="submit"
+       value="Update" ng-click="ediT(user)">
 
 </form>

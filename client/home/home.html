@@ -7,8 +7,10 @@
     font-family:arial;}
   
   #dvmsgnu{
-    display:inline-block;text-align:center;
-    border:1px solid grey;border-radius:2px;}
+    display:inline-block;
+      text-align:center;
+    border:1px solid grey;
+      border-radius:2px;}
    
   #dvmsgnu a{
     color:grey;}
@@ -29,12 +31,15 @@
 /*style title..*/
 @media only screen and (min-width:400px){
     #dvlg{
-     position:absolute;top:15px; right:20px;}
+     position:absolute;
+       top:15px;right:20px;}
     }/*media*/
       
   #dvlg{
-    border:1px solid grey; border-radius:5px;
-    background-color:white; color:black;
+    border:1px solid grey;
+      border-radius:5px;
+    background-color:white;
+      color:black;
     cursor:pointer;}
   #dvlg a{
     text-decoration:none;
@@ -42,15 +47,17 @@
 /*..style title*/
 </style>
 
+
 <div id="dvti">
   <h1 id="h1ti">BesTalk</h1>
    <div id="dvlg" 
-               ><a
- href="#/login">Login</a></div>
+    ><a href="#/login"
+        >Login</a></div>
 </div><!-- header -->
   
 <style>
-  #dvmed{background-color:#ffffe0;}
+  #dvmed{
+    background-color:#ffffe0;}
 </style>
 
   <div id="dvmed">
@@ -64,24 +71,26 @@
 <form name="fmsgup" 
       onsubmit="return valpW()">
   
-<input type="text" name="firstnm"
-       ng-model="user.firstnm"
-  placeholder="First Name">
-<input type="text" name="lastnm"
-       ng-model="user.lastnm"
-  placeholder="Last Name"><br>
+<input type="text"
+       name="firstnm" ng-model="user.firstnm"
+       placeholder="First Name">
+<input type="text"
+       name="lastnm" ng-model="user.lastnm"
+       placeholder="Last Name"><br>
   
-<input type="email" name="email"
-       ng-model="user.email"
- placeholder="Email"><br>
+<input type="email"
+       name="email" ng-model="user.email"
+       placeholder="Email"><br>
   
-  <input type="password" id="inpw"
-         ng-model="user.password"
-   placeholder="Password"><br>
-  <input type="password" name="password"
-   id="incpw" placeholder="Repeat password"><br>
+  <input type="password"
+         id="inpw" ng-model="user.password"
+         placeholder="Password"><br>
+  <input type="password"
+         name="password" id="incpw"
+         placeholder="Repeat password"><br>
   
-  <button type="submit" ng-click="signuP()">Sign Up</button>
+  <button type="submit"
+          ng-click="signuP()">Sign Up</button>
   
   <p>Already have an account? <a
  href="#/login">Log in!</a></p>

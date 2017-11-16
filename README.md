@@ -23,7 +23,7 @@ On the back-end,
 - safely store app secrets in `.env` (nobody can see this but you and people you invite)
 
 
-Made by BingoLingo team
+Made by BesTalk team
 -------------------
 
 \ ゜o゜)ノ

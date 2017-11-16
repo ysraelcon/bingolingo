@@ -19,8 +19,8 @@ sktclt.on("usernames",function(dat){
 for(var usrnme in dat){
  conusr+="<tr id=\'"+usrnme+
    "\' onclick='usrprfchtR(this)' >"+
-//onclick='dainfU(this)' 
-  "<td>"+dat[usrnme].firstnm+" "+dat[usrnme].lastnm+"</td>"+
+  "<td>"+dat[usrnme].firstnm+
+  " "+dat[usrnme].lastnm+"</td>"+
   "<td>"+(dat[usrnme].gender||"-")+"</td>"+
   "<td>"+(dat[usrnme].age||"-")+"</td>"+
   "<td>"+(dat[usrnme].country||"-")+"</td>"+
@@ -36,16 +36,14 @@ tblusrsbd.innerHTML=conusr;
 
 
 
-
-
 //====general room
 
 function entrgnrL(){
   
   if(typeof(dvicht)=="undefined"){
+    
  var nudiv=document.createElement("DIV");
-nudiv.id="dvicht";
-
+ nudiv.id="dvicht";
 
 nudiv.innerHTML='<div id="dvichtt">'+
     '<div id="dvichttn">General</div>'+
@@ -68,11 +66,14 @@ sktclt.emit("opngnrl");
 jQuery(function($){
 
 var draggableDiv = $('#dvicht').draggable();
-$('#dvichtc', draggableDiv).mousedown(function(ev) {
+  
+$('#dvichtc', draggableDiv)
+  .mousedown(function(ev){
   draggableDiv.draggable('disable');
-}).mouseup(function(ev) {
+})//mousedown
+  .mouseup(function(ev){
   draggableDiv.draggable('enable');
-});
+});//mouseup
   
 $("#dvicht").resizable();
 
@@ -83,22 +84,23 @@ $("#dvicht").resizable();
 
 sktclt.on("mndusrgnrl",function(dt){
   //dt{usrsgnrl,chtgnrl,sktid}  
-   //15 lines of chat
+   
   var usrsg=""
   
   for(var nombr in dt.usrsgnrl){
     usrsg+=dt.usrsgnrl[nombr]+"<br>";
-  }
+  }//for
+  
  dvichtu.innerHTML="";
  dvichtu.innerHTML=usrsg;
-  
-  
+    
   if(dt.sktid==sktclt.id){
+    
   var licht=dvichtc.innerHTML;
-
+//15 lines of chat
   for(var msgcht in dt.chtgnrl){
     licht+=dt.chtgnrl[msgcht]+"<br>";
-  }
+  }//for
  dvichtc.innerHTML=licht;
   }//if es el que llega
 });//skon mandaron el usuario
@@ -111,7 +113,7 @@ jQuery(function($){
 //$("#dvichttm").click(function(){
   
     if($("#dvichttm").html()=="-"){
-    $("#dvicht").height(30);
+      $("#dvicht").height(30);
       $("#dvichttm").html("+");
       $("#dvichtcu").hide();
       $("#dvichtmsg").hide();
@@ -127,11 +129,9 @@ jQuery(function($){
       $("#dvicht").resizable("enable");
     }//else +
     
-    
- //});//minimizar
-
 });//jQuery
 }//minimizar dvicht
+
 
 function restamchT(){
 if(dvicht.offsetWidth<dvchtc.offsetWidth){
@@ -145,10 +145,10 @@ if(dvicht.offsetWidth<dvchtc.offsetWidth){
   }//else retorna
 }//restaura tamaño
 
+
 function crrdvichT(){
  dvchtc.removeChild(dvicht);
- sktclt.emit("cerrgnrl");
-   
+ sktclt.emit("cerrgnrl");  
 }//cerrar dvicht
 
 
@@ -164,16 +164,16 @@ inimsg.value="";
 }//on send msg, del form
 
 
-
 sktclt.on('new message', function(data) {
 //data{msg,nick}
  
 jQuery(function($){
-  $("#dvichtc").append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-  $("#dvichtc").stop().animate({ scrollTop: $("#dvichtc")[0].scrollHeight}, 200);
+  $("#dvichtc").append('<b>'+data.nick+":</b> "+
+                       data.msg+"<br/>");
+  $("#dvichtc").stop().animate(
+    {scrollTop:$("#dvichtc")[0].scrollHeight}, 200);
 });//jQuery
 });//on receive msg
-
 
 
 
@@ -185,8 +185,9 @@ function nooP(){}//no operations, for swap functions
 function usrprfchtR(ele){
   
  if(typeof(dvinfusr)=="undefined"){
+   
 var nuedvinfusr=document.createElement("DIV");
-  nuedvinfusr.id="dvinfusr";
+nuedvinfusr.id="dvinfusr";
   
   nuedvinfusr.innerHTML='<div id="dvinfprfcht">'+
     '<li id="liprf'+ele.id
@@ -207,46 +208,56 @@ function prfinF(ele){
   
 }//info profile
 
+
 function chtrqsT(ele){
+  
   var prtid=ele.id.substr(8,ele.id.length);
   console.log("mando chtrqs");
-  sktclt.emit("mnd chtrqs",{sktidrcv:prtid,sktidmnd:sktclt.id});
-  //{sktidrcv,sktcltidmnd}
+  
+  sktclt.emit("mnd chtrqs",{sktidrcv:prtid,
+                        sktidmnd:sktclt.id});
+  
  alert("chat request, in construction");
   crrinfusR();
 }//chat request
 
+
 function crrinfusR(){
   dvchtc.removeChild(dvinfusr);
-  
 }//cerrar inf prf y cht rqst
+
 
 sktclt.on("recibe chtrqs",function(dt){
   //dt{nmemnd,idrcv,sktidmnd,sktidrcv,roombth}
   console.log("me dieron chtrqs");
   console.log(dt);
   
-  var nudiv=document.createElement("div");
+var nudiv=document.createElement("div");
 nudiv.id="dvchtrqsof";
 
-nudiv.innerHTML='<div id="dvchtrqsof_t">Chat request from '+dt.nmemnd
-  +'</div>'+
-    '<div id="dvchtrqsof_m" onclick="opnchtrqS(\''+dt.roombth+'\',\''+
+nudiv.innerHTML='<div id="dvchtrqsof_t">Chat request from '+
+  dt.nmemnd+'</div>'+
+    '<div id="dvchtrqsof_m" onclick="opnchtrqS(\''+
+  dt.roombth+'\',\''+
   dt.sktidmnd+'\')">+</div>'+
     '<div id="dvchtrqsof_x">X</div>';
 
 dvchtc.appendChild(nudiv);
   
-});
+});//cerrar info user
+
 
 sktclt.on("espera chtrqs",function(dt){
   //dt{idmnd,idrcv,sktidmnd,sktidrcv,roombth}
+  
   if(dt.sktidmnd==sktclt.id){
     
   console.log("espera chtrqs");
   console.log(dt);
-  if(typeof(dvwti)=="undefined"){  
-  var nudiv=document.createElement("div");
+    
+  if(typeof(dvwti)=="undefined"){ 
+    
+var nudiv=document.createElement("div");
 nudiv.id="dvwti";
 
 nudiv.innerHTML='<div id="dvwti_t">Waiting...</div>'+
@@ -257,12 +268,13 @@ dvchtc.appendChild(nudiv);
   }//if es el que espera
 });
 
+
 function opnchtrqS(roombthx,sktidmndx){
   
   if(typeof(dvchtrqswth)=="undefined"){
-  var nudiv=document.createElement("DIV");
+    
+var nudiv=document.createElement("DIV");
 nudiv.id="dvchtrqswth";
-
 
 nudiv.innerHTML='<div id="dvchtr_t">'+
     '<div id="dvchtr_tn">Chat with</div>'+
@@ -282,12 +294,13 @@ nudiv.innerHTML='<div id="dvchtr_t">'+
 
 dvchtc.appendChild(nudiv);
     
-    jQuery(function($){
+jQuery(function($){
 
-var draggableDiv = $('#dvchtrqswth').draggable();
-$('#dvchtr_c', draggableDiv).mousedown(function(ev) {
+var draggableDiv= $('#dvchtrqswth').draggable();
+$('#dvchtr_c', draggableDiv)
+  .mousedown(function(ev){
   draggableDiv.draggable('disable');
-}).mouseup(function(ev) {
+}).mouseup(function(ev){
   draggableDiv.draggable('enable');
 });
   
@@ -299,17 +312,17 @@ $("#dvchtrqswth").resizable();
     sktclt.emit("abr chtrqs",
                 {roombth:roombthx,
                  sktidmnd:sktidmndx});
-  }//if objeto sktidmndx
+  }//if objeto sktidmndx existe
   }//if dvchtrqswth no creado
   
-  
 }//abir chat request
+
 
 function crrdvchtR(){
  dvchtc.removeChild(dvchtrqswth);
  //sktclt.emit("cerrgnrl");
-   
 }//cerrar dvicht
+
 
 sktclt.on("aceptd chtrqs",function(dt){
   //dt{nmemnd,nmercv,sktidrcv,sktidmnd,roombth}
@@ -318,20 +331,19 @@ sktclt.on("aceptd chtrqs",function(dt){
   
   opnchtrqS(dt.roombth);
   sktclt.emit("usrs pa chtrqs",dt);  
-});
+});//skcon acepta chat reqquest
+
 
 sktclt.on("mete usrs chtrqs",function(dt){
   //dt{nmemnd,nmercv,sktidrcv,sktidmnd,roombth}
   
     console.log("nombres en lis");
-    dvchtr_u.innerHTML=dt.nmercv+"<br id='brrcv' data-sktid='"+dt.sktidrcv+"'/>"+
-        dt.nmemnd+"<br id='brmnd' data-sktid='"+dt.sktidmnd+"'/>";
+    dvchtr_u.innerHTML= dt.nmercv+"<br id='brrcv' data-sktid='"+
+     dt.sktidrcv+"'/>"+
+     dt.nmemnd+"<br id='brmnd' data-sktid='"+dt.sktidmnd+"'/>";
   
 });//meter usuario
 
-sktclt.on("palroomprv",function(dt){
-  console.log(dt);
-});
 
 function envmsgR(ev){
   ev.preventDefault();
@@ -346,13 +358,16 @@ inr_msg.value="";
   
 }//enviar message privado
 
+
 sktclt.on("new msgchtrqs",function(dt){
   //dt{msg,nick}
-  jQuery(function($){
+jQuery(function($){
   $("#dvchtr_c").append('<b>'+dt.nick+":</b> "+dt.msg+"<br/>");
-  $("#dvchtr_c").stop().animate({ scrollTop: $("#dvchtr_c")[0].scrollHeight}, 200);
+  $("#dvchtr_c").stop().animate(
+    {scrollTop:$("#dvchtr_c")[0].scrollHeight}, 200);
 });//jQuery
 });//nueve msg private
+
 
 
 //=====juego
@@ -375,7 +390,9 @@ dvjuse.innerHTML=usrj;
 
 
 function crtgaM(){
+  
    if(typeof(dvjue)=="undefined"){
+     
 var nudivj=document.createElement("DIV");
 nudivj.id="dvjue";
 
@@ -404,7 +421,8 @@ nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
   jQuery(function($){
 
 var draggableDiv = $('#dvjue').draggable();
-$('#dvjcon', draggableDiv).mousedown(function(ev) {
+$('#dvjcon', draggableDiv)
+  .mousedown(function(ev) {
   draggableDiv.draggable('disable');
 }).mouseup(function(ev) {
   draggableDiv.draggable('enable');
@@ -420,9 +438,10 @@ $("#dvjue").resizable();
 function restamjuE(){
   
   if(dvjue.offsetWidth<dvgmc.offsetWidth){
+    
   dvjue.style.height=dvgmc.offsetHeight+"px";
   dvjue.style.width=dvgmc.offsetWidth+"px";
-    dvjue.style.left=0;
+  dvjue.style.left=0;
   dvjue.style.top=0;
   }//if pequeño
   else{
@@ -451,14 +470,18 @@ injmsg.value="";
 
 sktclt.on('new messagejue', function(data) {
   //data{msg,nick}
+  
    if(/bingo/i.test(data.msg)){
+     
      dvjcon.innerHTML+="<b>"+data.nick+":</b> "+data.msg+"<br/>"+
-                        "BINGO, you guessed the word!<br>";
+       "BINGO, you guessed the word!<br>";
    }else{
      dvjcon.innerHTML+="<b>"+data.nick+":</b> "+data.msg+"<br/>";
-   }
-    jQuery(function($){
-  $("#dvjcon").stop().animate({ scrollTop: $("#dvjcon")[0].scrollHeight}, 100);
+   }//else no bingo
+  
+jQuery(function($){
+  $("#dvjcon").stop().animate(
+    {scrollTop:$("#dvjcon")[0].scrollHeight}, 100);
 });//jquery
 });//on receive msg juego
 

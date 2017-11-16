@@ -27,11 +27,11 @@ Ap.get("/login",function(req,res){
  //res.render("login.ejs",{msg:req.flash('loginMsg')});
 });
   
-Ap.post("/login",pssp.authenticate('login',{
-  successRedirect:'/profile',
+Ap.post("/login",pssp.authenticate('login',
+  {successRedirect:'/profile',
   failureRedirect:'/login',
-  failureFlash:true
-}));//post login
+  failureFlash:true}
+));//post login
 /*
 Ap.get("/tabs",function(req,res){
  res.render("tabs.ejs");
@@ -48,7 +48,7 @@ Ap.get('/profile',isLoggedIn,function(req,res){
  res.json(req.user);
   //res.render('/profile/profile.html',{user:req.user});
   //res.render('profile.ejs',{user:req.user});
-});//get 
+});//get f
   
 Ap.get('/edit',isLoggedIn,function(req,res){
  res.json(req.user);
@@ -58,19 +58,23 @@ Ap.get('/edit',isLoggedIn,function(req,res){
 Ap.post('/edit',isLoggedIn,function(req,res){
   
 // validate information
- req.checkBody('firstnm', 'First Name is required.').notEmpty();
- req.checkBody('age', 'Age is required.').notEmpty();
+ req.checkBody('firstnm',
+          'First Name is required.').notEmpty();
+ req.checkBody('age',
+          'Age is required.').notEmpty();
 
 // if there are errors, redirect and save errors to flash
 const errors = req.validationErrors();
   if (errors) {
   console.log(errors);
-   req.flash('errors', errors.map(err => err.msg));
+   req.flash('errors',
+             errors.map(err => err.msg));
    return res.redirect("/edit");
   }//if
 
 // finding a current event
- User.findOne({firstnm:req.user.firstnm}, (err, user) => {
+ User.findOne({firstnm:req.user.firstnm},
+              (err, user) => {
  // updating that event
  user.firstnm = req.body.firstnm;
  user.lastnm = req.body.lastnm;
@@ -81,12 +85,12 @@ const errors = req.validationErrors();
    user.speaks= req.body.speaks;
 
  user.save((err) => {
-  if (err)
-   throw err;
+  if (err) throw err;
 
 // success flash message
 // redirect back to the /events
- req.flash('success', 'Successfully updated event.');
+ req.flash('success',
+           'Successfully updated event.');
  res.redirect('/profile');
 });//ev.save
 });//ev.findone

@@ -11,15 +11,16 @@ var usrsch=Mng.Schema({
   speaks:String,
 email:{type:String,unique:true},
 password:{type:String},
-  chats:[]
-});
+  chats:[]});
 
-usrsch.methods.generateHash=function(password){
- return bcrypt.hashSync(password,bcrypt.genSaltSync(6),null);
+usrsch.methods.generateHash= function(password){
+ return bcrypt.hashSync(password,
+                bcrypt.genSaltSync(6),null);
 };
 
 usrsch.methods.validPassword=function(password){
- return bcrypt.compareSync(password,this.password);
+ return bcrypt.compareSync(password,
+                           this.password);
 };
 
 module.exports=Mng.model('User',usrsch);

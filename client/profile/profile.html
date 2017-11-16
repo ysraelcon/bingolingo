@@ -17,7 +17,8 @@
     display:flex;
       flex-direction:column;
     height:100%;
-   border:1px solid grey;border-radius:5px;
+   border:1px solid grey;
+      border-radius:5px;
     background-color:#ffffe0;}
   
 #dvmtb{
@@ -30,13 +31,15 @@
  #dvmtb>div{
    text-align:center;
    width:100%;
-  border:1px solid grey; border-radius:5px;
+  border:1px solid grey;
+     border-radius:5px;
    font-family:arial;
    background-color:white;
    cursor:pointer;}
       
   #dvmtb div:hover{
-    background-color:#9370DB;color:white;}
+    background-color:#9370DB;
+      color:white;}
       
  #dvmedc{
    position:relative;
@@ -47,17 +50,20 @@
     /*dv chtc gmc cmmc lssc*/
  #dvmedc>div:nth-child(-n+5){
    /*border:1px dotted grey;*/
-   display:none;overflow-y:auto;
+   display:none;
+     overflow-y:auto;
    position:absolute;
    height:100%;width:100%;
-  border:1px dotted grey;margin:0px;}
+  border:1px dotted grey;
+     margin:0px;}
 
    
   #dvusrc{
     overflow-y:auto;
     position:absolute;
     height:100%;width:100%;
-   border:1px dotted grey; margin:0px;
+   border:1px dotted grey;
+      margin:0px;
     background-color:#5F9EA0;} /*#6495ED #D3D3D3*/
   
   #dvchtc{
@@ -67,34 +73,39 @@
     background-color:#D2B48C;} /*#D2B48C #deb887*/
       
   #dvcmmc{
-    background-color:#0079a9;color:white;}
+    background-color:#0079a9;
+      color:white;}
   
   #dvlssc{
-    background-color:#2f4f4f;color:white;}
+    background-color:#2f4f4f;
+      color:white;}
  
 /*..style middle*/
 </style>
 
 
 
-      <div id="dvmed">
+<div id="dvmed">
         
-        <div id="dvmtb">
-    <div id="dvmtbcht"  onclick="opntB(event,'#dvchtc',this);entrchT();"
+ <div id="dvmtb">
+   <div id="dvmtbcht"
+  onclick="opntB(event,'#dvchtc',this);entrchT();"
          >Chat</div>
-    <div id="dvmtbgm"  onclick="opntB(event,'#dvgmc',this)"
+    <div id="dvmtbgm"
+         onclick="opntB(event,'#dvgmc',this)"
          >Game</div>
     <div id="dvmtbcmm"
       onclick="opntB(event,'#dvcmmc',this)"
          >Community</div>
-    <div id="dvmtblss"  onclick="opntB(event,'#dvlssc',this)"
+    <div id="dvmtblss"
+         onclick="opntB(event,'#dvlssc',this)"
          >Lesson</div>
-          
-        </div><!-- div tabs -->
-      
+  </div><!-- div tabs -->
+  
+  
 <link rel="stylesheet" href="/styles/chat.css">    
 
-    <div id="dvmedc">
+<div id="dvmedc">
 
       
       
@@ -103,11 +114,12 @@
 <div id="dvchtru">
           
 <div id="dvchtr">
-          <div id="dvchtrnm">Rooms</div>
-          <div id="dvchtrc">
-            <li id="lige" onclick="entrgnrL()">General</li>
-          </div>
-          </div><!-- dv rooms -->
+  <div id="dvchtrnm">Rooms</div>
+  <div id="dvchtrc">
+  <li id="lige"
+      onclick="entrgnrL()">General</li>
+  </div>
+</div><!-- dv rooms -->
           
   
 <div id="dvchtu">
@@ -128,9 +140,9 @@
 </table>
   
 </div><!-- dv users -->
-          </div><!-- dv chat room user -->
+</div><!-- dv chat room user -->
   
-      </div><!-- div chat -->
+</div><!-- div chat -->
 
 
      
@@ -140,14 +152,15 @@
 <div id="dvgmc">
   
   <p>In construction...</p>
-  <input type="button" value="create game"
-         id="btncrtgm" onclick="crtgaM()">   
+  <input type="button"
+         value="create game" id="btncrtgm"
+         onclick="crtgaM()">   
 </div><!-- div juego style="display:none"-->
       
       
       
-      <div id="dvcmmc">In future.</div>
-      <div id="dvlssc">The teacher has not arrived yet.</div>
+<div id="dvcmmc">In future.</div>
+<div id="dvlssc">The teacher has not arrived yet.</div>
 
       
       
@@ -156,9 +169,11 @@
   
 #dvusri{
   text-align:center;
- border:1px solid grey;border-radius:5px;
+ border:1px solid grey;
+    border-radius:5px;
   font-family:arial;
-  background-color:#9370DB;color:white;}
+  background-color:#9370DB;
+    color:white;}
   
 /*..style div user info*/
 </style>        
@@ -167,7 +182,8 @@
   <div id="dvusri">User info</div>
   
   <span ng-switch="edit">
-  <span id="spusrprf" ng-switch-when="false">
+  <span id="spusrprf"
+        ng-switch-when="false">
       
  <p>First Name: {{user.firstnm}} </p>
  <p>Last Name: {{user.lastnm}} </p>
@@ -177,15 +193,15 @@
 <p>Learning: {{user.learning || ""}} </p>
 <p>Speaks:  {{user.speaks || ""}} </p>
     
-  </span>
+  </span><!-- usr prf info -->
   
   
   <span id="spusredtprf" ng-switch-when="true">
     <app-edit-profile></app-edit-profile>
     
-  </span> 
+  </span><!-- usr prf edit --> 
     
-  </span>
+  </span><!-- span switcher -->
  
   
 <input type="button"
@@ -200,20 +216,25 @@
  <a href="/logout" >Logout</a>
 </div><!-- div user -->
 
-    </div><!-- middle content -->
-        
-    </div><!-- middle -->
+</div><!-- middle content -->
+</div><!-- middle -->
       
-   <script>
+
+
+<script>
+  
     function opntB(evt,idnm,thel){
       var dvmcs= document.querySelectorAll("#dvmedc>div");
+      
       for(var i=0;i<dvmcs.length;i++){
         dvmcs[i].style.display="none";
       }//for
+      
       document.querySelector(idnm).
        style.display="block";
 
-      var dvmtbs=document.querySelectorAll("#dvmtb>div");
+      var dvmtbs= document.querySelectorAll("#dvmtb>div");
+      
       for(var i=0;i<dvmtbs.length;i++){
         dvmtbs[i].style.backgroundColor="";
         dvmtbs[i].style.color="";
@@ -231,7 +252,7 @@ function insertAfter(referenceNode, newNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }//insert after
      
-   </script>
+</script>
 
 
 <app-fondo></app-fondo>
