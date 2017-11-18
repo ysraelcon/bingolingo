@@ -16,9 +16,9 @@
     font-size:25px;font-weight:bold;
     cursor:pointer;}
      
-/*chat general*/
+/*chat cuadro..*/
 
-#dvicht{
+.dvcht{
   display:flex;
     flex-direction:column;
   /*overflow:auto;resize:both;*/
@@ -29,32 +29,31 @@
   background-color:white;}
         
       
-#dvicht div{
+.dvcht div{
   border:1px solid grey;
     border-radius:5px;
     margin:0px;}
      
 
 
- #dvichtt{
+ .dvcht_t{
    display:flex;
      flex-direction:row;
      justify-content:center;
    height:30px;
   font-family:arial;}
         
-  #dvichttn{
+  .dvcht_tnm{
     display:flex;
       flex-direction:column;
       justify-content:center;
       text-align:center;
     width:70%;height:100%;
-   background-color:#9370DB;
-      color:white;
     cursor:move;}
+
         
       
-#dvichttm{
+.dvcht_tm{
    display:flex;
      flex-direction:column;
      justify-content:center;
@@ -62,7 +61,7 @@
    width:10%;height:100%;
    cursor:default;}
 
-#dvichttl{
+.dvcht_tl{
    display:flex;
      flex-direction:column;
      justify-content:center;
@@ -70,44 +69,77 @@
    width:10%;height:100%;
    cursor:default;}
     
-#dvichttx{
+.dvcht_tx{
    display:flex;
      flex-direction:column;
      justify-content:center;
      text-align:center;
    width:10%;height:100%;
-  background-color:#9370DB;
-    color:white;
-  /*#800000 #4B0082*/
    cursor:default;}
+
      
      
 
-  #dvichtcu{
+  .dvcht_cu{
     display:flex;
       flex-direction:row;
     height:100%;}
       
-  #dvichtc{
+  .dvcht_c{
     overflow-y:auto;
       word-wrap:break-word;
-    width:100%;height:98%;
-   background-color:#FFDAB9;}
+    width:100%;height:98%;}
+
         
         
-#dvichtu{
+.dvcht_u{
   float:right;
   width:100px;height:98%;
-  font-weight:bold;
- background-color:#FFF0F5;
-    color:black;}
+  font-weight:bold;}
+
         
-  #dvichtmsg{
+  .dvchtmsg{
     width:100%;}
-  #inimsg{
+  .inchtmsg{
     width:70%;}
+
+/*..chat cuadro*/
+
+/*chat general..*/
+
+#dvcht_tnm_gnrl{
+  background-color:#9370db;
+    color:white;}
+#dvcht_tx_gnrl{
+  background-color:#483D8B;
+    color:white;
+  /*#800000 #4B0082*/}
+
+#dvcht_c_gnrl{
+  background-color:#ffDAB9;}
+#dvcht_u_gnrl{
+  background-color:#FFF0F5;
+    color:black;}
+
+/*..chat general*/
+
+/*chat request..*/
+
+.col_tnm{
+  background-color:#2E8B57;
+    color:white;}
+.col_tx{
+  background-color:#800000;
+    color:white;/*#800000 #4B0082*/}
+
+.col_c{
+  background-color:#DEB887;}
+.col_u{
+  background-color:#FFA07A;}
+
+/*..chat request*/
      
- /*tabla users chat*/
+ /*tabla users chat..*/
      
 #tblusrs{
   border-collapse:collapse;
@@ -213,91 +245,5 @@ th, td{
       background-color:#800000;
         color:white;}
 
-/*chat request..*/
-
-#dvchtrqswth{
-  display:flex;
-    flex-direction:column;
-  /*overflow:auto;resize:both;*/
-  position:absolute;
-    left:15%;top:20%;
-  width:250px;height:200px;
- border:1px solid grey;
-  background-color:white;}
-        
-      
-#dvchtrqswth div{
-  border:1px solid grey;
-    border-radius:5px;
-    margin:0px;}
-      
- #dvchtr_t{
-   display:flex;
-     flex-direction:row;
-     justify-content:center;
-   height:30px;
-  font-family:arial;}
-        
-  #dvchtr_tn{
-    display:flex;
-      flex-direction:column;
-      justify-content:center;
-      text-align:center;
-    width:70%;height:100%;
-   background-color:#2E8B57;
-      color:white;
-    cursor:move;}
-        
-      
-#dvchtr_tm{
-   display:flex;
-     flex-direction:column;
-     justify-content:center;
-     text-align:center;
-   width:10%;height:100%;
-   cursor:default;}
-
-#dvchtr_tl{
-  display:flex;
-    flex-direction:column;
-    justify-content:center;
-    text-align:center;
-  width:10%;height:100%;
-  cursor:default;}
-    
-#dvchtr_tx{
-   display:flex;
-     flex-direction:column;
-     justify-content:center;
-     text-align:center;
-   width:10%;height:100%;
-  background-color:#800000;
-    color:white;/*#800000 #4B0082*/
-   cursor:default;}
-     
-     
-  #dvchtr_cu{
-    display:flex;
-      flex-direction:row;
-    height:100%;}
-      
-  #dvchtr_c{
-    overflow-y:auto;
-      word-wrap:break-word;
-    width:100%;height:98%;
-   background-color:#DEB887;}
-        
-        
-#dvchtr_u{
-  float:right;
-  width:100px;height:98%;
-  font-weight:bold;
- background-color:#FFA07A;
-    color:black;}
-        
-  #dvchtr_msg{
-    width:100%;}
-  #inr_msg{
-    width:70%;}
 
 

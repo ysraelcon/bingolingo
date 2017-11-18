@@ -83,7 +83,7 @@ io.sockets.on('connection', function(socket) {
   
 
 socket.on("userva",function(dt){
-//dt:sktclt.id //con user_id !!!
+//dt=sktclt.id //con user_id !!!
   //console.log(socket.id);
  if(socket.request.user){
 
@@ -97,10 +97,13 @@ updtusrscnnT();
   
   
 
-socket.on('opngnrl',function(){
-    
+socket.on('opngnrl',function(dt){
+ //dt="gnrl" room   
   usrsgnrl[socket.request.user._id]= socket.request.user.firstnm;
-    
+  
+  socket.join(dt);
+  console.log(io.sockets.adapter.rooms[dt]);   
+  
 Chat.findOne({_id:"5a03c2696602c617ed34b85f"},
              function(err,cht){
 
@@ -114,17 +117,17 @@ Chat.findOne({_id:"5a03c2696602c617ed34b85f"},
 });//skon abre general
   
   
-socket.on('send message', function(data) {
-    //data:inimsgval
+socket.on('send message', function(dt) {
+    //dt{msg(inimsgval),room}
     
-  data=emoji.emojify(data);
+  dt.msg=emoji.emojify(dt.msg);
    
   Chat.findOne({_id:"5a03c2696602c617ed34b85f"},
               function(err,cht){
 
 cht.chats.general.shift();
       
-cht.chats.general.push( socket.request.user.firstnm+": "+data);
+cht.chats.general.push( socket.request.user.firstnm+": "+dt.msg);
 
 cht.save((err)=>{
 if(err) throw err;
@@ -132,14 +135,18 @@ if(err) throw err;
 
 });//findone
     
-   io.sockets.emit('new message',
-              {msg:data,
-          nick:socket.request.user.firstnm});
+   io.to(dt.room).emit('new message',
+              {msg:dt.msg,
+          nick:socket.request.user.firstnm,
+              room:dt.room});
 });//sk send msg
 
 
-socket.on("cerrgnrl",function(){
-    
+socket.on("cerrgnrl",function(dt){
+  //dt="general" room
+  
+  socket.leave(dt);
+  
   if(!socket.id) return;
   delete usrsgnrl[socket.request.user._id];
   updtusrsgnrL();
@@ -152,7 +159,7 @@ socket.on("cerrgnrl",function(){
   
 socket.on("mnd chtrqs",function(dt){
   //dt{sktidrcv,sktidmnd}
-  console.log("hizo cht rqst");
+  console.log("2hizo cht rqst");
   
   var idmnd=socket.request.user._id;
     
@@ -170,7 +177,7 @@ socket.on("mnd chtrqs",function(dt){
            roombth:roombth
          }); //sktcltid de quien la manda
     
-    io.sockets.emit("espera chtrqs",
+    io.to(roombth).emit("espera chtrqs",
           {sktidmnd:dt.sktcltid,
            sktidrcv:dt.sktidrcv,
            roombth:roombth});
@@ -181,7 +188,7 @@ socket.on("mnd chtrqs",function(dt){
   socket.on("abr chtrqs",function(dt){
    //dt{roombth,sktidmnd}
     
-    console.log("abr chtrqs");
+    console.log("4abr chtrqs");
     
     socket.join(dt.roombth);
     
@@ -189,7 +196,7 @@ socket.on("mnd chtrqs",function(dt){
    var nmercv=socket.request.user.firstnm;
    var nmemnd=usrscnnt[dt.sktidmnd].firstnm;
    
-   io.to(dt.roombth).emit("aceptd chtrqs",
+   io.to(dt.sktidmnd).emit("aceptd chtrqs",
             {nmercv:nmercv,nmemnd:nmemnd,
             sktidrcv:dt.sktidrcv,
             sktidmnd:dt.sktidmn,
@@ -199,7 +206,8 @@ socket.on("mnd chtrqs",function(dt){
   
 socket.on("usrs pa chtrqs",function(dt){
  //dt{nmemnd,nmercv,sktidrcv,sktidmnd,roombth}
-    io.sockets.emit("mete usrs chtrqs",dt);
+  console.log("6usrs pa chtrqs");
+    io.to(dt.roombth).emit("mete usrs chtrqs",dt);
 });//skon users pa chat request
   
   
@@ -208,7 +216,8 @@ socket.on("send messagecht_r",function(dt){
     
   io.to(dt.roombth).emit("new msgchtrqs",
                         {msg:dt.msg,
-        nick:socket.request.user.firstnm});
+        nick:socket.request.user.firstnm,
+                    room:dt.roombth});
 });//skon send message chat rquest
   
   
