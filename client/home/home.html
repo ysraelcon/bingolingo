@@ -1,3 +1,32 @@
+
+
+<style>
+/*style head..*/
+
+#dvhd{
+    text-align:center;
+    position:relative;
+    width:100%;
+    border:2px solid;
+      border-radius:5px;
+    /*border:1px solid;*/
+    background-color:#9370DB;}
+
+#h1tit{
+    display:inline-block;
+    /*border:1px solid;*/
+      margin:0px;
+    font-family:"Playball",cursive;
+      font-size:50px;}
+/*..style head*/  
+</style>
+
+
+<div id="dvhd">
+<h1 id="h1tit">BesTalk</h1>
+</div>
+
+<!--  
 <style>
 
   #dvmed{
@@ -56,18 +85,122 @@
 </div><!-- header -->
   
 <style>
-  #dvmed{
-    background-color:#ffffe0;}
+/*style content...*/  
+  #dvcon{
+    display:flex;
+      flex-direction:column;
+      align-items:center;
+      overflow-y:auto;
+    position:relative;
+    height:100%;width:95%;
+    /*border:1px solid;*/
+      border-radius:10px;
+      margin-bottom:5px;margin-top:5px;
+      box-shadow:0 0 5px #444;
+    background-color:#B0C4DE;}
+  
+  
+  #h2wlc{
+    display:inline-block;
+    font-family:arial;}
+  
+  #h3msg{
+    display:inline-block;
+      text-align:center;
+    width:80%;}
+  
+  
+  
+  #dvlgi{
+    display:inline-block;
+      text-align:center;
+    border:1px solid grey;
+      border-radius:10px;
+      margin:auto;
+    background-color:#004987;
+      color:white;}
+  
+  #dvlgi input{
+    text-align:center;
+    border:none;
+      border-bottom:2px solid white;
+      /*outline:none;*/
+      margin:5px;
+    background:none;}
+  #dvlgi a{
+    color:grey;}
+  #btlgi{
+    width:70%;
+    border:none;
+      border-radius:10px;
+    font-weight:bold;
+    background-color:green;
+      color:white;
+    cursor:pointer;}
+  
+  
+  
+  #dvmsgnu{
+    display:inline-block;
+      text-align:center;
+    border:1px solid grey;
+      border-radius:2px;}
+   
+  #dvmsgnu a{
+    color:grey;}
+  
+  #dvmsgnu input[type=text]{
+    width:120px;}
+  
+  #dvmsgnu form input:not([type=text]){
+    width:99%;}
+  /*p:not([type=text])
+  p:nth-child(n+2)*/
+  
+  #dvmsgnu *{margin:2px;}
+  
+/*..style content*/
 </style>
 
-  <div id="dvmed">
+  <div id="dvcon">
    
-<div id="dvmtxsgnu">
-<h2>Welcome to BesTalk</h2>
-<h3>A language exchange page where you can chat, play games, learn lessons and more.</h3>
-</div>
+
+<h2 id="h2wlc">Welcome to BesTalk</h2>
+<h3 id="h3msg">A language exchange page where you can chat, play games, learn lessons and more.</h3>
+
+
+<div id="dvlgi">
+
+<h3>BesTalk</h3>
+  
+<div ng-show="msg">{{msg}}</div>
+   
+
+<form name="fmlogin" novalidate>
+
+<input type="email"
+       name="email" ng-model="user.email"
+       placeholder="Email" required><br>
+<input type="password"
+       name="password" ng-model="user.password"
+       placeholder="Password" required><br>
+
+<button type="submit" id="btlgi"
+        ng-click="logiN()">Login</button><br>
+
+<p>Don't have a BesTalk account yet? Sign up!</p>
+  
+  <a href="">Forgot password?</a><br>
+  <!-- <a 
+ href="#/signup">Sign up!</a> -->
+
+</form><!-- fmlgi -->
+</div><!-- dv login -->    
     
 <div id="dvmsgnu">
+  
+  <h2>Join us</h2>
+  
 <form name="fmsgup" 
       onsubmit="return valpW()">
   
@@ -92,13 +225,14 @@
   <button type="submit"
           ng-click="signuP()">Sign Up</button>
   
-  <p>Already have an account? <a
- href="#/login">Log in!</a></p>
+  <p>Already have an account? Log in!</p>
+  <!-- <a
+ href="#/login">Log in!</a> -->
   
 </form>
 </div>
     
-</div><!-- middle -->
+</div><!-- dv cont -->
 
 
 
@@ -114,5 +248,11 @@ function valpW(){
   }//else no match
 }//validar password
 </script>
+
+
+<style>
+  app-fondo{
+    width:100%;}
+</style>
 
 <app-fondo></app-fondo>

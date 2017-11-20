@@ -1,7 +1,7 @@
 
 var app= angular.module('laApp',
           ['ngRoute','laApp.home',
-           'laApp.login','laApp.profile'])
+           'laApp.profile'])
 
  .config(['$routeProvider','$locationProvider', 
    function($routeProvider,$locationProvider){

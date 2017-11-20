@@ -13,6 +13,21 @@ angular.module('laApp.home',['ngRoute'])
            ["$scope","$http","$location",
         function($scope,$http,$location){
 
+          
+$scope.logiN=function(){
+  
+$http.post("/login",$scope.user)
+      .then(function(res){
+  
+ $scope.message=res.data.message;
+  
+if($scope.message===undefined){
+ $location.path("/profile");
+}//if
+});//then
+};//login
+          
+          
 $scope.signuP=function(){
   
 $http.post("/signup",$scope.user)
@@ -24,6 +39,6 @@ if($scope.message===undefined){
  $location.path("/profile");
 }//if
 });//then
-};//login
+};//signup
   
 }]);//controller
