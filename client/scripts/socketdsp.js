@@ -48,7 +48,7 @@ tblusrsbd.innerHTML=conusr;
 
 function entrgnrL(rmx){
   
-  if(typeof(dvicht)=="undefined"){
+  if(typeof(dvcht_gnrl)=="undefined"){
     
  var nudiv=document.createElement("DIV");
  nudiv.id="dvcht_gnrl";
@@ -77,7 +77,7 @@ nudiv.innerHTML='<div id="dvcht_t_gnrl" class="dvcht_t">'+
     '</button>'+
   '</form></div>';
 
-dvchtc.appendChild(nudiv);
+dvconcht.appendChild(nudiv);
 //juntarlo al room: general !!!
 sktclt.emit("opngnrl",rmx);
 
@@ -161,9 +161,9 @@ function restamchT(rmx){//roomx
   var dvcht= document.querySelector
 
 ("#dvcht_"+rmx);
-if(dvcht.offsetWidth<dvchtc.offsetWidth){
-  dvcht.style.height=dvchtc.offsetHeight+"px";
-  dvcht.style.width=dvchtc.offsetWidth+"px";
+if(dvcht.offsetWidth<dvconcht.offsetWidth){
+  dvcht.style.height=dvconcht.offsetHeight+"px";
+  dvcht.style.width=dvconcht.offsetWidth+"px";
   dvcht.style.left=0;
   dvcht.style.top=0;
 }//if pequeño
@@ -174,10 +174,8 @@ if(dvcht.offsetWidth<dvchtc.offsetWidth){
 
 
 function crrdvichT(rmx){//roomx
-  var dvcht= document.querySelector
-
-("#dvcht_"+rmx);
- dvchtc.removeChild(dvcht);
+  var dvcht= document.querySelector("#dvcht_"+rmx);
+ dvconcht.removeChild(dvcht);
  sktclt.emit("cerrgnrl","general");  
 }//cerrar dvicht
 
@@ -231,7 +229,7 @@ nuedvinfusr.id="dvinfusr";
     '</div>'+
     '<div id="dvcrrprfcht" onclick="crrinfusR()">x</div>';
   
- dvchtc.appendChild(nuedvinfusr);
+ dvconcht.appendChild(nuedvinfusr);
  }//if no existe: crea
 }//profile y chat request del user
 
@@ -258,7 +256,7 @@ function chtrqsT(ele){
 
 
 function crrinfusR(){
-  dvchtc.removeChild(dvinfusr);
+  dvconcht.removeChild(dvinfusr);
 }//cerrar inf prf y cht rqst
 
 
@@ -277,7 +275,7 @@ nudiv.innerHTML='<div id="dvchtrqsof_t">Chat request from '+
   dt.sktidmnd+'\')">+</div>'+
     '<div id="dvchtrqsof_x">X</div>';
 
-dvchtc.appendChild(nudiv);
+dvconcht.appendChild(nudiv);
   
 });//skcon recibe cht rqs
 
@@ -298,7 +296,7 @@ nudiv.id="dvwti";
 nudiv.innerHTML='<div id="dvwti_t">Waiting...</div>'+
  '<div id="dvwti_x">X</div>';
 
-dvchtc.appendChild(nudiv);
+dvconcht.appendChild(nudiv);
   }//if dvwti no creado
   //}//if es el que espera
 });//skc espera cht rqs
@@ -335,7 +333,7 @@ nudiv.innerHTML='<div id="dvcht_t_'+roombthx+'" class="dvcht_t">'+
     '</button>'+
   '</form></div>';    
     
-dvchtc.appendChild(nudiv);
+dvconcht.appendChild(nudiv);
     
 jQuery(function($){
 
@@ -464,7 +462,7 @@ nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
 '><input type="submit" value="Send" id="btnjsndm" >'+
 '</form></div></div>';
 
-  dvgmc.appendChild(nudivj);
+  dvcongme.appendChild(nudivj);
     
   sktclt.emit("entroomj",roomj);
   
@@ -487,10 +485,10 @@ $("#dvjue").resizable();
 
 function restamjuE(){
   
-  if(dvjue.offsetWidth<dvgmc.offsetWidth){
+  if(dvjue.offsetWidth<dvcongme.offsetWidth){
     
-  dvjue.style.height=dvgmc.offsetHeight+"px";
-  dvjue.style.width=dvgmc.offsetWidth+"px";
+  dvjue.style.height=dvcongme.offsetHeight+"px";
+  dvjue.style.width=dvcongme.offsetWidth+"px";
   dvjue.style.left=0;
   dvjue.style.top=0;
   }//if pequeño
@@ -501,7 +499,7 @@ function restamjuE(){
 
 
 function crrjuE(){
-  dvgmc.removeChild(dvjue);
+  dvcongme.removeChild(dvjue);
   sktclt.emit("slrjue");
 }//cerrar juego
 

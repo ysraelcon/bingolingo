@@ -1,6 +1,55 @@
 
 
+<style>
+/*style head..*/
 
+#dvhd{
+    position:relative;
+    width:100%;
+    border:2px solid;
+      border-radius:5px;
+    /*border:1px solid;*/
+    background-color:#9370DB;}
+
+#h1tit{
+    display:inline-block;
+    /*border:1px solid;*/
+      margin:0px;
+      margin-left:7%;
+    font-family:"Playball",cursive;
+      font-size:50px;}
+
+#dvprfsgn{
+    display:inline-block;
+    position:absolute;
+      right:5px;bottom:15px;
+    width:80px;
+    /*border:1px solid;*/}
+#dvprfsgn>span{
+    margin:10%;
+    cursor:pointer;}
+  #dvprfsgn a{
+    color:black;}
+
+
+/*..style head*/
+
+</style>
+
+<div id="dvhd">
+<h1 id="h1tit">BesTalk</h1>
+
+<div id="dvprfsgn">
+<span id="spprf"
+  onclick="opntaB(dvconusr,'dvcon',null)"
+  ><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+<span id="spsgnout"
+  ><a href="/logout"
+      ><i class="fa fa-sign-out" aria-hidden="true"></i></a></span>
+</div>
+</div><!-- dv header -->
+
+<!--  
 <div id="dvti">
   <h1 id="h1ti">BesTalk</h1>
   <div id="dvlg"
@@ -12,7 +61,7 @@
 
 
 
-
+<!-- 
 <style>
 /*style middle..*/
   #dvmed{
@@ -84,36 +133,102 @@
  
 /*..style middle*/
 </style>
+ -->
 
 
+<style>
+/*style tabs..*/
 
-<div id="dvmed">
-        
- <div id="dvmtb">
-   <div id="dvmtbcht"
-  onclick="opntB(event,'#dvchtc',this);entrchT();"
-         >Chat</div>
-    <div id="dvmtbgm"
-         onclick="opntB(event,'#dvgmc',this)"
-         >Game</div>
-    <div id="dvmtbcmm"
-      onclick="opntB(event,'#dvcmmc',this)"
-         >Community</div>
-    <div id="dvmtblss"
-         onclick="opntB(event,'#dvlssc',this)"
-         >Lesson</div>
-  </div><!-- div tabs -->
+#dvtbs{
+    display:flex;
+      flex-direction:row;
+      /*justify-content:space-evenly;*/
+    width:80%;height:25px;
+    /*border:1px solid;*/}
+#dvtbs>div{
+    text-align:center;
+    width:25%;
+    /*border:1px dotted;*/
+      border-radius:0 10px;
+    font-family:arial;
+    background-color:#EEE8AA;
+    cursor:pointer;}
+
+#dvtbs>div:hover{
+    background-color:#483D8B;
+      color:white;}
+
+/*..style tabs*/
+</style>
+
+
+<div id="dvtbs">
+<div id="dvtbcht" 
+ onclick="opntaB(dvconcht,'dvcon',this);entrchT()">Chat</div>
+<div id="dvtbgme"
+ onclick="opntaB(dvcongme,'dvcon',this)">Game</div>
+<div id="dvtbcmn"
+ onclick="opntaB(dvconcmn,'dvcon',this)">Community</div>
+<div id="dvtblss"
+ onclick="opntaB(dvconlss,'dvcon',this)">Lesson</div>
+</div><!-- dv tabs --> 
+
+
+<style>
+/*style tabs content..*/
+
+#dvcon{
+    display:flex;
+    position:relative;
+    height:100%;width:95%;
+    /*border:1px solid;*/
+      border-radius:10px;
+      margin-bottom:5px;
+      box-shadow:0 0 5px #444;
+    background-color:#B0C4DE;}
+
+.dvconocul{
+  /*4 cht gme cmn lss
+  #dvcon>div:nth-child(-n+4) */
+    display:none;
+      overflow-y:auto;
+    position:absolute;
+    height:100%;width:100%;
+    /*border:1px dotted;*/
+      border-radius:inherit;
+      padding:10px;}
+
+#dvconcht{
+    background-color:#f5f5f5;}
+#dvcongme{
+    background-color:#D2B48C}
+#dvconcmn{
+    background-color:#0079a9;
+      color:white;}
+#dvconlss{
+    background-color:#2f4f4f;
+      color:white;}
+
+#dvconusr{
+    overflow-y:auto;
+    position:absolute;
+    height:100%;width:100%;
+    /*border:1px solid;*/
+    padding:10px;}
+
+
+/*..style tabs content*/
+</style>
+
+<div id="dvcon">
+
+<link rel="stylesheet"
+      href="/styles/chat.css">
   
-  
-<link rel="stylesheet" href="/styles/chat.css">    
+<div id="dvconcht"
+     class="dvconocul">
 
-<div id="dvmedc">
-
-      
-      
-<div id="dvchtc">
-  
-<div id="dvchtru">
+  <div id="dvchtru">
           
 <div id="dvchtr">
   <div id="dvchtrnm">Rooms</div>
@@ -151,28 +266,31 @@
 </div><!-- dv users -->
 </div><!-- dv chat room user -->
   
-</div><!-- div chat -->
+</div><!-- dv cont cht -->
+  
 
-
-     
- <link rel="stylesheet" href="/styles/game.css">    
-     
-      
-<div id="dvgmc">
+<link rel="stylesheet"
+      href="/styles/game.css">  
+    
+<div id="dvcongme"
+     class="dvconocul">
   
   <p>In construction...</p>
   <input type="button"
          value="create game" id="btncrtgm"
          onclick="crtgaM()">   
-</div><!-- div juego style="display:none"-->
-      
-      
-      
-<div id="dvcmmc">In future.</div>
-<div id="dvlssc">The teacher has not arrived yet.</div>
 
-      
-      
+
+</div><!-- dv cont game -->
+  
+<div id="dvconcmn"
+     class="dvconocul">In future.</div>
+  
+<div id="dvconlss"
+     class="dvconocul">The teacher has not arrived yet.</div>
+  
+  
+  
 <style>
 /*style div user info..*/
   
@@ -185,9 +303,10 @@
     color:white;}
   
 /*..style div user info*/
-</style>        
-        
-<div id="dvusrc">
+</style>          
+  
+<div id="dvconusr">
+  
   <div id="dvusri">User info</div>
   
   <span ng-switch="edit">
@@ -220,16 +339,68 @@
 <input type="button"
        value="Cancel" ng-show="edit"
        ng-click="edit=false">
+   <br>  
+<a href="/logout" >Logout</a>
   
-  <br>  
- <a href="/logout" >Logout</a>
-</div><!-- div user -->
+</div><!-- dv cont usr -->
+  
+</div><!-- dv content -->
 
+
+
+
+<!--
+<div id="dvmed">
+ <!--       
+ <div id="dvmtb">
+   <div id="dvmtbcht"
+  onclick="opntB(event,'#dvchtc',this);entrchT();"
+         >Chat</div>
+    <div id="dvmtbgm"
+         onclick="opntB(event,'#dvgmc',this)"
+         >Game</div>
+    <div id="dvmtbcmm"
+      onclick="opntB(event,'#dvcmmc',this)"
+         >Community</div>
+    <div id="dvmtblss"
+         onclick="opntB(event,'#dvlssc',this)"
+         >Lesson</div>
+  </div><!-- div tabs -->
+  
+
+
+<!--  
+<div id="dvmedc">
+
+      
+<div id="dvchtc">
+
+</div><!-- div chat -->
+
+ <!--  
+<div id="dvgmc">
+  
+  <p>In construction...</p>
+  <input type="button"
+         value="create game" id="btncrtgm"
+         onclick="crtgaM()">   
+</div><!-- div juego style="display:none"-->
+      
+      
+ <!--     
+<div id="dvcmmc">In future.</div>
+<div id="dvlssc">The teacher has not arrived yet.</div>
+       
+        
+<div id="dvusrc">
+  
+</div><!-- div user -->
+<!--
 </div><!-- middle content -->
-</div><!-- middle -->
+<!--</div><!-- middle -->
       
 
-
+<!--  
 <script>
   
     function opntB(evt,idnm,thel){
@@ -262,10 +433,42 @@ function insertAfter(referenceNode, newNode) {
 }//insert after
      
 </script>
+-->
 
+<script>
+//script open tab..
+function opntaB(dvpiemst,dvconf,thistbf){
+
+ var dvmsts= document.querySelectorAll("#"+dvconf+">div");
+
+ for(var i=0;i<dvmsts.length;i++){
+     dvmsts[i].style.display= "none";
+ }//for desaparece content
+
+ dvpiemst.style.display= "block";
+
+ var dvtbsq= document.querySelectorAll("#dvtbs>div");
+
+ for(var i=0;i<dvtbsq.length;i++){
+     dvtbsq[i].style.backgroundColor= "";
+     dvtbsq[i].style.color= "";
+ }//for vuleve tabs normal
+
+if(thistbf){
+ thistbf.style.backgroundColor= "#483D8B";
+ thistbf.style.color= "white";
+}//if hay tab
+}//opentab
+</script>
+
+
+
+<style>
+  app-fondo{
+    width:100%;}
+</style>
 
 <app-fondo></app-fondo>
-
 
   
    
@@ -275,12 +478,5 @@ function insertAfter(referenceNode, newNode) {
 
 
 
-<script>
-  
-   function dainfU(ele){
-    alert(ele.id);
-  }//da info user id
-  
-</script>
 
 
