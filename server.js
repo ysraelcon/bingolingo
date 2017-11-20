@@ -71,6 +71,7 @@ require('./app/routes')(Ap,pssp);
 //======socket part
 
 var Chat=require('./app/models/chat');
+var User=require('./app/models/user');
 
 //usrscnnt{usrid:{user,sktcltid}}
 var usrscnnt={};
@@ -90,6 +91,7 @@ socket.on("userva",function(dt){
 usrscnnt[dt]= socket.request.user;
 
 updtusrscnnT();
+updtusrsgnrL();   
 }//if usr lgged
 //console.log(socket.request.user.logged_in);
 });//skon user va
@@ -213,7 +215,9 @@ socket.on("usrs pa chtrqs",function(dt){
   
 socket.on("send messagecht_r",function(dt){
     //dt{msg,roombth}
-    
+  
+  dt.msg=emoji.emojify(dt.msg);
+  
   io.to(dt.roombth).emit("new msgchtrqs",
                         {msg:dt.msg,
         nick:socket.request.user.firstnm,

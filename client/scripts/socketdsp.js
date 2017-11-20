@@ -64,10 +64,17 @@ nudiv.innerHTML='<div id="dvcht_t_gnrl" class="dvcht_t">'+
   '<div id="dvcht_c_gnrl" class="dvcht_c"></div><div id="dvcht_u_gnrl" class="dvcht_u"></div>'+
   '</div>'+  
   '<div id="dvchtmsg_gnrl" class="dvchtmsg"><form id="fmchtmsg_gnrl" class="fmchtmsg" onsubmit="envmsG(event,\'gnrl\')">'+
-  '<input type="text" id="inchtmsg_gnrl" class="inchtmsg"'+
+  '<input type="text" id="inchtmsg_gnrl" class="inchtmsg" autocorrect="off" autocomplete="off"'+
   ' data-room="'+"general"+
   '" placeholder="write your message">'+
-  '<button id="btnchtmsg_gnrl" class="btnchtmsg" type="submit" >send</button>'+
+  '<button id="btnchtmsg_gnrl" class="btnchtmsg" type="submit" >'+
+  '<i class="fa fa-paper-plane" aria-hidden="true"></i>'+
+  '</button>'+
+  '<button'+
+  ' class="btnchtemj"  onclick="selemJ()">'+
+  '😄'+
+  //'<i class="fa fa-smile" aria-hidden="true"></i>'+
+    '</button>'+
   '</form></div>';
 
 dvchtc.appendChild(nudiv);
@@ -96,8 +103,9 @@ $("#dvcht_gnrl").resizable();
 
 
 sktclt.on("mndusrgnrl",function(dt){
-  //dt{usrsgnrl,chtgnrl,sktid}  
-   
+  //dt{usrsgnrl,chtgnrl,sktid} 
+  var cntgnrl=Object.keys(dt.usrsgnrl).length;
+  spchtcnt_gnrl.innerHTML= cntgnrl!=0? cntgnrl: ""; 
   var usrsg=""
   
   for(var nombr in dt.usrsgnrl){
@@ -116,6 +124,7 @@ sktclt.on("mndusrgnrl",function(dt){
   }//for
  dvcht_c_gnrl.innerHTML=licht;
   }//if es el que llega
+  
 });//skon mandaron el usuario
 
 
@@ -243,7 +252,7 @@ function chtrqsT(ele){
               {sktidrcv:prtid,
               sktidmnd:sktclt.id});
   
- alert("chat request, in construction");
+ 
   crrinfusR();
 }//chat request
 
@@ -313,10 +322,17 @@ nudiv.innerHTML='<div id="dvcht_t_'+roombthx+'" class="dvcht_t">'+
   '<div id="dvcht_c_'+roombthx+'" class="dvcht_c col_c"></div><div id="dvcht_u_'+roombthx+'" class="dvcht_u col_u"></div>'+
   '</div>'+  
   '<div id="dvchtmsg_'+roombthx+'" class="dvchtmsg"><form id="fmchtmsg_'+roombthx+'" class="fmchtmsg" onsubmit="envmsgR(event,\''+roombthx+'\')">'+
-  '<input type="text" id="inchtmsg_'+roombthx+'" class="inchtmsg"'+
+  '<input type="text" id="inchtmsg_'+roombthx+'" class="inchtmsg" autocorrect="off" autocomplete="off"'+
   ' data-room="'+roombthx+
   '" placeholder="write your message">'+
-  '<button id="btnchtmsg_'+roombthx+'" class="btnchtmsg" type="submit" >send</button>'+
+  '<button id="btnchtmsg_'+roombthx+'" class="btnchtmsg" type="submit" >'+
+  '<i class="fa fa-paper-plane" aria-hidden="true"></i>'+
+  '</button>'+
+  '<button'+
+  ' class="btnchtemj"  onclick="selemJ()">'+
+  '😄'+
+  //'<i class="fa fa-smile" aria-hidden="true"></i>'+
+    '</button>'+
   '</form></div>';    
     
 dvchtc.appendChild(nudiv);
@@ -520,7 +536,11 @@ jQuery(function($){
 });//on receive msg juego
 
 
+//----------complementos
 
+function selemJ(){
+  alert("emojies in construction, write :smile: for :)");
+}//select emjoy
 
 
 

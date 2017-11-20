@@ -4,17 +4,25 @@
        border-radius:5px;}
 
   #dvchtrnm{
-    display:inline-block;/*text-align:center;*/
+    display:block;
+      text-align:center;
    border:1px solid grey;
       border-radius:5px;
+      margin:0px;
     font-family:arial;
     background-color:#9370DB;
       color:white;}
 
-   #lige{
-    border:1px outset grey;
-    font-size:25px;font-weight:bold;
+   .spchtrm{
+    border:1px  grey;
+      box-shadow:5px -5px 5px grey;
+    font-family:"Playball",cursive;
+      font-size:20px;font-weight:bold;
     cursor:pointer;}
+.spchtcnt{
+  border:1px solid grey;
+    border-radius:20%;
+  font-family:consolas;}
      
 /*chat cuadro..*/
 
@@ -94,14 +102,25 @@
         
 .dvcht_u{
   float:right;
+    word-wrap:break-word;
   width:100px;height:98%;
   font-weight:bold;}
 
         
   .dvchtmsg{
     width:100%;}
+
+.fmchtmsg{
+    display:flex;
+      flex-direction:row;  }  
+  .btnchtmsg{
+    width:60px;} 
+  .btnchtemj{
+    width:30px;
+    margin-right:20px;}
+    
   .inchtmsg{
-    width:70%;}
+    width:100%;}
 
 /*..chat cuadro*/
 

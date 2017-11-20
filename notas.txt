@@ -2,7 +2,10 @@ html:
 
 icon
  <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
- 
+
+font-awesome:
+ http://fontawesome.io/icons/
+
 +errores:
 -mensaje cuando se logea mal, ej: incorrect password
 
