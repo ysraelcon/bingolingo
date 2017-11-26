@@ -1,7 +1,11 @@
 html:
 
-icon
- <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+pencil:
+ <i class="fa fa-pencil" aria-hidden="true"></i>
+ 
+ <i class="fa fa-window-minimize" aria-hidden="true"></i>
+<i class="fa fa-window-maximize" aria-hidden="true"></i>
+<i class="fa fa-window-restore" aria-hidden="true"></i>
 
 font-awesome:
  http://fontawesome.io/icons/
@@ -11,3 +15,90 @@ font-awesome:
 
 +por completar:
 -salas de chat con tamaño completo de la pantalla
+
+
++soluciones:
+
+6sl...
+
+https://www.iconfinder.com/icons/445514/message_translate_icon
+...6sl
+
+5sl...
+window.onblur=function(){console.log("bluuuuu")};
+
+
+setTimeout(function(){
+console.log(document.hasFocus());
+},3000);
+...5sl
+
+4sl...
+
+icon chat
+ <i class="fa fa-comments-o" aria-hidden="true"></i>
+game
+ <i class="fa fa-gamepad" aria-hidden="true"></i>
+post
+ <i class="fa fa-commenting" aria-hidden="true"></i>
+lesson
+ <i class="fa fa-book" aria-hidden="true"></i>
+ 
+notebook
+ <i class="fa fa-sticky-note" aria-hidden="true"></i>
+ 
+users
+ <i class="fa fa-users" aria-hidden="true"></i>
+ 
+user join
+ <i class="fa fa-user-plus" aria-hidden="true"></i>
+
+...4sl
+ 
+ 
+1sl...
+User.findOne({_id:id12[0]},
+  function(err,usr){
+
+usr.chat[roombth]=[];
+
+usr.save((err)=>{
+ if(err) throw err;
+});//save
+
+});//finone
+
+...1sl
+ 
+3sl...
+https://webdesign.tutsplus.com/tutorials/how-to-display-update-notifications-in-the-browser-tab--cms-23458
+...3sl
+ 
+2sl...
+  
+<input list="dtlstx" id="inlstx" placeholder="room list...">
+<input type="button" value="ir" onclick="iR()">
+
+<datalist id="dtlstx">
+<option id="gnrl" value="general">general</option>
+<option id="eng" value="english"></option>
+</datalist>
+
+<script>
+
+function iR(){
+  
+
+for(var opt in dtlstx.options){
+  if(dtlstx.options[opt].value== inlstx.value){
+    console.log(dtlstx.options[opt].id);
+    break;
+  }//if
+}//for
+
+}//ir a room
+
+
+</script>
+
+...2sl

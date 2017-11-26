@@ -11,7 +11,8 @@ var usrsch=Mng.Schema({
   speaks:String,
 email:{type:String,unique:true},
 password:{type:String},
-  chats:{}});
+  chats:Mng.Schema.Types.Mixed
+});
 
 usrsch.methods.generateHash= function(password){
  return bcrypt.hashSync(password,

@@ -73,7 +73,7 @@ const errors = req.validationErrors();
   }//if
 
 // finding a current event
- User.findOne({firstnm:req.user.firstnm},
+ User.findOne({_id:req.user._id},
               (err, user) => {
  // updating that event
  user.firstnm = req.body.firstnm;

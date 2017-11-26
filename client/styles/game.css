@@ -1,31 +1,32 @@
 /*style game..*/
-#dvjue, #dvjue div{
-  border:1px solid grey;
-    border-radius:5px;}    
    
 #dvjue{
   display:flex;
     flex-direction:column;
   /*overflow:auto;resize:both;*/
   position:relative;
-  width:250px;height:250px;}
+  width:250px;height:250px;
+  border:1px solid grey;
+    border-radius:5px;
+  background-color:#D2B48C;}
     
     #dvjue div{margin:0px;}
 
 #dvjnm{
   display:flex;
     flex-direction:row;
+  border:1px dotted grey;
   font-family:arial;}
 
 #dvjnmtit{
   text-align:center;
-  width:70%;
+  width:100%;
   background-color:#2E8B57;
     color:white;}
 
-#dvjnmmin,#dvjnmmit,#dvjnmcrr{
+#dvjnmmit,#dvjnmcrr{
   text-align:center;
-  width:10%;
+  width:30px;
   cursor:pointer;}
 
 #dvjnmcrr{
@@ -42,10 +43,62 @@
   height:100%;}
 
 #dvjuse{
+  border:1px solid grey;
   width:100px;height:100%;}
 
 #dvjcon{
   overflow-y:auto;
-  width:100%;height:100%;}
+  width:100%;height:100%;
+  border:1px solid grey;}
 
-#injmsg{width:70%;}
+
+
+/*style crear tipo de juego..*/
+
+
+#dvcrtgme{
+  display:inline-block;
+  border:1px dashed;}
+
+
+      
+      #dvrdygme{
+        text-align:center;
+      }
+      #btrdygme{
+        width:50%;
+      }
+#dvtitoptgme{
+  display:flex;
+    flex-direction:row;
+}
+      #dvtitoptgmenme{
+        display:inline-block;
+          text-align:center;
+        width:100%;
+        background-color:black;
+          color:white;
+      }
+#dvtitoptgme_x{
+  display:inline-block;
+    text-align:center;
+  width:50px;
+}
+      
+      dvcrtgme select{border:none;}
+      
+      #dvwaigme{
+        display:inline-block;
+      }
+/*style barra de juego a juntarse*/
+
+#dvgmebar_1{
+  display:table;
+  border:1px dotted;
+}
+
+#dvgmebar_1 div{
+  display:inline-block;
+  border:1px dashed;
+    margin:5px;
+}
