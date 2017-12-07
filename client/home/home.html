@@ -7,9 +7,28 @@
     text-align:center;
     position:relative;
     width:100%;
-    border-bottom:2px solid;
+    border-bottom:1px solid white;
     /*border:1px solid;*/
     background-color:#DDA0DD;}
+
+#dvhd:after{
+ display:block;
+ width:inherit;height:inherit;
+ content:"";
+  border-bottom:2px solid black;  
+  transform: scaleX(0);  
+  transition: transform 250ms ease-in-out;
+ transform-origin:  0% 50%;}
+
+#dvhd:after{
+  animation-name:mikeyfr;
+  animation-duration:1s;
+  animation-fill-mode:forwards;}
+
+@keyframes mikeyfr {
+    from {}
+    to {transform: scaleX(1);}
+}/*@keyframes*/
 
 #h1tit{
     display:inline-block;
@@ -25,34 +44,7 @@
 <h1 id="h1tit">BesTalk</h1>
 </div>
 
-<!-- 
-<style>
-/*style title..*/
-@media only screen and (min-width:400px){
-    #dvlg{
-     position:absolute;
-       top:15px;right:20px;}
-    }/*media*/
-      
-  #dvlg{
-    border:1px solid grey;
-      border-radius:5px;
-    background-color:white;
-      color:black;
-    cursor:pointer;}
-  #dvlg a{
-    text-decoration:none;
-    color:black;}
-/*..style title*/
-</style>
 
-
-<div id="dvti">
-  <h1 id="h1ti">BesTalk</h1>
-   <div id="dvlg" 
-    ><a href="#/login"
-        >Login</a></div>
-</div><!-- header -->
   
 <style>
 /*style content...*/  
@@ -91,13 +83,13 @@
     border:1px solid grey;
       border-radius:10px;
       margin:auto;
-    background-color:#BC8F8F;
-      color:white;}
+    background-color:#f5f5f5;
+      color:black;}
   
   #dvlgi input,#dvsgnu input{
     text-align:center;
     border:none;
-      border-bottom:2px solid white;
+      border-bottom:2px solid black;
       /*outline:none;*/
       margin:5px;
     background:none;}
@@ -108,9 +100,12 @@
     border:none;
       border-radius:10px;
     font-weight:bold;
-    background-color:#A0522D;
+    background-color:green;
       color:white;
     cursor:pointer;}
+  #btsgnu{
+    background-color:#9370DB;
+  }
   #h2lgi{
     font-family:"Playball",cursive;
     color:black;}
@@ -123,8 +118,8 @@
 /*    position:absolute;*/
     border:1px solid grey;
       border-radius:10px;
-    background-color:#004987;
-      color:white;}
+    background-color:#f5f5f5;
+      color:black;}
    
   #dvsgnu a{
     color:grey;}

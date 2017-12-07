@@ -2,24 +2,34 @@
 <style>
 /*style fondo..*/
 #dvfnd{
+    position:relative;
     width:100%;
     /*border:1px solid;*/
+    font-size:15px;
+      font-family:arial;
     background-color:black;
       color:white;}
+  
+  #sperr{
+    position:absolute;
+      right:0px;
+      bottom:0px;
+    
+  }
+  #sperr i{
+    color:yellow;
+  }
 /*..style fondo*/
 </style>
 
   
   <div id="dvfnd">
-    Powered by <a href="https://glitch.com/" target="_blank">glitch.com</a>
-    /
-      
-      send your : <a href="https://shrib.com/#bingolingo-suggestions" target="_blank">Suggestion</a>
-    / 
-      
-      Made with 
+    <span>Made with 
       <img src="https://png.icons8.com/potato/color/24" title="Potato" width="24" height="24">
-       by BesTalk Team      
+      by BesTalk Team</span> 
+    
+    <span id="sperr">Report <i class="fa fa-exclamation-triangle" aria-hidden="true"
+                        ></i> errors</span>
    
 </div><!-- footer / Visit the stable page: <a href="https://bingolingo.glitch.me" target="_blank">BingoLingo</a>
       <br> -->

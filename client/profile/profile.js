@@ -13,8 +13,8 @@ $routeProvider.when('/profile',
       ["$scope","$http","$location","$route",
       function($scope,$http,$location,$route){
   
- console.log('profilen');
-  
+ //console.log('profilen');
+        
 $http.get("/profile")
       .then(function(res){
   

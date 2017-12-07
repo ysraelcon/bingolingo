@@ -35,51 +35,150 @@ tblusrsbd.innerHTML=conusr;
 });//skon usernames table
 
 
+//---------
+
+var rooms={"gnrl":"General", "eng":"English",
+           "spa":"Spanish","fra":"French",
+"rus":"Russian","por":"Portuguese",
+"ita":"Italian","deu":"German",
+"ara":"Arabic","zho":"Chinese",
+"kor":"Korean","ind":"Indonesian",
+"jpn":"Japanese","hin":"Hindi",
+"swe":"Swedish","tur":"Turkish",
+"ben":"Bengali","slk":"Slovak",
+"mul":"MULTILINGUAL"
+          };
+
+function goiN(){
+  
+  for(var opt in dtlstroom.options){
+  if(dtlstroom.options[opt].value== inlstroom.value){
+    var roomf= dtlstroom.options[opt].id.slice(3,6);
+    break;
+  }//if
+}//for
+
+ 
+ if(!document.getElementById("sprm_"+roomf)){ 
+  
+var sprm= document.createElement("span");
+sprm.id="sprm_"+roomf;
+sprm.setAttribute("class","spchtrm");
+sprm.setAttribute("onclick","entrrooM(\'"+roomf+"\')");  
+entrrooM(roomf);
+
+
+sprm.innerHTML= rooms[roomf]+' <span id="spchtcnt_'+roomf+ '" class="spchtcnt"></span><i class="fa fa-comments-o" aria-hidden="true"></i>';
+
+dvchtrc.appendChild(sprm);
+ }//if  no esta lo crea
+  
+}//select room from datalist
+
 
 
 //====general room
 
-function entrgnrL(rmx){
+function entrrooM(rmx){
   
-  if(typeof(dvcht_gnrl)=="undefined"){
+  
+  
+  var dvcht_= document.getElementById("dvcht_"+rmx);
+  
+  if(!dvcht_){
     
  var nudiv=document.createElement("DIV");
- nudiv.id="dvcht_gnrl";
+ nudiv.id="dvcht_"+rmx;
 nudiv.classList.add("dvcht");
     
-nudiv.innerHTML='<div id="dvcht_t_gnrl" class="dvcht_t">'+
-    '<div id="dvcht_tnm_gnrl" class="dvcht_tnm">General</div>'+
-  '<div id="dvcht_tm_gnrl" class="dvcht_tm" onclick="mindvchT(\'gnrl\')">-</div>'+
-  '<div id="dvcht_tl_gnrl" class="dvcht_tl" onclick="restamchT(\'gnrl\')">L</div>'+
-  '<div id="dvcht_tx_gnrl" class="dvcht_tx" onclick="crrdvchT(\'gnrl\')">x</div>'+
+nudiv.innerHTML='<div id="dvcht_t_'+rmx+'" class="dvcht_t">'+
+    '<div id="dvcht_tnm_'+rmx+'" class="dvcht_tnm">'+rooms[rmx]+'</div>'+
+  '<div id="dvcht_tm_'+rmx+'" class="dvcht_tm" onclick="mindvchT(\''+rmx+'\')">-</div>'+
+  '<div id="dvcht_tl_'+rmx+'" class="dvcht_tl" onclick="restamchT(\''+rmx+'\')">L</div>'+
+  '<div id="dvcht_tx_'+rmx+'" class="dvcht_tx" onclick="crrdvchT(\''+rmx+'\')">x</div>'+
   '</div>'+
-  '<div id="dvcht_cu_gnrl" class="dvcht_cu">'+
-  '<div id="dvcht_c_gnrl" class="dvcht_c"></div><div id="dvcht_u_gnrl" class="dvcht_u"></div>'+
+  '<div id="dvcht_cu_'+rmx+'" class="dvcht_cu">'+
+  '<div id="dvcht_c_'+rmx+'" class="dvcht_c"></div><div id="dvcht_u_'+rmx+'" class="dvcht_u">'+
+    '<div id="dvcht_u_nm_'+rmx+'" class="dvcht_u_nm"></div>'+
+    '<div id="dvcht_u_bts_'+rmx+'" class="dvcht_u_bts">'+          
+    '<input type="button" value="dict"'+
+   ' onclick="mstdcT(\''+rmx+'\')" id="btdct_'+rmx+'"></div>'+
+  '</div>'+
   '</div>'+  
-  '<div id="dvchtmsg_gnrl" class="dvchtmsg"><form id="fmchtmsg_gnrl" class="fmchtmsg" onsubmit="envmsG(event,\'gnrl\')">'+
-  '<input type="text" id="inchtmsg_gnrl" class="inchtmsg" autocorrect="off" autocomplete="off"'+
-  ' data-room="'+"gnrl"+
-  '" placeholder="write your message">'+
-  '<button id="btnchtmsg_gnrl" class="btnchtmsg" type="submit" >'+
+  '<div id="dvchtmsg_'+rmx+'" class="dvchtmsg"><form id="fmchtmsg_'+rmx+'" class="fmchtmsg" onsubmit="envmsG(event,\''+rmx+'\')">'+
+  '<input type="text" id="inchtmsg_'+rmx+'" class="inchtmsg" autocorrect="off" autocomplete="off"'+
+  ' data-room="'+rmx+'" placeholder="write your message">'+
+  '<button id="btnchtmsg_'+rmx+'" class="btnchtmsg" type="submit" >'+
   '<i class="fa fa-paper-plane" aria-hidden="true"></i>'+
   '</button>'+
   '<button'+
   ' class="btnchtemj"  onclick="selemJ()">'+
   '<b><i class="fa fa-smile-o" aria-hidden="true" style="color:black"></i></b>'+
     '</button>'+
-  '</form></div>';
+  '</form></div>'+
+  
+  
+  '<div id="dvdct_'+rmx+'" class="dvdct">'+
+  
+  '<form onsubmit="event.preventDefault()">'+
+'      <input type="text" id="inwrd_'+rmx+'"'+
+'   placeholder="word...">'+
+'      <input type="submit"'+
+'    value="dictENG"'+
+'    onclick="defwrdniK(inwrd_'+rmx+'.value,\''+rmx+'\')">'+
+'      <input type="button" value="X"'+
+'             onclick="inwrd_'+rmx+'.value=\'\'">  '+
+'        </form>'+
+'      '+
+'      '+
+'      <input type="button"'+
+'   value="Translate"'+
+'   onclick="trdphR(inwrd_'+rmx+'.value,\''+rmx+'\')">'+
+'   '+
+'   <input list="dtlstlng" id="inlstlngfrm"'+
+'    placeholder="from...">'+
+'  <input list="dtlstlng" id="inlstlngto"'+
+'    placeholder="to...">'+
+''+
+'<datalist id="dtlstlng">'+
+'<option value="en">English</option>'+
+'<option value="es">Spanish</option>'+
+'<option value="fr">French</option>'+
+'<option value="ru">Russian</option>'+
+'<option value="pt">Portuguese</option>'+
+''+
+'<option value="it">Italian</option>'+
+'<option value="de">German</option>'+
+'<option value="ar">Arabic</option>'+
+'<option value="zh">Chinese</option>'+
+'<option value="ko">Korean</option>'+
+''+
+'<option value="id">Indonesian</option>'+
+'<option value="ja">Japanese</option>'+
+'<option value="hi">Hindi</option>'+
+'<option value="sv">Swedish</option>'+
+'<option value="tr">Turkish</option>'+
+'</datalist>'+
+'      '+
+'      <input type="button" value="dictYandex"'+
+' onclick="defyaN(inwrd_'+rmx+'.value,\''+rmx+'\')">'+
+'      '+
+'      <div id="dvrsldct_'+rmx+'"'+
+'           class="dvrsldct"></div>'+
+  
+  '</div>';
 
 dvconcht.appendChild(nudiv);
 //juntarlo al room: gnrl !!!
-sktclt.emit("opngnrl",rmx);
+sktclt.emit("open room",rmx);
 
 jQuery(function($){
 
 var draggableDiv = 
 
-$('#dvcht_gnrl').draggable();
+$('#dvcht_'+rmx).draggable();
   
-$('#dvcht_c_gnrl', draggableDiv)
+$('#dvcht_c_'+rmx, draggableDiv)
   .mousedown(function(ev){
   draggableDiv.draggable('disable');
 })//mousedown
@@ -87,43 +186,77 @@ $('#dvcht_c_gnrl', draggableDiv)
   draggableDiv.draggable('enable');
 });//mouseup
   
-$("#dvcht_gnrl").resizable();
+$('#dvcht_'+rmx).resizable();
   
-  inchtmsg_gnrl.addEventListener("keydown",tyP);
+  var inchtmsg_= document.getElementById("inchtmsg_"+rmx);
+  
+  inchtmsg_.addEventListener("keydown",tyP);
 
 });//jQuery
   }//if no dvicht
 }//entrar al general room
 
 
-sktclt.on("mndusrgnrl",function(dt){
-  //dt{usrsgnrl,chtgnrl,sktid} 
-  var cntgnrl=Object.keys(dt.usrsgnrl).length;
-  spchtcnt_gnrl.innerHTML= cntgnrl!=0? cntgnrl: ""; 
-  var usrsg=""
+
+sktclt.on("mndusrroom",function(dt){
+  //dt{usrsroom,chtroom,sktid,room} 
+    
+  var usrsg="";
   
-  for(var nombr in dt.usrsgnrl){
-    usrsg+=dt.usrsgnrl[nombr]+"<br>";
+  for(var nombr in dt.usrsroom){
+    usrsg+=dt.usrsroom[nombr]+"<br>";
   }//for
+ 
+  var dvcht_u_= document.getElementById("dvcht_u_nm_"+dt.room);
   
- dvcht_u_gnrl.innerHTML="";
- dvcht_u_gnrl.innerHTML=usrsg;
+ dvcht_u_.innerHTML="";
+ dvcht_u_.innerHTML=usrsg;
     
   if(dt.sktid==sktclt.id){
     
-  var licht=dvcht_c_gnrl.innerHTML;
-//15 lines of chat
-  for(var msgcht in dt.chtgnrl){
-    licht+=dt.chtgnrl[msgcht]+"<br>";
-  }//for
- dvcht_c_gnrl.innerHTML=licht;
+   var dvcht_c_= document.getElementById("dvcht_c_"+dt.room); 
     
- dvcht_c_gnrl.scrollTo(0,dvcht_c_gnrl.scrollHeight);
+  var licht=dvcht_c_.innerHTML;
+//15 lines of chat
+  for(var msgcht in dt.chtroom){
+    licht+=dt.chtroom[msgcht]+"<br>";
+  }//for
+ dvcht_c_.innerHTML=licht;
+    
+ dvcht_c_.scrollTo(0,dvcht_c_.scrollHeight);
     
   }//if es el que llega
   
 });//skon mandaron el usuario
 
+sktclt.on("actlz rooms",function(dt){
+  console.log(document.getElementById("sprm_"+dt.room));
+  if(!document.getElementById("sprm_"+dt.room)){ 
+  
+var sprm= document.createElement("span");
+sprm.id="sprm_"+dt.room;
+sprm.setAttribute("class","spchtrm");
+sprm.setAttribute("onclick","entrrooM(\'"+dt.room+"\')");  
+//entrrooM(roomf);
+
+
+sprm.innerHTML= rooms[dt.room]+
+  ' <span id="spchtcnt_'+dt.room+
+  '" class="spchtcnt"></span><i class="fa fa-comments-o" aria-hidden="true"></i>';
+
+dvchtrc.appendChild(sprm);
+ }//if  no esta lo crea
+  
+  //dt{usrsroom,chtroom,sktid,room} 
+  var cntusrs=Object.keys(dt.usrsroom).length;
+  var spchtcnt_= document.getElementById("spchtcnt_"+dt.room);
+  spchtcnt_.innerHTML= cntusrs!=0? cntusrs: ""; 
+  
+  
+});
+
+
+//----complementarias vent cht
 
 function mindvchT(rmx){//roomx
 jQuery(function($){
@@ -176,6 +309,172 @@ function crrdvchT(rmx){//roomx
  sktclt.emit("cerr room",rmx);  
 }//cerrar dvicht
 
+function mstdcT(rmf){
+      
+      var btdct_= document.getElementById("btdct_"+rmf);
+      var dvdct_= document.getElementById("dvdct_"+rmf);
+      
+      if(btdct_.style.color!=="green"){
+       dvdct_.style.height="70%";
+       btdct_.style.color="green";
+      }else{
+        dvdct_.removeAttribute("style");
+        btdct_.removeAttribute("style");
+      }//else
+        
+    }//.mostrar dictionary
+
+
+function defwrdniK(wrd,rmx){
+      
+    var hk="https://cors-anywhere.herokuapp.com/";     
+      
+    var url1="http://api.wordnik.com:80/v4/word.json/";
+    
+    //var url2="/hyphenation?useCanonical=true&limit=50&api_key="+
+    var url2="/definitions?sourceDictionaries=wordnet&useCanonical=true&includeRelated=true"+"&api_key=b986324a786a6d94d00060ded100c020a49a6a49d8f93c9b3";
+        //"a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";  //de prueba
+    
+    
+      
+  var xhr=new XMLHttpRequest();
+    
+  xhr.open("GET", hk+url1+wrd+url2, true);
+    
+    var dvrsldct_= document.getElementById("dvrsldct_"+rmx);
+       
+    dvrsldct_.innerHTML ="loading...";    
+      
+  xhr.onload = function() {
+          
+      //console.log(this.response);
+      var resp=JSON.parse(this.response);//matriz objetos
+     
+     var list="";
+     
+     for(var pr in resp){
+       
+      var relwrds="";
+      
+      //console.log(resp[pr].relatedWords[0].words)
+      
+      if(resp[pr].relatedWords[0].words)
+      resp[pr].relatedWords[0].words.forEach(function(v){
+relwrds+=v+", "
+});//for each
+       
+       list+=resp[pr].partOfSpeech+". "+
+         resp[pr].text+"<br>"+
+         "["+relwrds+"]<br>";
+     }//for
+     
+     dvrsldct_.innerHTML=list;
+    
+  };//onload
+
+    
+    xhr.send();
+      
+}//.definicion wordnik wordnet.3.0
+    
+    
+    
+    function defyaN(wrd,rmx){
+  
+  var apik="dict.1.1.20171201T200832Z.77f7f25aec7d41b6.7bf840f1b594d83a20e756ec3117a3f6393466b0";
+  var url1="https://dictionary.yandex.net/api/v1/dicservice.json/lookup?";
+  
+  var lngfrm=inlstlngfrm.value||"en";
+  var lngto=inlstlngto.value||"es";
+  
+  var url2="key="+apik+"&text="+wrd+"&lang="+
+           lngfrm+"-"+lngto;
+  
+  var xhr=new XMLHttpRequest();
+  
+  xhr.open("POST",url1,true);
+  
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send(url2);
+  
+  var dvrsldct_= document.getElementById("dvrsldct_"+rmx);
+  
+  dvrsldct_.innerHTML="loading...";
+  
+  xhr.onload=function(){
+    //console.log(this.response);
+    
+    var resp=JSON.parse(this.response);
+    
+    
+    var rsl="";
+
+for(var i in resp.def){
+
+ rsl+= resp.def[i].pos+". "+
+   resp.def[i].text+" / "+
+   resp.def[i].ts+"<br>";
+  
+ for(var j in resp.def[i].tr){
+   rsl+="  "+resp.def[i].tr[j].text+
+       "<br> syn: ";
+  for(var l in resp.def[i].tr[j].syn){
+    rsl+=resp.def[i].tr[j].syn[l].text+", ";
+  }//for l
+  
+  rsl+="<br> mean: ";
+  
+  for(var k in resp.def[i].tr[j].mean){
+   rsl+=resp.def[i].tr[j].mean[k].text+", ";
+}//for k
+rsl+="<br>";
+}//for j
+}//for i
+    
+    dvrsldct_.innerHTML=rsl;
+   
+  };//onload
+  
+}//.definir de yandex
+
+function trdphR(phr,rmx){
+  
+  var apik="trnsl.1.1.20151020T150119Z.a9c85d2a39f6fe5d.c34e526096f815916127444ce3d86ab82e945c35";
+  var url1="https://translate.yandex.net/api/v1.5/tr.json/translate?";
+  
+  var lngfrm=inlstlngfrm.value||"en";
+  var lngto=inlstlngto.value||"es";
+  
+  var url2="key="+apik+"&text="+phr+"&lang="+
+           lngfrm+"-"+lngto;
+  
+  var xhr=new XMLHttpRequest();
+  
+  xhr.open("POST",url1,true);
+  
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send(url2);
+  
+  var dvrsldct_= document.getElementById("dvrsldct_"+rmx);
+  
+  dvrsldct_.innerHTML="loading...";
+  
+  xhr.onload=function(){
+    //console.log(this.response);
+    //{code,lang,text}
+    var resp=JSON.parse(this.response);
+    
+    dvrsldct_.innerHTML=resp.text;
+   
+  };//onload
+  
+  
+}//.traduccion
+
+
+
+//........
+
 
 function envmsG(ev,rmx){//event,roomx
   ev.preventDefault();
@@ -183,7 +482,7 @@ var inchtmsg= document.querySelector
 
 ("#inchtmsg_"+rmx);
 if(inchtmsg.value!=""){
- sktclt.emit("send message",
+ sktclt.emit("send message room",
              {msg:inchtmsg.value,
       room:rmx});
   //inchtmsg.getAttribute("data-room")
@@ -193,7 +492,7 @@ inchtmsg.value="";
 }//on send msg, del form
 
 
-sktclt.on('new message', function(data) {
+sktclt.on('new message room', function(data) {
 //data{msg,nick,room}
   
   if(!document.hasFocus()){
@@ -474,21 +773,9 @@ sktclt.on("dejar prv",function(dt){
 
 //=====juego
 
-var roomj="roomjue";
+var roomj="juex";
 
 
-sktclt.on("mndusrjue",function(dt){
-  //dt{usrid(firstnm)}
-  console.log("recibe user pal juego");
- var usrj="";
-
-for(var nom in dt){
- usrj+=dt[nom]+"<br>";
-}//for
-dvjuse.innerHTML="";
-dvjuse.innerHTML=usrj;
-  
-});//se juntaron al juego
 
 
 
@@ -530,7 +817,7 @@ nudiv.innerHTML='<div id="dvtitoptgme">'+
  '</select></div><br>'+
 
  '<div id="dvrdygme">'+
- '<input type="button" id="btrdygme" value="Create" onclick="rdygmE()">'+
+ '<input type="button" id="btrdygme" value="Create" onclick="crtgaM()">'+
  '</div></div>';
 
 dvcongme.appendChild(nudiv);
@@ -540,31 +827,56 @@ dvcongme.appendChild(nudiv);
 
 
 
-function rdygmE(){
-
+function rdygmE(roomf,nmejuef,lisjuef,nroplyf){
+var nrogme=roomf;
 var nudiv=document.createElement("DIV");
 nudiv.id="dvgmebar_1";
+nudiv.setAttribute("onclick","jnspC(\'"+nrogme+"\',\'"+
+                   nmejuef+"\',\'"+
+                   lisjuef+"\',\'"+
+                   nroplyf+"\')");
+nudiv.setAttribute("data-idgm",nrogme)
 
-nudiv.innerHTML='<div>'+
- sltypgme.options[sltypgme.selectedIndex].value+
+nudiv.innerHTML='<div id="dvbarjuenm">'+
+ nmejuef+
  '</div>'+
- '<div>'+
- sllst.options[sllst.selectedIndex].value+
+ '<div id="dvbarjuelis">'+
+ lisjuef+
  '</div>'+
- '<div>1/'+//nrojug/totjug
-slnroply.options[slnroply.selectedIndex].value
+ '<div id="dvbarjuenroply>1/'+//nrojug/totjug
+'<span id="spnroply">'+
+  nroplyf+
+  '</span>'+
  '</div>';
 
 dvcongme.appendChild(nudiv);
 
 dvcongme.removeChild(dvcrtgme);  
 
-crtgaM();
   
 }//ready game options
 
 
-function crtgaM(){
+function jnspC(rmj,nmejuef,lisjuef,nroplyf){
+  crtgaM(rmj,nmejuef,lisjuef,nroplyf);
+}//juntarse o spectate
+
+
+function crtgaM(rmj,nmejuef,lisjuef,nroplyf){
+  
+  var rmj=roomj;
+  var nmejue=nmejuef;
+  var lisjue=lisjuef;
+  var nroply=nroplyf;
+  
+  if(typeof(sltypgme)!="undefined"){
+   nmejue= sltypgme.options[sltypgme.selectedIndex].value;
+   lisjue= sllst.options[sllst.selectedIndex].value;
+   nroply= slnroply.options[slnroply.selectedIndex].value;
+  
+  
+  rdygmE(rmj,nmejue,lisjue,nroply);
+  }//if crea barra
   
    if(typeof(dvjue)=="undefined"){
      
@@ -577,12 +889,23 @@ nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
   '<div id="dvjnmmit" onclick="restamjuE()">L</div>'+
   '<div id="dvjnmcrr" onclick="crrjuE()">X</div>'+
   '</div>'+
+  
 '<div id="dvjexp">Explains: <span>wordX</span'+
 '><span id="sptmr">00</span></div></div>'+
+  
 '<div id="dvjcu">'+
 '<div id="dvjcon"></div>'+
-'<div id="dvjuse">Users</div>'+
-'</div><div id="dvjmsg">'+
+'<div id="dvjuse">'+
+  '<div id="dvjue_u_nm_'+"juex"+'" class="dvjue_u_nm"></div>'+
+    '<div id="dvjue_u_bts_'+"juex"+'" class="dvjue_u_bts">'+          
+    '<input type="button" value="dict"'+
+   ' onclick="mstdcT(\''+"juex"+'\')" id="btdct_'+"juex"+'"></div>'+
+  '</div>'+
+'</div>'+
+  
+  
+  '<div id="dvjmsg">'+
+  
 '<form id="fmjmsg" class="fmchtmsg" onsubmit="envmsgJ(event)">'+
 '<input type="text" id="injmsg" class="inchtmsg" placeholder="write your text...">'+
 '<button id="btnjsndm" class="btnchtmsg" type="submit" >'+
@@ -592,12 +915,66 @@ nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
   ' class="btnchtemj"  onclick="selemJ()">'+
   '<i class="fa fa-smile-o" aria-hidden="true"></i>'+
     '</button>'+  
-'</form></div></div>';
+'</form></div>'+
+  
+  '<div id="dvdct_'+"juex"+'" class="dvdct">'+
+  
+  '<form onsubmit="event.preventDefault()">'+
+'      <input type="text" id="inwrd_'+"juex"+'"'+
+'   placeholder="word..." class=inwrd>'+
+'      <input type="submit"'+
+'    value="dictENG"'+
+'    onclick="defwrdniK(inwrd_'+"juex"+'.value,\''+"juex"+'\')">'+
+'      <input type="button" value="X"'+
+'             onclick="inwrd_'+"juex"+'.value=\'\'">  '+
+'        </form>'+
+'      '+
+'      '+
+'      <input type="button"'+
+'   value="Translate"'+
+'   onclick="trdphR(inwrd_'+"juex"+'.value,\''+"juex"+'\')">'+
+'   '+
+'   <input list="dtlstlng" id="inlstlngfrm"'+
+'    placeholder="from...">'+
+'  <input list="dtlstlng" id="inlstlngto"'+
+'    placeholder="to...">'+
+''+
+'<datalist id="dtlstlng">'+
+'<option value="en">English</option>'+
+'<option value="es">Spanish</option>'+
+'<option value="fr">French</option>'+
+'<option value="ru">Russian</option>'+
+'<option value="pt">Portuguese</option>'+
+''+
+'<option value="it">Italian</option>'+
+'<option value="de">German</option>'+
+'<option value="ar">Arabic</option>'+
+'<option value="zh">Chinese</option>'+
+'<option value="ko">Korean</option>'+
+''+
+'<option value="id">Indonesian</option>'+
+'<option value="ja">Japanese</option>'+
+'<option value="hi">Hindi</option>'+
+'<option value="sv">Swedish</option>'+
+'<option value="tr">Turkish</option>'+
+'</datalist>'+
+'      '+
+'      <input type="button" value="dictYandex"'+
+' onclick="defyaN(inwrd_'+"juex"+'.value,\''+"juex"+'\')">'+
+'      '+
+'      <div id="dvrsldct_'+"juex"+'"'+
+'           class="dvrsldct"></div>'+
+     
+     '</div>';;
 
   dvcongme.appendChild(nudivj);
     
-  sktclt.emit("entroomj",roomj);
-  
+  sktclt.emit("entroomj",
+              {idjue:rmj,
+               nroply:nroply,
+               nmejue:nmejue,
+               lisjue:lisjue});
+ 
   jQuery(function($){
 
 var draggableDiv = $('#dvjue').draggable();
@@ -613,6 +990,34 @@ $("#dvjue").resizable();
 });//jQuery
 }//if no esta, crea
 };//crear juego
+
+
+sktclt.on("juego creado",function(dt){
+  //dt{room,nroply,nmejue,lisjue}
+  console.log("barra de juego");
+  rdygmE(dt.room,dt.nmejue,dt.lisjue,dt.nroply);
+});
+
+
+sktclt.on("mndusrjue",function(dt){
+  //dt{usrjue{usrid(firstnm)},room,nroply,nmejue,lisjue}
+  console.log("recibe user pal juego");
+  console.log(dt);
+ var usrj="";
+
+for(var nom in dt.usrjue){
+ usrj+=dt.usrjue[nom]+"<br>";
+}//for
+dvjue_u_nm_juex.innerHTML="";
+dvjue_u_nm_juex.innerHTML=usrj;
+  
+    
+  if(Object.keys(dt.usrjue).length==dt.nroply){
+    alert("start game!");
+    sktclt.emit("start game","vamos");
+  }//if, enviar emit socket start game
+  
+});//se juntaron al juego
 
 
 function restamjuE(){
@@ -649,9 +1054,9 @@ injmsg.value="";
 
 
 sktclt.on('new messagejue', function(data){
-  //data{msg,nick}
+  //data{msg,nick,guess}
   
-   if(/bingo/i.test(data.msg)){
+   if(data.guess){
      
      dvjcon.innerHTML+="<b>"+data.nick+":</b> "+data.msg+"<br/>"+
        "BINGO, you guessed the word!<br>";

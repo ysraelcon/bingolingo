@@ -87,7 +87,7 @@
   @media only screen and (max-width:400px){
     #sptbchttxt,#sptbgmetxt,#sptbcmntxt,#sptblsstxt{display:none;}
     #sptbchtico,#sptbgmeico,#sptbcmnico,#sptblssico{display:inline;}
-  }
+  }/*@media*/
 
 /*..style tabs*/
 </style>
@@ -172,14 +172,55 @@
   <div id="dvchtrnm">Rooms</div>
   <div id="dvchtrc">
     
-    <!-- language room in datalist !!! as the theme ones -->
+    <form id="fmgoroom" onsubmit="event.preventDefault()">
+  <input list="dtlstroom" id="inlstroom"
+    placeholder="search room...">
+
+<datalist id="dtlstroom">
+  <option id="opteng" value="English"></option>
+<option id="optspa" value="Spanish"></option>
+<option id="optfra" value="French"></option>
+<option id="optrus" value="Russian"></option>
+<option id="optpor" value="Portuguese"></option>
+
+<option id="optita" value="Italian"></option>
+<option id="optdeu" value="German"></option>
+<option id="optara" value="Arabic"></option>
+<option id="optzho" value="Chinese"></option>
+<option id="optkor" value="Korean"></option>
+
+<option id="optind" value="Indonesian"></option>
+<option id="optjpn" value="Japanese"></option>
+<option id="opthin" value="Hindi"></option>
+<option id="optswe" value="Swedish"></option>
+<option id="opttur" value="Turkish"></option>
+  
+<option id="optben" value="Bengali"></option>
+<option id="optslk" value="Slovak"></option>  
+  
+<option id="optmul" value="MULTILINGUAL"></option>  
+</datalist>
     
-  <span id="lige" class="spchtrm"
-      onclick="entrgnrL('gnrl')"
+    <input type="button" value="Go in"
+           onclick="goiN()">
+    </form>
+    
+    
+    
+  <span id="sprm_gnrl" class="spchtrm"
+      onclick="entrrooM('gnrl')"
         > General <span id="spchtcnt_gnrl"
         class="spchtcnt"></span><i class="fa fa-comments-o"
            aria-hidden="true"
       ></i> </span>
+    
+    <span id="sprm_eng" class="spchtrm"
+      onclick="entrrooM('eng')"
+        > English <span id="spchtcnt_eng"
+        class="spchtcnt"></span><i class="fa fa-comments-o"
+           aria-hidden="true"
+      ></i> </span>
+    
   </div>
 </div><!-- dv rooms -->
           
@@ -234,8 +275,30 @@
   
 #dvusri{
   text-align:center;
-  border-bottom:1px solid grey;
   font-family:arial;}
+  
+  #spusredtprf,#btncnledtprf{
+    display:none;
+  }  
+  
+ #dvusri:after{
+ display:block;
+ width:inherit;height:inherit;
+ content:"";
+  border-bottom:1px solid grey;  
+  transform: scaleX(0);  
+  transition: transform 250ms ease-in-out;
+ transform-origin:  0% 50%;}
+
+#dvusri:after{
+animation-name:mikeyfr;
+animation-duration:1s;
+animation-fill-mode:forwards;}
+
+@keyframes mikeyfr {
+    from {}
+    to {transform: scaleX(1);}
+} /*keyframes*/
   
 /*..style div user info*/
 </style>          
@@ -244,9 +307,8 @@
   
   <div id="dvusri">User info</div>
   
-  <span ng-switch="edit">
-  <span id="spusrprf"
-        ng-switch-when="false">
+  
+  <span id="spusrprf">
       
  <p>First Name: {{user.firstnm}} </p>
  <p>Last Name: {{user.lastnm}} </p>
@@ -259,22 +321,37 @@
   </span><!-- usr prf info -->
   
   
-  <span id="spusredtprf" ng-switch-when="true">
-    <app-edit-profile></app-edit-profile>
-    
+  <span id="spusredtprf">
+    <app-edit-profile></app-edit-profile>  
   </span><!-- usr prf edit --> 
-    
-  </span><!-- span switcher -->
- 
+     
   
-<input type="button"
-       value="Edit Profile" ng-init="edit=false"
-       ng-click="edit=true" ng-show="!edit">
+<input type="button" id="btnedtprf"
+       value="Edit Profile"
+       onclick="shwedtprF()">
   
-<input type="button"
-       value="Cancel" ng-show="edit"
-       ng-click="edit=false">
+<input type="button" id="btncnledtprf"
+       value="Cancel" 
+       onclick="cnledtprF()">
 
+<script>
+//script user
+  function shwedtprF(){
+    spusrprf.style.display="none";
+    spusredtprf.style.display="inline";
+    btncnledtprf.style.display="inline";
+    btnedtprf.style.display="none";
+  }//mostrar editar perfil
+  
+  
+  function cnledtprF(){
+    spusrprf.removeAttribute("style");
+    spusredtprf.removeAttribute("style");
+    btncnledtprf.removeAttribute("style");
+    btnedtprf.removeAttribute("style");
+  }//cancelar edit profile
+  
+</script>
   
 </div><!-- dv cont usr -->
   

@@ -43,14 +43,29 @@
   height:100%;}
 
 #dvjuse{
+  position:relative;
+  width:100px;height:100%;
   border:1px solid grey;
-  width:100px;height:100%;}
+  }
+.dvjue_u_nm{
+  overflow-y:auto;
+    word-wrap:break-word;
+}
+.dvjue_u_bts{
+  position:absolute;
+    bottom:0px;
+}
 
 #dvjcon{
   overflow-y:auto;
   width:100%;height:100%;
   border:1px solid grey;}
 
+
+/*diccionario*/
+
+.inwrd{
+  width:120px;}
 
 
 /*style crear tipo de juego..*/

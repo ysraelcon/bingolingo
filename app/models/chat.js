@@ -2,7 +2,7 @@ var Mng=require('mongoose');
 
 var chtsch=Mng.Schema({
   
-  chats:{general:[]}
+  chats:Mng.Schema.Types.Mixed
 });
 
 
