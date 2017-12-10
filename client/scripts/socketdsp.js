@@ -158,6 +158,8 @@ nudiv.innerHTML='<div id="dvcht_t_'+rmx+'" class="dvcht_t">'+
 '<option value="hi">Hindi</option>'+
 '<option value="sv">Swedish</option>'+
 '<option value="tr">Turkish</option>'+
+  
+  '<option value="bn">Bengali</option>'+
 '</datalist>'+
 '      '+
 '      <input type="button" value="dictYandex"'+
@@ -179,6 +181,14 @@ var draggableDiv =
 $('#dvcht_'+rmx).draggable();
   
 $('#dvcht_c_'+rmx, draggableDiv)
+  .mousedown(function(ev){
+  draggableDiv.draggable('disable');
+})//mousedown
+  .mouseup(function(ev){
+  draggableDiv.draggable('enable');
+});//mouseup
+  
+  $('#dvdct_'+rmx, draggableDiv)
   .mousedown(function(ev){
   draggableDiv.draggable('disable');
 })//mousedown
@@ -780,7 +790,7 @@ var roomj="juex";
 
 
 function crtgmE(){
-
+ console.log("1crear juego");
   if(typeof(dvcrtgme)=="undefined"){
   
 var nudiv=document.createElement("DIV");
@@ -828,6 +838,7 @@ dvcongme.appendChild(nudiv);
 
 
 function rdygmE(roomf,nmejuef,lisjuef,nroplyf){
+console.log("crear barra de juego");
 var nrogme=roomf;
 var nudiv=document.createElement("DIV");
 nudiv.id="dvgmebar_1";
@@ -858,12 +869,13 @@ dvcongme.removeChild(dvcrtgme);
 
 
 function jnspC(rmj,nmejuef,lisjuef,nroplyf){
+  console.log("juntarse juego");
   crtgaM(rmj,nmejuef,lisjuef,nroplyf);
 }//juntarse o spectate
 
 
 function crtgaM(rmj,nmejuef,lisjuef,nroplyf){
-  
+  console.log("2creando vent juego");
   var rmj=roomj;
   var nmejue=nmejuef;
   var lisjue=lisjuef;
@@ -887,10 +899,10 @@ nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
 '<div id="dvjnm">'+
   '<div id="dvjnmtit">Explain The Word</div>'+
   '<div id="dvjnmmit" onclick="restamjuE()">L</div>'+
-  '<div id="dvjnmcrr" onclick="crrjuE()">X</div>'+
+  '<div id="dvjnmcrr" onclick="crrjuE(\''+"juex"+'\')">X</div>'+
   '</div>'+
   
-'<div id="dvjexp">Explains: <span>wordX</span'+
+'<div id="dvjexp">Explains: <span id="spwrdtogss">wordX</span'+
 '><span id="sptmr">00</span></div></div>'+
   
 '<div id="dvjcu">'+
@@ -1000,13 +1012,14 @@ sktclt.on("juego creado",function(dt){
 
 
 sktclt.on("mndusrjue",function(dt){
-  //dt{usrjue{usrid(firstnm)},room,nroply,nmejue,lisjue}
-  console.log("recibe user pal juego");
-  console.log(dt);
+  //dt{usrjue{usrid{firstnm,sktid}},room,nroply,nmejue,lisjue}
+  
+  console.log("4recibe user pal juego");
+  
  var usrj="";
 
 for(var nom in dt.usrjue){
- usrj+=dt.usrjue[nom]+"<br>";
+ usrj+=dt.usrjue[nom].firstnm+"<br>";
 }//for
 dvjue_u_nm_juex.innerHTML="";
 dvjue_u_nm_juex.innerHTML=usrj;
@@ -1014,10 +1027,46 @@ dvjue_u_nm_juex.innerHTML=usrj;
     
   if(Object.keys(dt.usrjue).length==dt.nroply){
     alert("start game!");
-    sktclt.emit("start game","vamos");
+    sktclt.emit("start game",dt);
   }//if, enviar emit socket start game
   
 });//se juntaron al juego
+
+
+sktclt.on("el del turno",function(dt){
+  //dt{wrd}
+  console.log("te toca explicar");
+  spwrdtogss.innerHTML=dt.wrd;
+});//skon el del turno
+
+sktclt.on("corre reloj",function(dt){
+  //dt{tmp}
+  
+  sptmr.innerHTML=dt.tmp;
+  
+  
+});//empieza a correr el reloj
+
+sktclt.on("los que adivinan",function(dt){
+  //dt{usrexpl}
+  console.log("a adivinar!");
+  spwrdtogss.innerHTML=dt.usrexpl;
+});//skon los que adivinan
+
+sktclt.on("no se adivino",function(dt){
+//dt{wrdtogss}
+  console.log("no se adivino");
+ dvjcon.innerHTML+="The word was <b>"+
+         dt.wrdtogss+"</b>";
+  sktclt.emit("10 seg","next turn");
+});//si no se adivina
+
+
+sktclt.on("next turn",function(dt){
+  //dt{nxttrnply}
+  console.log("next turn");
+  alert("next "+dt.nxttrnply);
+});//next turn
 
 
 function restamjuE(){
@@ -1035,9 +1084,9 @@ function restamjuE(){
 }//restaurar tamaño del juego
 
 
-function crrjuE(){
+function crrjuE(rmj){
   dvcongme.removeChild(dvjue);
-  sktclt.emit("slrjue");
+  sktclt.emit("slrjue",{room:rmj});
 }//cerrar juego
 
 
@@ -1060,6 +1109,7 @@ sktclt.on('new messagejue', function(data){
      
      dvjcon.innerHTML+="<b>"+data.nick+":</b> "+data.msg+"<br/>"+
        "BINGO, you guessed the word!<br>";
+     sktclt.emit("10 seg","next turn");
    }else{
      dvjcon.innerHTML+="<b>"+data.nick+":</b> "+data.msg+"<br/>";
    }//else no bingo
@@ -1076,6 +1126,17 @@ jQuery(function($){
 function selemJ(){
   alert("emojies in construction, write :smile: for :)\n\nlist: https://raw.githubusercontent.com/omnidan/node-emoji/master/lib/emoji.json");
 }//select emjoy
+
+
+function sndrpT(){
+  
+sktclt.emit("reporte",{
+           tit:inrpttit.value,
+           rpt:tarpt.value});
+alert("Thanks for your report");
+crrrpT();  
+
+}//enviar reporte
 
 
 

@@ -1,4 +1,5 @@
-
+ <!-- efectos navidad -->
+ <script type="text/javascript" src="/scripts/snow.js"></script>
 
 <style>
 /*style head..*/
@@ -159,7 +160,7 @@
 
 <h2 id="h2lgi">BesTalk</h2>
   
-<div ng-show="msg">{{msg}}</div>
+<div ng-show="message">{{message}}</div>
    
 
 <form name="fmlogin" novalidate>
@@ -187,6 +188,8 @@
      style="display:none">
   
   <h2 id="h2sgnu">Join us</h2>
+  
+  <div ng-show="message">{{message}}</div>
   
 <form name="fmsgup" 
       onsubmit="return valpW()">
@@ -250,10 +253,53 @@ function valpW(){
   
 </script>
 
-
+<!--  
 <style>
   app-fondo{
     width:100%;}
 </style>
 
 <app-fondo></app-fondo>
+-->
+
+<style>
+/*style fondo..*/
+#dvfnd{
+    position:relative;
+    width:100%;
+    /*border:1px solid;*/
+    font-size:15px;
+      font-family:arial;
+    background-color:black;
+      color:white;}
+  
+  #spinf{
+    position:absolute;
+      right:20px;
+      bottom:0px;
+      cursor:pointer;
+  }
+  
+/*..style fondo*/
+</style>
+
+  
+  <div id="dvfnd">
+    <span>Made with 
+      <img src="https://png.icons8.com/potato/color/24" title="Potato" width="24" height="24">
+      by BesTalk Team</span> 
+    
+    <span id="spinf" title="info"
+          onclick="inF()"><i class="fa fa-info-circle" aria-hidden="true"
+                                               ></i></span>
+   
+</div><!-- footer / Visit the stable page: <a href="https://bingolingo.glitch.me" target="_blank">BingoLingo</a>
+      <br> -->
+
+
+
+ <script>
+  function inF(){
+    alert("Welcome to BesTalk!\n\nA exchange language website in development which will be ready for 2024 :)\n\nLog in!\n\n- chat working.\n- game coming soon before 2024 x).");
+  }//info
+  </script>

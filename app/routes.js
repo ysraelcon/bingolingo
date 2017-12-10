@@ -5,18 +5,15 @@ module.exports=function(Ap,pssp){
 
 Ap.get("/",function(req,res){
  //res.render("login.ejs",{msg:""});
+ 
 });
 
-  /*
+  
 Ap.get("/home",function(req,res){
  
-  res.render("signup.ejs");
-  
-  var newChat= new Chat();
-  
-  newChat.save();//save
-             
-});*/
+  res.json({message:req.flash("registerMessage")});
+               
+});
 
   /*
 Ap.get("/signup",function(req,res){
@@ -25,6 +22,7 @@ Ap.get("/signup",function(req,res){
 
 Ap.get("/login",function(req,res){
  //res.render("login.ejs",{msg:req.flash('loginMsg')});
+  res.json({message:req.flash("loginMsg")});
 });
   
 Ap.post("/login",pssp.authenticate('login',

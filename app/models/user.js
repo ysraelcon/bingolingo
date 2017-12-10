@@ -11,6 +11,8 @@ var usrsch=Mng.Schema({
   speaks:String,
 email:{type:String,unique:true},
 password:{type:String},
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
   chats:Mng.Schema.Types.Mixed
 });//user datos
 //city,in,description,yearborn,monthborn,

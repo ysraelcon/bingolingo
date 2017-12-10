@@ -24,6 +24,7 @@ $http.post("/login",$scope.user)
 if($scope.message===undefined){
  $location.path("/profile");
 }//if
+  
 });//then
 };//login
           

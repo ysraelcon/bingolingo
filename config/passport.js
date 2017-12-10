@@ -27,6 +27,7 @@ pssp.use('register',new lclstrtg({
     
   if(err){return done(err);}
   if(user){
+    console.log("email taken");
    return done(null,false,
                req.flash('registerMessage', "email is already taken"));
 }else{
@@ -59,10 +60,12 @@ pssp.use('login',new lclstrtg({
     
   if(err){return done(err);}
   if(!user){
+    console.log("no username");
    return done(null,false,
                req.flash('loginMsg',"Incorrect username"));
 }//if
   if(!user.validPassword(password)){
+    console.log("wrong password");
  return done(null,false,
              req.flash('loginMsg',"Incorrect password"));
 }//if

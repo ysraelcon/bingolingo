@@ -12,9 +12,9 @@
 
 #h1tit{
     display:inline-block;
-    /*border:1px solid;*/
+    /*border:1px dotted;*/
       margin:0px;
-      margin-left:7%;
+      margin-left:50px;
     font-family:"Playball",cursive;
       font-size:50px;}
 
@@ -36,8 +36,30 @@
 </style>
 
 <div id="dvhd">
-<h1 id="h1tit">BesTalk</h1>
 
+<svg width="150" height="60"
+     style="position:absolute;">
+
+<path d="M32,16 A14,6 0 1,1 78,8"
+   fill="red" stroke="black" /> 
+ 
+ <path d="M28,24 A5,3 0 1,1 46,22"
+   transform="rotate(-10)"
+   fill="#9370DB" stroke="black" /> 
+   
+ <rect x="45" y="20"
+width="30" height="6"
+transform="rotate(-10)"
+style="fill:white;stroke-width:1;stroke:black" />
+
+<circle cx="30" cy="16" r="5"
+style="fill:white;stroke-width:1;stroke:black"/>
+ 
+</svg>   
+  
+  <h1 id="h1tit">BesTalk</h1>
+  
+  
 <div id="dvprfsgn">
 <span id="spprf"
   onclick="opntaB(dvconusr,'dvcon',null)"
@@ -393,13 +415,134 @@ if(thistbf){
 </script>
 
 
-
+<!--  
 <style>
   app-fondo{
     width:100%;}
 </style>
 
 <app-fondo></app-fondo>
+-->
+
+<style>
+/*style fondo..*/
+#dvfnd{
+    position:relative;
+    width:100%;
+    /*border:1px solid;*/
+    font-size:15px;
+      font-family:arial;
+    background-color:black;
+      color:white;}
+  
+  #sperr{
+    position:absolute;
+      right:0px;
+      bottom:0px;
+    
+  }
+  #sperr i{
+    color:yellow;
+    cursor:pointer;
+  }
+/*..style fondo*/
+</style>
+
+<style>
+  
+   #dvrptscr{
+      display:flex;
+        justify-content:center;
+        align-items:center;
+      position:absolute;
+        top:0;
+      width:100%;height:100%;
+      background:rgba(0,0,0,0.7);
+    }
+    #dvrpt{
+      width:50%;height:50%;
+      /*border:1px dotted;*/}
+    
+    #dvrpttit{
+      display:flex;
+        justify-content:center;
+      position:relative;
+    }
+    #dvrpttit>div{
+      display:inline-block;
+    }
+    
+    #dvrpttitnm{
+      text-align:center;
+      width:100%;
+      background:black;
+        color:yellow;
+    }
+    #dvrpttitx{
+      text-align:center;
+      position:absolute;
+        right:0px;
+      width:50px;
+      background:white;
+      cursor:pointer;
+    }
+    #inrpttit{
+      text-align:center;
+      width:100%;
+    }
+    #tarpt{
+      width:100%;height:50%;
+    }
+    #btsndrpt{
+      width:100%;
+    }
+    
+  </style>
+  
+  <div id="dvfnd">
+    <span>Made with 
+      <img src="https://png.icons8.com/potato/color/24" title="Potato" width="24" height="24">
+      by BesTalk Team</span> 
+    
+    <span id="sperr" onclick="rpT()">Report <i class="fa fa-exclamation-triangle" aria-hidden="true"
+                        ></i> errors</span>
+   
+</div><!-- footer / Visit the stable page: <a href="https://bingolingo.glitch.me" target="_blank">BingoLingo</a>
+      <br> -->
+
+
+
+ <script>
+  //cerrar report
+  function crrrpT(){
+    dvngvw.removeChild(dvrptscr);
+  }
+  
+   
+  function rpT(){
+    
+    var dv= document.createElement("div");
+    dv.id="dvrptscr";
+    dv.innerHTML='<div id="dvrpt">'+
+'  <div id="dvrpttit">'+
+'    <div id="dvrpttitnm">Errors or Suggestions</div>'+
+'    <div id="dvrpttitx" onclick="crrrpT()">X</div>'+
+'  </div>'+
+'  <input type="text" id="inrpttit"'+
+'         placeholder="Title (optional)">'+
+'  <br>'+
+'  <textarea id="tarpt"'+
+'    placeholder="write the error or suggestion..."'+
+'  ></textarea>'+
+'  <br>'+
+'  <input type="button" id="btsndrpt"'+
+'         value="Send"'+
+'         onclick="sndrpT()">'+
+'</div>';
+    
+    dvngvw.appendChild(dv);
+  }
+  </script>
 
   
    

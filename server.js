@@ -84,6 +84,8 @@ var usrjue={};
 
 io.sockets.on('connection', function(socket) {
   
+  console.log("en conexion "+socket.request.user.firstnm);
+  
 //----click on chat
   
 socket.on("userva",function(dt){
@@ -216,6 +218,24 @@ socket.on("typing gnrl",function(){
 });//typing
   
   
+  
+ socket.on("reporte",function(dt){
+//dt{tit,rpt}
+console.log("guarda reporte");
+Chat.findOne({_id:"5a03c2696602c617ed34b85f"},
+              function(err,cht){
+
+cht.reportes.push(
+     [socket.request.user.id,
+      socket.request.user.firstnm,
+       dt]);
+
+cht.save((err)=>{
+ if(err) throw err;
+});//save
+});//findone
+
+});//reporte 
   
   
 //====private chats
@@ -358,20 +378,25 @@ usr.save((err)=>{
   
   
   
+  
+  
 //=====jueg  
 socket.on('entroomj',function(dt){
  //dt {idjue,nroply,nmejue,lisjue}
-  console.log("entra al juego");
-  console.log(dt);
+  console.log("3entrando al juego");
+  
+  
 socket.join(dt.idjue);
-usrjue[socket.request.user._id]= socket.request.user.firstnm;
+usrjue[socket.request.user._id]= {firstnm:socket.request.user.firstnm,
+           sktid:socket.id};
+  
 io.to(dt.idjue).emit("mndusrjue",
                      {usrjue:usrjue,
                       room:dt.idjue,
                 nroply:dt.nroply,
                 nmejue:dt.nmejue,
                 lisjue:dt.lisjue});
-io.sockets.emit("juego creado",
+socket.broadcast.emit("juego creado",
                 {room:dt.idjue,
                 nroply:dt.nroply,
                 nmejue:dt.nmejue,
@@ -379,25 +404,76 @@ io.sockets.emit("juego creado",
     
 });//skon entra juego
  
+  var lis1=["one","two","three","four","five",
+           "six","seven","eight","nine","ten"];
+  
+  var tmp=0;
+  var wrdtogss="";
+
+socket.on("10 seg",function(dt){
+ console.log(tmp);
+ if(tmp!=0){ 
+ tmp=10;
+ }else{
+   var x=setInterval(function(){
+ tmp--;
+ io.to(dt.room).emit("corre reloj",{tmp:tmp});
+ console.log(tmp);
+if(tmp>0){
+  
+  }
+else{
+  clearInterval(x);
+  io.to(dt.room).emit("next turn",
+                      {nxttrnply:"pedro"});
+  }
+},1000);
+ }//else corre de nuevo
+});//10 seg para next turn player    
   
 socket.on("start game",function(dt){
-  console.log(dt);
+  //dt{room,nroply,nmejue,lisjue}
+  console.log("5start game");
+  io.to(usrjue[Object.keys(usrjue)[3%3]].sktid)
+    .emit("el del turno",{wrd:lis1[2]});
+  
+  socket.to(dt.room).broadcast.emit("los que adivinan",
+         {usrexpl: usrjue[Object.keys( usrjue)[3%3]].firstnm});
+  
+  wrdtogss=lis1[2];
+  tmp=30;//90
+  console.log("corre reloj "+tmp);
+var x=setInterval(function(){
+ tmp--;
+ io.to(dt.room).emit("corre reloj",{tmp:tmp});
+ 
+if(tmp>0){
+  
+  }
+else{
+  clearInterval(x);
+  io.to(dt.room).emit("no se adivino",
+                      {wrdtogss:wrdtogss});
+  }
+},1000);
+
+  
 });//skon start game  
+  
+
+
   
   
 socket.on('send messagejue',function(data){
   //data:injmsg(val)
   
-  var lis1=["one","two","three","four","five",
-           "six","seven","eight","nine","ten"];
   
-  for(var i in lis1){
-    var re=new RegExp(lis1[i],"i");
+    var re=new RegExp(wrdtogss,"i");
   if(re.test(data)){
     var gss=true;
-    break;
+    
   }//if
-  }//for
+  
   
   data=emoji.emojify(data);
   
@@ -409,12 +485,15 @@ socket.on('send messagejue',function(data){
   
    
 socket.on("slrjue",function(dt){
+  //dt{room}
   console.log("sale del jue"),
-
+ 
+    socket.leave(dt.room);
+    
   delete usrjue[socket.request.user._id];
   io.sockets.emit("mndusrjue",
                   {usrjue:usrjue});
-});
+});//sk salir del juego
   
   
   
