@@ -1,350 +1,197 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="laApp">
 <head>
-<meta name="description" content="BingoLingo, front page">
+  
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110169179-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110169179-1');
+</script>
+  
+  
+  
+<meta name="description"
+      content="BesTalk, a exchange language website">
+  
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width">
+  <!--<base href="/" />-->
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width">
   
   <link id="favicon" rel="icon"
-  href="https://cdn.glitch.com/55f963f5-bf15-449c-b526-e46a7cd2b96f%2Fbingolingovene.ico?1509504155870"
+  href="https://cdn.glitch.com/55f963f5-bf15-449c-b526-e46a7cd2b96f%2Fbstlk.ico?1511655349997"
         type="image/x-icon">
-  <title>BingoLingo!</title>
+  
+  <title>BesTalk!</title>
 
   <!-- <link rel="stylesheet" href="/style.css"> -->
   <!--<script src="https://code.jquery.com/jquery.js"></script>-->
+   <!--  
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  --> 
+<!--  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Playball">
+
+ 
+
+ 
+  
   
 <style>
-  *{box-sizing:border-box;}
-  
- html{
-   height:100%;
-  border:1px dotted grey;margin:0px;} 
-  
- body{
-   display:flex;flex-direction:column;
-   height:100%; width:100%;
-  border:1px solid grey;margin:0px;
-   background-color:#e6e6fa;}/*#e6e6fa*/
+/*style basic page..*/
+*{box-sizing:border-box;}
 
-  div{margin:5px;}
-
-/*style title..*/
-#dvti{
-  text-align:center;
- border:1px solid grey;border-radius:5px 55px;
-  background-color:#00ff7f;}
+html{
+    height:100%;/*min-height:100%*/
+    /*border:1px solid;*/
+      margin:0px;}
+body{
+    display:flex;
+      flex-direction:column;
+      align-items:center;
+    height:100%;width:100%;
+   /*border:1px dotted;*/
+      margin:0px;
+    background-color:white;}
   
-  #h1ti{
-   display:inline-block;
-  margin:auto;
-   font-family:arial;
-   color:black;}
-/*..style title*/
+  /*#dvngvw{
+    display:flex;
+      flex-direction:column;
+      align-items:center;
+    
+    height:100%; width:100%;
+    margin:0px;}*/
   
-  #dvmed{
-    height:100%;
-   border:1px solid grey;border-radius:5px;}
+/*..style basic page*/
+</style>  
   
-  
-   
-  </style>
-  
+ 
 </head>
 <body>
 
- <%- body %>
   
- <!-- layout de aqui para abajo -->
-  
+ <style>
+/*style head..*/
+
+#dvhd{
+    text-align:center;
+    position:relative;
+    width:100%;
+    border-bottom:1px solid white;
+    /*border:1px solid;*/
+    background-color:#DDA0DD;}
+
+#dvhd:after{
+ display:block;
+ width:inherit;height:inherit;
+ content:"";
+  border-bottom:2px solid black;  
+  transform: scaleX(0);  
+  transition: transform 250ms ease-in-out;
+ transform-origin:  0% 50%;}
+
+#dvhd:after{
+  animation-name:mikeyfr;
+  animation-duration:1s;
+  animation-fill-mode:forwards;}
+
+@keyframes mikeyfr {
+    from {}
+    to {transform: scaleX(1);}
+}/*@keyframes*/
+
+#h1tit{
+    display:inline-block;
+    /*border:1px solid;*/
+      margin:0px;
+    font-family:"Playball",cursive;
+      font-size:50px;}
+/*..style head*/  
+</style>
+
+
+<div id="dvhd">
+<h1 id="h1tit">BesTalk</h1>
+</div> 
+
   
 <style>
-/*style footer..*/
- 
-  #dvfnd{
-    border:1px solid grey;border-radius:5px 20px;
-    font-family:arial;
-    background-color:#aaa;}
+  #dvmed{
+    height:100%;
+  }
+  </style>
   
-/*..style footer*/
+ <div id="dvmed">
+  <%- body %>
+  </div>
+  
+  
+ 
+<style>
+/*style fondo..*/
+#dvfnd{
+    position:relative;
+    width:100%;
+    /*border:1px solid;*/
+    font-size:15px;
+      font-family:arial;
+    background-color:black;
+      color:white;}
+  
+  #spinf{
+    position:absolute;
+      right:20px;
+      bottom:0px;
+      cursor:pointer;
+  }
+  
+/*..style fondo*/
 </style>
+
   
   <div id="dvfnd">
-    Supported by <a href="https://glitch.com/" target="_blank">glitch.com</a>
-    /
-      source code: <a href="https://glitch.com/edit/#!/bingolingo-test?path=README.md:1:0" target="_blank">code</a>
-      /
-      send your : <a href="https://shrib.com/#bingolingo-suggestions" target="_blank">Suggestion</a>
-      <br>
-      Made with 
+    <span>Made with 
       <img src="https://png.icons8.com/potato/color/24" title="Potato" width="24" height="24">
-       by BingoLingo Team
-      <br>
-      
+      by BesTalk Team</span> 
+    
+    <!--  
+    <span id="spinf" title="info"
+          onclick="inF()"><i class="fa fa-info-circle" aria-hidden="true"
+             ></i></span>-->
    
-</div><!-- footer -->
+</div><!-- footer / Visit the stable page: <a href="https://bingolingo.glitch.me" target="_blank">BingoLingo</a>
+      <br> -->
+
   
   <!-- <script src="/client.js"></script> -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  
-<script src="/socket.io/socket.io.js"></script> 
-<!--   <script src="https://cors-anywhere.herokuapp.com/https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> -->
-<script>
-
-jQuery(function($) {
-  var Sk=io.connect();
-  
-  var $dvmtbcht= $("#dvmtbcht");
-  
-  var $dvchtuc= $("#dvchtuc");
-  
 
 
-$dvmtbcht.on("click",function(e){
- e.preventDefault();
- Sk.emit("userva","hola");
-});//click tab chat
   
   
-Sk.on("usernames",function(dt){
- var html="";
-for(var usrnm in dt){
- html+="<tr>";
-  html+="<td>"+dt[usrnm].firstnm+" "+dt[usrnm].lastnm+"</td>";
-  html+="<td>"+(dt[usrnm].gender||"-")+"</td>";
-  html+="<td>"+(dt[usrnm].age||"-")+"</td>";
-  html+="<td>"+(dt[usrnm].country||"-")+"</td>";
-  html+="<td>"+(dt[usrnm].learning||"-")+"</td>";
-  html+="<td>"+(dt[usrnm].speaks||"-")+"</td>";
- html+="</tr>";
-}//for
-$("#tblusrsbd").html(html);
-});//skon usernames table
+  <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
   
- 
-  
-lige.onclick=function(){
-
-var nudiv=document.createElement("DIV");
-nudiv.id="dvicht";
-/*  
-var dvichtt=document.createElement("DIV");
-  dvichtt.id="dvichtt";
- 
-dvichtt.innerHTML="General";
-  
-var dvichtcu=document.createElement("DIV"); 
-  dvichtcu.id="dvichtcu";
-var dvichtc=document.createElement("DIV"); 
-  dvichtc.id="dvichtc";
-var dvichtu=document.createElement("DIV"); 
-  dvichtu.id="dvichtu";
-dvichtcu.appendChild(dvichtc);
-dvichtcu.appendChild(dvichtu);
-  
-var dvichtmsg=document.createElement("DIV"); 
-  dvichtmsg.id="dvichtmsg";
-var fmisndmsg=document.createElement("form"); 
-  fmisndmsg.id="fmisndmsg";
-var inimsg=document.createElement("input"); 
-  inimsg.id="inimsg";
-  inimsg.type="text";
-  inimsg.placeholder="write your message";
-var btnimsg=document.createElement("button");
-  btnimsg.type="submit";
-  btnimsg.innerHTML="send";
-fmisndmsg.appendChild(inimsg);
-fmisndmsg.appendChild(btnimsg);
-
-dvichtmsg.appendChild(fmisndmsg);
-
-nudiv.appendChild(dvichtt);
-nudiv.appendChild(dvichtcu);
-nudiv.appendChild(dvichtmsg);  
-  */
-  /*
-  var el = $('<a href="#">test</a>');
-
-$("#div_element").append(el);
-
-el.click(function(){alert("test")});
-
-// or preferrably:
-el.on('click', function(){alert("test")});
-  */
-  
- 
-nudiv.innerHTML='<div id="dvichtt">'+
-    '<div id="dvichttn">General</div>'+
-  '<div id="dvichttm">-</div>'+
-  '<div id="dvichttx">x</div>'+
-  '</div>'+
-  '<div id="dvichtcu">'+
-  '<div id="dvichtc"></div><div id="dvichtu"></div>'+
-  '</div>'+  
-  '<div id="dvichtmsg"><form id="fmisndmsg">'+
-  '<input type="text" id="inimsg" placeholder="write your message">'+
-  '<button id="btnimsg" type="submit">send</button>'+
-  '</form></div>';
-  
-dvchtc.appendChild(nudiv);
-  
-//$("#dvicht").draggable();
-/*  {
-  handle: $('#dvichtc', $("#dvicht"))
-});*/
-var draggableDiv = $('#dvicht').draggable();
-$('#dvichtc', draggableDiv).mousedown(function(ev) {
-  draggableDiv.draggable('disable');
-}).mouseup(function(ev) {
-  draggableDiv.draggable('enable');
-});
-  
-$("#dvicht").resizable();
-  
-  //minimize, toggle class
-  $("#dvichttm").click(function(){
-  
-    if($("#dvichttm").html()=="-"){
-    $("#dvicht").height(30);
-      $("#dvichttm").html("+");
-      $("#dvichtcu").hide();
-      $("#dvichtmsg").hide();
-      $("#dvicht").resizable("disable");
-      $('#dvicht').css('z-index', 9999);
-      
-    }//if -
-    else{
-      $("#dvicht").height(200);
-      $("#dvichttm").html("-");
-      $("#dvichtcu").show();
-      $("#dvichtmsg").show();
-      $("#dvicht").resizable("enable");
-    }//else +
-    
-    
- });//minimizar
-  
-  
-  //cerrar
- $("#dvichttx").click(function(){
-  $("#dvicht").remove();
-  Sk.emit("cerrgnrl");
- });//cerrar
-
-Sk.emit("opngnrl");
-   
-};//general onclick dar dvcht
   
 
- 
- 
-$("#dvchtc").on("click","#fmisndmsg",function(){
-
-$(this).submit(function(e) {
-   e.preventDefault();
-   if($("#inimsg").val()!='')
-     Sk.emit('send message', $("#inimsg").val());
-  
-  $("#inimsg").val('');
-  
-  //$("#dvichtc").scrollTop($('#dvichtc').get(0).scrollHeight);//$("#dvichtc").height()
-  
-  
-  
-  //$('#dvichtc').animate({
-  //scrollTop: $('#dvichtc').get(0).scrollHeight}, 2000);
-  
-  //var myDiv = $("#dvichtc");
-//myDiv.animate({ scrollTop: myDiv.attr("scrollHeight") - myDiv.height() }, 3000);
-  
-});//on send msg
-});//
-  
-Sk.on('new message', function(data) {
-  $("#dvichtc").append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-  $("#dvichtc").stop().animate({ scrollTop: $("#dvichtc")[0].scrollHeight}, 300);
-});//on receive msg
- 
-//Sk.on()
-  
-Sk.on("mndusrgnrl",function(dt){
-  var html=""
-  
-  for(var nombr in dt){
-    html+=nombr+"<br>";
-  }
-  $("#dvichtu").html("");
-  $("#dvichtu").html(html);
-  
-});//skon mandaron el usuario
-  
-
-var roomj="roomjue";  
-
-Sk.on("mndusrjue",function(dt){
-  var html=""
-  
-  for(var nombr in dt){
-    html+=nombr+"<br>";
-  }
-  $("#dvjuse").html("");
-  $("#dvjuse").html(html);
-}); //se juntaron al juego
-  
- Sk.on('new messagejue', function(data) {
-  
-   if(/bingo/.test(data.msg)){
-     $("#dvjcon").append('<b>'+data.nick+":</b> "+data.msg+"<br/>"+
-                        "BINGO, you guessed the word!");
-   }else{
-     $("#dvjcon").append('<b>'+data.nick+":</b> "+data.msg+"<br/>");
-   }
-  $("#dvjcon").stop().animate({ scrollTop: $("#dvjcon")[0].scrollHeight}, 100);
-});//on receive msg
-  
-  
-btncrtgm.onclick=function(){
-    console.log("crear juego");
-var nudivj=document.createElement("DIV");
-nudivj.id="dvjue";
-
-nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
-'<div id="dvjnm">Explain The Word</div>'+
-'<div id="dvjexp">Explains: <span>wordX</span'+
-'><span id="sptmr">00</span></div></div>'+
-'<div id="dvjcu">'+
-'<div id="dvjcon"></div>'+
-'<div id="dvjuse">Users</div>'+
-'</div><div id="dvjmsg">'+
-'<form id="fmjmsg" onsubmit="return false">'+
-'<input type="text" id="injmsg" placeholder="write your text..."'+
-'><input type="submit" value="Send" id="btnjsndm" >'+
-'</form></div></div>';
-
-  dvgmc.appendChild(nudivj);
-  
-  Sk.emit("entroomj",roomj);
-  
-};//crear juego
-  
-  $("#dvgmc").on("click","#fmjmsg",function(){
-
-$(this).submit(function(e) {
-   e.preventDefault();
-   if($("#injmsg").val()!='')
-     Sk.emit('send messagejue', $("#injmsg").val());
-  
-  $("#injmsg").val('');
-  
-  
-});//on send msg
-});//send msg juego
-  
-})//jquery
-</script>
+  <!--  
+  <script src="app.js"></script>
+<script src="home/home.js"></script>
+<script src="profile/profile.js"></script>
+  -->
   
 </body>
 </html>

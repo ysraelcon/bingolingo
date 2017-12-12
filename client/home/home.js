@@ -27,7 +27,24 @@ if($scope.message===undefined){
   
 });//then
 };//login
-          
+
+//olvido password
+$scope.fgtpwD=function(){
+  
+  if(typeof($scope.user)=="undefined"){
+alert("write your email in login");
+}else{
+
+  $http.post("/mail",$scope.user)
+    .then(function(res){
+    
+    //console.log(res);
+//alert("Check your email for get your password")
+    $scope.message=res.data.message;
+  });//then post email
+}//else
+  
+};//fgtpwD
           
 $scope.signuP=function(){
   

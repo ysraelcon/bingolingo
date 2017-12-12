@@ -11,13 +11,20 @@ font-awesome:
  http://fontawesome.io/icons/
 
 +errores:
--mensaje cuando se logea mal, ej: incorrect password
+-
 
 +por completar:
--salas de chat con tamaño completo de la pantalla
+-
 
 
 +soluciones:
+
+8sl..
+forgot password:
+http://sahatyalkabov.com/how-to-implement-password-reset-in-nodejs/
+https://stackoverflow.com/questions/42682923/password-reset-in-nodejs
+https://medium.com/@manojsinghnegi/sending-an-email-using-nodemailer-gmail-7cfa0712a799
+..8sl
 
 7sl..
 alert error icon:

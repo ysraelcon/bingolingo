@@ -1,5 +1,8 @@
+
 var User=require('../app/models/user');
 var Chat=require('../app/models/chat');
+var ndmlr= require('nodemailer');
+
 
 module.exports=function(Ap,pssp){
 
@@ -19,6 +22,38 @@ Ap.get("/home",function(req,res){
 Ap.get("/signup",function(req,res){
  res.render("signup.ejs");
 });*/
+
+Ap.get("/reset/:token",function(req,res){
+  
+ res.render("reset.ejs",{token:req.params.token});
+});//get reset
+  
+  
+Ap.post("/reset/:token",function(req,res){
+  console.log(req.body.password);
+  User.findOne({ resetPasswordToken: req.params.token,
+            resetPasswordExpires: { $gt: Date.now() } },
+               function(err, user) {
+        if (!user) {
+          
+          return res.send('Password reset token is invalid or has expired. <a href="https://bestalk-test.glitch.me">home</a>');
+        }//if
+//console.log(user);
+        user.password = user.generateHash(req.body.password);
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+    
+    user.save((err) => {
+  if (err) throw err;
+      });//save
+    
+    res.send("Password reseted succesfully! <a href='https://bestalk-test.glitch.me'>Login</a>");
+    
+  });//findone
+  
+  
+});//post reset
+
 
 Ap.get("/login",function(req,res){
  //res.render("login.ejs",{msg:req.flash('loginMsg')});
@@ -100,7 +135,71 @@ Ap.get('/logout',function(req,res){
 res.redirect('/');
 });//get
   
+  
+Ap.post('/mail',function(req,res){
+    
+  var token=Math.random().toString(36)
+        .replace(/[^a-z]+/g, '').substr(0, 5);
+  console.log(token);
+  
+  User.findOne({ email: req.body.email },
+                function(err, user){
+    
+    if(!user){
+          
+          //return res.redirect('/mail');
+      res.json({message:"No email address exists."});
+        }//if
+    else{
+      
+      user.resetPasswordToken = token;
+      user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+      user.save((err) => {
+  if (err) throw err;
+      });//save
+      
+      var transporter= ndmlr.createTransport({
+    service:'gmail',
+    auth:{user: process.env.MAILSENDER,
+          pass: process.env.MAILSENDERPWD}
+  });//transporter
+  
+  var mailopts={
+ from: process.env.MAILSENDER,
+ to: req.body.email,//or list
+ subject: 'Password Reset',
+ html: '<p>Visit the link for set your new password:</p>'+
+    '<a href="https://bestalk-test.glitch.me/reset/'+
+    token+
+    '">Reset Password</a>'+
+    '<h2>Continue enjoying of BesTalk!</h2>'
+};//mailopts
+  
+  
+ transporter.sendMail(mailopts, function(err, info){
+   if(err)
+     console.log(err)
+   else
+     console.log(info);
+});//sendmail 
+  
+  res.json({message:"Check your mail for get your password"});
+      
+    }//else
+    console.log(user);
+  });//findone
+  
+  
+  
+  
+});//post enviar mail 
+  
+   
 };//exports
+
+
+
+
 
 function isLoggedIn(req,res,next){
  if(req.isAuthenticated())

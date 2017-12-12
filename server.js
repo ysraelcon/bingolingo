@@ -15,8 +15,8 @@ var ckp= require('cookie-parser');
 var Ss= require('express-session');
 var expvtr= require('express-validator');
 var mngstr= require('connect-mongo')(Ss);
-var 
-pssp= require('passport');
+var ndmlr= require('nodemailer');
+var pssp= require('passport');
 var emoji= require('node-emoji');
 
 var port=process.env.PORT||3000;
@@ -68,6 +68,7 @@ Ap.use(Fl());
 //Ap.use(require('./app/routes'));
 require('./app/routes')(Ap,pssp);
 
+ 
 
 //======socket part
 
