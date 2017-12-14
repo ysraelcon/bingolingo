@@ -83,6 +83,16 @@ var usrjue={};
 
 //user{_id,email,firstnm,lastnm,chats[]}
 
+//juego
+var jue={};
+
+var lis1=["one","two","three","four","five",
+           "six","seven","eight","nine","ten"];
+  
+  var tmp=0;
+  var wrdtogss="";
+
+//socket connection, poner variable afuera
 io.sockets.on('connection', function(socket) {
   
   console.log("en conexion "+socket.request.user.firstnm);
@@ -382,119 +392,222 @@ usr.save((err)=>{
   
   
 //=====jueg  
+  
+  
+socket.on("solicitar game",function(dt){
+ //dt{typgme,liswrd,nroply}
+
+console.log("2solicitar juego");
+console.log(dt);
+  
+var nrogme= "jue"+Object.keys(jue).length;  
+
+  
+jue[nrogme]= {nrogme: nrogme,
+              tmp:20,
+             typegme: dt.typgme,
+             liswrd: dt.liswrd,              
+             nroply: dt.nroply,
+             nroplyact: {}
+             };//jue{}
+
+io.to(socket.id).emit("crear juego",
+             {nrogme: nrogme,
+              typegme: dt.typgme,
+             liswrd: dt.liswrd,
+             nroply: dt.nroply });
+socket.broadcast.emit("los demas barjue",
+                {nrogme:nrogme,
+                 typgme:dt.typgme,
+                 liswrd:dt.liswrd,
+                 nroply:dt.nroply});
+  
+});//skon solicitar game  
+  
+  
 socket.on('entroomj',function(dt){
- //dt {idjue,nroply,nmejue,lisjue}
+ //dt{nrogme,typgme,liswrd,nroply}
   console.log("3entrando al juego");
+ console.log(dt);
+    
+var usrid= socket.request.user.id;
+var fn=  socket.request.user.firstnm;
+
+var nroingme= Object.keys(jue[dt.nrogme].nroplyact).length;
   
+  console.log(nroingme);
+  console.log(jue[dt.nrogme].nroply-1);
+
+if(nroingme< (jue[dt.nrogme].nroply-1) ){
+  console.log("cant menor que nroply-1");
+
+  jue[dt.nrogme].nroplyact[usrid]=[fn,socket.id];
   
-socket.join(dt.idjue);
+  console.log(jue[dt.nrogme]);
+
+socket.join(dt.nrogme);
 usrjue[socket.request.user._id]= {firstnm:socket.request.user.firstnm,
            sktid:socket.id};
   
-io.to(dt.idjue).emit("mndusrjue",
-                     {usrjue:usrjue,
-                      room:dt.idjue,
-                nroply:dt.nroply,
-                nmejue:dt.nmejue,
-                lisjue:dt.lisjue});
-socket.broadcast.emit("juego creado",
-                {room:dt.idjue,
-                nroply:dt.nroply,
-                nmejue:dt.nmejue,
-                lisjue:dt.lisjue});
+ var usrgme= jue[dt.nrogme].nroplyact; 
+io.to(dt.nrogme).emit("mndusrjue",
+                     {usrjue:usrgme,
+                      nrogme:dt.nrogme,
+                      typgme:dt.typgme,
+                      liswrd:dt.liswrd,
+                      nroply:dt.nroply});
+
+}//if nroplyact<nroply-1: junta
+
+else if(nroingme== (jue[dt.nrogme].nroply-1) ){
+  console.log("cant igual que nroply-1")
+
+jue[dt.nrogme].nroplyact[usrid]=[fn,socket.id];
+  
+  
+socket.join(dt.nrogme);
+usrjue[socket.request.user._id]= {firstnm:socket.request.user.firstnm,
+           sktid:socket.id};
+  
+ var usrgme= jue[dt.nrogme].nroplyact; 
+io.to(dt.nrogme).emit("mndusrjue",
+                     {usrjue:usrgme,
+                      nrogme:dt.nrogme,
+                      typgme:dt.typgme,
+                      liswrd:dt.liswrd,
+                      nroply:dt.nroply});
+
+//strgme(jue[dt.nrogme]);
+  //start plyer 0 va sumando 0%nroply
+var plytrn=0;
+  
+var pmrid= Object.keys(jue[dt.nrogme].nroplyact)[plytrn];
+var pmrusr= jue[dt.nrogme].nroplyact[pmrid];//[fn,sktid]
+
+wrdtogss=lis1[rndnuM(0,lis1.length)];  
+    
+io.to(dt.nrogme).emit("los que adivinan",
+                {usrexpl: pmrusr[0]});
+io.to(pmrusr[1]).emit("el del turno",
+                      {wrd:wrdtogss});
+
+//tmp=20;
+  //nota el tiempo de ese juego jue[dt.nrogme].tmp
+  
+  cntdwN(dt.nrogme,"next",plytrn);
+
+}//elseif nroplyact==nroply-1 : junta y comienza
+else{
+console.log("juego comenzado");
+  
+io.to(socket.id).emit("ya comenzo jue",
+                 {msg:"complete game, create a new one"});
+
+}//else, comenzado
+
     
 });//skon entra juego
  
-  var lis1=["one","two","three","four","five",
-           "six","seven","eight","nine","ten"];
+//los tiempos se manejan del lado del server.  
   
-  var tmp=0;
-  var wrdtogss="";
+  
+  
+function cntdwN(rmjf,mod,plytrn){
 
-socket.on("10 seg",function(dt){
- console.log(tmp);
- if(tmp!=0){ 
- tmp=10;
- }else{
-   var x=setInterval(function(){
- tmp--;
- io.to(dt.room).emit("corre reloj",{tmp:tmp});
- console.log(tmp);
-if(tmp>0){
+io.to(rmjf).emit("corre reloj",{tmp:jue[rmjf].tmp});
+jue[rmjf].tmp-=1;
   
-  }
+if(jue[rmjf].tmp>0){
+    setTimeout(function(){
+      cntdwN(rmjf,mod,plytrn);},1000);
+}//if
+else if(mod=="next"){
+  
+  plytrn++;
+  jue[rmjf].tmp=25;
+  
+  var pmrid= Object.keys(jue[rmjf].nroplyact)[ plytrn%jue[rmjf].nroply];
+var pmrusr= jue[rmjf].nroplyact[pmrid];//[fn,sktid]
+
+wrdtogss=lis1[rndnuM(0,lis1.length)];  
+    
+io.to(rmjf).emit("los que adivinan",
+                {usrexpl: pmrusr[0]});
+io.to(pmrusr[1]).emit("el del turno",
+                      {wrd:wrdtogss});
+  
+  setTimeout(function(){
+    cntdwN(rmjf,null,plytrn); },1000);
+   
+  
+}//else if next
 else{
-  clearInterval(x);
-  io.to(dt.room).emit("next turn",
-                      {nxttrnply:"pedro"});
-  }
-},1000);
- }//else corre de nuevo
+    console.log(jue[rmjf].tmp);
+  io.to(rmjf).emit("no se adivino",
+                      {wrdtogss:wrdtogss});
+}//else
+
+}//count down
+  
+  
+  
+function rndnuM(a,b){
+    return Math.floor(Math.random() * b) + a;
+};//random number entre 0 y m.length
+  
+  
+  
+socket.on("10 seg",function(dt){
+  //dt{nrogme}
+  console.log("10 seg next turn");
+ console.log(jue[dt.nrogme].tmp);
+  jue[dt.nrogme].tmp=10;
+ //next turn
 });//10 seg para next turn player    
   
-socket.on("start game",function(dt){
-  //dt{room,nroply,nmejue,lisjue}
-  console.log("5start game");
-  io.to(usrjue[Object.keys(usrjue)[3%3]].sktid)
-    .emit("el del turno",{wrd:lis1[2]});
-  
-  socket.to(dt.room).broadcast.emit("los que adivinan",
-         {usrexpl: usrjue[Object.keys( usrjue)[3%3]].firstnm});
-  
-  wrdtogss=lis1[2];
-  tmp=30;//90
-  console.log("corre reloj "+tmp);
-var x=setInterval(function(){
- tmp--;
- io.to(dt.room).emit("corre reloj",{tmp:tmp});
- 
-if(tmp>0){
-  
-  }
-else{
-  clearInterval(x);
-  io.to(dt.room).emit("no se adivino",
-                      {wrdtogss:wrdtogss});
-  }
-},1000);
-
-  
-});//skon start game  
   
 
 
   
   
-socket.on('send messagejue',function(data){
-  //data:injmsg(val)
+socket.on('send messagejue',function(dt){
+  //dt{msg,nrogme}
   
   
     var re=new RegExp(wrdtogss,"i");
-  if(re.test(data)){
+  if(re.test(dt.msg)){
     var gss=true;
     
   }//if
   
   
-  data=emoji.emojify(data);
+  dt.msg=emoji.emojify(dt.msg);
   
-   io.sockets.emit('new messagejue',
-                   {msg:data,
+   io.to(dt.nrogme).emit('new messagejue',
+                   {msg:dt.msg,
+                    nrogme:dt.nrogme,
         nick:socket.request.user.firstnm,
                    guess:gss});
 });//sk send msg juego
   
    
+
 socket.on("slrjue",function(dt){
   //dt{room}
   console.log("sale del jue"),
  
-    socket.leave(dt.room);
+  socket.leave(dt.room);
+
+  var usrid= socket.request.user.id;
     
-  delete usrjue[socket.request.user._id];
+  delete jue[dt.room].nroplyact[usrid];//eliminar
+  //console.log(jue);
+
   io.sockets.emit("mndusrjue",
-                  {usrjue:usrjue});
-});//sk salir del juego
+                  {usrjue: jue[dt.room].nroplyact,
+                   nrogme: dt.room});
+    
+});//skon salir del juego
   
   
   

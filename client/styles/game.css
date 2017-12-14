@@ -107,12 +107,12 @@
       }
 /*style barra de juego a juntarse*/
 
-#dvgmebar_1{
+.dvgmebar{
   display:table;
   border:1px dotted;
 }
 
-#dvgmebar_1 div{
+.dvgmebar div{
   display:inline-block;
   border:1px dashed;
     margin:5px;
