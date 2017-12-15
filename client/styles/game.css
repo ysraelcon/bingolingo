@@ -47,6 +47,13 @@
   width:100px;height:100%;
   border:1px solid grey;
   }
+.dvjuepnt{
+  display:inline-block;
+    text-align:center;
+  width:30px;
+  border:1px solid;
+    border-radius:50%;
+}
 .dvjue_u_nm{
   overflow-y:auto;
     word-wrap:break-word;

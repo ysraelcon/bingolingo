@@ -404,7 +404,8 @@ var nrogme= "jue"+Object.keys(jue).length;
 
   
 jue[nrogme]= {nrogme: nrogme,
-              tmp:20,
+              tmp:0,
+              mod:"",
              typegme: dt.typgme,
              liswrd: dt.liswrd,              
              nroply: dt.nroply,
@@ -441,7 +442,8 @@ var nroingme= Object.keys(jue[dt.nrogme].nroplyact).length;
 if(nroingme< (jue[dt.nrogme].nroply-1) ){
   console.log("cant menor que nroply-1");
 
-  jue[dt.nrogme].nroplyact[usrid]=[fn,socket.id];
+  jue[dt.nrogme].nroplyact[usrid]=[fn,socket.id,0];
+  //[fn,sktid,puntaje]
   
   console.log(jue[dt.nrogme]);
 
@@ -462,7 +464,8 @@ io.to(dt.nrogme).emit("mndusrjue",
 else if(nroingme== (jue[dt.nrogme].nroply-1) ){
   console.log("cant igual que nroply-1")
 
-jue[dt.nrogme].nroplyact[usrid]=[fn,socket.id];
+jue[dt.nrogme].nroplyact[usrid]=[fn,socket.id,0];
+  //[fn,sktid,puntaje]
   
   
 socket.join(dt.nrogme);
@@ -493,8 +496,11 @@ io.to(pmrusr[1]).emit("el del turno",
 
 //tmp=20;
   //nota el tiempo de ese juego jue[dt.nrogme].tmp
+jue[dt.nrogme].tmp=20;
+jue[dt.nrogme].mod="ten";
+
   
-  cntdwN(dt.nrogme,"next",plytrn);
+  cntdwN(dt.nrogme,plytrn);
 
 }//elseif nroplyact==nroply-1 : junta y comienza
 else{
@@ -512,19 +518,50 @@ io.to(socket.id).emit("ya comenzo jue",
   
   
   
-function cntdwN(rmjf,mod,plytrn){
+function cntdwN(rmjf,plytrn){
 
 io.to(rmjf).emit("corre reloj",{tmp:jue[rmjf].tmp});
 jue[rmjf].tmp-=1;
   
 if(jue[rmjf].tmp>0){
     setTimeout(function(){
-      cntdwN(rmjf,mod,plytrn);},1000);
+      cntdwN(rmjf,plytrn);},1000);
 }//if
-else if(mod=="next"){
+else if(jue[rmjf].mod=="ten"){
+  
+  io.to(rmjf).emit("no se adivino",
+                      {wrdtogss:wrdtogss});
+  
+  jue[rmjf].tmp=10;
+  jue[rmjf].mod="turn";
+    
+  cntdwN(rmjf,plytrn);
+}//else if ten
+else if(jue[rmjf].mod=="turn"){
+  
+  console.log("new turn?");
+  console.log(Object.keys(jue[rmjf].nroplyact));
+  var wnr="";
+for(var i=0;i<Object.keys( jue[rmjf].nroplyact).length;i++){
+
+ if(jue[rmjf].nroplyact[
+Object.keys(jue[rmjf].nroplyact)[i]
+][2]==5){
+ wnr=jue[rmjf].nroplyact[
+Object.keys(jue[rmjf].nroplyact)[i]
+][0];
+  console.log("ganó");
+console.log(wnr);
+break;
+}//if 10
+}//for
+  
+
+if(wnr==""){
   
   plytrn++;
   jue[rmjf].tmp=25;
+  jue[rmjf].mod="ten";
   
   var pmrid= Object.keys(jue[rmjf].nroplyact)[ plytrn%jue[rmjf].nroply];
 var pmrusr= jue[rmjf].nroplyact[pmrid];//[fn,sktid]
@@ -536,15 +573,19 @@ io.to(rmjf).emit("los que adivinan",
 io.to(pmrusr[1]).emit("el del turno",
                       {wrd:wrdtogss});
   
-  setTimeout(function(){
-    cntdwN(rmjf,null,plytrn); },1000);
+  
+    cntdwN(rmjf,plytrn); 
+}//if no wnr
+else{
+  io.to(rmjf).emit("quien gano",
+                   {wnrnme:wnr});
+}//else, quien gano
    
   
 }//else if next
 else{
-    console.log(jue[rmjf].tmp);
-  io.to(rmjf).emit("no se adivino",
-                      {wrdtogss:wrdtogss});
+    console.log("else");
+  
 }//else
 
 }//count down
@@ -562,6 +603,7 @@ socket.on("10 seg",function(dt){
   console.log("10 seg next turn");
  console.log(jue[dt.nrogme].tmp);
   jue[dt.nrogme].tmp=10;
+  jue[dt.nrogme].mod="turn";
  //next turn
 });//10 seg para next turn player    
   
@@ -588,6 +630,21 @@ socket.on('send messagejue',function(dt){
                     nrogme:dt.nrogme,
         nick:socket.request.user.firstnm,
                    guess:gss});
+  
+  if(gss){
+    var usrid= socket.request.user.id;
+jue[dt.nrogme].nroplyact[usrid][2]+=1;
+//puntaje
+    console.log("punteo");
+    console.log(jue[dt.nrogme].nroplyact);
+var pntply= jue[dt.nrogme].nroplyact[usrid][2];
+    
+  io.to(dt.nrogme).emit("actualiza puntaje",
+              {usrid: usrid,
+               pntply: pntply});  
+    
+  }//if adivina, suma 1
+  
 });//sk send msg juego
   
    

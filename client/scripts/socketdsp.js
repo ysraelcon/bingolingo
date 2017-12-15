@@ -1040,7 +1040,8 @@ sktclt.on("mndusrjue",function(dt){
  var usrj="";
 
 for(var nom in dt.usrjue){
- usrj+=dt.usrjue[nom][0]+"<br>";
+ usrj+= '<div id="dvjuepnt_'+nom+'" class="dvjuepnt">0</div>'+ 
+          dt.usrjue[nom][0]+"<br>";
 }//for
 
 var dvjue_u_nm= document.getElementById("dvjue_u_nm_"+dt.nrogme);
@@ -1088,6 +1089,7 @@ sktclt.on("los que adivinan",function(dt){
   //dt{usrexpl}
   console.log("a adivinar!");
   spwrdtogss.innerHTML=dt.usrexpl;
+  dvjcon.innerHTML="";
 });//skon los que adivinan
 
 
@@ -1096,9 +1098,30 @@ sktclt.on("no se adivino",function(dt){
 //dt{wrdtogss}
   console.log("no se adivino");
  dvjcon.innerHTML+="The word was <b>"+
-         dt.wrdtogss+"</b>";
+         dt.wrdtogss+"</b><br>";
   
 });//si no se adivina
+
+
+
+sktclt.on("actualiza puntaje",function(dt){
+ //dt{usrid,pntply}
+
+var dvjuepnt= document.getElementById("dvjuepnt_"+dt.usrid);
+
+dvjuepnt.innerHTML=dt.pntply;
+});//skcl actualiza puntaje
+
+
+
+sktclt.on("quien gano",function(dt){
+//dt{wnrnme}
+
+dvjcon.innerHTML="The winner is: <b>"+
+              dt.wnrnme+"</b>!<br>";
+
+});//skcl quien gano
+
 
 
 
