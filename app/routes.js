@@ -65,10 +65,7 @@ Ap.post("/login",pssp.authenticate('login',
   failureRedirect:'/login',
   failureFlash:true}
 ));//post login
-/*
-Ap.get("/tabs",function(req,res){
- res.render("tabs.ejs");
-});*/
+
 
 
 Ap.post('/signup',pssp.authenticate('register',{

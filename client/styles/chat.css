@@ -180,12 +180,13 @@
   background-color:#FFF0F5;
     color:black;}
 
-#dvtyp{
+/*typing*/
+.dvtyp{
   position:absolute;
     top:0px;
   width:70%;/*height:20%;*/
   background-color:white;}
-#sptyp{
+.sptyp{
   color:grey;}
 
 

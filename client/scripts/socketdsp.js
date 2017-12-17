@@ -1,5 +1,6 @@
 //despues de socket.io/socket.io.js
 
+//conexión socket
 var sktclt=io.connect();
 
 
@@ -10,7 +11,7 @@ function entrchT(){
 }//click tab chat
 
 
-
+//llena tabla users chat
 sktclt.on("usernames",function(dat){
   //dat-usrscnnt{sktcltid:user}
   //user{_id,email,firstnm,lastnm,chats[]}
@@ -47,8 +48,11 @@ var rooms={"gnrl":"General", "eng":"English",
 "swe":"Swedish","tur":"Turkish",
 "ben":"Bengali","slk":"Slovak",
 "mul":"MULTILINGUAL"
-          };
+          };//rooms
 
+
+
+//entrar language room, from datalist
 function goiN(){
   
   for(var opt in dtlstroom.options){
@@ -73,16 +77,13 @@ sprm.innerHTML= rooms[roomf]+' <span id="spchtcnt_'+roomf+ '" class="spchtcnt"><
 dvchtrc.appendChild(sprm);
  }//if  no esta lo crea
   
-}//select room from datalist
+}//goiN room
 
 
 
-//====general room
-
+//entrar language room, click on name
 function entrrooM(rmx){
-  
-  
-  
+    
   var dvcht_= document.getElementById("dvcht_"+rmx);
   
   if(!dvcht_){
@@ -200,14 +201,19 @@ $('#dvcht_'+rmx).resizable();
   
   var inchtmsg_= document.getElementById("inchtmsg_"+rmx);
   
-  inchtmsg_.addEventListener("keydown",tyP);
+  inchtmsg_.addEventListener("keydown",
+                        function(){
+        tyP(inchtmsg_);
+  });//addeventlistener keydown tyP
 
 });//jQuery
   }//if no dvicht
-}//entrar al general room
+  
+}//entrrooM
 
 
 
+//users in room
 sktclt.on("mndusrroom",function(dt){
   //dt{usrsroom,chtroom,sktid,room} 
     
@@ -237,10 +243,12 @@ sktclt.on("mndusrroom",function(dt){
     
   }//if es el que llega
   
-});//skon mandaron el usuario
+});//skon mndusrroom
+
+
 
 sktclt.on("actlz rooms",function(dt){
-  console.log(document.getElementById("sprm_"+dt.room));
+  //console.log(document.getElementById("sprm_"+dt.room));
   if(!document.getElementById("sprm_"+dt.room)){ 
   
 var sprm= document.createElement("span");
@@ -261,13 +269,13 @@ dvchtrc.appendChild(sprm);
   var cntusrs=Object.keys(dt.usrsroom).length;
   var spchtcnt_= document.getElementById("spchtcnt_"+dt.room);
   spchtcnt_.innerHTML= cntusrs!=0? cntusrs: ""; 
-  
-  
-});
+   
+});//skcl actlz rooms
 
 
-//----complementarias vent cht
 
+
+//minimizar ventana del chat
 function mindvchT(rmx){//roomx
 jQuery(function($){
 
@@ -294,9 +302,11 @@ var dvchtmsg= "#dvchtmsg_"+rmx;
     }//else +
     
 });//jQuery
-}//minimizar chat
+}//mindvchT
 
 
+
+//restaurar tamaño del chat
 function restamchT(rmx){//roomx
   var dvcht= document.querySelector
 
@@ -310,15 +320,20 @@ if(dvcht.offsetWidth<dvconcht.offsetWidth){
   else{
     dvcht.removeAttribute("style");
   }//else retorna
-}//restaura tamaño
+}//restamchT
 
 
+
+//cerrar chat
 function crrdvchT(rmx){//roomx
   var dvcht= document.querySelector("#dvcht_"+rmx);
  dvconcht.removeChild(dvcht);
  sktclt.emit("cerr room",rmx);  
-}//cerrar dvicht
+}//crrdvchT
 
+
+
+//mostrar diccionario
 function mstdcT(rmf){
       
       var btdct_= document.getElementById("btdct_"+rmf);
@@ -332,9 +347,11 @@ function mstdcT(rmf){
         btdct_.removeAttribute("style");
       }//else
         
-    }//.mostrar dictionary
+    }//.mstdcT
 
 
+
+//definicion wordnik wordnet.3.0
 function defwrdniK(wrd,rmx){
       
     var hk="https://cors-anywhere.herokuapp.com/";     
@@ -344,8 +361,7 @@ function defwrdniK(wrd,rmx){
     //var url2="/hyphenation?useCanonical=true&limit=50&api_key="+
     var url2="/definitions?sourceDictionaries=wordnet&useCanonical=true&includeRelated=true"+"&api_key=b986324a786a6d94d00060ded100c020a49a6a49d8f93c9b3";
         //"a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";  //de prueba
-    
-    
+        
       
   var xhr=new XMLHttpRequest();
     
@@ -385,11 +401,12 @@ relwrds+=v+", "
     
     xhr.send();
       
-}//.definicion wordnik wordnet.3.0
+}//.defwrdniK
     
     
     
-    function defyaN(wrd,rmx){
+//definicion yandex
+function defyaN(wrd,rmx){
   
   var apik="dict.1.1.20171201T200832Z.77f7f25aec7d41b6.7bf840f1b594d83a20e756ec3117a3f6393466b0";
   var url1="https://dictionary.yandex.net/api/v1/dicservice.json/lookup?";
@@ -445,8 +462,11 @@ rsl+="<br>";
    
   };//onload
   
-}//.definir de yandex
+}//.defyaN
 
+
+
+//traducir frase
 function trdphR(phr,rmx){
   
   var apik="trnsl.1.1.20151020T150119Z.a9c85d2a39f6fe5d.c34e526096f815916127444ce3d86ab82e945c35";
@@ -479,13 +499,12 @@ function trdphR(phr,rmx){
   };//onload
   
   
-}//.traduccion
-
-
+}//.trdphR
 
 //........
 
 
+//enviar mensaje
 function envmsG(ev,rmx){//event,roomx
   ev.preventDefault();
 var inchtmsg= document.querySelector
@@ -499,9 +518,11 @@ if(inchtmsg.value!=""){
 }//if no vacio
 
 inchtmsg.value="";
-}//on send msg, del form
+}//envmsG
 
 
+
+//recibe mensaje en chat
 sktclt.on('new message room', function(data) {
 //data{msg,nick,room}
   
@@ -517,8 +538,11 @@ jQuery(function($){
   $(dvcht_c).stop().animate(
     {scrollTop:$(dvcht_c)[0].scrollHeight}, 200);
 });//jQuery
-});//on receive msg
+});//skcl new message room
 
+
+
+//cambia icono de nuevo mensaje
 window.onfocus=function(){
   if(favicon.href!="https://cdn.glitch.com/55f963f5-bf15-449c-b526-e46a7cd2b96f%2Fbstlk.ico?1511655349997")
   favicon.href="https://cdn.glitch.com/55f963f5-bf15-449c-b526-e46a7cd2b96f%2Fbstlk.ico?1511655349997";
@@ -526,32 +550,38 @@ window.onfocus=function(){
 
 
 
-//agregado cuando se crea
-function tyP(){
-  sktclt.emit("typing gnrl");
-  inchtmsg_gnrl.removeEventListener("keydown",tyP);
+//quien escribe, en evento attached
+function tyP(inchtmsgf){
+  sktclt.emit("typing",
+             {room: inchtmsgf.getAttribute("data-room")});
+  inchtmsgf.removeEventListener("keydown",tyP);
   setTimeout(function(){
-    inchtmsg_gnrl.addEventListener("keydown",tyP);
+    inchtmsgf.addEventListener("keydown",tyP);
   },1000);
   
-}//typing
+}//tyP typing
+
+
 
 sktclt.on("who type",function(dt){
-  //dt=user.firstnm
+  //dt{fistnm,room}
   //console.log(dt+" is typing");
   
   var nudiv= document.createElement("div");
-nudiv.id="dvtyp"
+nudiv.id="dvtyp_"+dt.room;
+nudiv.setAttribute("class","dvtyp"); 
   
-  nudiv.innerHTML="<b>"+dt+"</b>"+"<span id='sptyp'> is typing...</span>"+'<i class="fa fa-pencil" aria-hidden="true"></i>';
+  nudiv.innerHTML="<b>"+dt.firstnm+"</b>"+"<span  class='sptyp'> is typing...</span>"+'<i class="fa fa-pencil" aria-hidden="true"></i>';
+
+  var dvcht_cu= document.getElementById("dvcht_cu_"+dt.room);
   
-dvcht_cu_gnrl.appendChild(nudiv);
+dvcht_cu.appendChild(nudiv);
 
 setTimeout(function(){
- dvcht_cu_gnrl.removeChild(nudiv);
+ dvcht_cu.removeChild(nudiv);
 },1000)
   
-});//who type
+});//skcl who type
 
 
 
@@ -559,6 +589,7 @@ setTimeout(function(){
 
 function nooP(){}//no operations, for swap functions
 
+//cuadro, profile, chat request, al clicar user
 function usrprfchtR(ele,ev){
   
  if(typeof(dvinfusr)=="undefined"){
@@ -579,7 +610,8 @@ nuedvinfusr.style="position:fixed;"+
   
  dvconcht.appendChild(nuedvinfusr);
  }//if no existe: crea
-}//profile y chat request del user
+}//usrprfchtR
+
 
 
 function prfinF(ele){
@@ -589,6 +621,7 @@ function prfinF(ele){
 }//info profile
 
 
+//eviarle chat request
 function chtrqsT(ele){
   
   var prtid=ele.id.substr(8,ele.id.length);
@@ -600,12 +633,13 @@ function chtrqsT(ele){
   
  
   crrinfusR();
-}//chat request
+}//chtrqsT
 
 
 function crrinfusR(){
   dvconcht.removeChild(dvinfusr);
 }//cerrar inf prf y cht rqst
+
 
 
 sktclt.on("recibe chtrqs",function(dt){
@@ -625,7 +659,8 @@ nudiv.innerHTML='<div id="dvchtrqsof_t">Chat request from '+
 
 dvconcht.appendChild(nudiv);
   
-});//skcon recibe cht rqs
+});//skclon recibe chtrqs
+
 
 
 sktclt.on("espera chtrqs",function(dt){
@@ -647,9 +682,11 @@ nudiv.innerHTML='<div id="dvwti_t">Waiting for '+dt.nmercv+'...</div>'+
 dvconcht.appendChild(nudiv);
   }//if dvwti no creado
   //}//if es el que espera
-});//skc espera cht rqs
+});//skcl espera chtrqs
 
 
+
+//abre chat request
 function opnchtrqS(roombthx,sktidmndx){
   
   if(typeof(dvchtrqswth)=="undefined"){
@@ -707,7 +744,7 @@ $(dvcht).resizable();
   console.log("abrio chat request");
   }//if dvchtrqswth no creado
   
-}//abir chat request
+}//opnchtrqS
 
 
 
@@ -719,6 +756,7 @@ sktclt.on("aceptd chtrqs",function(dt){
   opnchtrqS(dt.roombth);
   sktclt.emit("usrs pa chtrqs",dt);  
 });//skcon acepta chat reqquest
+
 
 
 sktclt.on("mete usrs chtrqs",function(dt){
@@ -742,9 +780,11 @@ var dvcht_c= document.getElementById("dvcht_c_"+dt.roombth);
 
 dvcht_c.innerHTML=licht;
   
-});//meter usuario
+});//skcl meter usrs chtrqs
 
 
+
+//enviar msg chat privado
 function envmsgR(ev,roombthx){
   ev.preventDefault();
   
@@ -759,7 +799,7 @@ function envmsgR(ev,roombthx){
 
 inchtmsg.value="";
   
-}//enviar message privado
+}//envmsgR cht prv
 
 
 sktclt.on("new msgchtrqs",function(dt){
@@ -772,7 +812,7 @@ jQuery(function($){
   $(dvcht_c).stop().animate(
     {scrollTop:$(dvcht_c)[0].scrollHeight}, 200);
 });//jQuery
-});//nueve msg private
+});//skcl new msgchtrqs msg privado
 
 
 sktclt.on("dejar prv",function(dt){
@@ -784,6 +824,7 @@ sktclt.on("dejar prv",function(dt){
 //=====juego
 
 
+//opciones de juego para crearlo
 function crtgmE(){
  console.log("1opciones de juego");
   if(typeof(dvcrtgme)=="undefined"){
@@ -828,7 +869,7 @@ nudiv.innerHTML='<div id="dvtitoptgme">'+
 dvcongme.appendChild(nudiv);
   }//if dvcrtgme no existe
     
-}//crear tipo de juego
+}//crtgmE opciones
 
 
 
@@ -857,6 +898,7 @@ sktclt.on("crear juego",function(dt){
  crtgaM(dt.nrogme,dt.typgme,
        dt.liswrd,dt.nroply); 
 });//skcl crear juego
+
 
 
 sktclt.on("los demas barjue",function(dt){
@@ -901,7 +943,7 @@ dvcongme.appendChild(nudiv);
 
 
 
-
+//mostrar cuadro, join, spectate
 function jnspC(rmj,nmejuef,lisjuef,nroplyf){
   
   console.log("juntarse juego");
@@ -910,6 +952,7 @@ function jnspC(rmj,nmejuef,lisjuef,nroplyf){
 
 
 
+//crear ventana juego
 function crtgaM(rmjf,nmejuef,lisjuef,nroplyf){
   console.log("2creando vent juego");
   
@@ -1025,7 +1068,7 @@ $("#dvjue").resizable();
 
 });//jQuery
 }//if no esta, crea
-};//crear juego
+};//crtgaM
 
 
 
@@ -1072,7 +1115,7 @@ sktclt.on("el del turno",function(dt){
   //dt{wrd}
   console.log("te toca explicar");
   spwrdtogss.innerHTML=dt.wrd;
-});//skon el del turno
+});//skcl el del turno
 
 
 
@@ -1081,7 +1124,7 @@ sktclt.on("corre reloj",function(dt){
   
   sptmr.innerHTML=dt.tmp;
   
-});//empieza a correr el reloj
+});//skcl empieza a correr el reloj
 
 
 
@@ -1090,7 +1133,7 @@ sktclt.on("los que adivinan",function(dt){
   console.log("a adivinar!");
   spwrdtogss.innerHTML=dt.usrexpl;
   dvjcon.innerHTML="";
-});//skon los que adivinan
+});//skcl los que adivinan
 
 
 
@@ -1100,7 +1143,7 @@ sktclt.on("no se adivino",function(dt){
  dvjcon.innerHTML+="The word was <b>"+
          dt.wrdtogss+"</b><br>";
   
-});//si no se adivina
+});//skcl si no se adivina
 
 
 
@@ -1122,14 +1165,6 @@ dvjcon.innerHTML="The winner is: <b>"+
 
 });//skcl quien gano
 
-
-
-
-sktclt.on("next turn",function(dt){
-  //dt{nxttrnply}
-  console.log("next turn");
-  alert("next "+dt.nxttrnply);
-});//next turn
 
 
 
@@ -1166,6 +1201,7 @@ if(injmsg.value!=""){
 
 injmsg.value="";
 }//on send msg jue, del form envmsgJ(event)
+
 
 
 sktclt.on('new messagejue', function(dt){
