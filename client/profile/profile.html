@@ -72,7 +72,28 @@ style="fill:white;stroke-width:1;stroke:black"/>
 
 
 
+<style>
+/*style dv medio..*/
+  #dvmed{
+    display:flex;
+      flex-direction:row;
+    width:100%;height:100%;
+  }
+</style>
 
+<div id="dvmed">
+
+  
+  
+<style>
+/*style dv medio izquierdo..*/ 
+  #dvmedizq{
+    width:100%;
+  }
+</style>  
+  
+<div id="dvmedizq">  
+  
 <style>
 /*style tabs..*/
 
@@ -136,6 +157,7 @@ style="fill:white;stroke-width:1;stroke:black"/>
 
 
 
+  
 <style>
 /*style tabs content..*/
 
@@ -177,7 +199,7 @@ style="fill:white;stroke-width:1;stroke:black"/>
     background-color:black;
       color:white;}
 
-
+ 
 /*..style tabs content*/
 </style>
 
@@ -386,11 +408,134 @@ animation-fill-mode:forwards;}
 </div><!-- dv cont usr -->
   
   
+<style>
+  /*style div dictionary*/
+ #dvdct{
+    display:none;
+    position:absolute;
+      top:0px;right:0px;
+    width:50%;height:50%;
+    border:1px dashed grey;
+    background:#B0C4DE;
+  }
+  #dvdcttit{
+    background:white;
+  }
+  #dvdctcon{
+    display:flex;
+      flex-direction:column;
+    width:100%;height:90%;
+  }
+  #dvdctcon input[list="dtlstlng"]{
+      width:40px;
+    }
+  #dvrsldct{
+    overflow-y:auto;
+    width:100%;height:100%;
+    border:1px dotted red;
+    }
+</style> 
+  
+<div id="dvdct">
+  
+  <div id="dvdcttit">dictionary/translator</div>
+  
+  <div id="dvdctcon">
+ <form onsubmit="event.preventDefault()">
+
+  <input type="text" id="inwrd"
+   placeholder="word...">
+
+ <input type="submit"
+ value="dictENG" 
+ onclick="defwrdniK(inwrd.value)">
+
+ <input type="button" value="X"
+ onclick="inwrd.value=''">
+
+</form> 
+
+ <div id="dvdcttrd">
+ <input type="button" 
+ value="Translate" 
+ onclick="trdphR(inwrd.value)">
+
+ <input list="dtlstlng" id="inlstlngfrm" 
+ placeholder="from..."> 
+
+ <input list="dtlstlng" id="inlstlngto" 
+ placeholder="to...">
+
+<datalist id="dtlstlng">
+<option value="en">English</option>
+<option value="es">Spanish</option>
+<option value="fr">French</option>
+<option value="ru">Russian</option>
+<option value="pt">Portuguese</option>
+
+<option value="it">Italian</option>
+<option value="de">German</option>
+<option value="ar">Arabic</option>
+<option value="zh">Chinese</option>
+<option value="ko">Korean</option>
+
+<option value="id">Indonesian</option>
+<option value="ja">Japanese</option>
+<option value="hi">Hindi</option>
+<option value="sv">Swedish</option>
+<option value="tr">Turkish</option>
+  
+<option value="bn">Bengali</option>
+</datalist>
+   
+ <input type="button" value="dictYandex" 
+ onclick="defyaN(inwrd.value)">   
+    </div><!-- dvdcttrd -->
+
+ 
+  
+  <div id="dvrsldct"></div>
+  </div><!-- dvdctcon -->
+  
+</div><!-- dv dictionary -->  
+  
+  
   
 </div><!-- dv content -->
 
-
-
+  </div><!-- dv medio izquierdo -->
+  
+  
+  
+  <style>
+  /*style dv medio derecho*/
+    #dvmedder{
+      width:40px;
+      background:black;
+        color:white;
+    }
+  </style>
+  
+  <div id="dvmedder">
+    <input type="button"
+ value="dict" onclick="mstrdcT(this)">
+  </div><!-- dv medio derecho,panel, dict -->
+  
+  <script>
+  //mostrar diccionario
+  function mstrdcT(btf){
+    if(btf.style.color=="green"){
+      btf.removeAttribute("style");
+      dvdct.removeAttribute("style");
+    }else{
+      btf.style.color="green";
+      dvdct.style.display="block";
+    }//else
+  }//mstdcT 
+  </script>
+  
+  
+</div><!-- dv medio -->
 
 
 <script>
@@ -405,6 +550,7 @@ function opntaB(dvpiemst,dvconf,thistbf){
  var dvmsts= document.querySelectorAll("#"+dvconf+">div");
 
  for(var i=0;i<dvmsts.length;i++){
+     if(dvmsts[i].id!="dvdct")
      dvmsts[i].style.display= "none";
  }//for desaparece content
 

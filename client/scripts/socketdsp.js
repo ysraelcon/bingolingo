@@ -102,8 +102,8 @@ nudiv.innerHTML='<div id="dvcht_t_'+rmx+'" class="dvcht_t">'+
   '<div id="dvcht_c_'+rmx+'" class="dvcht_c"></div><div id="dvcht_u_'+rmx+'" class="dvcht_u">'+
     '<div id="dvcht_u_nm_'+rmx+'" class="dvcht_u_nm"></div>'+
     '<div id="dvcht_u_bts_'+rmx+'" class="dvcht_u_bts">'+          
-    '<input type="button" value="dict"'+
-   ' onclick="mstdcT(\''+rmx+'\')" id="btdct_'+rmx+'"></div>'+
+    '<input type="button" value="_"'+
+   ' onclick="empbuT()"></div>'+
   '</div>'+
   '</div>'+  
   '<div id="dvchtmsg_'+rmx+'" class="dvchtmsg"><form id="fmchtmsg_'+rmx+'" class="fmchtmsg" onsubmit="envmsG(event,\''+rmx+'\')">'+
@@ -117,58 +117,7 @@ nudiv.innerHTML='<div id="dvcht_t_'+rmx+'" class="dvcht_t">'+
   '<b><i class="fa fa-smile-o" aria-hidden="true" style="color:black"></i></b>'+
     '</button>'+
   '</form></div>'+
-  
-  
-  '<div id="dvdct_'+rmx+'" class="dvdct">'+
-  
-  '<form onsubmit="event.preventDefault()">'+
-'      <input type="text" id="inwrd_'+rmx+'"'+
-'   placeholder="word...">'+
-'      <input type="submit"'+
-'    value="dictENG"'+
-'    onclick="defwrdniK(inwrd_'+rmx+'.value,\''+rmx+'\')">'+
-'      <input type="button" value="X"'+
-'             onclick="inwrd_'+rmx+'.value=\'\'">  '+
-'        </form>'+
-'      '+
-'      '+
-'      <input type="button"'+
-'   value="Translate"'+
-'   onclick="trdphR(inwrd_'+rmx+'.value,\''+rmx+'\')">'+
-'   '+
-'   <input list="dtlstlng" id="inlstlngfrm"'+
-'    placeholder="from...">'+
-'  <input list="dtlstlng" id="inlstlngto"'+
-'    placeholder="to...">'+
-''+
-'<datalist id="dtlstlng">'+
-'<option value="en">English</option>'+
-'<option value="es">Spanish</option>'+
-'<option value="fr">French</option>'+
-'<option value="ru">Russian</option>'+
-'<option value="pt">Portuguese</option>'+
-''+
-'<option value="it">Italian</option>'+
-'<option value="de">German</option>'+
-'<option value="ar">Arabic</option>'+
-'<option value="zh">Chinese</option>'+
-'<option value="ko">Korean</option>'+
-''+
-'<option value="id">Indonesian</option>'+
-'<option value="ja">Japanese</option>'+
-'<option value="hi">Hindi</option>'+
-'<option value="sv">Swedish</option>'+
-'<option value="tr">Turkish</option>'+
-  
-  '<option value="bn">Bengali</option>'+
-'</datalist>'+
-'      '+
-'      <input type="button" value="dictYandex"'+
-' onclick="defyaN(inwrd_'+rmx+'.value,\''+rmx+'\')">'+
-'      '+
-'      <div id="dvrsldct_'+rmx+'"'+
-'           class="dvrsldct"></div>'+
-  
+    
   '</div>';
 
 dvconcht.appendChild(nudiv);
@@ -333,26 +282,15 @@ function crrdvchT(rmx){//roomx
 
 
 
-//mostrar diccionario
-function mstdcT(rmf){
-      
-      var btdct_= document.getElementById("btdct_"+rmf);
-      var dvdct_= document.getElementById("dvdct_"+rmf);
-      
-      if(btdct_.style.color!=="green"){
-       dvdct_.style.height="70%";
-       btdct_.style.color="green";
-      }else{
-        dvdct_.removeAttribute("style");
-        btdct_.removeAttribute("style");
-      }//else
-        
-    }//.mstdcT
+//botones chat, como zumbido, bell, volume-up
 
+function empbuT(){
+  alert("Empty Button :)");
+}//empbuT
 
 
 //definicion wordnik wordnet.3.0
-function defwrdniK(wrd,rmx){
+function defwrdniK(wrd){
       
     var hk="https://cors-anywhere.herokuapp.com/";     
       
@@ -367,9 +305,8 @@ function defwrdniK(wrd,rmx){
     
   xhr.open("GET", hk+url1+wrd+url2, true);
     
-    var dvrsldct_= document.getElementById("dvrsldct_"+rmx);
-       
-    dvrsldct_.innerHTML ="loading...";    
+         
+    dvrsldct.innerHTML ="loading...";    
       
   xhr.onload = function() {
           
@@ -394,7 +331,7 @@ relwrds+=v+", "
          "["+relwrds+"]<br>";
      }//for
      
-     dvrsldct_.innerHTML=list;
+     dvrsldct.innerHTML=list;
     
   };//onload
 
@@ -406,7 +343,7 @@ relwrds+=v+", "
     
     
 //definicion yandex
-function defyaN(wrd,rmx){
+function defyaN(wrd){
   
   var apik="dict.1.1.20171201T200832Z.77f7f25aec7d41b6.7bf840f1b594d83a20e756ec3117a3f6393466b0";
   var url1="https://dictionary.yandex.net/api/v1/dicservice.json/lookup?";
@@ -424,9 +361,8 @@ function defyaN(wrd,rmx){
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.send(url2);
   
-  var dvrsldct_= document.getElementById("dvrsldct_"+rmx);
-  
-  dvrsldct_.innerHTML="loading...";
+    
+  dvrsldct.innerHTML="loading...";
   
   xhr.onload=function(){
     //console.log(this.response);
@@ -458,7 +394,7 @@ rsl+="<br>";
 }//for j
 }//for i
     
-    dvrsldct_.innerHTML=rsl;
+    dvrsldct.innerHTML=rsl;
    
   };//onload
   
@@ -467,7 +403,7 @@ rsl+="<br>";
 
 
 //traducir frase
-function trdphR(phr,rmx){
+function trdphR(phr){
   
   var apik="trnsl.1.1.20151020T150119Z.a9c85d2a39f6fe5d.c34e526096f815916127444ce3d86ab82e945c35";
   var url1="https://translate.yandex.net/api/v1.5/tr.json/translate?";
@@ -484,17 +420,16 @@ function trdphR(phr,rmx){
   
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.send(url2);
+    
   
-  var dvrsldct_= document.getElementById("dvrsldct_"+rmx);
-  
-  dvrsldct_.innerHTML="loading...";
+  dvrsldct.innerHTML="loading...";
   
   xhr.onload=function(){
     //console.log(this.response);
     //{code,lang,text}
     var resp=JSON.parse(this.response);
     
-    dvrsldct_.innerHTML=resp.text;
+    dvrsldct.innerHTML=resp.text;
    
   };//onload
   
@@ -976,9 +911,8 @@ nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
 '<div id="dvjuse">'+
   '<div id="dvjue_u_nm_'+rmjf+'" class="dvjue_u_nm"></div>'+
     '<div id="dvjue_u_bts_'+rmjf+'" class="dvjue_u_bts">'+          
-    '<input type="button" value="dict"'+
-   ' onclick="mstdcT(\''+rmjf+
-  '\')" id="btdct_'+rmjf+'"></div>'+
+    '<input type="button" value="_"'+
+   ' onclick="empbuT()"></div>'+
   '</div>'+
 '</div>'+
   
@@ -995,54 +929,6 @@ nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
   '<i class="fa fa-smile-o" aria-hidden="true"></i>'+
     '</button>'+  
 '</form></div>'+
-  
-  '<div id="dvdct_'+rmjf+'" class="dvdct">'+
-  
-  '<form onsubmit="event.preventDefault()">'+
-'      <input type="text" id="inwrd_'+rmjf+'"'+
-'   placeholder="word..." class=inwrd>'+
-'      <input type="submit"'+
-'    value="dictENG"'+
-'    onclick="defwrdniK(inwrd_'+rmjf+'.value,\''+rmjf+'\')">'+
-'      <input type="button" value="X"'+
-'             onclick="inwrd_'+rmjf+'.value=\'\'">  '+
-'        </form>'+
-'      '+
-'      '+
-'      <input type="button"'+
-'   value="Translate"'+
-'   onclick="trdphR(inwrd_'+rmjf+'.value,\''+rmjf+'\')">'+
-'   '+
-'   <input list="dtlstlng" id="inlstlngfrm"'+
-'    placeholder="from...">'+
-'  <input list="dtlstlng" id="inlstlngto"'+
-'    placeholder="to...">'+
-''+
-'<datalist id="dtlstlng">'+
-'<option value="en">English</option>'+
-'<option value="es">Spanish</option>'+
-'<option value="fr">French</option>'+
-'<option value="ru">Russian</option>'+
-'<option value="pt">Portuguese</option>'+
-''+
-'<option value="it">Italian</option>'+
-'<option value="de">German</option>'+
-'<option value="ar">Arabic</option>'+
-'<option value="zh">Chinese</option>'+
-'<option value="ko">Korean</option>'+
-''+
-'<option value="id">Indonesian</option>'+
-'<option value="ja">Japanese</option>'+
-'<option value="hi">Hindi</option>'+
-'<option value="sv">Swedish</option>'+
-'<option value="tr">Turkish</option>'+
-'</datalist>'+
-'      '+
-'      <input type="button" value="dictYandex"'+
-' onclick="defyaN(inwrd_'+rmjf+'.value,\''+rmjf+'\')">'+
-'      '+
-'      <div id="dvrsldct_'+rmjf+'"'+
-'           class="dvrsldct"></div>'+
      
      '</div>';;
 
