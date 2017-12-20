@@ -693,6 +693,7 @@ nudiv.innerHTML='<div id="dvtitoptgme">'+
  '<select id="sllst">'+
  '<option id="nros">10 numbers</option>'+
  '<option id="abc">alphabet</option>'+
+  '<option id="house">house\'s things</option>'+
  '<option id="optld">load list, in future</option>'+
  '</select></div>'+
 

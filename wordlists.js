@@ -5,6 +5,8 @@ module.exports= {
   abc: ["a","b","c","d","e","f","g",
      "h","i","j","k","l","m","n",
      "ñ","o","p","q","r","s","t",
-     "u","w","x","y","z"]
+     "u","w","x","y","z"],
+  house:["chair","fridge","table","lamp","fan",
+"bed","floor","roof","sofa","balcony"]
   
 };//exports
