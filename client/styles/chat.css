@@ -6,10 +6,18 @@
     border-bottom:1px solid black;
     font-family:arial;
     color:#2F4F4F;}
+#dvrmsctnm{
+    display:block;
+      text-align:center;
+    border-bottom:1px solid black;
+    font-family:arial;
+    color:#2F4F4F;}
 
-#inlstroom{
+
+#inlstroom,#insctrm{
   width:120px;
 }
+
 
 #fmgoroom{
   display:inline-block;

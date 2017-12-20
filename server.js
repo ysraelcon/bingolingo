@@ -79,6 +79,7 @@ var User=require('./app/models/user');
 var usrscnnt={};
 
 var usrsroom={};
+var usrssctrm={};
 var usrjue={};
 
 //user{_id,email,firstnm,lastnm,chats[]}
@@ -86,11 +87,8 @@ var usrjue={};
 //juego
 var jue={};
 
-var lis1=["one","two","three","four","five",
-           "six","seven","eight","nine","ten"];
   
-  var tmp=0;
-  var wrdtogss="";
+var liswrds= require("./wordlists.js");
 
 
 //socket connection, poner variable afuera
@@ -102,7 +100,7 @@ io.sockets.on('connection', function(socket) {
   
 socket.on("userva",function(dt){
 //dt
-  console.log("se conectó "+ socket.request.user.firstnm);
+  console.log("entro a chat "+ socket.request.user.firstnm);
  if(socket.request.user){
 
 usrscnnt[socket.request.user._id]= {user: socket.request.user,
@@ -179,10 +177,11 @@ newChat.save(function(err){
   
   
 socket.on('send message room', function(dt) {
-    //dt{msg(inimsgval),room}
+    //dt{msg(inimsgval),room,typrm}
     
   dt.msg=emoji.emojify(dt.msg);
    
+  if(dt.typrm==="public"){
   Chat.findOne({_id:"5a03c2696602c617ed34b85f"},
               function(err,cht){
 
@@ -199,6 +198,7 @@ cht.save((err)=>{
  if(err) throw err;
 });//save
 });//findone
+  }//if typrm public
     
    io.to(dt.room).emit('new message room',
               {msg:dt.msg,
@@ -264,6 +264,29 @@ cht.save((err)=>{
 });//findone
 
 });//reporte 
+  
+  
+//=====secret rooms
+  
+socket.on("slide in sct",function(dt){
+ //dt=secret name's room
+ 
+ if(!usrsroom[dt]){
+   usrsroom[dt]={};
+}//if indef
+  //console.log(usrsroom[dt])
+  usrsroom[dt][socket.request.user._id]= socket.request.user.firstnm;
+
+socket.join(dt);
+  console.log(io.sockets.adapter.rooms[dt]);
+
+io.to(dt).emit('mndusrroom',
+             {usrsroom:usrsroom[dt],
+              sktid:socket.id,
+              room:dt});
+
+});//skon slide in secret room
+          
   
   
 //====private chats
@@ -479,8 +502,10 @@ var nrogme= "jue"+Object.keys(jue).length;
 jue[nrogme]= {nrogme: nrogme,
               tmp:0,
               mod:"",
+              wrdtogss:"",
              typegme: dt.typgme,
-             liswrd: dt.liswrd,              
+             liswrd: liswrds[dt.liswrd],
+             plytrn:"", 
              nroply: dt.nroply,
              nroplyact: {}
              };//jue{}
@@ -509,9 +534,7 @@ var fn=  socket.request.user.firstnm;
 
 var nroingme= Object.keys(jue[dt.nrogme].nroplyact).length;
   
-  console.log(nroingme);
-  console.log(jue[dt.nrogme].nroply-1);
-
+  
 if(nroingme< (jue[dt.nrogme].nroply-1) ){
   console.log("cant menor que nroply-1");
 
@@ -558,16 +581,17 @@ io.to(dt.nrogme).emit("mndusrjue",
 //strgme(jue[dt.nrogme]);
   //start plyer 0 va sumando 0%nroply
 var plytrn=0;
+jue[dt.nrogme].plytrn=0;
   
 var pmrid= Object.keys(jue[dt.nrogme].nroplyact)[plytrn];
 var pmrusr= jue[dt.nrogme].nroplyact[pmrid];//[fn,sktid]
 
-wrdtogss=lis1[rndnuM(0,lis1.length)];  
+jue[dt.nrogme].wrdtogss= jue[dt.nrogme].liswrd[rndnuM(0, jue[dt.nrogme].liswrd.length)];  
     
 io.to(dt.nrogme).emit("los que adivinan",
                 {usrexpl: pmrusr[0]});
 io.to(pmrusr[1]).emit("el del turno",
-                      {wrd:wrdtogss});
+                 {wrd: jue[dt.nrogme].wrdtogss});
 
 //tmp=20;
   //nota el tiempo de ese juego jue[dt.nrogme].tmp
@@ -575,7 +599,7 @@ jue[dt.nrogme].tmp=20;
 jue[dt.nrogme].mod="ten";
 
   
-  cntdwN(dt.nrogme,plytrn);
+  cntdwN(dt.nrogme,jue[dt.nrogme].plytrn);
 
 }//elseif nroplyact==nroply-1 : junta y comienza
 else{
@@ -593,24 +617,24 @@ io.to(socket.id).emit("ya comenzo jue",
   
   
   
-function cntdwN(rmjf,plytrn){
+function cntdwN(rmjf){
 
 io.to(rmjf).emit("corre reloj",{tmp:jue[rmjf].tmp});
 jue[rmjf].tmp-=1;
   
 if(jue[rmjf].tmp>0){
     setTimeout(function(){
-      cntdwN(rmjf,plytrn);},1000);
+      cntdwN(rmjf);},1000);
 }//if
 else if(jue[rmjf].mod=="ten"){
   
   io.to(rmjf).emit("no se adivino",
-                      {wrdtogss:wrdtogss});
+                  {wrdtogss: jue[rmjf].wrdtogss});
   
   jue[rmjf].tmp=10;
   jue[rmjf].mod="turn";
     
-  cntdwN(rmjf,plytrn);
+  cntdwN(rmjf);
 }//else if ten
 else if(jue[rmjf].mod=="turn"){
   
@@ -622,6 +646,7 @@ for(var i=0;i<Object.keys( jue[rmjf].nroplyact).length;i++){
  if(jue[rmjf].nroplyact[
 Object.keys(jue[rmjf].nroplyact)[i]
 ][2]>=5){
+
  wnr=jue[rmjf].nroplyact[
 Object.keys(jue[rmjf].nroplyact)[i]
 ][0];
@@ -634,24 +659,24 @@ break;
 
 if(wnr==""){
   
-  plytrn++;
+  jue[rmjf].plytrn++;
   jue[rmjf].tmp=25;
   jue[rmjf].mod="ten";
   
-  var pmrid= Object.keys(jue[rmjf].nroplyact)[ plytrn%jue[rmjf].nroply];
+  var pmrid= Object.keys(jue[rmjf].nroplyact)[ jue[rmjf].plytrn%jue[rmjf].nroply];
 var pmrusr= jue[rmjf].nroplyact[pmrid];//[fn,sktid]
 
-wrdtogss=lis1[rndnuM(0,lis1.length)];  
+jue[rmjf].wrdtogss= jue[rmjf].liswrd[rndnuM(0,jue[rmjf].liswrd.length)];  
 
   if(Object.keys(jue[rmjf].nroplyact).length>1){
   
 io.to(rmjf).emit("los que adivinan",
                 {usrexpl: pmrusr[0]});
 io.to(pmrusr[1]).emit("el del turno",
-                      {wrd:wrdtogss});
+                      {wrd: jue[rmjf].wrdtogss});
   
   
-    cntdwN(rmjf,plytrn); 
+    cntdwN(rmjf); 
   }//if cantply>1
 }//if no wnr
 else{
@@ -693,9 +718,16 @@ socket.on("10 seg",function(dt){
 socket.on('send messagejue',function(dt){
   //dt{msg,nrogme}
   
+  var pmrid= Object.keys(jue[dt.nrogme].nroplyact)[ jue[dt.nrogme].plytrn%jue[dt.nrogme].nroply];
+
+var sktidply= jue[dt.nrogme].nroplyact[pmrid][1];//[fn,sktid]
   
-    var re=new RegExp(wrdtogss,"i");
-  if(re.test(dt.msg)){
+  var smejug=sktidply==socket.id;//same jugador ?
+    var re=new RegExp(jue[dt.nrogme].wrdtogss,"i");
+  
+  if(re.test(dt.msg)&&
+     jue[dt.nrogme].mod=="ten"&&
+     !(smejug)){
     var gss=true;
     
   }//if
@@ -748,13 +780,25 @@ socket.on("slrjue",function(dt){
   
   
 socket.on('disconnect', function(data) {
-
+//console.log(socket.request.user);
+  
   if(!socket.id) return;
   delete usrscnnt[socket.request.user._id];
   io.sockets.emit('usernames', usrscnnt);
   
   console.log("se desconecto "+ socket.request.user.firstnm);
   
+  for(var rm in usrsroom){
+ if(usrsroom[rm][socket.request.user._id]){
+ delete usrsroom[rm][socket.request.user._id];
+io.to(rm).emit('mndusrroom',
+        {usrsroom:usrsroom[rm],
+         room:rm});
+io.sockets.emit("actlz rooms",
+                {usrsroom:usrsroom[rm],
+                 room:rm});   
+}//if
+}//for
    
   /* del control total de usuarios, eliminarlo
    delete usrjue[socket.request.user._id];

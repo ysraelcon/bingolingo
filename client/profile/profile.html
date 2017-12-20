@@ -269,9 +269,26 @@ style="fill:white;stroke-width:1;stroke:black"/>
       ></i> </span>
     
   </div>
-</div><!-- dv rooms -->
+</div><!-- dv chtr rooms-->
+    
+    
+    
+<div id="dvrmsct">
+  <div id="dvrmsctnm">Secret Rooms</div>
+  
+  <form id="fmgosctrm" onsubmit="event.preventDefault()">
+    
+  <input type="text" id="insctrm"
+         placeholder="secret room's name...">
+  <input type="button"
+         value="Slide in"
+         onclick="goscT()">
+  </form>
+</div><!-- dvrmsct secret rooms -->
           
   
+    
+    
 <div id="dvchtu">
 <table id="tblusrs">
   <caption>Users</caption>
@@ -420,6 +437,7 @@ animation-fill-mode:forwards;}
   }
   #dvdcttit{
     background:white;
+    cursor:move;
   }
   #dvdctcon{
     display:flex;
@@ -432,7 +450,7 @@ animation-fill-mode:forwards;}
   #dvrsldct{
     overflow-y:auto;
     width:100%;height:100%;
-    border:1px dotted red;
+    /*border:1px dotted red;*/
     }
 </style> 
   

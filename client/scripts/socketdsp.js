@@ -81,83 +81,18 @@ dvchtrc.appendChild(sprm);
 
 
 
+
+
+
 //entrar language room, click on name
 function entrrooM(rmx){
     
-  var dvcht_= document.getElementById("dvcht_"+rmx);
+  crtrooM(rmx);
   
-  if(!dvcht_){
-    
- var nudiv=document.createElement("DIV");
- nudiv.id="dvcht_"+rmx;
-nudiv.classList.add("dvcht");
-    
-nudiv.innerHTML='<div id="dvcht_t_'+rmx+'" class="dvcht_t">'+
-    '<div id="dvcht_tnm_'+rmx+'" class="dvcht_tnm">'+rooms[rmx]+'</div>'+
-  '<div id="dvcht_tm_'+rmx+'" class="dvcht_tm" onclick="mindvchT(\''+rmx+'\')">-</div>'+
-  '<div id="dvcht_tl_'+rmx+'" class="dvcht_tl" onclick="restamchT(\''+rmx+'\')">L</div>'+
-  '<div id="dvcht_tx_'+rmx+'" class="dvcht_tx" onclick="crrdvchT(\''+rmx+'\')">x</div>'+
-  '</div>'+
-  '<div id="dvcht_cu_'+rmx+'" class="dvcht_cu">'+
-  '<div id="dvcht_c_'+rmx+'" class="dvcht_c"></div><div id="dvcht_u_'+rmx+'" class="dvcht_u">'+
-    '<div id="dvcht_u_nm_'+rmx+'" class="dvcht_u_nm"></div>'+
-    '<div id="dvcht_u_bts_'+rmx+'" class="dvcht_u_bts">'+          
-    '<input type="button" value="_"'+
-   ' onclick="empbuT()"></div>'+
-  '</div>'+
-  '</div>'+  
-  '<div id="dvchtmsg_'+rmx+'" class="dvchtmsg"><form id="fmchtmsg_'+rmx+'" class="fmchtmsg" onsubmit="envmsG(event,\''+rmx+'\')">'+
-  '<input type="text" id="inchtmsg_'+rmx+'" class="inchtmsg" autocorrect="off" autocomplete="off"'+
-  ' data-room="'+rmx+'" placeholder="write your message">'+
-  '<button id="btnchtmsg_'+rmx+'" class="btnchtmsg" type="submit" >'+
-  '<i class="fa fa-paper-plane" aria-hidden="true"></i>'+
-  '</button>'+
-  '<button'+
-  ' class="btnchtemj"  onclick="selemJ()">'+
-  '<b><i class="fa fa-smile-o" aria-hidden="true" style="color:black"></i></b>'+
-    '</button>'+
-  '</form></div>'+
-    
-  '</div>';
-
-dvconcht.appendChild(nudiv);
 //juntarlo al room: gnrl !!!
 sktclt.emit("open room",rmx);
 
-jQuery(function($){
-
-var draggableDiv = 
-
-$('#dvcht_'+rmx).draggable();
-  
-$('#dvcht_c_'+rmx, draggableDiv)
-  .mousedown(function(ev){
-  draggableDiv.draggable('disable');
-})//mousedown
-  .mouseup(function(ev){
-  draggableDiv.draggable('enable');
-});//mouseup
-  
-  $('#dvdct_'+rmx, draggableDiv)
-  .mousedown(function(ev){
-  draggableDiv.draggable('disable');
-})//mousedown
-  .mouseup(function(ev){
-  draggableDiv.draggable('enable');
-});//mouseup
-  
-$('#dvcht_'+rmx).resizable();
-  
-  var inchtmsg_= document.getElementById("inchtmsg_"+rmx);
-  
-  inchtmsg_.addEventListener("keydown",
-                        function(){
-        tyP(inchtmsg_);
-  });//addeventlistener keydown tyP
-
-});//jQuery
-  }//if no dvicht
-  
+   
 }//entrrooM
 
 
@@ -165,7 +100,9 @@ $('#dvcht_'+rmx).resizable();
 //users in room
 sktclt.on("mndusrroom",function(dt){
   //dt{usrsroom,chtroom,sktid,room} 
-    
+  //console.log("mndusrroom")
+  //console.log(dt)
+  
   var usrsg="";
   
   for(var nombr in dt.usrsroom){
@@ -173,6 +110,7 @@ sktclt.on("mndusrroom",function(dt){
   }//for
  
   var dvcht_u_= document.getElementById("dvcht_u_nm_"+dt.room);
+  
   
  dvcht_u_.innerHTML="";
  dvcht_u_.innerHTML=usrsg;
@@ -192,12 +130,15 @@ sktclt.on("mndusrroom",function(dt){
     
   }//if es el que llega
   
-});//skon mndusrroom
+});//skcl mndusrroom
 
 
 
 sktclt.on("actlz rooms",function(dt){
-  //console.log(document.getElementById("sprm_"+dt.room));
+  //dt{usrsroom,room}
+  
+  
+  if(rooms[dt.room]){
   if(!document.getElementById("sprm_"+dt.room)){ 
   
 var sprm= document.createElement("span");
@@ -212,13 +153,16 @@ sprm.innerHTML= rooms[dt.room]+
   '" class="spchtcnt"></span><i class="fa fa-comments-o" aria-hidden="true"></i>';
 
 dvchtrc.appendChild(sprm);
+    
+     
  }//if  no esta lo crea
-  
+   
   //dt{usrsroom,chtroom,sktid,room} 
   var cntusrs=Object.keys(dt.usrsroom).length;
   var spchtcnt_= document.getElementById("spchtcnt_"+dt.room);
-  spchtcnt_.innerHTML= cntusrs!=0? cntusrs: ""; 
-   
+  spchtcnt_.innerHTML= cntusrs!=0? cntusrs: "";
+  }//if no secret
+    
 });//skcl actlz rooms
 
 
@@ -289,152 +233,6 @@ function empbuT(){
 }//empbuT
 
 
-//definicion wordnik wordnet.3.0
-function defwrdniK(wrd){
-      
-    var hk="https://cors-anywhere.herokuapp.com/";     
-      
-    var url1="http://api.wordnik.com:80/v4/word.json/";
-    
-    //var url2="/hyphenation?useCanonical=true&limit=50&api_key="+
-    var url2="/definitions?sourceDictionaries=wordnet&useCanonical=true&includeRelated=true"+"&api_key=b986324a786a6d94d00060ded100c020a49a6a49d8f93c9b3";
-        //"a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";  //de prueba
-        
-      
-  var xhr=new XMLHttpRequest();
-    
-  xhr.open("GET", hk+url1+wrd+url2, true);
-    
-         
-    dvrsldct.innerHTML ="loading...";    
-      
-  xhr.onload = function() {
-          
-      //console.log(this.response);
-      var resp=JSON.parse(this.response);//matriz objetos
-     
-     var list="";
-     
-     for(var pr in resp){
-       
-      var relwrds="";
-      
-      //console.log(resp[pr].relatedWords[0].words)
-      
-      if(resp[pr].relatedWords[0].words)
-      resp[pr].relatedWords[0].words.forEach(function(v){
-relwrds+=v+", "
-});//for each
-       
-       list+=resp[pr].partOfSpeech+". "+
-         resp[pr].text+"<br>"+
-         "["+relwrds+"]<br>";
-     }//for
-     
-     dvrsldct.innerHTML=list;
-    
-  };//onload
-
-    
-    xhr.send();
-      
-}//.defwrdniK
-    
-    
-    
-//definicion yandex
-function defyaN(wrd){
-  
-  var apik="dict.1.1.20171201T200832Z.77f7f25aec7d41b6.7bf840f1b594d83a20e756ec3117a3f6393466b0";
-  var url1="https://dictionary.yandex.net/api/v1/dicservice.json/lookup?";
-  
-  var lngfrm=inlstlngfrm.value||"en";
-  var lngto=inlstlngto.value||"es";
-  
-  var url2="key="+apik+"&text="+wrd+"&lang="+
-           lngfrm+"-"+lngto;
-  
-  var xhr=new XMLHttpRequest();
-  
-  xhr.open("POST",url1,true);
-  
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.send(url2);
-  
-    
-  dvrsldct.innerHTML="loading...";
-  
-  xhr.onload=function(){
-    //console.log(this.response);
-    
-    var resp=JSON.parse(this.response);
-    
-    
-    var rsl="";
-
-for(var i in resp.def){
-
- rsl+= resp.def[i].pos+". "+
-   resp.def[i].text+" / "+
-   resp.def[i].ts+"<br>";
-  
- for(var j in resp.def[i].tr){
-   rsl+="  "+resp.def[i].tr[j].text+
-       "<br> syn: ";
-  for(var l in resp.def[i].tr[j].syn){
-    rsl+=resp.def[i].tr[j].syn[l].text+", ";
-  }//for l
-  
-  rsl+="<br> mean: ";
-  
-  for(var k in resp.def[i].tr[j].mean){
-   rsl+=resp.def[i].tr[j].mean[k].text+", ";
-}//for k
-rsl+="<br>";
-}//for j
-}//for i
-    
-    dvrsldct.innerHTML=rsl;
-   
-  };//onload
-  
-}//.defyaN
-
-
-
-//traducir frase
-function trdphR(phr){
-  
-  var apik="trnsl.1.1.20151020T150119Z.a9c85d2a39f6fe5d.c34e526096f815916127444ce3d86ab82e945c35";
-  var url1="https://translate.yandex.net/api/v1.5/tr.json/translate?";
-  
-  var lngfrm=inlstlngfrm.value||"en";
-  var lngto=inlstlngto.value||"es";
-  
-  var url2="key="+apik+"&text="+phr+"&lang="+
-           lngfrm+"-"+lngto;
-  
-  var xhr=new XMLHttpRequest();
-  
-  xhr.open("POST",url1,true);
-  
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.send(url2);
-    
-  
-  dvrsldct.innerHTML="loading...";
-  
-  xhr.onload=function(){
-    //console.log(this.response);
-    //{code,lang,text}
-    var resp=JSON.parse(this.response);
-    
-    dvrsldct.innerHTML=resp.text;
-   
-  };//onload
-  
-  
-}//.trdphR
 
 //........
 
@@ -442,13 +240,21 @@ function trdphR(phr){
 //enviar mensaje
 function envmsG(ev,rmx){//event,roomx
   ev.preventDefault();
-var inchtmsg= document.querySelector
+var inchtmsg= document.querySelector("#inchtmsg_"+rmx);
 
-("#inchtmsg_"+rmx);
+var typrm;
+if(rooms[rmx]){
+  typrm="public";
+}else{
+  typrm="secret";
+}//else
+
+
 if(inchtmsg.value!=""){
  sktclt.emit("send message room",
              {msg:inchtmsg.value,
-      room:rmx});
+             room:rmx,
+             typrm:typrm});
   //inchtmsg.getAttribute("data-room")
 }//if no vacio
 
@@ -517,6 +323,110 @@ setTimeout(function(){
 },1000)
   
 });//skcl who type
+
+
+//======secret rooms
+
+//slide in secret room
+function goscT(){
+
+ crtrooM(insctrm.value);
+
+  sktclt.emit("slide in sct", insctrm.value);
+}//goscT
+
+
+
+function crtrooM(rmx){
+
+var dvcht_= document.getElementById("dvcht_"+rmx);
+  
+  if(!dvcht_){
+    
+ var nudiv=document.createElement("DIV");
+ nudiv.id="dvcht_"+rmx;
+nudiv.classList.add("dvcht");
+    
+nudiv.innerHTML='<div id="dvcht_t_'+rmx+'" class="dvcht_t">'+
+    '<div id="dvcht_tnm_'+rmx+'" class="dvcht_tnm">'+(rooms[rmx]||rmx)+'</div>'+
+  '<div id="dvcht_tm_'+rmx+'" class="dvcht_tm" onclick="mindvchT(\''+rmx+'\')">-</div>'+
+  '<div id="dvcht_tl_'+rmx+'" class="dvcht_tl" onclick="restamchT(\''+rmx+'\')">L</div>'+
+  '<div id="dvcht_tx_'+rmx+'" class="dvcht_tx" onclick="crrdvchT(\''+rmx+'\')">x</div>'+
+  '</div>'+
+  '<div id="dvcht_cu_'+rmx+'" class="dvcht_cu">'+
+  '<div id="dvcht_c_'+rmx+'" class="dvcht_c"></div><div id="dvcht_u_'+rmx+'" class="dvcht_u">'+
+    '<div id="dvcht_u_nm_'+rmx+'" class="dvcht_u_nm"></div>'+
+    '<div id="dvcht_u_bts_'+rmx+'" class="dvcht_u_bts">'+          
+    '<input type="button" value="_"'+
+   ' onclick="empbuT()"></div>'+
+  '</div>'+
+  '</div>'+  
+  '<div id="dvchtmsg_'+rmx+'" class="dvchtmsg"><form id="fmchtmsg_'+rmx+'" class="fmchtmsg" onsubmit="envmsG(event,\''+rmx+'\')">'+
+  '<input type="text" id="inchtmsg_'+rmx+'" class="inchtmsg" autocorrect="off" autocomplete="off"'+
+  ' data-room="'+rmx+'" placeholder="write your message">'+
+  '<button id="btnchtmsg_'+rmx+'" class="btnchtmsg" type="submit" >'+
+  '<i class="fa fa-paper-plane" aria-hidden="true"></i>'+
+  '</button>'+
+  '<button'+
+  ' class="btnchtemj"  onclick="selemJ()">'+
+  '<b><i class="fa fa-smile-o" aria-hidden="true" style="color:black"></i></b>'+
+    '</button>'+
+  '</form></div>'+
+    
+  '</div>';
+
+dvconcht.appendChild(nudiv);
+
+    jQuery(function($){
+
+var draggableDiv = 
+
+$('#dvcht_'+rmx).draggable();
+  
+$('#dvcht_c_'+rmx, draggableDiv)
+  .mousedown(function(ev){
+  draggableDiv.draggable('disable');
+})//mousedown
+  .mouseup(function(ev){
+  draggableDiv.draggable('enable');
+});//mouseup
+  
+    
+$('#dvcht_'+rmx).resizable();
+  
+  var inchtmsg_= document.getElementById("inchtmsg_"+rmx);
+  
+  inchtmsg_.addEventListener("keydown",
+                        function(){
+        tyP(inchtmsg_);
+  });//addeventlistener keydown tyP
+
+});//jQuery
+    
+  }//if no dvicht
+    
+  
+  
+}//crtsctrM
+  
+
+
+sktclt.on("mndusrsctrm",function(dt){
+ //dt{usrsctrm,sktid,room}
+
+var usrsg="";
+  
+  for(var nombr in dt.usrsroom){
+    usrsg+=dt.usrsroom[nombr]+"<br>";
+  }//for
+ 
+  var dvcht_u_= document.getElementById("dvcht_u_nm_"+dt.room);
+  
+ dvcht_u_.innerHTML="";
+ dvcht_u_.innerHTML=usrsg;
+
+});//skcl mndusrsctrm
+          
 
 
 
@@ -781,8 +691,8 @@ nudiv.innerHTML='<div id="dvtitoptgme">'+
  '<div style="display:inline-block">'+
  '<span>Select word list:</span><br>'+
  '<select id="sllst">'+
- '<option id="opt10">10 words</option>'+
- '<option id="opt20">20 words</option>'+
+ '<option id="nros">10 numbers</option>'+
+ '<option id="abc">alphabet</option>'+
  '<option id="optld">load list, in future</option>'+
  '</select></div>'+
 
@@ -811,7 +721,7 @@ dvcongme.appendChild(nudiv);
 //solicitar juego
 function solgmE(){
  var typgme= sltypgme.options[sltypgme.selectedIndex].value;
- var liswrd= sllst.options[sllst.selectedIndex].value;
+ var liswrd= sllst.options[sllst.selectedIndex].id;
  var nroply= slnroply.options[slnroply.selectedIndex].value;
  
  dvcongme.removeChild(dvcrtgme);  
@@ -1112,7 +1022,30 @@ jQuery(function($){
 });//on receive msg juego
 
 
+
+//dv dictionary, movible y resizable
+jQuery(function($){
+
+var draggableDiv = 
+
+$('#dvdct').draggable();
+  
+$('#dvrsldct', draggableDiv)
+  .mousedown(function(ev){
+  draggableDiv.draggable('disable');
+})//mousedown
+  .mouseup(function(ev){
+  draggableDiv.draggable('enable');
+});//mouseup
+  
+  
+$('#dvdct').resizable();
+
+});//dvdct
+
+
 //----------complementos
+
 
 function selemJ(){
   alert("emojies in construction, write :smile: for :)\n\nlist: https://raw.githubusercontent.com/omnidan/node-emoji/master/lib/emoji.json");
@@ -1129,5 +1062,154 @@ crrrpT();
 
 }//enviar reporte
 
+
+//====diccionario
+
+//definicion wordnik wordnet.3.0
+function defwrdniK(wrd){
+      
+    var hk="https://cors-anywhere.herokuapp.com/";     
+      
+    var url1="http://api.wordnik.com:80/v4/word.json/";
+    
+    //var url2="/hyphenation?useCanonical=true&limit=50&api_key="+
+    var url2="/definitions?sourceDictionaries=wordnet&useCanonical=true&includeRelated=true"+"&api_key=b986324a786a6d94d00060ded100c020a49a6a49d8f93c9b3";
+        //"a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";  //de prueba
+        
+      
+  var xhr=new XMLHttpRequest();
+    
+  xhr.open("GET", hk+url1+wrd+url2, true);
+    
+         
+    dvrsldct.innerHTML ="loading...";    
+      
+  xhr.onload = function() {
+          
+      //console.log(this.response);
+      var resp=JSON.parse(this.response);//matriz objetos
+     
+     var list="";
+     
+     for(var pr in resp){
+       
+      var relwrds="";
+      
+      //console.log(resp[pr].relatedWords[0].words)
+      
+      if(resp[pr].relatedWords[0].words)
+      resp[pr].relatedWords[0].words.forEach(function(v){
+relwrds+=v+", "
+});//for each
+       
+       list+=resp[pr].partOfSpeech+". "+
+         resp[pr].text+"<br>"+
+         "["+relwrds+"]<br>";
+     }//for
+     
+     dvrsldct.innerHTML=list;
+    
+  };//onload
+
+    
+    xhr.send();
+      
+}//.defwrdniK
+    
+    
+    
+//definicion yandex
+function defyaN(wrd){
+  
+  var apik="dict.1.1.20171201T200832Z.77f7f25aec7d41b6.7bf840f1b594d83a20e756ec3117a3f6393466b0";
+  var url1="https://dictionary.yandex.net/api/v1/dicservice.json/lookup?";
+  
+  var lngfrm=inlstlngfrm.value||"en";
+  var lngto=inlstlngto.value||"es";
+  
+  var url2="key="+apik+"&text="+wrd+"&lang="+
+           lngfrm+"-"+lngto;
+  
+  var xhr=new XMLHttpRequest();
+  
+  xhr.open("POST",url1,true);
+  
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send(url2);
+  
+    
+  dvrsldct.innerHTML="loading...";
+  
+  xhr.onload=function(){
+    //console.log(this.response);
+    
+    var resp=JSON.parse(this.response);
+    
+    
+    var rsl="";
+
+for(var i in resp.def){
+
+ rsl+= resp.def[i].pos+". "+
+   resp.def[i].text+" / "+
+   resp.def[i].ts+"<br>";
+  
+ for(var j in resp.def[i].tr){
+   rsl+="  "+resp.def[i].tr[j].text+
+       "<br> syn: ";
+  for(var l in resp.def[i].tr[j].syn){
+    rsl+=resp.def[i].tr[j].syn[l].text+", ";
+  }//for l
+  
+  rsl+="<br> mean: ";
+  
+  for(var k in resp.def[i].tr[j].mean){
+   rsl+=resp.def[i].tr[j].mean[k].text+", ";
+}//for k
+rsl+="<br>";
+}//for j
+}//for i
+    
+    dvrsldct.innerHTML=rsl;
+   
+  };//onload
+  
+}//.defyaN
+
+
+
+//traducir frase
+function trdphR(phr){
+  
+  var apik="trnsl.1.1.20151020T150119Z.a9c85d2a39f6fe5d.c34e526096f815916127444ce3d86ab82e945c35";
+  var url1="https://translate.yandex.net/api/v1.5/tr.json/translate?";
+  
+  var lngfrm=inlstlngfrm.value||"en";
+  var lngto=inlstlngto.value||"es";
+  
+  var url2="key="+apik+"&text="+phr+"&lang="+
+           lngfrm+"-"+lngto;
+  
+  var xhr=new XMLHttpRequest();
+  
+  xhr.open("POST",url1,true);
+  
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send(url2);
+    
+  
+  dvrsldct.innerHTML="loading...";
+  
+  xhr.onload=function(){
+    //console.log(this.response);
+    //{code,lang,text}
+    var resp=JSON.parse(this.response);
+    
+    dvrsldct.innerHTML=resp.text;
+   
+  };//onload
+  
+  
+}//.trdphR
 
 
