@@ -1,0 +1,331 @@
+/*style chat..*/
+  
+  #dvchtrnm{
+    display:block;
+      text-align:center;
+    border-bottom:1px solid black;
+    font-family:arial;
+    color:#2F4F4F;}
+#dvrmsctnm{
+    display:block;
+      text-align:center;
+    border-bottom:1px solid black;
+    font-family:arial;
+    color:#2F4F4F;}
+
+
+#inlstroom,#insctrm{
+  width:120px;
+}
+
+
+#fmgoroom{
+  display:inline-block;
+}
+
+   .spchtrm{
+    border:1px solid black;
+      border-radius:5px;
+      /*box-shadow:5px -5px 5px grey;*/
+      margin-left:5px;
+    font-family:Tahoma, Geneva, sans-serif;
+    background-color:#2F4F4F;
+      color:white;
+    cursor:pointer;}
+.spchtcnt{
+  border:1px solid grey;
+    border-radius:20%;
+  font-family:consolas;}
+     
+/*chat cuadro..*/
+
+.dvcht{
+  display:flex;
+    flex-direction:column;
+  /*overflow:auto;resize:both;*/
+  position:absolute;
+    left:12%;top:20%;
+  width:80%;height:60%;max-width:600px;
+  border:1px solid grey;
+    border-radius:5px;
+    box-shadow:0 0 5px #444;
+  background-color:white;}
+        
+    
+
+
+ .dvcht_t{
+   display:flex;
+     flex-direction:row;
+     justify-content:center;
+   height:30px;
+   font-family:arial;}
+        
+  .dvcht_tnm{
+    display:flex;
+      flex-direction:column;
+      justify-content:center;
+      text-align:center;
+    width:70%;height:100%;
+    border-radius:5px 0 0 0;
+    cursor:move;}
+
+        
+      
+.dvcht_tm{
+   display:flex;
+     flex-direction:column;
+     justify-content:center;
+     text-align:center;
+   width:10%;height:100%;
+   cursor:default;}
+
+.dvcht_tl{
+   display:flex;
+     flex-direction:column;
+     justify-content:center;
+     text-align:center;
+   width:10%;height:100%;
+   cursor:default;}
+    
+.dvcht_tx{
+   display:flex;
+     flex-direction:column;
+     justify-content:center;
+     text-align:center;
+   width:10%;height:100%;
+   border-radius:0 5px 0 0;
+   cursor:default;}
+
+     
+     
+
+  .dvcht_cu{
+    display:flex;
+      flex-direction:row;
+    position:relative;
+    height:100%;}
+      
+  .dvcht_c{
+    overflow-y:auto;
+      word-wrap:break-word;
+    width:100%;height:98%;}
+
+        
+        
+.dvcht_u{
+  float:right;
+    word-wrap:break-word;
+  position:relative;
+  width:100px;height:98%;
+  font-weight:bold;}
+.dvcht_u_nm{
+      overflow-y:auto;
+        word-wrap:break-word;
+    }
+    .dvcht_u_bts{
+      position:absolute;
+        bottom:0px;
+    }
+
+        
+  .dvchtmsg{
+    width:100%;}
+
+.fmchtmsg{
+    display:flex;
+      flex-direction:row;  }  
+  .btnchtmsg{
+    width:40px;} 
+  .btnchtemj{
+    width:40px;
+    margin-right:20px;}
+    
+  .inchtmsg{
+    width:100%;}
+
+
+.dvdct{
+      overflow:auto;
+      width:100%;height:0px; /*250px;*/
+      /*border:1px solid;*/
+      background-color:grey;
+    }
+    .dvdct input[list="dtlstlng"]{
+      width:40px;
+    }
+
+ /*base*/
+   .dvcht_tnm{
+  background-color:#9370db;
+    color:white;}
+.dvcht_tx{
+  background-color:#483D8B;
+    color:white;
+  /*#800000 #4B0082*/}
+
+.dvcht_c{
+  background-color:#ffDAB9;}
+.dvcht_u{
+  background-color:#FFF0F5;
+    color:black;}
+
+/*..chat cuadro*/
+
+/*chat general..*/
+
+#dvcht_tnm_gnrl{
+  background-color:#9370db;
+    color:white;}
+#dvcht_tx_gnrl{
+  background-color:#483D8B;
+    color:white;
+  /*#800000 #4B0082*/}
+
+#dvcht_c_gnrl{
+  background-color:#ffDAB9;}
+#dvcht_u_gnrl{
+  background-color:#FFF0F5;
+    color:black;}
+
+/*typing*/
+.dvtyp{
+  position:absolute;
+    top:0px;
+  width:70%;/*height:20%;*/
+  background-color:white;}
+.sptyp{
+  color:grey;}
+
+
+/*..chat general*/
+
+/*chat request..*/
+
+.col_tnm{
+  background-color:#2E8B57;
+    color:white;}
+.col_tx{
+  background-color:#800000;
+    color:white;/*#800000 #4B0082*/}
+
+.col_c{
+  background-color:#DEB887;}
+.col_u{
+  background-color:#FFA07A;}
+
+/*..chat request*/
+     
+ /*tabla users chat..*/
+     
+#tblusrs{
+  width:100%;
+  border-collapse:collapse;
+    border-radius:5px;
+  background-color:#34495E}
+  
+
+caption{
+ border-bottom:1px solid black;
+ font-family:arial;/*font-weight:bold;*/
+ color:#34495E;}
+ 
+th{
+  font-family:arial;
+    font-weight:bold;
+  color:#dd5;}
+  
+tbody>tr{/*:not(:first-child)*/
+  /*border:1px dashed grey;*/
+   /*background-color:#008080;*/
+     color:white;}/*#FF7F50 #2F4F4F*/
+     
+tbody>tr:hover{/*:not(:first-child):hover*/
+  background-color: silver;
+  cursor:pointer;}
+     
+th, td{
+    text-align: center;}
+
+/*style inf user cht rqs..*/
+
+#dvinfusr{
+    display:inline-flex;
+      flex-direction:row;
+    border:1px solid grey;}
+        
+ #dvinfusr>div{
+     border:1px dashed grey;
+       padding-right:5px;}
+          
+    #dvcrrprfcht{
+      display:flex;
+        flex-direction:column;
+        justify-content:center;
+      padding:5px;}
+      
+    #dvcrrprfcht:hover{
+    background-color:grey;
+      cursor:pointer;}
+    
+#dvinfprfcht{
+  background-color:#f5f5f5;}
+
+      #dvinfprfcht>li:hover{
+    background-color:grey;
+      cursor:pointer;}
+      
+/*waiting section chtrqs..*/
+
+#dvwti{
+  display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+  width:200px;
+  border:1px solid grey;
+    border-radius:5px;}
+
+    #dvwti>div{
+      border:1px solid grey;
+        border-radius:5px;}
+
+    #dvwti_t{
+      text-align:center;
+      width:90%;
+      background-color:#2e8b57;
+        color:white;}
+    #dvwti_x{
+      text-align:center;
+      width:10%;
+      background-color:#800000;
+        color:white;}
+
+/*receiving chat request..*/
+
+#dvchtrqsof{
+  display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+  width:200px;
+  border:1px solid grey;
+    border-radius:5px;}
+
+    #dvchtrqsof>div{
+      border:1px solid grey;
+        border-radius:5px;}
+    #dvchtrqsof_t{
+      text-align:center;
+      width:80%;
+      background-color:#2e8b57;
+        color:white;}
+    #dvchtrqsof_m{
+      text-align:center;
+      width:10%;}
+    #dvchtrqsof_x{
+      text-align:center;
+      width:10%;
+      background-color:#800000;
+        color:white;}
+
+
+

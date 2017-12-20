@@ -33,17 +33,16 @@
 
   <!-- <link rel="stylesheet" href="/style.css"> -->
   <!--<script src="https://code.jquery.com/jquery.js"></script>-->
-   <!--  
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+  
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-  --> 
-<!--  
+  
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  -->
+  
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Playball">
 
@@ -61,21 +60,21 @@ html{
     /*border:1px solid;*/
       margin:0px;}
 body{
-    display:flex;
+    /*display:flex;
       flex-direction:column;
-      align-items:center;
+      align-items:center;*/
     height:100%;width:100%;
    /*border:1px dotted;*/
       margin:0px;
     background-color:white;}
   
-  /*#dvngvw{
+  #dvngvw{
     display:flex;
       flex-direction:column;
       align-items:center;
     
     height:100%; width:100%;
-    margin:0px;}*/
+    margin:0px;}
   
 /*..style basic page*/
 </style>  
@@ -84,98 +83,11 @@ body{
 </head>
 <body>
 
-  
- <style>
-/*style head..*/
+ 
 
-#dvhd{
-    text-align:center;
-    position:relative;
-    width:100%;
-    border-bottom:1px solid white;
-    /*border:1px solid;*/
-    background-color:#DDA0DD;}
-
-#dvhd:after{
- display:block;
- width:inherit;height:inherit;
- content:"";
-  border-bottom:2px solid black;  
-  transform: scaleX(0);  
-  transition: transform 250ms ease-in-out;
- transform-origin:  0% 50%;}
-
-#dvhd:after{
-  animation-name:mikeyfr;
-  animation-duration:1s;
-  animation-fill-mode:forwards;}
-
-@keyframes mikeyfr {
-    from {}
-    to {transform: scaleX(1);}
-}/*@keyframes*/
-
-#h1tit{
-    display:inline-block;
-    /*border:1px solid;*/
-      margin:0px;
-    font-family:"Playball",cursive;
-      font-size:50px;}
-/*..style head*/  
-</style>
-
-
-<div id="dvhd">
-<h1 id="h1tit">BesTalk</h1>
-</div> 
-
-  
-<style>
-  #dvmed{
-    height:100%;
-  }
-  </style>
-  
- <div id="dvmed">
-  <%- body %>
-  </div>
-  
+  <div id="dvngvw" ng-view></div>
   
  
-<style>
-/*style fondo..*/
-#dvfnd{
-    position:relative;
-    width:100%;
-    /*border:1px solid;*/
-    font-size:15px;
-      font-family:arial;
-    background-color:black;
-      color:white;}
-  
-  #spinf{
-    position:absolute;
-      right:20px;
-      bottom:0px;
-      cursor:pointer;
-  }
-  
-/*..style fondo*/
-</style>
-
-  
-  <div id="dvfnd">
-    <span>Made with 
-      <img src="https://png.icons8.com/potato/color/24" title="Potato" width="24" height="24">
-      by BesTalk Team</span> 
-    
-    <!--  
-    <span id="spinf" title="info"
-          onclick="inF()"><i class="fa fa-info-circle" aria-hidden="true"
-             ></i></span>-->
-   
-</div><!-- footer / Visit the stable page: <a href="https://bingolingo.glitch.me" target="_blank">BingoLingo</a>
-      <br> -->
 
   
   <!-- <script src="/client.js"></script> -->
@@ -187,11 +99,11 @@ body{
   
   
 
-  <!--  
+  
   <script src="app.js"></script>
 <script src="home/home.js"></script>
 <script src="profile/profile.js"></script>
-  -->
+  
   
 </body>
 </html>

@@ -1,232 +1,26 @@
-    <style>
-    #dvmed{
-     display:flex;
-     flex-direction:column;}
-    
-    
-      #dvmtb{border:1px solid grey;
-        display:flex;
-      flex-direction:row;
-       justify-content:space-evenly}
-    
-      
-      #dvmtb>div{
-      border:1px solid grey;
-      width:100%;
-      text-align:center;
-      border-radius:5px;
-      font-family:arial;
-      cursor:pointer;
-      background-color:white;}
-      
-      #dvmtb div:hover{
-        background-color:black;
-        color:white;}
-      
-    #dvmedc{border:1px solid grey;
-      height:100%;
-      position:relative;}
-      
-      
-    @media only screen and (min-width:400px){
-    #dvlg{
-     position:absolute;
-     top:15px;
-     right:20px;}
-    }/*media*/
-      
-      #dvlg{color:black;
-       border:1px solid grey;
-       border-radius:5px;
-       background-color:white;
-       cursor:pointer;}
-    
-    #dvmedc>div:nth-child(-n+4){
-      /*border:1px dotted grey;*/
-      height:99%;width:99%;
-      position:absolute;
-      display:none;}
-    
-    #dvchtc{background-color:white;}  
-      
-    #dvgmc{background-color:#deb887;} 
-      
-    #dvlssc{background-color:#2f4f4f;
-      color:white;}
-     
-    #dvcmmc{background-color:#0079a9;
-      color:white;}
-    
-
-    </style>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
-    <div id="dvti">
-      <h1 id="h1ti">BingoLingo</h1>
-       <div id="dvlg" onclick="opntB(event,'#dvusrc',this)"
-        ><%= user.firstnm %></div>
-    </div><!-- header -->
-      
-      <div id="dvmed">
-        
-        <div id="dvmtb">
-    <div id="dvmtbcht"  onclick="opntB(event,'#dvchtc',this)"
-         >Chat</div>
-    <div id="dvmtbgm"  onclick="opntB(event,'#dvgmc',this)"
-         >Game</div>
-    <div id="dvmtbcmm"  onclick="opntB(event,'#dvcmmc',this)"
-         >Community</div>
-    <div id="dvmtblss"  onclick="opntB(event,'#dvlssc',this)"
-         >Lesson</div>
-          
-        </div><!-- div tabs -->
-      
-   <style>
-   #dvchtc>*>div{
-    border:1px solid grey;
-    border-radius:5px;}
-   #dvchtrnm,#dvchtunm{
-    border:1px solid grey;
-    border-radius:5px;
-    background-color:black;
-    color:white;
-    display:inline-block;
-    font-family:arial;}
-
-   #lige{
-    cursor:pointer;}
-  
-  #dvicht{
-        position:absolute;
-        left:20%; top:20%;}
-     
-/*style chat*/
-     
-   #dvicht{
-        border:1px solid grey;
-        width:240px;
-        height:200px;
-        background-color:white;
-        display:-webkit-flex;
-        -webkit-flex-direction:column;}
-      
-      #dvicht div{border:1px solid grey;
-       border-radius:5px;}
-      
-      #dvichtt{
-        text-align:center;
-        background-color:black;
-        color:white;
-        font-family:arial;
-        cursor:move;}
-     
-     #dvichtcu{display:flex;
-       flex-direction:row;
-       height:100%;}
-      
-      #dvichtc{
-        width:100%;
-        height:98%;
-        overflow-y:auto;}
-        
-      #dvichtu{
-        width:100px;
-        height:98%;
-        float:right;}
-     
-     #dvichtmsg{width:100%;}
-     #inimsg{width:70%;}
-     
-     
- /*tabla users chat*/
-     
-#tblusrs{
-  width:100%;
-  border-collapse:collapse;}
-
-caption{
- background-color:black;
- color:white;
- border:1px solid grey;
- border-radius:5px;
- font-family:arial;}
- 
-th{
-  font-family:arial
-  font-weight:normal;}
-  
-tr:not(:first-child){
-  border:1px dashed grey;}
-     
-tr:not(:first-child):hover{
-  background-color: silver;}
-     
-th, td{
-    text-align: center;}
-     
-   </style>     
-
-    <div id="dvmedc">
-
-      <div id="dvchtc">
-        <div id="dvchtru">
-          <div id="dvchtr">
-          <div id="dvchtrnm">Rooms</div>
-          <div id="dvchtrc">
-            <li id="lige">General</li>
-          </div>
-          </div>
-          <div id="dvchtu">
-<table id="tblusrs">
-  <caption>Users</caption>
-  <tr>
-    <th>Name</th>
-    <th>Gender</th>
-    <th>Age</th>
-<th>Country</th>
-<th>Learning</th>
-<th>Speaks</th>
-  </tr>
-</table>
-   
-          <div id="dvchtuc"></div>
-          </div>
-          </div>
-      </div>
-
-      <div id="dvgmc">In construction.</div>
-      <div id="dvcmmc">In future.</div>
-      <div id="dvlssc">The teacher has not arrived yet.</div>
-
-<style>
-   /*div user info*/
-  
-#dvusri{
- background-color:black;
- color:white;
- border:1px solid grey;
- border-radius:5px;
- font-family:arial;
- text-align:center;}
-</style>        
-        
-<div id="dvusrc">
-      <div id="dvusri">User info</div>
-  
- <form action="/edit" method="post">
+<form id="fmedt">
 
 First Name: <input type="text"
-name="firstnm" value="<%= user.firstnm %>"><br>
+        ng-model="user.firstnm" name="firstnm"
+                   value="{{user.firstnm}}"><br>
 
-Last Name: <input type="text" name="lastnm" value="<%= user.lastnm %>"><br>
+Last Name: <input type="text"
+                  name="lastnm" ng-model="user.lastnm"
+              value="{{user.lastnm}}"><br>
 
-Gender: <input type="radio" name="gender" value="M"> Male
-  <input type="radio" name="gender" value="F"> Female<br>
+Gender: <input type="radio"
+               name="gender" ng-model="user.gender"       
+             value="M"> Male
+  <input type="radio"
+         name="gender" ng-model="user.gender"
+         value="F"> Female<br>
 
-Age: <input type="number" name="age" value="<%= user.age %>"><br>
+Age: <input type="number"
+            name="age" ng-model="user.age"      
+          value="{{user.age}}" required><br>
 
-Country: <select name="country">
+Country: <select name="country"
+                 ng-model="user.country">
 <option value="">Country...</option>
 <option value="AF">Afghanistan</option>
 <option value="AL">Albania</option>
@@ -477,63 +271,16 @@ Country: <select name="country">
 <option value="ZW">Zimbabwe</option>
 </select><br>
 
-Learning: <input type="text" name="learning" value="<%= user.learning %>"><br>
+Learning: <input type="text"
+                 name="learning" ng-model="user.learning"
+          value="{{user.learning}}"><br>
 
-Speaks: <input type="text" name="speaks" value="<%= user.speaks %>"><br>
+Speaks: <input type="text"
+               name="speaks" ng-model="user.speaks"
+        value="{{user.speaks}}"><br>
 
 
-<input type="submit" value="Update">
+<input type="submit"
+       value="Update" ng-click="ediT(user)">
 
 </form>
-  
-</div>
-
-    </div>
-        
-    </div><!-- middle -->
-      
-   <script>
-    function opntB(evt,idnm,thel){
-      var dvmcs= document.querySelectorAll("#dvmedc>div");
-      for(var i=0;i<dvmcs.length;i++){
-        dvmcs[i].style.display="none";
-      }//for
-      document.querySelector(idnm).
-       style.display="block";
-
-      var dvmtbs=document.querySelectorAll("#dvmtb>div");
-      for(var i=0;i<dvmtbs.length;i++){
-        dvmtbs[i].style.backgroundColor="";
-        dvmtbs[i].style.color="";
-      }//for
-      
-      if(thel.id!="dvlg"){
-       var tb=document.getElementById(thel.id);
-        tb.style.backgroundColor="black";
-        tb.style.color="white";
-      }//if not dvlg
-
-    }//opentab
-     
-/*    
-lige.onclick=function(){
-
-var nudiv=document.createElement("DIV");
-nudiv.id="dvicht";
-nudiv.innerHTML='<div id="dvichtt">General</div>'+
-  '<div id="dvichtc"></div><div id="dvichtu"></div>'+
-  '<div id="dvichtmsg"><form id="fmisndmsg">'+
-  '<input type="text" id="inimsg" placeholder="write your message">'+
-  '<button type="submit">send</button></form></div>';
-
-dvchtc.appendChild(nudiv);
-  
-$("#dvicht").draggable();
-};//general onclick dar dvcht
-*/
-     
-function insertAfter(referenceNode, newNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-}//insert after
-     
-   </script> 

@@ -1,0 +1,30 @@
+<h2>Reset Password</h2>
+
+<form action="/reset/<%= token %>" onsubmit="return valpW()"
+  method="post">
+  
+  
+  <input type="password" id="inpw"
+   placeholder="New password"><br>
+  <input type="password" name="password"
+   id="incpw" placeholder="Repeat password"><br>
+  
+  <button type="submit" >Reset</button>
+  
+  
+  
+</form>
+
+
+<script>
+function valpW(){
+  if(inpw.value==incpw.value){
+     return true;
+  }else{
+    incpw.
+      setCustomValidity("Passwords Don't Match");
+        //alert("no match");
+    return false;
+  }//else no match
+}//validar password
+</script>

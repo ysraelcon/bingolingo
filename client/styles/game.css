@@ -1,0 +1,126 @@
+/*style game..*/
+   
+#dvjue{
+  display:flex;
+    flex-direction:column;
+  /*overflow:auto;resize:both;*/
+  position:relative;
+  width:250px;height:250px;
+  border:1px solid grey;
+    border-radius:5px;
+  background-color:#D2B48C;}
+    
+    #dvjue div{margin:0px;}
+
+#dvjnm{
+  display:flex;
+    flex-direction:row;
+  border:1px dotted grey;
+  font-family:arial;}
+
+#dvjnmtit{
+  text-align:center;
+  width:100%;
+  background-color:#2E8B57;
+    color:white;}
+
+#dvjnmmit,#dvjnmcrr{
+  text-align:center;
+  width:30px;
+  cursor:pointer;}
+
+#dvjnmcrr{
+  background-color:red;
+    color:white;}    
+    
+#sptmr{
+  float:right;
+  border:1px solid black;}
+
+#dvjcu{
+  display:flex;
+    flex-direction:row;
+  height:100%;}
+
+#dvjuse{
+  position:relative;
+  width:100px;height:100%;
+  border:1px solid grey;
+  }
+.dvjuepnt{
+  display:inline-block;
+    text-align:center;
+  width:30px;
+  border:1px solid;
+    border-radius:50%;
+}
+.dvjue_u_nm{
+  overflow-y:auto;
+    word-wrap:break-word;
+}
+.dvjue_u_bts{
+  position:absolute;
+    bottom:0px;
+}
+
+#dvjcon{
+  overflow-y:auto;
+  width:100%;height:100%;
+  border:1px solid grey;}
+
+
+/*diccionario*/
+
+.inwrd{
+  width:120px;}
+
+
+/*style crear tipo de juego..*/
+
+
+#dvcrtgme{
+  display:inline-block;
+  border:1px dashed;}
+
+
+      
+      #dvrdygme{
+        text-align:center;
+      }
+      #btrdygme{
+        width:50%;
+      }
+#dvtitoptgme{
+  display:flex;
+    flex-direction:row;
+}
+      #dvtitoptgmenme{
+        display:inline-block;
+          text-align:center;
+        width:100%;
+        background-color:black;
+          color:white;
+      }
+#dvtitoptgme_x{
+  display:inline-block;
+    text-align:center;
+  width:50px;
+}
+      
+      dvcrtgme select{border:none;}
+      
+      #dvwaigme{
+        display:inline-block;
+      }
+/*style barra de juego a juntarse*/
+
+.dvgmebar{
+  display:table;
+  border:1px dotted;
+}
+
+.dvgmebar div{
+  display:inline-block;
+  border:1px dashed;
+    margin:5px;
+}
