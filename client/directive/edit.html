@@ -1,5 +1,17 @@
 <form id="fmedt">
 
+<img id="igprfedi" class="igprfavtr"
+     name="avatar"
+ ng-src="{{user.avatar}}" alt="avatar"
+ ><br>
+
+<input type="file"
+ onchange="loaimG()"
+ id="inflimg">
+<br>
+
+
+  
 First Name: <input type="text"
         ng-model="user.firstnm" name="firstnm"
                    value="{{user.firstnm}}"><br>

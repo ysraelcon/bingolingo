@@ -33,6 +33,7 @@ $scope.logout=function(){
 $scope.ediT=function(user){
 
   $scope.user=user;
+  $scope.user.avatar= igprfedi.src;
     
 $http.post("/edit",$scope.user)
       .then(function(res){

@@ -294,6 +294,7 @@ style="fill:white;stroke-width:1;stroke:black"/>
   <caption>Users</caption>
   <thead>
   <tr>
+    <th>Avatar</th>
     <th>Name</th>
     <th>Gender</th>
     <th>Age</th>
@@ -369,6 +370,12 @@ animation-fill-mode:forwards;}
     to {transform: scaleX(1);}
 } /*keyframes*/
   
+  .igprfavtr{
+    width:50px;height:50px;
+    border-width:1px;
+      border-radius:50%;
+      border-color:white;}
+  
 /*..style div user info*/
 </style>          
   
@@ -378,7 +385,10 @@ animation-fill-mode:forwards;}
   
   
   <span id="spusrprf">
-      
+ 
+ <img id="igprf" class="igprfavtr"
+      ng-src="{{user.avatar}}"
+      alt="avatar" ><br>
  <p>First Name: {{user.firstnm}} </p>
  <p>Last Name: {{user.lastnm}} </p>
 <p>Gender: {{user.gender||""}} </p>
@@ -420,7 +430,40 @@ animation-fill-mode:forwards;}
     btnedtprf.removeAttribute("style");
   }//cancelar edit profile
   
+  
+  //cargar imagen
+function loaimG(){
+ 
+ var reader= new FileReader();
+
+reader.onloadend= function(){
+ var imgprovisional= new Image();
+  
+  imgprovisional.onload= function(){
+    
+ var can= document.createElement("canvas");
+ can.width=50;
+ can.height=50;
+    
+ var coc= can.getContext("2d");
+  
+ coc.drawImage(this,0,0, can.width,can.height);
+    
+              
+ igprfedi.src= can.toDataURL("image/png");
+      
+  }//onload imgprovisional
+    
+  imgprovisional.src= reader.result;
+   
+}//onloadend reader
+ 
+ reader.readAsDataURL(inflimg.files[0]);
+}//loaimG
+  
 </script>
+  
+   
   
 </div><!-- dv cont usr -->
   

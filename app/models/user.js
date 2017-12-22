@@ -2,6 +2,7 @@ var Mng=require('mongoose');
 var bcrypt=require('bcrypt-nodejs');
 
 var usrsch=Mng.Schema({
+  avatar:String,
   firstnm:String,
   lastnm:String,
   country:String,

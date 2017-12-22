@@ -106,6 +106,9 @@ const errors = req.validationErrors();
  User.findOne({_id:req.user._id},
               (err, user) => {
  // updating that event
+   
+   //console.log(req.body);
+ user.avatar= req.body.avatar;  
  user.firstnm = req.body.firstnm;
  user.lastnm = req.body.lastnm;
  user.gender= req.body.gender;
