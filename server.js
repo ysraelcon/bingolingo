@@ -595,7 +595,7 @@ io.to(pmrusr[1]).emit("el del turno",
 
 //tmp=20;
   //nota el tiempo de ese juego jue[dt.nrogme].tmp
-jue[dt.nrogme].tmp=20;
+jue[dt.nrogme].tmp=90;
 jue[dt.nrogme].mod="ten";
 
   
@@ -645,7 +645,7 @@ for(var i=0;i<Object.keys( jue[rmjf].nroplyact).length;i++){
 
  if(jue[rmjf].nroplyact[
 Object.keys(jue[rmjf].nroplyact)[i]
-][2]>=5){
+][2]>= 10){
 
  wnr=jue[rmjf].nroplyact[
 Object.keys(jue[rmjf].nroplyact)[i]
@@ -660,7 +660,7 @@ break;
 if(wnr==""){
   
   jue[rmjf].plytrn++;
-  jue[rmjf].tmp=25;
+  jue[rmjf].tmp=90;
   jue[rmjf].mod="ten";
   
   var pmrid= Object.keys(jue[rmjf].nroplyact)[ jue[rmjf].plytrn%jue[rmjf].nroply];

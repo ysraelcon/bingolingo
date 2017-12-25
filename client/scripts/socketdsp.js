@@ -49,7 +49,11 @@ var rooms={"gnrl":"General", "eng":"English",
 "jpn":"Japanese","hin":"Hindi",
 "swe":"Swedish","tur":"Turkish",
 "ben":"Bengali","slk":"Slovak",
-"mul":"MULTILINGUAL"
+"mul":"MULTILINGUAL",
+"Musics":"Musics","TV":"TV",
+"Travel":"Travel","News":"News",
+"Politics":"Politics","Religion":"Religion",
+"Others":"Others"           
           };//rooms
 
 
@@ -74,7 +78,7 @@ sprm.setAttribute("onclick","entrrooM(\'"+roomf+"\')");
 entrrooM(roomf);
 
 
-sprm.innerHTML= rooms[roomf]+' <span id="spchtcnt_'+roomf+ '" class="spchtcnt"></span><i class="fa fa-comments-o" aria-hidden="true"></i>';
+sprm.innerHTML= rooms[roomf]+' <span id="spchtcnt_'+roomf+ '" class="spchtcnt"></span><img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/white/png/16/comments-o.png">';
 
 dvchtrc.appendChild(sprm);
  }//if  no esta lo crea
@@ -82,6 +86,27 @@ dvchtrc.appendChild(sprm);
 }//goiN room
 
 
+
+//entrar theme room
+function gothmrM(){
+ 
+ var roomf= inlstthmrm.value;
+ 
+ if(!document.getElementById("sprm_"+roomf) ){
+
+var sprm= document.createElement("span");
+sprm.id="sprm_"+roomf;
+sprm.setAttribute("class","spchtrm");
+sprm.setAttribute("onclick","entrrooM(\'"+roomf+"\')");  
+entrrooM(roomf);
+
+
+sprm.innerHTML= roomf+' <span id="spchtcnt_'+roomf+ '" class="spchtcnt"></span><img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/white/png/16/comments-o.png">';
+
+dvthmrmscon.appendChild(sprm);
+
+}//if no esta aviso, lo crea
+}//gothmrM
 
 
 
@@ -152,7 +177,7 @@ sprm.setAttribute("onclick","entrrooM(\'"+dt.room+"\')");
 
 sprm.innerHTML= rooms[dt.room]+
   ' <span id="spchtcnt_'+dt.room+
-  '" class="spchtcnt"></span><i class="fa fa-comments-o" aria-hidden="true"></i>';
+  '" class="spchtcnt"></span><img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/white/png/16/comments-o.png"></i>';
 
 dvchtrc.appendChild(sprm);
     
@@ -203,9 +228,8 @@ var dvchtmsg= "#dvchtmsg_"+rmx;
 
 //restaurar tamaño del chat
 function restamchT(rmx){//roomx
-  var dvcht= document.querySelector
-
-("#dvcht_"+rmx);
+  var dvcht= document.querySelector("#dvcht_"+rmx);
+  
 if(dvcht.offsetWidth<dvconcht.offsetWidth){
   dvcht.style.height=dvconcht.offsetHeight+"px";
   dvcht.style.width=dvconcht.offsetWidth+"px";
@@ -314,7 +338,7 @@ sktclt.on("who type",function(dt){
 nudiv.id="dvtyp_"+dt.room;
 nudiv.setAttribute("class","dvtyp"); 
   
-  nudiv.innerHTML="<b>"+dt.firstnm+"</b>"+"<span  class='sptyp'> is typing...</span>"+'<i class="fa fa-pencil" aria-hidden="true"></i>';
+  nudiv.innerHTML="<b>"+dt.firstnm+"</b>"+"<span  class='sptyp'> is typing...</span>"+'<img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/pencil.png">';
 
   var dvcht_cu= document.getElementById("dvcht_cu_"+dt.room);
   
@@ -367,11 +391,11 @@ nudiv.innerHTML='<div id="dvcht_t_'+rmx+'" class="dvcht_t">'+
   '<input type="text" id="inchtmsg_'+rmx+'" class="inchtmsg" autocorrect="off" autocomplete="off"'+
   ' data-room="'+rmx+'" placeholder="write your message">'+
   '<button id="btnchtmsg_'+rmx+'" class="btnchtmsg" type="submit" >'+
-  '<i class="fa fa-paper-plane" aria-hidden="true"></i>'+
+  '<img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/paper-plane.png">'+
   '</button>'+
   '<button'+
   ' class="btnchtemj"  onclick="selemJ()">'+
-  '<b><i class="fa fa-smile-o" aria-hidden="true" style="color:black"></i></b>'+
+  '<b><img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/smile-o.png"></b>'+
     '</button>'+
   '</form></div>'+
     
@@ -556,11 +580,11 @@ nudiv.innerHTML='<div id="dvcht_t_'+roombthx+'" class="dvcht_t">'+
   ' data-room="'+roombthx+
   '" placeholder="write your message...">'+
   '<button id="btnchtmsg_'+roombthx+'" class="btnchtmsg" type="submit" >'+
-  '<i class="fa fa-paper-plane" aria-hidden="true"></i>'+
+  '<img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/paper-plane.png">'+
   '</button>'+
   '<button'+
   ' class="btnchtemj"  onclick="selemJ()">'+
-  '<i class="fa fa-smile-o" aria-hidden="true"></i>'+
+  '<img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/smile-o.png">'+
     '</button>'+
   '</form></div>';    
     
@@ -696,6 +720,8 @@ nudiv.innerHTML='<div id="dvtitoptgme">'+
  '<option id="nros">10 numbers</option>'+
  '<option id="abc">alphabet</option>'+
   '<option id="house">house\'s things</option>'+
+  '<option id="sharedlingo">sharedlingo\'s words</option>'+
+'<option id="proposed">proposed words</option>'+
  '<option id="optld">load list, in future</option>'+
  '</select></div>'+
 
@@ -835,11 +861,11 @@ nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
 '<form id="fmjmsg" class="fmchtmsg" onsubmit="envmsgJ(event)">'+
 '<input type="text" id="injmsg" class="inchtmsg" placeholder="write your text..." data-room="'+rmjf+'">'+
 '<button id="btnjsndm" class="btnchtmsg" type="submit" >'+
-  '<i class="fa fa-paper-plane" aria-hidden="true"></i>'+
+  '<img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/paper-plane.png">'+
   '</button>'+  
 '<button'+
   ' class="btnchtemj"  onclick="selemJ()">'+
-  '<i class="fa fa-smile-o" aria-hidden="true"></i>'+
+  '<img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/smile-o.png">'+
     '</button>'+  
 '</form></div>'+
      
