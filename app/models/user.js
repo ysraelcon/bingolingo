@@ -12,6 +12,7 @@ var usrsch=Mng.Schema({
   speaks:String,
 email:{type:String,unique:true},
 password:{type:String},
+  notes:String,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
   chats:Mng.Schema.Types.Mixed

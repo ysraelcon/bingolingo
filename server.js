@@ -483,6 +483,25 @@ usr.save((err)=>{
 });//skon send message chat rquest
   
   
+
+socket.on("save note",function(dt){
+//dt{nte}
+
+User.findOne({_id: socket.request.user._id},
+    function(err,usr){
+
+if(!usr.notes){
+ usr.notes="";
+}
+
+usr.notes=dt.nte;
+
+usr.save((err)=>{
+if(err) throw err;
+});//save
+});//findone
+console.log("saved note");
+});//skon save note  
   
   
   

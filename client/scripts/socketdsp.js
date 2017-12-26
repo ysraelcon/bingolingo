@@ -78,7 +78,8 @@ sprm.setAttribute("onclick","entrrooM(\'"+roomf+"\')");
 entrrooM(roomf);
 
 
-sprm.innerHTML= rooms[roomf]+' <span id="spchtcnt_'+roomf+ '" class="spchtcnt"></span><img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/white/png/16/comments-o.png">';
+sprm.innerHTML= rooms[roomf]+' <span id="spchtcnt_'+roomf+
+  '" class="spchtcnt"></span><svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M704 384q-153 0-286 52t-211.5 141-78.5 191q0 82 53 158t149 132l97 56-35 84q34-20 62-39l44-31 53 10q78 14 153 14 153 0 286-52t211.5-141 78.5-191-78.5-191-211.5-141-286-52zm0-128q191 0 353.5 68.5t256.5 186.5 94 257-94 257-256.5 186.5-353.5 68.5q-86 0-176-16-124 88-278 128-36 9-86 16h-3q-11 0-20.5-8t-11.5-21q-1-3-1-6.5t.5-6.5 2-6l2.5-5 3.5-5.5 4-5 4.5-5 4-4.5q5-6 23-25t26-29.5 22.5-29 25-38.5 20.5-44q-124-72-195-177t-71-224q0-139 94-257t256.5-186.5 353.5-68.5zm822 1169q10 24 20.5 44t25 38.5 22.5 29 26 29.5 23 25q1 1 4 4.5t4.5 5 4 5 3.5 5.5l2.5 5 2 6 .5 6.5-1 6.5q-3 14-13 22t-22 7q-50-7-86-16-154-40-278-128-90 16-176 16-271 0-472-132 58 4 88 4 161 0 309-45t264-129q125-92 192-212t67-254q0-77-23-152 129 71 204 178t75 230q0 120-71 224.5t-195 176.5z" fill="#fff"/>';//comments-o
 
 dvchtrc.appendChild(sprm);
  }//if  no esta lo crea
@@ -101,7 +102,8 @@ sprm.setAttribute("onclick","entrrooM(\'"+roomf+"\')");
 entrrooM(roomf);
 
 
-sprm.innerHTML= roomf+' <span id="spchtcnt_'+roomf+ '" class="spchtcnt"></span><img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/white/png/16/comments-o.png">';
+sprm.innerHTML= roomf+' <span id="spchtcnt_'+roomf+
+  '" class="spchtcnt"></span><svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M704 384q-153 0-286 52t-211.5 141-78.5 191q0 82 53 158t149 132l97 56-35 84q34-20 62-39l44-31 53 10q78 14 153 14 153 0 286-52t211.5-141 78.5-191-78.5-191-211.5-141-286-52zm0-128q191 0 353.5 68.5t256.5 186.5 94 257-94 257-256.5 186.5-353.5 68.5q-86 0-176-16-124 88-278 128-36 9-86 16h-3q-11 0-20.5-8t-11.5-21q-1-3-1-6.5t.5-6.5 2-6l2.5-5 3.5-5.5 4-5 4.5-5 4-4.5q5-6 23-25t26-29.5 22.5-29 25-38.5 20.5-44q-124-72-195-177t-71-224q0-139 94-257t256.5-186.5 353.5-68.5zm822 1169q10 24 20.5 44t25 38.5 22.5 29 26 29.5 23 25q1 1 4 4.5t4.5 5 4 5 3.5 5.5l2.5 5 2 6 .5 6.5-1 6.5q-3 14-13 22t-22 7q-50-7-86-16-154-40-278-128-90 16-176 16-271 0-472-132 58 4 88 4 161 0 309-45t264-129q125-92 192-212t67-254q0-77-23-152 129 71 204 178t75 230q0 120-71 224.5t-195 176.5z" fill="#fff"/>';//comments-o
 
 dvthmrmscon.appendChild(sprm);
 
@@ -177,7 +179,7 @@ sprm.setAttribute("onclick","entrrooM(\'"+dt.room+"\')");
 
 sprm.innerHTML= rooms[dt.room]+
   ' <span id="spchtcnt_'+dt.room+
-  '" class="spchtcnt"></span><img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/white/png/16/comments-o.png"></i>';
+  '" class="spchtcnt"></span><svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M704 384q-153 0-286 52t-211.5 141-78.5 191q0 82 53 158t149 132l97 56-35 84q34-20 62-39l44-31 53 10q78 14 153 14 153 0 286-52t211.5-141 78.5-191-78.5-191-211.5-141-286-52zm0-128q191 0 353.5 68.5t256.5 186.5 94 257-94 257-256.5 186.5-353.5 68.5q-86 0-176-16-124 88-278 128-36 9-86 16h-3q-11 0-20.5-8t-11.5-21q-1-3-1-6.5t.5-6.5 2-6l2.5-5 3.5-5.5 4-5 4.5-5 4-4.5q5-6 23-25t26-29.5 22.5-29 25-38.5 20.5-44q-124-72-195-177t-71-224q0-139 94-257t256.5-186.5 353.5-68.5zm822 1169q10 24 20.5 44t25 38.5 22.5 29 26 29.5 23 25q1 1 4 4.5t4.5 5 4 5 3.5 5.5l2.5 5 2 6 .5 6.5-1 6.5q-3 14-13 22t-22 7q-50-7-86-16-154-40-278-128-90 16-176 16-271 0-472-132 58 4 88 4 161 0 309-45t264-129q125-92 192-212t67-254q0-77-23-152 129 71 204 178t75 230q0 120-71 224.5t-195 176.5z" fill="#fff"/>';//comments-o
 
 dvchtrc.appendChild(sprm);
     
@@ -338,7 +340,8 @@ sktclt.on("who type",function(dt){
 nudiv.id="dvtyp_"+dt.room;
 nudiv.setAttribute("class","dvtyp"); 
   
-  nudiv.innerHTML="<b>"+dt.firstnm+"</b>"+"<span  class='sptyp'> is typing...</span>"+'<img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/pencil.png">';
+  nudiv.innerHTML="<b>"+dt.firstnm+"</b>"+"<span  class='sptyp'> is typing...</span>"+
+    '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M491 1536l91-91-235-235-91 91v107h128v128h107zm523-928q0-22-22-22-10 0-17 7l-542 542q-7 7-7 17 0 22 22 22 10 0 17-7l542-542q7-7 7-17zm-54-192l416 416-832 832h-416v-416zm683 96q0 53-37 90l-166 166-416-416 166-165q36-38 90-38 53 0 91 38l235 234q37 39 37 91z"/></svg>';//pencil
 
   var dvcht_cu= document.getElementById("dvcht_cu_"+dt.room);
   
@@ -391,11 +394,11 @@ nudiv.innerHTML='<div id="dvcht_t_'+rmx+'" class="dvcht_t">'+
   '<input type="text" id="inchtmsg_'+rmx+'" class="inchtmsg" autocorrect="off" autocomplete="off"'+
   ' data-room="'+rmx+'" placeholder="write your message">'+
   '<button id="btnchtmsg_'+rmx+'" class="btnchtmsg" type="submit" >'+
-  '<img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/paper-plane.png">'+
+  '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
   '</button>'+
   '<button'+
   ' class="btnchtemj"  onclick="selemJ()">'+
-  '<b><img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/smile-o.png"></b>'+
+  '<b><svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg></b>'+//smile-o
     '</button>'+
   '</form></div>'+
     
@@ -580,11 +583,11 @@ nudiv.innerHTML='<div id="dvcht_t_'+roombthx+'" class="dvcht_t">'+
   ' data-room="'+roombthx+
   '" placeholder="write your message...">'+
   '<button id="btnchtmsg_'+roombthx+'" class="btnchtmsg" type="submit" >'+
-  '<img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/paper-plane.png">'+
+  '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
   '</button>'+
   '<button'+
   ' class="btnchtemj"  onclick="selemJ()">'+
-  '<img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/smile-o.png">'+
+  '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
     '</button>'+
   '</form></div>';    
     
@@ -861,11 +864,11 @@ nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
 '<form id="fmjmsg" class="fmchtmsg" onsubmit="envmsgJ(event)">'+
 '<input type="text" id="injmsg" class="inchtmsg" placeholder="write your text..." data-room="'+rmjf+'">'+
 '<button id="btnjsndm" class="btnchtmsg" type="submit" >'+
-  '<img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/paper-plane.png">'+
+  '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
   '</button>'+  
 '<button'+
   ' class="btnchtemj"  onclick="selemJ()">'+
-  '<img src="https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/16/smile-o.png">'+
+  '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
     '</button>'+  
 '</form></div>'+
      
@@ -1080,6 +1083,7 @@ function selemJ(){
   alert("emojies in construction, write :smile: for :)\n\nlist: https://raw.githubusercontent.com/omnidan/node-emoji/master/lib/emoji.json");
 }//select emjoy
 
+//https://github.com/encharm/Font-Awesome-SVG-PNG/blob/master/black/svg/pencil.svg
 
 function sndrpT(){
   
@@ -1090,6 +1094,33 @@ alert("Thanks for your report");
 crrrpT();  
 
 }//enviar reporte
+
+
+//----notas
+
+//editar notas
+function edtntE(){
+
+  tantscon.removeAttribute("readonly");
+  
+  btntsedt.style.display="none";
+  btntssve.style.display="inline-block";
+}//edtntE
+
+
+
+//guardar nota
+function sventE(){
+
+ sktclt.emit("save note",{nte: tantscon.value}); 
+  
+ tantscon.setAttribute("readonly","");
+  
+ btntsedt.style.display="inline-block";
+ btntssve.style.display="none";
+
+}//sventE
+
 
 
 //====diccionario
