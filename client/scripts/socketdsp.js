@@ -53,7 +53,8 @@ var rooms={"gnrl":"General", "eng":"English",
 "Musics":"Musics","TV":"TV",
 "Travel":"Travel","News":"News",
 "Politics":"Politics","Religion":"Religion",
-"Others":"Others"           
+"Others":"Others",
+           "bstlk":"BesTalk"
           };//rooms
 
 
@@ -129,8 +130,8 @@ sktclt.emit("open room",rmx);
 //users in room
 sktclt.on("mndusrroom",function(dt){
   //dt{usrsroom,chtroom,sktid,room} 
-  //console.log("mndusrroom")
-  //console.log(dt)
+  console.log("mndusrroom")
+  console.log(dt)
   
   var usrsg="";
   
@@ -434,9 +435,8 @@ $('#dvcht_'+rmx).resizable();
     
   }//if no dvicht
     
-  
-  
-}//crtsctrM
+    
+}//crtrooM
   
 
 
@@ -465,7 +465,8 @@ function nooP(){}//no operations, for swap functions
 
 //cuadro, profile, chat request, al clicar user
 function usrprfchtR(ele,ev){
-  
+ 
+  if(ele.id!=sktclt.id)//if no es el mismo 
  if(typeof(dvinfusr)=="undefined"){
    
 var nuedvinfusr=document.createElement("DIV");
@@ -478,7 +479,9 @@ nuedvinfusr.style="position:fixed;"+
     '<li id="liprf'+ele.id
   +'" onclick="prfinF(this)">Profile</li>'+
     '<li id="lichtrqs'+ele.id+
-  '" onclick="chtrqsT(this)">Chat Request</li>'+
+  '" onclick="chtrqsT(this)" data-usrid="'+
+    ele.getAttribute("data-usrid")+
+    '">Chat Request</li>'+
     '</div>'+
     '<div id="dvcrrprfcht" onclick="crrinfusR()">x</div>';
   
@@ -490,6 +493,7 @@ nuedvinfusr.style="position:fixed;"+
 
 function prfinF(ele){
   
+  //make request of user id in skcl.emit
   alert("in construction, "+ele.id);
   
 }//info profile
@@ -497,12 +501,14 @@ function prfinF(ele){
 
 //eviarle chat request
 function chtrqsT(ele){
-  
-  var prtid=ele.id.substr(8,ele.id.length);
   console.log("1mando chtrqs");
+  var prtid=ele.id.substr(8,ele.id.length);
+  
+  var usridrcv= ele.getAttribute("data-usrid");
   
   sktclt.emit("mnd chtrqs",
               {sktidrcv:prtid,
+               usridrcv: usridrcv,
               sktidmnd:sktclt.id});
   
  
@@ -522,7 +528,8 @@ sktclt.on("recibe chtrqs",function(dt){
   console.log(dt);
   
 var nudiv=document.createElement("div");
-nudiv.id="dvchtrqsof";
+nudiv.id="dvchtrqsof_"+dt.roombth;
+nudiv.classList.add("dvchtrqsof");  
 
 nudiv.innerHTML='<div id="dvchtrqsof_t">Chat request from '+
   dt.nmemnd+'</div>'+
@@ -544,14 +551,20 @@ sktclt.on("espera chtrqs",function(dt){
     
   console.log("3espera chtrqs");
   console.log(dt);
-    
-  if(typeof(dvwti)=="undefined"){ 
+  
+  var dvwti_= document.getElementById("dvwti_"+dt.roombth);
+  
+  if(!dvwti_){ 
     
 var nudiv=document.createElement("div");
-nudiv.id="dvwti";
+nudiv.id="dvwti_"+dt.roombth;
+nudiv.classList.add("dvwti");
 
 nudiv.innerHTML='<div id="dvwti_t">Waiting for '+dt.nmercv+'...</div>'+
- '<div id="dvwti_x">X</div>';
+ '<div id="dvwti_x" onclick=\'crrwtI("'+
+     dt.sktidrcv+'","'+
+     dt.roombth+
+               '")\'>X</div>';
 
 dvconcht.appendChild(nudiv);
   }//if dvwti no creado
@@ -560,10 +573,36 @@ dvconcht.appendChild(nudiv);
 
 
 
+//cancelar chat request
+function crrwtI(sktidrcvf,rmbthf){
+
+  var dvwti= document.getElementById("dvwti_"+rmbthf);
+
+  dvconcht.removeChild(dvwti);
+
+  sktclt.emit("cancel chtrqs",
+              {sktidrcv:sktidrcvf,
+               rmbth:rmbthf});
+}//crrwtI
+
+
+
+sktclt.on("elim chtrqs",function(dt){
+ //dt{rmbth}
+
+ var dvchtrqsof= document.getElementById("dvchtrqsof_"+dt.rmbth);
+
+dvconcht.removeChild(dvchtrqsof);
+});//skcl eliminar chat request
+
+
+
 //abre chat request
 function opnchtrqS(roombthx,sktidmndx){
   
-  if(typeof(dvchtrqswth)=="undefined"){
+ var dvcht_= document.getElementById("dvcht_"+roombthx); 
+  
+  if(!dvcht_){
     
 var nudiv=document.createElement("DIV");
 nudiv.id="dvcht_"+roombthx;
@@ -576,7 +615,19 @@ nudiv.innerHTML='<div id="dvcht_t_'+roombthx+'" class="dvcht_t">'+
   '<div id="dvcht_tx_'+roombthx+'" class="dvcht_tx col_tx" onclick="crrdvchT(\''+roombthx+'\')">x</div>'+
   '</div>'+
   '<div id="dvcht_cu_'+roombthx+'" class="dvcht_cu">'+
-  '<div id="dvcht_c_'+roombthx+'" class="dvcht_c col_c"></div><div id="dvcht_u_'+roombthx+'" class="dvcht_u col_u"></div>'+
+  
+  '<div id="dvcht_c_'+roombthx+'" class="dvcht_c col_c"></div>'+
+
+'<div id="dvcht_u_'+roombthx+'" class="dvcht_u col_u">'+
+
+'<div id="dvcht_u_nm_'+roombthx+'" class="dvcht_u_nm"></div>'+
+    '<div id="dvcht_u_bts_'+roombthx+'" class="dvcht_u_bts">'+          
+    '<input type="button" value="_"'+
+   ' onclick="empbuT()"></div>'+
+  '</div>'+
+
+'</div>'+//dvcht_u_
+  
   '</div>'+  
   '<div id="dvchtmsg_'+roombthx+'" class="dvchtmsg"><form id="fmchtmsg_'+roombthx+'" class="fmchtmsg" onsubmit="envmsgR(event,\''+roombthx+'\')">'+
   '<input type="text" id="inchtmsg_'+roombthx+'" class="inchtmsg" autocorrect="off" autocomplete="off"'+
@@ -608,9 +659,21 @@ $(dvcht_c, draggableDiv)
   
 $(dvcht).resizable();
 
+var inchtmsg_= document.getElementById("inchtmsg_"+roombthx);
+  
+  inchtmsg_.addEventListener("keydown",
+                        function(){
+        tyP(inchtmsg_);
+  });//addeventlistener keydown tyP  
+  
 });//jQuery
 
   if(sktidmndx){
+    
+    var dvchtrqsof= document.getElementById("dvchtrqsof_"+roombthx);
+
+dvconcht.removeChild(dvchtrqsof);
+    
     sktclt.emit("abr chtrqs",
                 {roombth:roombthx,
                  sktidmnd:sktidmndx});
@@ -627,6 +690,10 @@ sktclt.on("aceptd chtrqs",function(dt){
   console.log("5aceptada chtrqs");
   console.log(dt);
   
+  var dvwti= document.getElementById("dvwti_"+dt.roombth);
+
+  dvconcht.removeChild(dvwti);
+  
   opnchtrqS(dt.roombth);
   sktclt.emit("usrs pa chtrqs",dt);  
 });//skcon acepta chat reqquest
@@ -638,7 +705,7 @@ sktclt.on("mete usrs chtrqs",function(dt){
   
     console.log("7mete usrs");
   //console.log(dt);
-  var dvcht_u= document.getElementById("dvcht_u_"+dt.roombth);
+  var dvcht_u= document.getElementById("dvcht_u_nm_"+dt.roombth);
   
     dvcht_u.innerHTML= dt.nmercv+"<br id='brrcv' data-sktid='"+
      dt.sktidrcv+"'/>"+

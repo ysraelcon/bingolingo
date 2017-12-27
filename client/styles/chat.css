@@ -283,15 +283,17 @@ th, td{
       
 /*waiting section chtrqs..*/
 
-#dvwti{
+.dvwti{
   display:flex;
     flex-direction:row;
     justify-content:space-evenly;
+  position:absolute;
+    bottom:0px;
   width:200px;
   border:1px solid grey;
     border-radius:5px;}
 
-    #dvwti>div{
+    .dvwti>div{
       border:1px solid grey;
         border-radius:5px;}
 
@@ -308,15 +310,17 @@ th, td{
 
 /*receiving chat request..*/
 
-#dvchtrqsof{
+.dvchtrqsof{
   display:flex;
     flex-direction:row;
     justify-content:space-evenly;
+    position:absolute;
+    top:0px;
   width:200px;
   border:1px solid grey;
     border-radius:5px;}
 
-    #dvchtrqsof>div{
+    .dvchtrqsof>div{
       border:1px solid grey;
         border-radius:5px;}
     #dvchtrqsof_t{

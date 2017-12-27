@@ -210,7 +210,8 @@ cht.save((err)=>{
   
 socket.on("cerr room",function(dt){
   //dt="roombth o gnrl" room
-
+console.log("cerr room "+dt);
+  
 socket.leave(dt);
   
   if(!socket.id) return;
@@ -292,27 +293,27 @@ io.to(dt).emit('mndusrroom',
 //====private chats
   
 socket.on("mnd chtrqs",function(dt){
-  //dt{sktidrcv,sktidmnd}
+  //dt{sktidrcv,usridrcv,sktidmnd}
   console.log("2hizo cht rqst");
-  
+  console.log(dt);
   var idmnd=socket.request.user._id;
   
-  var usridrcv="";
-
-for(var usri in usrscnnt){
-  if(usrscnnt[usri].sktid== dt.sktidrcv){
-usridrcv=usri;
-break;
-}//if
-}//for
+  var usridrcv=dt.usridrcv;
   
   var roombth=idmnd> usridrcv?
          idmnd+"_"+usridrcv:
          usridrcv+"_"+idmnd;
   
+  if(!usrsroom[roombth]){
+   usrsroom[roombth]={};
+}//if indef
+  //usrsroom{rmnme{usrid:firstnm,...},...}
+  usrsroom[roombth][socket.request.user._id]= socket.request.user.firstnm;
+  
   socket.join(roombth);
    
- console.log(io.sockets.adapter.rooms[roombth]);   
+ console.log(io.sockets.adapter.rooms[roombth]); 
+  
   socket.to(dt.sktidrcv).emit("recibe chtrqs",
         {nmemnd:socket.request.user.firstnm,
        sktidmnd:dt.sktidmnd,
@@ -329,10 +330,25 @@ break;
   });//skon hicieron request
  
   
+  
+  socket.on("cancel chtrqs",function(dt){
+ //dt{sktidrcv,rmbth}
+
+//y sacarlo del room
+
+ socket.to(dt.sktidrcv).emit("elim chtrqs",
+    {rmbth:dt.rmbth});
+});//skon cancel request
+  
+  
+  
+  
   socket.on("abr chtrqs",function(dt){
    //dt{roombth,sktidmnd}
     
     console.log("4abr chtrqs");
+    
+    usrsroom[dt.roombth][socket.request.user._id]= socket.request.user.firstnm;
     
     socket.join(dt.roombth);
     
