@@ -81,7 +81,7 @@ Ap.get('/profile',isLoggedIn,function(req,res){
 });//get f
   
 Ap.get('/edit',isLoggedIn,function(req,res){
- res.json(req.user);
+ res.json({message:req.flash("errors")});
   //res.render('edit.ejs',{user:req.user});
 });//get 
   

@@ -314,7 +314,7 @@ th, td{
   display:flex;
     flex-direction:row;
     justify-content:space-evenly;
-    position:absolute;
+  position:absolute;
     top:0px;
   width:200px;
   border:1px solid grey;

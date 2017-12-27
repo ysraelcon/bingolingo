@@ -31,7 +31,8 @@ if($scope.message===undefined){
 //olvido password
 $scope.fgtpwD=function(){
   
-  if(typeof($scope.user)=="undefined"){
+  if(typeof($scope.user)=="undefined"||
+    $scope.user.email==""){
 alert("write your email in login");
 }else{
 

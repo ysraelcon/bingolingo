@@ -201,6 +201,10 @@ c26 42 28 93 4 128 -9 15 -41 45 -70 68 -64 51 -79 83 -57 118 19 29 58 45 90
     color:grey;
     cursor:pointer;}
   
+  #dvmsg{
+    font-size:25px;
+    color:red;}
+  
 /*..style content*/
 </style>
 
@@ -232,7 +236,7 @@ Created by potrace 1.15, written by Peter Selinger 2001-2017
 </svg>
   
   
-<div ng-show="message">{{message}}</div>
+<div id="dvmsg" ng-show="message">{{message}}</div>
    
 
 <form name="fmlogin" novalidate>
@@ -268,7 +272,7 @@ Created by potrace 1.15, written by Peter Selinger 2001-2017
   
 <input type="text"
        name="firstnm" ng-model="user.firstnm"
-       placeholder="First Name">
+       placeholder="First Name" required>
 <input type="text"
        name="lastnm" ng-model="user.lastnm"
        placeholder="Last Name"><br>

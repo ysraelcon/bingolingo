@@ -1,11 +1,20 @@
+<style>
+#dvmsgedt{
+  font-size:20px;
+  color:red;}
+</style>
+
 <form id="fmedt">
 
+<div id="dvmsgedt"
+     ng-show="message">{{message}}</div>  
+  
 <img id="igprfedi" class="igprfavtr"
      name="avatar"
  ng-src="{{user.avatar}}" alt="avatar"
  ><br>
 
-Change your avatar: 
+Change your avatar:<br>
 <input type="file"
  onchange="loaimG()"
  id="inflimg">
@@ -13,11 +22,13 @@ Change your avatar:
 
 
   
-First Name: <input type="text"
+First Name:<br>
+<input type="text"
         ng-model="user.firstnm" name="firstnm"
                    value="{{user.firstnm}}"><br>
 
-Last Name: <input type="text"
+Last Name:<br>
+<input type="text"
                   name="lastnm" ng-model="user.lastnm"
               value="{{user.lastnm}}"><br>
 
@@ -28,11 +39,12 @@ Gender: <input type="radio"
          name="gender" ng-model="user.gender"
          value="F"> Female<br>
 
-Age: <input type="number"
+Age:<br>
+<input type="number"
             name="age" ng-model="user.age"      
           value="{{user.age}}" required><br>
 
-Country: <select name="country"
+Country:<br><select name="country"
                  ng-model="user.country">
 <option value="">Country...</option>
 <option value="AF">Afghanistan</option>
@@ -284,11 +296,11 @@ Country: <select name="country"
 <option value="ZW">Zimbabwe</option>
 </select><br>
 
-Learning: <input type="text"
+Learning:<br><input type="text"
                  name="learning" ng-model="user.learning"
           value="{{user.learning}}"><br>
 
-Speaks: <input type="text"
+Speaks:<br><input type="text"
                name="speaks" ng-model="user.speaks"
         value="{{user.speaks}}"><br>
 
