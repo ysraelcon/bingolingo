@@ -81,7 +81,7 @@ Ap.get('/profile',isLoggedIn,function(req,res){
 });//get f
   
 Ap.get('/edit',isLoggedIn,function(req,res){
- res.json(req.user);
+ res.json({message:req.flash("errors")});
   //res.render('edit.ejs',{user:req.user});
 });//get 
   
@@ -106,6 +106,9 @@ const errors = req.validationErrors();
  User.findOne({_id:req.user._id},
               (err, user) => {
  // updating that event
+   
+   //console.log(req.body);
+ user.avatar= req.body.avatar;  
  user.firstnm = req.body.firstnm;
  user.lastnm = req.body.lastnm;
  user.gender= req.body.gender;

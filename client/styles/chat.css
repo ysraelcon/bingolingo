@@ -1,6 +1,6 @@
 /*style chat..*/
   
-  #dvchtrnm{
+  .dvchtrmnm{
     display:block;
       text-align:center;
     border-bottom:1px solid black;
@@ -14,14 +14,14 @@
     color:#2F4F4F;}
 
 
-#inlstroom,#insctrm{
+.inlstrms{
   width:120px;
 }
 
-
-#fmgoroom{
+.fmgorms{
   display:inline-block;
 }
+
 
    .spchtrm{
     border:1px solid black;
@@ -43,8 +43,8 @@
   display:flex;
     flex-direction:column;
   /*overflow:auto;resize:both;*/
-  position:absolute;
-    left:12%;top:20%;
+  position:absolute !important;
+    left:12%;top:10%;
   width:80%;height:60%;max-width:600px;
   border:1px solid grey;
     border-radius:5px;
@@ -216,6 +216,12 @@
 
 /*..chat request*/
      
+
+/*img prf tabla*/
+.igprftbl{
+  width:25px;height:25px;}
+
+
  /*tabla users chat..*/
      
 #tblusrs{
@@ -277,15 +283,17 @@ th, td{
       
 /*waiting section chtrqs..*/
 
-#dvwti{
+.dvwti{
   display:flex;
     flex-direction:row;
     justify-content:space-evenly;
+  position:absolute;
+    bottom:0px;
   width:200px;
   border:1px solid grey;
     border-radius:5px;}
 
-    #dvwti>div{
+    .dvwti>div{
       border:1px solid grey;
         border-radius:5px;}
 
@@ -302,15 +310,17 @@ th, td{
 
 /*receiving chat request..*/
 
-#dvchtrqsof{
+.dvchtrqsof{
   display:flex;
     flex-direction:row;
     justify-content:space-evenly;
+  position:absolute;
+    top:0px;
   width:200px;
   border:1px solid grey;
     border-radius:5px;}
 
-    #dvchtrqsof>div{
+    .dvchtrqsof>div{
       border:1px solid grey;
         border-radius:5px;}
     #dvchtrqsof_t{

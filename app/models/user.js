@@ -2,6 +2,7 @@ var Mng=require('mongoose');
 var bcrypt=require('bcrypt-nodejs');
 
 var usrsch=Mng.Schema({
+  avatar:String,
   firstnm:String,
   lastnm:String,
   country:String,
@@ -11,6 +12,7 @@ var usrsch=Mng.Schema({
   speaks:String,
 email:{type:String,unique:true},
 password:{type:String},
+  notes:String,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
   chats:Mng.Schema.Types.Mixed
