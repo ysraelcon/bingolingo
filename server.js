@@ -363,7 +363,8 @@ usridmnd=usri;
 break;
 }//if
 }//for
-    
+   
+   if(usrscnnt[usridmnd]) 
    var nmemnd=usrscnnt[usridmnd].user.firstnm;
    
    io.to(dt.sktidmnd).emit("aceptd chtrqs",
@@ -802,7 +803,8 @@ socket.on("slrjue",function(dt){
   socket.leave(dt.room);
 
   var usrid= socket.request.user._id;
-    
+  
+  if(!socket.id) return;
   delete jue[dt.room].nroplyact[usrid];//eliminar
   //console.log(jue);
 
@@ -833,6 +835,7 @@ socket.on('disconnect', function(data) {
   
   for(var rm in usrsroom){
  if(usrsroom[rm][socket.request.user._id]){
+   if(!socket.id) return;
  delete usrsroom[rm][socket.request.user._id];
 io.to(rm).emit('mndusrroom',
         {usrsroom:usrsroom[rm],

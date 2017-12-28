@@ -19,6 +19,11 @@ font-awesome:
 
 +soluciones:
 
+9sl..
+heroku logs --tail
+heroku logs -n 150
+..9sl
+
 8sl..
 forgot password:
 http://sahatyalkabov.com/how-to-implement-password-reset-in-nodejs/
