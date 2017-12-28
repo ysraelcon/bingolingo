@@ -775,7 +775,7 @@ var nudiv=document.createElement("DIV");
 
 nudiv.innerHTML='<div id="dvtitoptgme">'+
  '<div id="dvtitoptgmenme">Game Options</div>'+
- '<div id="dvtitoptgme_x">X</div></div>'+
+ '<div id="dvtitoptgme_x" onclick="crrgmeopT()">X</div></div>'+
 
  '<div id="dvtypgme">'+
  '<span>Type of game:</span>'+
@@ -814,6 +814,13 @@ dvcongme.appendChild(nudiv);
   }//if dvcrtgme no existe
     
 }//crtgmE opciones
+
+
+
+//cerrar las opciones de juegos
+function crrgmeopT(){
+ dvcongme.removeChild(dvcrtgme);
+}//crrgmeopT
 
 
 
@@ -1082,6 +1089,16 @@ function crrjuE(rmj){
   dvcongme.removeChild(dvjue);
   sktclt.emit("slrjue",{room:rmj});
 }//cerrar juego
+
+
+
+sktclt.on("elim gmebar",function(dt){
+ //dt{rmgme}
+var dvgmebar= document.getElementById("dvgmebar_"+dt.rmgme);
+
+dvcongme.removeChild(dvgmebar);
+
+});//skcl elim gmebar
 
 
 

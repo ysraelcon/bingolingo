@@ -550,7 +550,8 @@ io.to(socket.id).emit("crear juego",
               typegme: dt.typgme,
              liswrd: dt.liswrd,
              nroply: dt.nroply });
-socket.broadcast.emit("los demas barjue",
+//socket.broadcast.emit("los demas barjue",
+io.sockets.emit("los demas barjue",
                 {nrogme:nrogme,
                  typgme:dt.typgme,
                  liswrd:dt.liswrd,
@@ -805,9 +806,16 @@ socket.on("slrjue",function(dt){
   delete jue[dt.room].nroplyact[usrid];//eliminar
   //console.log(jue);
 
-  io.sockets.emit("mndusrjue",
+  var nroingme= Object.keys(jue[dt.room].nroplyact).length;
+
+  if(nroingme==0){//elimina bar
+    io.sockets.emit("elim gmebar",
+                 {rmgme:dt.room});
+  }else{
+    io.sockets.emit("mndusrjue",
                   {usrjue: jue[dt.room].nroplyact,
                    nrogme: dt.room});
+}//else mndusrjue
     
 });//skon salir del juego
   
