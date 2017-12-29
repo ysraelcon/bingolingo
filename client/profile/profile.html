@@ -52,7 +52,7 @@
   
   <svg id="svgbstlk" xmlns="http://www.w3.org/2000/svg" version="1.0" width="311" height="65" viewBox="0 0 451.000000 115.000000" preserveAspectRatio="xMidYMid meet">
 <metadata>
-Created by potrace 1.15, written by Peter Selinger 2001-2017
+BesTalk, the best of exchange language websites.
 </metadata>
 <g transform="translate(0.000000,133.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
 <path d="M3053 1071 c-76 -47 -163 -198 -237 -409 -48 -137 -83 -206 -133 -262 -67 -75 -113 -71 -98 7 10 54 61 179 95 236 37 59 37 67 4 67 -29 0 -60 -14 -91 -43 -20 -18 -23 -18 -29 -3 -9 24 -57 46 -99 46 -140 0 -276 -187 -263 -363 5 -66 21 -87 70 -87 57 0 124 55 191 158 l35 53 -5 -84 c-7 -102 3 -127 50 -127 45 0 100 40 153 113 l45 61 -7 -62 c-9 -80 9 -112 62 -112 51 0 96 24 148 80 26 27 46 47 46 44 0 -2 -11 -31 -24 -64 l-25 -60 39 0 c48 0 60 14 130 155 75 151 159 233 216 211 10 -4 14 -16 12 -38 -2 -28 -10 -37 -48 -56 -24 -12 -57 -22 -72 -22 -35 0 -48 -29 -47 -103 0 -68 18 -115 51 -140 25 -18 31 -19 70 -8 53 16 137 99 192 189 59 97 40 110 -22 14 -49 -76 -100 -122 -134 -122 -29 0 -50 37 -55 98 l-5 59 47 13 c68 19 125 75 125 123 0 104 -117 86 -245 -38 -87 -84 -75 -44 17 55 189 203 276 367 228 426 -18 21 -82 14 -119 -14 -67 -49 -161 -215 -236 -417 -50 -134 -90 -209 -143 -261 -78 -78 -118 -72 -109 15 12 116 38 173 122 268 184 209 260 357 209 407 -21 22 -72 20 -111 -3z m95 -29 c7 -45 -71 -181 -182 -319 -27 -35 -51 -61 -54 -59 -6 7 67 184 115 279 59 114 113 158 121 99z m268 -14 c-13 -65 -116 -232 -198 -321 l-38 -42 21 55 c11 30 36 89 55 131 67 150 108 209 146 209 18 0 20 -4 14 -32z m-853 -379 c13 -20 -88 -185 -154 -252 -38 -39 -53 -48 -76 -45 -23 2 -29 8 -31 34 -7 69 74 212 148 262 39 26 97 27 113 1z"/>
@@ -232,6 +232,8 @@ Created by potrace 1.15, written by Peter Selinger 2001-2017
 <div id="dvconcht"
      class="dvconocul">
 
+  <button id="btnthm" onclick="chnthM()"><svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1390 1303q-54 9-110 9-182 0-337-90t-245-245-90-337q0-192 104-357-201 60-328.5 229t-127.5 384q0 130 51 248.5t136.5 204 204 136.5 248.5 51q144 0 273.5-61.5t220.5-171.5zm203-85q-94 203-283.5 324.5t-413.5 121.5q-156 0-298-61t-245-164-164-245-61-298q0-153 57.5-292.5t156-241.5 235.5-164.5 290-68.5q44-2 61 39 18 41-15 72-86 78-131.5 181.5t-45.5 218.5q0 148 73 273t198 198 273 73q118 0 228-51 41-18 72 13 14 14 17.5 34t-4.5 38z"/></svg></button>
+  
   <div id="dvchtru">
           
     
@@ -384,8 +386,23 @@ Created by potrace 1.15, written by Peter Selinger 2001-2017
 </div><!-- dv chat room user -->
   
 </div><!-- dv cont cht -->
+ 
+  <script>
+  //cambiar tema del chat
+function chnthM(){
   
+ if(btnthm.style.backgroundColor=="white"){
+ btnthm.removeAttribute("style");
+ dvconcht.style.backgroundColor= "#f5f5f5";
+   
+}else{
+ btnthm.style.backgroundColor= "white";
+ dvconcht.style.backgroundColor= "black";
+}//else
+}//chnthM
+  </script>
 
+  
   
 <link rel="stylesheet"
       href="/styles/game.css">  
@@ -807,9 +824,13 @@ if(thistbf){
     background-color:black;
       color:white;}
   
+  #spmdwth{
+    position:relative;
+      left:5px;}
+  
   #sperr{
     position:absolute;
-      right:0px;
+      right:5px;
       bottom:0px;
     
   }
@@ -826,12 +847,12 @@ if(thistbf){
 
   
   <div id="dvfnd">
-    <span>Made with 
-      <img src="https://png.icons8.com/potato/color/24" title="Potato" width="24" height="24">
+    <span id="spmdwth">Made with 
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIoSURBVEhL5ZJPTxNBGMYXjCZ68cDRb+DJD0CCISjWNkLbXVpp9n8Zg3S3wkFC2zDdglDprp5NNIYrRuSkiRy4ePFTcOLOgeihMePM+C50t0Oz4JEneTKZP89v3n13pKupdwjdClwz6zvlBb9angwW5Zuw9X/CGA8HjvkicK3jwLVJj4/euLYOxy4nVmXg2F9i4Ih9196C4xcTxsqNwLG+i6Bx+1W7ALFk2lGUa7Qln0Uw5leoxB3Ofcc+ZK2E+GARSRqioY9hWOT4Bcydqn0fEOfrX+Vi+PPMeN9axI61DBixeM9d65MwnMDtudltQPWLvXHftb6Jgkn8el4jTS27D7io4LUciIKDXFfzfKTPlKyWnhBPz30AZFT0wNt4OIkbmszHliGTFeURWSsXxwF5pmBRu0Or78bDoVd1mbTndeEeq3zNVDi8Xsx02esD7Jn8imWIwqFRaoxfEl/vVEyC1WkOZ27q+V1ARrVenvXoJZFw2FuRfcck69YMqRUen8JrhfSfjQV1BJBRtXTFqNPDLNSpGBwS9jY0q3bzWYn9RFKbSZ2COZyatmkDcP3CkjTceJr5FR6mvaQvYop/PqYjm/cC426quZ+AOl8tI78sCjMvTU2QuQejwj2sZX8ghK4DZrCaWm5PBEEPR0nq3t3IWq2Y7tJ2tSGaXDT0slHMnPTCek3b9ZsV0kbKbYhcTp4lpz0t+x6rua/0X+x6Wn7LM+Ux2L4SkqS/5cRzDLlpspQAAAAASUVORK5CYII=" title="Potato" width="24" height="24">
       by BesTalk Team</span> 
     
     <span id="sperr"
-          onclick="rpT()">Suggestions <svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 654v978q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-978q0-15 11-24 8-7 39-34.5t41.5-36 45.5-37.5 70-55.5 96-73 143.5-107 192.5-140.5q5-4 52.5-40t71.5-52.5 64-35 69-18.5 69 18.5 65 35.5 71 52 52 40q110 80 192.5 140.5t143.5 107 96 73 70 55.5 45.5 37.5 41.5 36 39 34.5q11 9 11 24zm-564 585q263-191 345-252 11-8 12.5-20.5t-6.5-23.5l-38-52q-8-11-21-12.5t-24 6.5q-231 169-343 250-5 3-52 39t-71.5 52.5-64.5 35-69 18.5-69-18.5-64.5-35-71.5-52.5-52-39q-186-134-343-250-11-8-24-6.5t-21 12.5l-38 52q-8 11-6.5 23.5t12.5 20.5q82 61 345 252 10 8 50 38t65 47 64 39.5 77.5 33.5 75.5 11 75.5-11 79-34.5 64.5-39.5 65-47.5 48-36.5z" fill="#fff"/></svg></span><!-- envelope-open -->
+          onclick="rpT()">Suggestions <svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 654v978q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-978q0-15 11-24 8-7 39-34.5t41.5-36 45.5-37.5 70-55.5 96-73 143.5-107 192.5-140.5q5-4 52.5-40t71.5-52.5 64-35 69-18.5 69 18.5 65 35.5 71 52 52 40q110 80 192.5 140.5t143.5 107 96 73 70 55.5 45.5 37.5 41.5 36 39 34.5q11 9 11 24zm-564 585q263-191 345-252 11-8 12.5-20.5t-6.5-23.5l-38-52q-8-11-21-12.5t-24 6.5q-231 169-343 250-5 3-52 39t-71.5 52.5-64.5 35-69 18.5-69-18.5-64.5-35-71.5-52.5-52-39q-186-134-343-250-11-8-24-6.5t-21 12.5l-38 52q-8 11-6.5 23.5t12.5 20.5q82 61 345 252 10 8 50 38t65 47 64 39.5 77.5 33.5 75.5 11 75.5-11 79-34.5 64.5-39.5 65-47.5 48-36.5z" fill="yellow"/></svg></span><!-- envelope-open -->
    
 </div><!-- footer / Visit the stable page: <a href="https://bingolingo.glitch.me" target="_blank">BingoLingo</a>
       <br> -->
