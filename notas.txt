@@ -19,6 +19,41 @@ font-awesome:
 
 +soluciones:
 
+
+10sl..
+https://simplewebrtc.com/audio.js
+
+<script 
+
+src="https://simplewebrtc.com/latest-v2.js"></script>
+
+<script>
+var roomrtc= roombth;
+
+var webrtc= new SimpleWebRTC({
+ localVideoEl:'', remoteVideosEl:'',
+ autoRquestMedia: false,
+ enableDataChannels: false,
+ media:{audio:true,
+        video:false},
+ receiveMedia: {offerToReceiveAudio:1,
+            offerToReceiveVideo:0}
+});//webrtc
+
+webrtc.on("readyToCall",function(){
+  webrtc.joinRoom(roomrtc, function(err,res){
+if(err) return;
+setTimeout(function(){
+ webrtc.sendToAll("juntado rtc",
+               {msgrtc:"juntadoenrtc"});
+},1000);//settimeout
+});//joinroom
+});//webrtc ready to call
+
+</script>
+..10sl
+
+
 9sl..
 heroku logs --tail
 heroku logs -n 150
