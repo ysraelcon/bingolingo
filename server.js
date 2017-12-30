@@ -215,6 +215,7 @@ console.log("cerr room "+dt);
 socket.leave(dt);
   
   if(!socket.id) return;
+  if(socket.request.user)
   delete usrsroom[dt][socket.request.user._id];
   io.to(dt).emit('mndusrroom',
                 {usrsroom:usrsroom[dt],
@@ -499,8 +500,44 @@ usr.save((err)=>{
                     room:dt.roombth});
 });//skon send message chat rquest
   
+
+  
+socket.on("solicitar llamada",function(dt){
+ //dt{rmrtc:roombth}
+console.log("solicita llamada");
+ io.to(dt.rmrtc).emit("solicitud de aceptacion de la llamada",
+  {rmrtc:dt.rmrtc, sktidmnd:socket.id,
+   nmemnd: socket.request.user.firstnm});
+  
+});//skon solicitar llamada  
+  
+ 
+  
+socket.on("cancelar llamada entrante", function(dt){
+ //dt{rmrtc}
+io.to(dt.rmrtc).emit("se cancelo llmd",
+                    {rmrtc:dt.rmrtc});
+});//skon cancelar llamada entr  
   
 
+  
+socket.on("correr llmd",function(dt){
+ //dt{rmrtc}
+
+io.to(dt.rmrtc).emit("correr webrtc",
+                      {rmrtc:dt.rmrtc});
+});//skon correr llmd  
+  
+ 
+socket.on("colgar llamada",function(dt){
+ //dt{rmrtc}
+io.to(dt.rmrtc).emit("se cuelga llmd",
+                   {rmrtc:dt.rmrtc});
+});//skon colgar llamada 
+  
+  
+  
+//guardar nota
 socket.on("save note",function(dt){
 //dt{nte}
 
