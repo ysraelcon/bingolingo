@@ -337,5 +337,32 @@ th, td{
       background-color:#800000;
         color:white;}
 
+/*call*/
 
+.dvrcbcll,.dvespcll{
+  display:flex;
+    flex-direction:row;
+  position:absolute;
+    top:10%;
+  width:100%;
+  background-color:white;
+    color:grey;
+}
+.dvrcbcllnm,.dvespcllnm{
+  width:40%;
+}
+.dvrcbcllnm b{color:black}
+.dvrcbcllmas,.dvrcbcllcrr,.dvespcllcrr{
+  text-align:center;
+  width:10%;
+  border:1px solid;
+    border-radius:5%;
+    margin-left:5px;
+}
+.dvrcbcllmas{
+ background-color:#2E8B57;
+   color:white;}
+.dvrcbcllcrr,.dvespcllcrr{
+ background-color:#800000;
+   color:white;}
 

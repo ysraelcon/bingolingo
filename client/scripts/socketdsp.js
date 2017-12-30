@@ -621,12 +621,14 @@ nudiv.innerHTML='<div id="dvcht_t_'+roombthx+'" class="dvcht_t">'+
 '<div id="dvcht_u_'+roombthx+'" class="dvcht_u col_u">'+
 
 '<div id="dvcht_u_nm_'+roombthx+'" class="dvcht_u_nm"></div>'+
-    '<div id="dvcht_u_bts_'+roombthx+'" class="dvcht_u_bts">'+          
-    '<input type="button" value="_"'+
-   ' onclick="empbuT()">'+
-  '<button onclick="alert(\'in construction\')">'+
-'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>'+
+    '<div id="dvcht_u_bts_'+roombthx+'" class="dvcht_u_bts">'+  
+  '<button id="btcll_'+roombthx+'" onclick="slcllM(this,\''+roombthx+'\')">'+
+'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>'+//phone
 '</button>'+
+  '<button id="btmtecll_'+roombthx+'" class="btmtecll">'+
+'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M463 945l-101 101q-42-103-42-214v-128q0-26 19-45t45-19 45 19 19 45v128q0 53 15 113zm1114-602l-361 361v128q0 132-94 226t-226 94q-55 0-109-19l-96 96q97 51 205 51 185 0 316.5-131.5t131.5-316.5v-128q0-26 19-45t45-19 45 19 19 45v128q0 221-147.5 384.5t-364.5 187.5v132h256q26 0 45 19t19 45-19 45-45 19h-640q-26 0-45-19t-19-45 19-45 45-19h256v-132q-125-13-235-81l-254 254q-10 10-23 10t-23-10l-82-82q-10-10-10-23t10-23l1234-1234q10-10 23-10t23 10l82 82q10 10 10 23t-10 23zm-380-132l-621 621v-512q0-132 94-226t226-94q102 0 184.5 59t116.5 152z"/></svg>'+//microphhone-slash
+'</button>'+
+  '<audio id="lclaud" style="display:none" oncontextmenu="return false;" disabled></audio>'+  
   '</div>'+//u_bts
   '</div>'+
 
@@ -724,6 +726,23 @@ for(var msgcht in dt.chtprv){
 var dvcht_c= document.getElementById("dvcht_c_"+dt.roombth);
 
 dvcht_c.innerHTML=licht;
+  
+if(typeof(scrrtc)=="undefined"){
+  console.log("mete scripts rtc");
+var scr1= document.createElement("script");
+scr1.id="scrrtc"
+scr1.src="https://simplewebrtc.com/latest-v2.js";
+
+var scr2= document.createElement("script");
+scr2.id="scrrtchec"
+scr2.src="scripts/webrtc.js";
+
+document.querySelector("body").appendChild(scr1);
+document.querySelector("body").appendChild(scr2);
+
+  
+
+}//if no script rtc  
   
 });//skcl meter usrs chtrqs
 
