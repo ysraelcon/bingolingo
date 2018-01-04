@@ -119,8 +119,8 @@
 .fmchtrm_msg{
     display:flex;
       flex-direction:row;  }  
-  .btnchtrm_msg{width:40px;} 
-  .btnchtrm_emj{
+  .btchtrm_msg{width:40px;} 
+  .btchtrm_emj{
     width:40px;
     margin-right:20px;}
     
@@ -130,17 +130,17 @@
 
 
  /*colores general..*/
-.dvchtrm_titnm{
+.gnrl_titnm{
   background-color:#9370db;/*purpura*/
     color:white;}
-.dvchtrm_titcrr{
+.gnrl_titcrr{
   background-color:#483D8B;/*ouroura oscuro*/
     color:white;
   /*#800000 #4B0082*/} 
 
-.dvchtrm_con{
+.gnrl_con{
   background-color:#ffDAB9;}/*carne*/
-.dvchtrm_usr{
+.gnrl_usr{
   background-color:#FFF0F5;/*rosa suave*/
     color:black;}
 

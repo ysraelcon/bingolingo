@@ -24,10 +24,10 @@ document.querySelector("body").appendChild(scr1);
 document.querySelector("body").appendChild(scr2);
 
   
-
 }//if no script rtc  
   
 }//click tab chat
+
 
 
 //llena tabla users chat
@@ -404,7 +404,7 @@ var dvchtrm_= document.getElementById("dvchtrm_"+rmx);
     
 nudiv.innerHTML='<div class="dvchtrm_tit">'+
 
-    '<div class="dvchtrm_titnm">'+(rooms[rmx]||rmx)+'</div>'+
+    '<div class="dvchtrm_titnm gnrl_titnm">'+(rooms[rmx]||rmx)+'</div>'+
 
   '<div id="dvchtrm_titmin_'+rmx+
   '" class="dvchtrm_titmin"'+
@@ -413,7 +413,7 @@ nudiv.innerHTML='<div class="dvchtrm_tit">'+
   '<div class="dvchtrm_titrsz"'+
   ' onclick="restamchT(\''+rmx+'\')">L</div>'+
 
-  '<div class="dvchtrm_titcrr"'+
+  '<div class="dvchtrm_titcrr gnrl_titcrr"'+
   ' onclick="crrdvchT(\''+rmx+'\')">x</div>'+
 
   '</div>'+//dvchtrm_tit
@@ -421,11 +421,12 @@ nudiv.innerHTML='<div class="dvchtrm_tit">'+
   '<div id="dvchtrm_conusr_'+rmx+
   '" class="dvchtrm_conusr">'+
 
-  '<div id="dvchtrm_con_'+rmx+'" class="dvchtrm_con"></div>'+
+  '<div id="dvchtrm_con_'+rmx+'" class="dvchtrm_con gnrl_con"></div>'+
   
-  '<div id="dvchtrm_usr_'+rmx+'" class="dvchtrm_usr">'+
+  '<div id="dvchtrm_usr_'+rmx+'" class="dvchtrm_usr gnrl_usr">'+
 
-    '<div id="dvchtrm_usrnm_'+rmx+'" class="dvchtrm_usrnm"></div>'+
+    '<div id="dvchtrm_usrnm_'+rmx+
+  '" class="dvchtrm_usrnm"></div>'+
 
     '<div class="dvchtrm_usrbts">'+ 
     '<input type="button" value="_"'+
@@ -435,7 +436,7 @@ nudiv.innerHTML='<div class="dvchtrm_tit">'+
   '</div>'+ //dvchtrm_conusr
 
   '<div id="dvchtrm_msg_'+rmx+
-  'class="dvchtrm_msg">'+
+  '" class="dvchtrm_msg">'+
   '<form class="fmchtrm_msg" onsubmit="envmsG(event,\''+rmx+'\')">'+
 
   '<input type="text" id="inchtrm_msg_'+rmx+'" class="inchtrm_msg" autocorrect="off" autocomplete="off"'+
@@ -840,8 +841,8 @@ sktclt.on("dejar prv",function(dt){
 //=====juego
 
 
-//opciones de juego para crearlo
-function crtgmE(){
+//opciones de juego para crear etw
+function etwgmeopT(){
  console.log("1opciones de juego");
   if(typeof(dvcrtgme)=="undefined"){
   
@@ -851,13 +852,6 @@ var nudiv=document.createElement("DIV");
 nudiv.innerHTML='<div id="dvtitoptgme">'+
  '<div id="dvtitoptgmenme">Game Options</div>'+
  '<div id="dvtitoptgme_x" onclick="crrgmeopT()">X</div></div>'+
-
- '<div id="dvtypgme">'+
- '<span>Type of game:</span>'+
- '<select id="sltypgme">'+
- '<option id="optetw">Explain The Word</option>'+
- '<option id="optoth">Others, in future</option>'+
- '</select></div>'+
 
  '<div style="display:inline-block">'+
  '<span>Select word list:</span><br>'+
@@ -882,13 +876,13 @@ nudiv.innerHTML='<div id="dvtitoptgme">'+
  '</select></div><br>'+
 
  '<div id="dvrdygme">'+
- '<input type="button" id="btrdygme" value="Create" onclick="solgmE()">'+
+ '<input type="button" id="btrdygme" value="Create" onclick="solgmE(\'Explain The Word\')">'+
  '</div></div>';
 
 dvcongme.appendChild(nudiv);
   }//if dvcrtgme no existe
     
-}//crtgmE opciones
+}//etwgmeopT
 
 
 
@@ -899,16 +893,16 @@ function crrgmeopT(){
 
 
 
-//solicitar juego
-function solgmE(){
- var typgme= sltypgme.options[sltypgme.selectedIndex].value;
+//solicitar juego explain the word
+function solgmE(typgmef){
+ //var typgme= sltypgme.options[sltypgme.selectedIndex].value;
  var liswrd= sllst.options[sllst.selectedIndex].id;
  var nroply= slnroply.options[slnroply.selectedIndex].value;
  
  dvcongme.removeChild(dvcrtgme);  
   
  sktclt.emit("solicitar game",
-         {typgme: typgme,
+         {typgme: typgmef,
           liswrd: liswrd,
           nroply: nroply});
 }//solgmE
@@ -987,41 +981,41 @@ function crtgaM(rmjf,nmejuef,lisjuef,nroplyf){
 var nudivj=document.createElement("DIV");
 nudivj.id="dvjue";
 
-nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
-'<div id="dvjnm">'+
-  '<div id="dvjnmtit">Explain The Word</div>'+
-  '<div id="dvjnmmit" onclick="restamjuE()">L</div>'+
-  '<div id="dvjnmcrr" onclick="crrjuE(\''+rmjf+'\')">X</div>'+
+nudivj.innerHTML='<div id="dvjue_cab" draggable="true">'+
+'<div id="dvjue_tit" class="dvchtrm_tit">'+
+  '<div id="dvjue_titnm">Explain The Word</div>'+
+  '<div id="dvjue_titrsz" onclick="restamjuE()">L</div>'+
+  '<div id="dvjue_titcrr" class="prv_titcrr" onclick="crrjuE(\''+rmjf+'\')">X</div>'+
   '</div>'+
   
-'<div id="dvjexp">Explains: <span id="spwrdtogss">wordX</span'+
-'><span id="sptmr">00</span></div></div>'+
+'<div id="dvjue_exp">Explains: <span id="spwrdtogss">wordX</span'+
+'><span id="sptmr">00</span></div>'+
+'</div>'+//dvjue_cab
   
-'<div id="dvjcu">'+
-'<div id="dvjcon"></div>'+
-'<div id="dvjuse">'+
-  '<div id="dvjue_u_nm_'+rmjf+'" class="dvjue_u_nm"></div>'+
-    '<div id="dvjue_u_bts_'+rmjf+'" class="dvjue_u_bts">'+          
+'<div id="dvjue_conusr" class="dvchtrm_conusr">'+
+'<div id="dvjue_con" class="dvchtrm_con"></div>'+
+'<div id="dvjue_usr" class="dvchtrm_usr">'+
+
+  '<div id="dvjue_usrnm_'+rmjf+'" class="dvchtrm_usrnm"></div>'+
+  
+    '<div id="dvjue_usrbts_'+rmjf+'" class="dvchtrm_usrbts">'+          
     '<input type="button" value="_"'+
    ' onclick="empbuT()"></div>'+
   '</div>'+
-'</div>'+
+'</div>'+//_conusr
   
+  '<div id="dvjue_msg">'+
   
-  '<div id="dvjmsg">'+
-  
-'<form id="fmjmsg" class="fmchtmsg" onsubmit="envmsgJ(event)">'+
-'<input type="text" id="injmsg" class="inchtmsg" placeholder="write your text..." data-room="'+rmjf+'">'+
-'<button id="btnjsndm" class="btnchtmsg" type="submit" >'+
+'<form id="fmjue_msg" class="fmchtrm_msg" onsubmit="envmsgJ(event)">'+
+'<input type="text" id="injue_msg" class="inchtrm_msg" placeholder="write your text..." data-room="'+rmjf+'">'+
+
+'<button id="btnjue_sndmsg" class="btchtrm_msg" type="submit" >'+
   '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
   '</button>'+  
-'<button'+
-  ' class="btnchtemj"  onclick="selemJ()">'+
+'<button class="btchtrm_emj"  onclick="selemJ()">'+
   '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
     '</button>'+  
-'</form></div>'+
-     
-     '</div>';;
+'</form></div>';
 
   dvcongme.appendChild(nudivj);
     
@@ -1034,7 +1028,7 @@ nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
   jQuery(function($){
 
 var draggableDiv = $('#dvjue').draggable();
-$('#dvjcon', draggableDiv)
+$('#dvjue_con', draggableDiv)
   .mousedown(function(ev) {
   draggableDiv.draggable('disable');
 }).mouseup(function(ev) {
@@ -1046,7 +1040,6 @@ $("#dvjue").resizable();
 });//jQuery
 }//if no esta, crea
 };//crtgaM
-
 
 
 
@@ -1064,10 +1057,10 @@ for(var nom in dt.usrjue){
           dt.usrjue[nom][0]+"<br>";
 }//for
 
-var dvjue_u_nm= document.getElementById("dvjue_u_nm_"+dt.nrogme);
+var dvjue_usrnm_= document.getElementById("dvjue_usrnm_"+dt.nrogme);
   
-dvjue_u_nm.innerHTML="";
-dvjue_u_nm.innerHTML=usrj;
+dvjue_usrnm_.innerHTML="";
+dvjue_usrnm_.innerHTML=usrj;
   
  /*   
   if(Object.keys(dt.usrjue).length==dt.nroply){
@@ -1109,7 +1102,7 @@ sktclt.on("los que adivinan",function(dt){
   //dt{usrexpl}
   console.log("a adivinar!");
   spwrdtogss.innerHTML=dt.usrexpl;
-  dvjcon.innerHTML="";
+  dvjue_con.innerHTML="";
 });//skcl los que adivinan
 
 
@@ -1117,9 +1110,13 @@ sktclt.on("los que adivinan",function(dt){
 sktclt.on("no se adivino",function(dt){
 //dt{wrdtogss}
   console.log("no se adivino");
- dvjcon.innerHTML+="The word was <b>"+
+ dvjue_con.innerHTML+="The word was <b>"+
          dt.wrdtogss+"</b><br>";
   
+  jQuery(function($){
+  $("#dvjue_con").stop().animate(
+    {scrollTop:$("#dvjcon")[0].scrollHeight}, 100);
+});//jquery
 });//skcl si no se adivina
 
 
@@ -1137,7 +1134,7 @@ dvjuepnt.innerHTML=dt.pntply;
 sktclt.on("quien gano",function(dt){
 //dt{wnrnme}
 
-dvjcon.innerHTML="The winner is: <b>"+
+dvjue_con.innerHTML="The winner is: <b>"+
               dt.wnrnme+"</b>!<br>";
 
 });//skcl quien gano
@@ -1180,13 +1177,13 @@ dvcongme.removeChild(dvgmebar);
 function envmsgJ(ev){
   ev.preventDefault();
 
-if(injmsg.value!=""){
+if(injue_msg.value!=""){
  sktclt.emit("send messagejue",
-             {msg:injmsg.value,
-        nrogme:injmsg.getAttribute("data-room")});
+             {msg:injue_msg.value,
+        nrogme:injue_msg.getAttribute("data-room")});
 }//if no vacio
 
-injmsg.value="";
+injue_msg.value="";
 }//on send msg jue, del form envmsgJ(event)
 
 
@@ -1196,19 +1193,19 @@ sktclt.on('new messagejue', function(dt){
   
    if(dt.guess){
      
-     dvjcon.innerHTML+="<b>"+dt.nick+":</b> "+
+     dvjue_con.innerHTML+="<b>"+dt.nick+":</b> "+
        dt.msg+"<br/>"+
        "BINGO, you guessed the word!<br>";
      sktclt.emit("10 seg",{nrogme: dt.nrogme});
      
    }else{
-     dvjcon.innerHTML+="<b>"+dt.nick+":</b> "+
+     dvjue_con.innerHTML+="<b>"+dt.nick+":</b> "+
        dt.msg+"<br/>";
    }//else no bingo
   
 jQuery(function($){
-  $("#dvjcon").stop().animate(
-    {scrollTop:$("#dvjcon")[0].scrollHeight}, 100);
+  $("#dvjue_con").stop().animate(
+    {scrollTop:$("#dvjue_con")[0].scrollHeight}, 100);
 });//jquery
 });//on receive msg juego
 

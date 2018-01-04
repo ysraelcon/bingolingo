@@ -418,10 +418,10 @@ function chnthM(){
 <div id="dvcongme"
      class="dvconocul">
   
-  <span>In construction...</span><br>
+  
   <input type="button"
-         value="create game" id="btncrtgm"
-         onclick="crtgmE()"> <br>  
+         value="Explain The Word" id="btncrtgm"
+         onclick="etwgmeopT()"> <br>  
 
 
 </div><!-- dv cont game -->
@@ -588,6 +588,9 @@ reader.onloadend= function(){
       flex-direction:column;
     width:100%;height:90%;
   }
+  #fmdct{
+    display:flex;
+      flex-direction:row;}
   #dvdctcon input[list="dtlstlng"]{
       width:40px;
     }
@@ -604,7 +607,8 @@ reader.onloadend= function(){
   <div id="dvdcttit">Dictionary/Translator</div>
   
   <div id="dvdctcon">
- <form onsubmit="event.preventDefault()">
+ <form id="fmdct"
+       onsubmit="event.preventDefault()">
 
   <input type="text" id="inwrd"
    placeholder="word...">
