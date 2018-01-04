@@ -13,6 +13,7 @@ else{
 }//solicitar llamada
 
 
+
 sktclt.on("solicitud de aceptacion de la llamada",function(dt){
  //dt{rmrtc,sktidmnd,nmemnd}
 
@@ -29,9 +30,9 @@ nudiv.innerHTML= '<div class="dvrcbcllnm"><b>'+dt.nmemnd+
 '<div class="dvrcbcllmas" onclick="acpclL(\''+dt.rmrtc+'\')">+</div>'+
 '<div class="dvrcbcllcrr" onclick="cncclL(\''+dt.rmrtc+'\')">x</div>';
 
-var dvcht_c= document.getElementById("dvcht_c_"+dt.rmrtc);
+var dvchtrm_con_= document.getElementById("dvchtrm_con_"+dt.rmrtc);
 
-dvcht_c.appendChild(nudiv);
+dvchtrm_con_.appendChild(nudiv);
     
 }//if el que rcb llmd
 else{
@@ -45,42 +46,46 @@ nudiv.innerHTML= '<div class="dvespcllnm">waiting for '+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>... </div>'+
 '<div class="dvespcllcrr" onclick="crrclL(\''+dt.rmrtc+'\')">x</div>';
 
-var dvcht_c= document.getElementById("dvcht_c_"+dt.rmrtc);
+var dvchtrm_con_= document.getElementById("dvchtrm_con_"+dt.rmrtc);
 
-dvcht_c.appendChild(nudiv);
+dvchtrm_con_.appendChild(nudiv);
   
 }//else wait for the acept call
 
 });//skcl solicitud de acepation de llmd
 
 
+
 //cancelar llamada enviada
 function crrclL(rmf){
  
-var dvcht_c= document.getElementById("dvcht_c_"+rmf);
+var dvchtrm_con_= document.getElementById("dvchtrm_con_"+rmf);
 var dvespcll= document.getElementById("dvespcll_"+rmf);
 
 if(dvespcll){
   sktclt.emit("cancelar llamada entrante",
             {rmrtc:rmf});
- dvcht_c.removeChild(dvespcll);
+ dvchtrm_con_.removeChild(dvespcll);
 }//if esta
 
 }//crrclL
 
+
+
 //cancelar llamada recibida
 function cncclL(rmf){
  
-var dvcht_c= document.getElementById("dvcht_c_"+rmf);
+var dvchtrm_con_= document.getElementById("dvchtrm_con_"+rmf);
 var dvrcbcll= document.getElementById("dvrcbcll_"+rmf);
 
 if(dvrcbcll){
  sktclt.emit("cancelar llamada entrante",
             {rmrtc:rmf}); 
- dvcht_c.removeChild(dvrcbcll);
+ dvchtrm_con_.removeChild(dvrcbcll);
 }//if esta
 
 }//cncclL
+
 
 
 sktclt.on("se cancelo llmd",function(dt){
@@ -89,6 +94,7 @@ sktclt.on("se cancelo llmd",function(dt){
 crrclL(dt.rmrtc);
 cncclL(dt.rmrtc);
 });//skcl se cancelo llmd
+
 
 
 //se acepta la llamada y empieza a correr
@@ -103,11 +109,13 @@ btcll.style.backgroundColor= "green";
 }//acpclL
 
 
+
 sktclt.on("correr webrtc",function(dt){
  //dt{rmrtc}
 
 clL(dt.rmrtc);
 });//skcl correr webrtc
+
 
 
 sktclt.on("se cuelga llmd",function(dt){
@@ -252,4 +260,4 @@ setTimeout(function(){
 setTimeout(function(){
   console.log("se va a ejecutar GUM");
   GUM();
-},1000);
+},3000);

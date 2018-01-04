@@ -20,6 +20,18 @@ font-awesome:
 +soluciones:
 
 
+11sl..
+function TranslOpen() {
+  var newW, x, y, w;
+  w= 850
+  y = 35
+  x=50;
+//  newW=window.open("Translator.asp","Translator", "toolbar=0,directories=0,menubar=0,scrollbars=1,resizable=1,width=" + w + ",height=525,left=" + x + ",top=" + y);
+  newW=window.open("http://translate.google.com/#","Translator", "toolbar=0,directories=0,menubar=0,scrollbars=1,resizable=1,width=" + w + ",height=400,left=" + x + ",top=" + y);
+  newW.focus();
+}
+..11sl
+
 10sl..
 https://simplewebrtc.com/audio.js
 
