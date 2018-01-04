@@ -1,6 +1,6 @@
 /*style chat..*/
   
-  .dvchtrmnm{
+  .dvrmsnm{
     display:block;
       text-align:center;
     border-bottom:1px solid black;
@@ -37,9 +37,11 @@
     border-radius:20%;
   font-family:consolas;}
      
-/*chat cuadro..*/
 
-.dvcht{
+
+/*chat room basico..*/
+
+.dvchtrm{
   display:flex;
     flex-direction:column;
   /*overflow:auto;resize:both;*/
@@ -50,18 +52,16 @@
     border-radius:5px;
     box-shadow:0 0 5px #444;
   background-color:white;}
-        
-    
 
 
- .dvcht_t{
+ .dvchtrm_tit{
    display:flex;
      flex-direction:row;
      justify-content:center;
    height:30px;
    font-family:arial;}
         
-  .dvcht_tnm{
+  .dvchtrm_titnm{
     display:flex;
       flex-direction:column;
       justify-content:center;
@@ -69,26 +69,16 @@
     width:70%;height:100%;
     border-radius:5px 0 0 0;
     cursor:move;}
-
-        
-      
-.dvcht_tm{
+   
+.dvchtrm_titmin,.dvchtrm_titrsz{
    display:flex;
      flex-direction:column;
      justify-content:center;
      text-align:center;
    width:10%;height:100%;
    cursor:default;}
-
-.dvcht_tl{
-   display:flex;
-     flex-direction:column;
-     justify-content:center;
-     text-align:center;
-   width:10%;height:100%;
-   cursor:default;}
-    
-.dvcht_tx{
+ 
+.dvchtrm_titcrr{
    display:flex;
      flex-direction:column;
      justify-content:center;
@@ -97,96 +87,65 @@
    border-radius:0 5px 0 0;
    cursor:default;}
 
-     
-     
 
-  .dvcht_cu{
+  .dvchtrm_conusr{
     display:flex;
       flex-direction:row;
     position:relative;
     height:100%;}
       
-  .dvcht_c{
+  .dvchtrm_con{
     overflow-y:auto;
       word-wrap:break-word;
     width:100%;height:98%;}
 
-        
-        
-.dvcht_u{
+
+.dvchtrm_usr{
   float:right;
     word-wrap:break-word;
   position:relative;
   width:100px;height:98%;
   font-weight:bold;}
-.dvcht_u_nm{
-      overflow-y:auto;
-        word-wrap:break-word;
-    }
-    .dvcht_u_bts{
-      position:absolute;
-        bottom:0px;
-    }
+.dvchtrm_usrnm{
+  overflow-y:auto;
+    word-wrap:break-word;}
+.dvchtrm_usrbts{
+  position:absolute;
+    bottom:0px;}
 
         
-  .dvchtmsg{
-    width:100%;}
+  .dvchtrm_msg{width:100%;}
 
-.fmchtmsg{
+.fmchtrm_msg{
     display:flex;
       flex-direction:row;  }  
-  .btnchtmsg{
-    width:40px;} 
-  .btnchtemj{
+  .btchtrm_msg{width:40px;} 
+  .btchtrm_emj{
     width:40px;
     margin-right:20px;}
     
-  .inchtmsg{
-    width:100%;}
+  .inchtrm_msg{width:100%;}
+
+  /*..style room basico*/
 
 
-.dvdct{
-      overflow:auto;
-      width:100%;height:0px; /*250px;*/
-      /*border:1px solid;*/
-      background-color:grey;
-    }
-    .dvdct input[list="dtlstlng"]{
-      width:40px;
-    }
-
- /*base*/
-   .dvcht_tnm{
-  background-color:#9370db;
+ /*colores general..*/
+.gnrl_titnm{
+  background-color:#9370db;/*purpura*/
     color:white;}
-.dvcht_tx{
-  background-color:#483D8B;
+.gnrl_titcrr{
+  background-color:#483D8B;/*ouroura oscuro*/
     color:white;
-  /*#800000 #4B0082*/}
+  /*#800000 #4B0082*/} 
 
-.dvcht_c{
-  background-color:#ffDAB9;}
-.dvcht_u{
-  background-color:#FFF0F5;
+.gnrl_con{
+  background-color:#ffDAB9;}/*carne*/
+.gnrl_usr{
+  background-color:#FFF0F5;/*rosa suave*/
     color:black;}
 
-/*..chat cuadro*/
+/*..colores general*/
 
-/*chat general..*/
-
-#dvcht_tnm_gnrl{
-  background-color:#9370db;
-    color:white;}
-#dvcht_tx_gnrl{
-  background-color:#483D8B;
-    color:white;
-  /*#800000 #4B0082*/}
-
-#dvcht_c_gnrl{
-  background-color:#ffDAB9;}
-#dvcht_u_gnrl{
-  background-color:#FFF0F5;
-    color:black;}
 
 /*typing*/
 .dvtyp{
@@ -198,23 +157,23 @@
   color:grey;}
 
 
-/*..chat general*/
+/*..chat room*/
 
-/*chat request..*/
+/*colores privado..*/
 
-.col_tnm{
+.prv_titnm{
   background-color:#2E8B57;
     color:white;}
-.col_tx{
+.prv_titcrr{
   background-color:#800000;
     color:white;/*#800000 #4B0082*/}
 
-.col_c{
+.prv_con{
   background-color:#DEB887;}
-.col_u{
+.prv_usr{
   background-color:#FFA07A;}
 
-/*..chat request*/
+/*..colores privado*/
      
 
 /*img prf tabla*/

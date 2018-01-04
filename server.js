@@ -322,10 +322,13 @@ socket.on("mnd chtrqs",function(dt){
            roombth:roombth
          }); //sktcltid de quien la manda
     
+  if(usrscnnt[usridrcv])
+  var nmercv= usrscnnt[usridrcv].user.firstnm;
+  
     io.to(roombth).emit("espera chtrqs",
           {sktidmnd:dt.sktcltid,
            sktidrcv:dt.sktidrcv,
-  nmercv:usrscnnt[usridrcv].user.firstnm,
+  nmercv:nmercv,
            roombth:roombth});
     
   });//skon hicieron request
@@ -606,6 +609,7 @@ socket.on('entroomj',function(dt){
 var usrid= socket.request.user._id;
 var fn=  socket.request.user.firstnm;
 
+  if(jue[dt.nrogme])
 var nroingme= Object.keys(jue[dt.nrogme].nroplyact).length;
   
   
@@ -845,6 +849,7 @@ socket.on("slrjue",function(dt){
   delete jue[dt.room].nroplyact[usrid];//eliminar
   //console.log(jue);
 
+  if(jue[dt.room])
   var nroingme= Object.keys(jue[dt.room].nroplyact).length;
 
   if(nroingme==0){//elimina bar

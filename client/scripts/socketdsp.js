@@ -8,7 +8,26 @@ var sktclt=io.connect();
 function entrchT(){
   
  sktclt.emit("userva",sktclt.id);
+  
+  if(typeof(scrrtc)=="undefined"){
+    
+  console.log("mete scripts rtc");
+var scr1= document.createElement("script");
+scr1.id="scrrtc"
+scr1.src="https://simplewebrtc.com/latest-v2.js";
+
+var scr2= document.createElement("script");
+scr2.id="scrrtchec"
+scr2.src="scripts/webrtc.js";
+
+document.querySelector("body").appendChild(scr1);
+document.querySelector("body").appendChild(scr2);
+
+  
+}//if no script rtc  
+  
 }//click tab chat
+
 
 
 //llena tabla users chat
@@ -18,6 +37,7 @@ sktclt.on("usernames",function(dat){
  var conusr="";
 
 for(var usrnme in dat){
+  
  conusr+="<tr id=\'"+dat[usrnme].sktid+
    "\' data-usrid='"+usrnme+
    "' onclick='usrprfchtR(this,event)' >"+
@@ -63,7 +83,9 @@ var rooms={"gnrl":"General", "eng":"English",
 function goiN(){
   
   for(var opt in dtlstroom.options){
+    
   if(dtlstroom.options[opt].value== inlstroom.value){
+    
     var roomf= dtlstroom.options[opt].id.slice(3,6);
     break;
   }//if
@@ -82,7 +104,7 @@ entrrooM(roomf);
 sprm.innerHTML= rooms[roomf]+' <span id="spchtcnt_'+roomf+
   '" class="spchtcnt"></span><svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M704 384q-153 0-286 52t-211.5 141-78.5 191q0 82 53 158t149 132l97 56-35 84q34-20 62-39l44-31 53 10q78 14 153 14 153 0 286-52t211.5-141 78.5-191-78.5-191-211.5-141-286-52zm0-128q191 0 353.5 68.5t256.5 186.5 94 257-94 257-256.5 186.5-353.5 68.5q-86 0-176-16-124 88-278 128-36 9-86 16h-3q-11 0-20.5-8t-11.5-21q-1-3-1-6.5t.5-6.5 2-6l2.5-5 3.5-5.5 4-5 4.5-5 4-4.5q5-6 23-25t26-29.5 22.5-29 25-38.5 20.5-44q-124-72-195-177t-71-224q0-139 94-257t256.5-186.5 353.5-68.5zm822 1169q10 24 20.5 44t25 38.5 22.5 29 26 29.5 23 25q1 1 4 4.5t4.5 5 4 5 3.5 5.5l2.5 5 2 6 .5 6.5-1 6.5q-3 14-13 22t-22 7q-50-7-86-16-154-40-278-128-90 16-176 16-271 0-472-132 58 4 88 4 161 0 309-45t264-129q125-92 192-212t67-254q0-77-23-152 129 71 204 178t75 230q0 120-71 224.5t-195 176.5z" fill="#fff"/>';//comments-o
 
-dvchtrc.appendChild(sprm);
+dvlngrmscon.appendChild(sprm);
  }//if  no esta lo crea
   
 }//goiN room
@@ -139,24 +161,24 @@ sktclt.on("mndusrroom",function(dt){
     usrsg+=dt.usrsroom[nombr]+"<br>";
   }//for
  
-  var dvcht_u_= document.getElementById("dvcht_u_nm_"+dt.room);
+  var dvchtrm_usrnm_= document.getElementById("dvchtrm_usrnm_"+dt.room);
   
   
- dvcht_u_.innerHTML="";
- dvcht_u_.innerHTML=usrsg;
+ dvchtrm_usrnm_.innerHTML="";
+ dvchtrm_usrnm_.innerHTML=usrsg;
     
   if(dt.sktid==sktclt.id){
     
-   var dvcht_c_= document.getElementById("dvcht_c_"+dt.room); 
+   var dvchtrm_con_= document.getElementById("dvchtrm_con_"+dt.room); 
     
-  var licht=dvcht_c_.innerHTML;
+  var licht=dvchtrm_con_.innerHTML;
 //15 lines of chat
   for(var msgcht in dt.chtroom){
     licht+=dt.chtroom[msgcht]+"<br>";
   }//for
- dvcht_c_.innerHTML=licht;
+ dvchtrm_con_.innerHTML=licht;
     
- dvcht_c_.scrollTo(0,dvcht_c_.scrollHeight);
+ dvchtrm_con_.scrollTo(0, dvchtrm_con_.scrollHeight);
     
   }//if es el que llega
   
@@ -182,7 +204,7 @@ sprm.innerHTML= rooms[dt.room]+
   ' <span id="spchtcnt_'+dt.room+
   '" class="spchtcnt"></span><svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M704 384q-153 0-286 52t-211.5 141-78.5 191q0 82 53 158t149 132l97 56-35 84q34-20 62-39l44-31 53 10q78 14 153 14 153 0 286-52t211.5-141 78.5-191-78.5-191-211.5-141-286-52zm0-128q191 0 353.5 68.5t256.5 186.5 94 257-94 257-256.5 186.5-353.5 68.5q-86 0-176-16-124 88-278 128-36 9-86 16h-3q-11 0-20.5-8t-11.5-21q-1-3-1-6.5t.5-6.5 2-6l2.5-5 3.5-5.5 4-5 4.5-5 4-4.5q5-6 23-25t26-29.5 22.5-29 25-38.5 20.5-44q-124-72-195-177t-71-224q0-139 94-257t256.5-186.5 353.5-68.5zm822 1169q10 24 20.5 44t25 38.5 22.5 29 26 29.5 23 25q1 1 4 4.5t4.5 5 4 5 3.5 5.5l2.5 5 2 6 .5 6.5-1 6.5q-3 14-13 22t-22 7q-50-7-86-16-154-40-278-128-90 16-176 16-271 0-472-132 58 4 88 4 161 0 309-45t264-129q125-92 192-212t67-254q0-77-23-152 129 71 204 178t75 230q0 120-71 224.5t-195 176.5z" fill="#fff"/>';//comments-o
 
-dvchtrc.appendChild(sprm);
+dvchtrmscon.appendChild(sprm);
     
      
  }//if  no esta lo crea
@@ -202,26 +224,26 @@ dvchtrc.appendChild(sprm);
 function mindvchT(rmx){//roomx
 jQuery(function($){
 
-var dvcht_tm= "#dvcht_tm_"+rmx;
-var dvcht= "#dvcht_"+rmx;
-var dvcht_cu= "#dvcht_cu_"+rmx;
-var dvchtmsg= "#dvchtmsg_"+rmx;
+var dvchtrm_titmin_= "#dvchtrm_titmin_"+rmx;
+var dvchtrm_= "#dvchtrm_"+rmx;
+var dvchtrm_conusr_= "#dvchtrm_conusr_"+rmx;
+var dvchtrm_msg_= "#dvchtrm_msg_"+rmx;
   
-    if($(dvcht_tm).html()=="-"){
-      $(dvcht).height(30);
-      $(dvcht_tm).html("+");
-      $(dvcht_cu).hide();
-      $(dvchtmsg).hide();
-      $(dvcht).resizable("disable");
-      $(dvcht).css('z-index', 9999);
+    if($(dvchtrm_titmin_).html()=="-"){
+      $(dvchtrm_).height(30);
+      $(dvchtrm_titmin_).html("+");
+      $(dvchtrm_conusr_).hide();
+      $(dvchtrm_msg_).hide();
+      $(dvchtrm_).resizable("disable");
+      $(dvchtrm_).css('z-index', 9999);
       
     }//if -
     else{
-      $(dvcht).height(200);
-      $(dvcht_tm).html("-");
-      $(dvcht_cu).show();
-      $(dvchtmsg).show();
-      $(dvcht).resizable("enable");
+      $(dvchtrm_).height(200);
+      $(dvchtrm_titmin_).html("-");
+      $(dvchtrm_conusr_).show();
+      $(dvchtrm_msg_).show();
+      $(dvchtrm_).resizable("enable");
     }//else +
     
 });//jQuery
@@ -231,16 +253,16 @@ var dvchtmsg= "#dvchtmsg_"+rmx;
 
 //restaurar tamaño del chat
 function restamchT(rmx){//roomx
-  var dvcht= document.querySelector("#dvcht_"+rmx);
+  var dvchtrm_= document.querySelector("#dvchtrm_"+rmx);
   
-if(dvcht.offsetWidth<dvconcht.offsetWidth){
-  dvcht.style.height=dvconcht.offsetHeight+"px";
-  dvcht.style.width=dvconcht.offsetWidth+"px";
-  dvcht.style.left=0;
-  dvcht.style.top=0;
+if(dvchtrm_.offsetWidth<dvconcht.offsetWidth){
+  dvchtrm_.style.height= dvconcht.offsetHeight+"px";
+  dvchtrm_.style.width= dvconcht.offsetWidth+"px";
+  dvchtrm_.style.left=0;
+  dvchtrm_.style.top=0;
 }//if pequeño
   else{
-    dvcht.removeAttribute("style");
+    dvchtrm_.removeAttribute("style");
   }//else retorna
 }//restamchT
 
@@ -248,8 +270,8 @@ if(dvcht.offsetWidth<dvconcht.offsetWidth){
 
 //cerrar chat
 function crrdvchT(rmx){//roomx
-  var dvcht= document.querySelector("#dvcht_"+rmx);
- dvconcht.removeChild(dvcht);
+  var dvchtrm_= document.querySelector("#dvchtrm_"+rmx);
+ dvconcht.removeChild(dvchtrm_);
  sktclt.emit("cerr room",rmx);  
 }//crrdvchT
 
@@ -269,7 +291,7 @@ function empbuT(){
 //enviar mensaje
 function envmsG(ev,rmx){//event,roomx
   ev.preventDefault();
-var inchtmsg= document.querySelector("#inchtmsg_"+rmx);
+var inchtrm_msg_= document.querySelector("#inchtrm_msg_"+rmx);
 
 var typrm;
 if(rooms[rmx]){
@@ -279,15 +301,15 @@ if(rooms[rmx]){
 }//else
 
 
-if(inchtmsg.value!=""){
+if(inchtrm_msg_.value!=""){
  sktclt.emit("send message room",
-             {msg:inchtmsg.value,
+             {msg:inchtrm_msg_.value,
              room:rmx,
              typrm:typrm});
-  //inchtmsg.getAttribute("data-room")
+  //inchtrm_msg_.getAttribute("data-room")
 }//if no vacio
 
-inchtmsg.value="";
+inchtrm_msg_.value="";
 }//envmsG
 
 
@@ -301,12 +323,14 @@ sktclt.on('new message room', function(data) {
   }//if not focus
   
   
- var dvcht_c= "#dvcht_c_"+data.room;
+ var dvchtrm_con_= "#dvchtrm_con_"+data.room;
+  
 jQuery(function($){
-  $(dvcht_c).append('<b>'+data.nick+":</b> "+
+  
+  $(dvchtrm_con_).append('<b>'+data.nick+":</b> "+
                        data.msg+"<br/>");
-  $(dvcht_c).stop().animate(
-    {scrollTop:$(dvcht_c)[0].scrollHeight}, 200);
+  $(dvchtrm_con_).stop().animate(
+    {scrollTop: $(dvchtrm_con_)[0].scrollHeight}, 200);
 });//jQuery
 });//skcl new message room
 
@@ -344,13 +368,13 @@ nudiv.setAttribute("class","dvtyp");
   nudiv.innerHTML="<b>"+dt.firstnm+"</b>"+"<span  class='sptyp'> is typing...</span>"+
     '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M491 1536l91-91-235-235-91 91v107h128v128h107zm523-928q0-22-22-22-10 0-17 7l-542 542q-7 7-7 17 0 22 22 22 10 0 17-7l542-542q7-7 7-17zm-54-192l416 416-832 832h-416v-416zm683 96q0 53-37 90l-166 166-416-416 166-165q36-38 90-38 53 0 91 38l235 234q37 39 37 91z"/></svg>';//pencil
 
-  var dvcht_cu= document.getElementById("dvcht_cu_"+dt.room);
+  var dvchtrm_conusr_= document.getElementById("dvchtrm_conusr_"+dt.room);
   
-dvcht_cu.appendChild(nudiv);
+dvchtrm_conusr_.appendChild(nudiv);
 
 setTimeout(function(){
- dvcht_cu.removeChild(nudiv);
-},1000)
+ dvchtrm_conusr_.removeChild(nudiv);
+},1000);
   
 });//skcl who type
 
@@ -367,42 +391,65 @@ function goscT(){
 
 
 
+//crear room
 function crtrooM(rmx){
 
-var dvcht_= document.getElementById("dvcht_"+rmx);
+var dvchtrm_= document.getElementById("dvchtrm_"+rmx);
   
-  if(!dvcht_){
+  if(!dvchtrm_){
     
  var nudiv=document.createElement("DIV");
- nudiv.id="dvcht_"+rmx;
-nudiv.classList.add("dvcht");
+ nudiv.id="dvchtrm_"+rmx;
+ nudiv.classList.add("dvchtrm");
     
-nudiv.innerHTML='<div id="dvcht_t_'+rmx+'" class="dvcht_t">'+
-    '<div id="dvcht_tnm_'+rmx+'" class="dvcht_tnm">'+(rooms[rmx]||rmx)+'</div>'+
-  '<div id="dvcht_tm_'+rmx+'" class="dvcht_tm" onclick="mindvchT(\''+rmx+'\')">-</div>'+
-  '<div id="dvcht_tl_'+rmx+'" class="dvcht_tl" onclick="restamchT(\''+rmx+'\')">L</div>'+
-  '<div id="dvcht_tx_'+rmx+'" class="dvcht_tx" onclick="crrdvchT(\''+rmx+'\')">x</div>'+
-  '</div>'+
-  '<div id="dvcht_cu_'+rmx+'" class="dvcht_cu">'+
-  '<div id="dvcht_c_'+rmx+'" class="dvcht_c"></div><div id="dvcht_u_'+rmx+'" class="dvcht_u">'+
-    '<div id="dvcht_u_nm_'+rmx+'" class="dvcht_u_nm"></div>'+
-    '<div id="dvcht_u_bts_'+rmx+'" class="dvcht_u_bts">'+          
+nudiv.innerHTML='<div class="dvchtrm_tit">'+
+
+    '<div class="dvchtrm_titnm gnrl_titnm">'+(rooms[rmx]||rmx)+'</div>'+
+
+  '<div id="dvchtrm_titmin_'+rmx+
+  '" class="dvchtrm_titmin"'+
+  ' onclick="mindvchT(\''+rmx+'\')">-</div>'+
+
+  '<div class="dvchtrm_titrsz"'+
+  ' onclick="restamchT(\''+rmx+'\')">L</div>'+
+
+  '<div class="dvchtrm_titcrr gnrl_titcrr"'+
+  ' onclick="crrdvchT(\''+rmx+'\')">x</div>'+
+
+  '</div>'+//dvchtrm_tit
+
+  '<div id="dvchtrm_conusr_'+rmx+
+  '" class="dvchtrm_conusr">'+
+
+  '<div id="dvchtrm_con_'+rmx+'" class="dvchtrm_con gnrl_con"></div>'+
+  
+  '<div id="dvchtrm_usr_'+rmx+'" class="dvchtrm_usr gnrl_usr">'+
+
+    '<div id="dvchtrm_usrnm_'+rmx+
+  '" class="dvchtrm_usrnm"></div>'+
+
+    '<div class="dvchtrm_usrbts">'+ 
     '<input type="button" value="_"'+
    ' onclick="empbuT()"></div>'+
-  '</div>'+
-  '</div>'+  
-  '<div id="dvchtmsg_'+rmx+'" class="dvchtmsg"><form id="fmchtmsg_'+rmx+'" class="fmchtmsg" onsubmit="envmsG(event,\''+rmx+'\')">'+
-  '<input type="text" id="inchtmsg_'+rmx+'" class="inchtmsg" autocorrect="off" autocomplete="off"'+
+
+  '</div>'+//dvchtrm_usr
+  '</div>'+ //dvchtrm_conusr
+
+  '<div id="dvchtrm_msg_'+rmx+
+  '" class="dvchtrm_msg">'+
+  '<form class="fmchtrm_msg" onsubmit="envmsG(event,\''+rmx+'\')">'+
+
+  '<input type="text" id="inchtrm_msg_'+rmx+'" class="inchtrm_msg" autocorrect="off" autocomplete="off"'+
   ' data-room="'+rmx+'" placeholder="write your message">'+
-  '<button id="btnchtmsg_'+rmx+'" class="btnchtmsg" type="submit" >'+
+
+  '<button id="btchtrm_msg_'+rmx+'" class="btchtrm_msg" type="submit" >'+
   '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
   '</button>'+
-  '<button'+
-  ' class="btnchtemj"  onclick="selemJ()">'+
-  '<b><svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg></b>'+//smile-o
+
+  '<button class="btchtrm_emj" onclick="selemJ()">'+
+  '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
     '</button>'+
-  '</form></div>'+
-    
+  '</form>'+  
   '</div>';
 
 dvconcht.appendChild(nudiv);
@@ -411,9 +458,9 @@ dvconcht.appendChild(nudiv);
 
 var draggableDiv = 
 
-$('#dvcht_'+rmx).draggable();
+$('#dvchtrm_'+rmx).draggable();
   
-$('#dvcht_c_'+rmx, draggableDiv)
+$('#dvchtrm_con_'+rmx, draggableDiv)
   .mousedown(function(ev){
   draggableDiv.draggable('disable');
 })//mousedown
@@ -422,22 +469,22 @@ $('#dvcht_c_'+rmx, draggableDiv)
 });//mouseup
   
     
-$('#dvcht_'+rmx).resizable();
+$('#dvchtrm_'+rmx).resizable();
   
-  var inchtmsg_= document.getElementById("inchtmsg_"+rmx);
+  var inchtrm_msg_= document.getElementById("inchtrm_msg_"+rmx);
   
-  inchtmsg_.addEventListener("keydown",
+  inchtrm_msg_.addEventListener("keydown",
                         function(){
-        tyP(inchtmsg_);
+        tyP(inchtrm_msg_);
   });//addeventlistener keydown tyP
 
 });//jQuery
     
-  }//if no dvicht
+  }//if no dvchtrm
     
     
 }//crtrooM
-  
+
 
 
 sktclt.on("mndusrsctrm",function(dt){
@@ -449,10 +496,10 @@ var usrsg="";
     usrsg+=dt.usrsroom[nombr]+"<br>";
   }//for
  
-  var dvcht_u_= document.getElementById("dvcht_u_nm_"+dt.room);
+  var dvchtrm_usrnm_= document.getElementById("dvchtrm_usrnm_"+dt.room);
   
- dvcht_u_.innerHTML="";
- dvcht_u_.innerHTML=usrsg;
+ dvchtrm_usrnm_.innerHTML="";
+ dvchtrm_usrnm_.innerHTML=usrsg;
 
 });//skcl mndusrsctrm
           
@@ -600,50 +647,68 @@ dvconcht.removeChild(dvchtrqsof);
 //abre chat request
 function opnchtrqS(roombthx,sktidmndx){
   
- var dvcht_= document.getElementById("dvcht_"+roombthx); 
+ var dvchtrm_= document.getElementById("dvchtrm_"+roombthx); 
   
-  if(!dvcht_){
+  if(!dvchtrm_){
     
 var nudiv=document.createElement("DIV");
-nudiv.id="dvcht_"+roombthx;
-nudiv.classList.add("dvcht");    
+nudiv.id="dvchtrm_"+roombthx;
+nudiv.classList.add("dvchtrm");    
  
-nudiv.innerHTML='<div id="dvcht_t_'+roombthx+'" class="dvcht_t">'+
-    '<div id="dvcht_tnm_'+roombthx+'" class="dvcht_tnm col_tnm">Chat with</div>'+
-  '<div id="dvcht_tm_'+roombthx+'" class="dvcht_tm" onclick="mindvchT(\''+roombthx+'\')">-</div>'+
-  '<div id="dvcht_tl_'+roombthx+'" class="dvcht_tl" onclick="restamchT(\''+roombthx+'\')">L</div>'+
-  '<div id="dvcht_tx_'+roombthx+'" class="dvcht_tx col_tx" onclick="crrdvchT(\''+roombthx+'\')">x</div>'+
-  '</div>'+
-  '<div id="dvcht_cu_'+roombthx+'" class="dvcht_cu">'+
+nudiv.innerHTML='<div class="dvchtrm_tit">'+
+
+    '<div class="dvchtrm_titnm prv_titnm">Chat with</div>'+
+
+  '<div id="dvchtrm_titmin_'+roombthx+
+  '" class="dvchtrm_titmin"'+
+  ' onclick="mindvchT(\''+roombthx+'\')">-</div>'+
+
+  '<div class="dvchtrm_titrsz"'+
+  ' onclick="restamchT(\''+roombthx+'\')">L</div>'+
+
+  '<div class="dvchtrm_titcrr prv_titcrr"'+
+  ' onclick="crrdvchT(\''+roombthx+'\')">x</div>'+
+
+  '</div>'+//dvchtrm_tit
+
+
+  '<div id="dvchtrm_conusr_'+roombthx+
+  '" class="dvchtrm_conusr">'+
   
-  '<div id="dvcht_c_'+roombthx+'" class="dvcht_c col_c"></div>'+
+  '<div id="dvchtrm_con_'+roombthx+'" class="dvchtrm_con prv_con"></div>'+
 
-'<div id="dvcht_u_'+roombthx+'" class="dvcht_u col_u">'+
+'<div id="dvchtrm_usr_'+roombthx+'" class="dvchtrm_usr prv_usr">'+
 
-'<div id="dvcht_u_nm_'+roombthx+'" class="dvcht_u_nm"></div>'+
-    '<div id="dvcht_u_bts_'+roombthx+'" class="dvcht_u_bts">'+  
-  '<button id="btcll_'+roombthx+'" onclick="slcllM(this,\''+roombthx+'\')">'+
+'<div id="dvchtrm_usrnm_'+roombthx+'" class="dvchtrm_usrnm"></div>'+
+
+    '<div class="dvchtrm_usrbts">'+  
+
+  '<button id="btcll_'+roombthx+
+  '" onclick="slcllM(this,\''+roombthx+'\')">'+
+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>'+//phone
 '</button>'+
+
   '<button id="btmtecll_'+roombthx+'" class="btmtecll">'+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M463 945l-101 101q-42-103-42-214v-128q0-26 19-45t45-19 45 19 19 45v128q0 53 15 113zm1114-602l-361 361v128q0 132-94 226t-226 94q-55 0-109-19l-96 96q97 51 205 51 185 0 316.5-131.5t131.5-316.5v-128q0-26 19-45t45-19 45 19 19 45v128q0 221-147.5 384.5t-364.5 187.5v132h256q26 0 45 19t19 45-19 45-45 19h-640q-26 0-45-19t-19-45 19-45 45-19h256v-132q-125-13-235-81l-254 254q-10 10-23 10t-23-10l-82-82q-10-10-10-23t10-23l1234-1234q10-10 23-10t23 10l82 82q10 10 10 23t-10 23zm-380-132l-621 621v-512q0-132 94-226t226-94q102 0 184.5 59t116.5 152z"/></svg>'+//microphhone-slash
 '</button>'+
   '<audio id="lclaud" style="display:none" oncontextmenu="return false;" disabled></audio>'+  
-  '</div>'+//u_bts
-  '</div>'+
-
-'</div>'+//dvcht_u_
+  '</div>'+//_usrbts
+  '</div>'+//_usr
+  '</div>'+//_conusr
   
-  '</div>'+  
-  '<div id="dvchtmsg_'+roombthx+'" class="dvchtmsg"><form id="fmchtmsg_'+roombthx+'" class="fmchtmsg" onsubmit="envmsgR(event,\''+roombthx+'\')">'+
-  '<input type="text" id="inchtmsg_'+roombthx+'" class="inchtmsg" autocorrect="off" autocomplete="off"'+
+  '<div id="dvchtrm_msg_'+roombthx+'" class="dvchtrm_msg">'+
+  '<form class="fmchtrm_msg" onsubmit="envmsgR(event,\''+roombthx+'\')">'+
+
+  '<input type="text" id="inchtrm_msg_'+roombthx+'" class="inchtrm_msg" autocorrect="off" autocomplete="off"'+
   ' data-room="'+roombthx+
   '" placeholder="write your message...">'+
-  '<button id="btnchtmsg_'+roombthx+'" class="btnchtmsg" type="submit" >'+
+
+  '<button id="btnchtrm_msg_'+roombthx+'" class="btnchtmsg" type="submit" >'+
   '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
   '</button>'+
-  '<button'+
-  ' class="btnchtemj"  onclick="selemJ()">'+
+
+  '<button class="btnchtrm_emj"  onclick="selemJ()">'+
   '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
     '</button>'+
   '</form></div>';    
@@ -652,24 +717,24 @@ dvconcht.appendChild(nudiv);
     
 jQuery(function($){
 
-var dvcht= "#dvcht_"+roombthx;
-var dvcht_c= "#dvcht_c_"+roombthx;  
+var dvchtrm_= "#dvchtrm_"+roombthx;
+var dvchtrm_con_= "#dvchtrm_con_"+roombthx;  
   
-var draggableDiv= $(dvcht).draggable();
-$(dvcht_c, draggableDiv)
+var draggableDiv= $(dvchtrm_).draggable();
+$(dvchtrm_con_, draggableDiv)
   .mousedown(function(ev){
   draggableDiv.draggable('disable');
 }).mouseup(function(ev){
   draggableDiv.draggable('enable');
 });
   
-$(dvcht).resizable();
+$(dvchtrm_).resizable();
 
-var inchtmsg_= document.getElementById("inchtmsg_"+roombthx);
+var inchtrm_msg_= document.getElementById("inchtrm_msg_"+roombthx);
   
-  inchtmsg_.addEventListener("keydown",
+  inchtrm_msg_.addEventListener("keydown",
                         function(){
-        tyP(inchtmsg_);
+        tyP(inchtrm_msg_);
   });//addeventlistener keydown tyP  
   
 });//jQuery
@@ -711,9 +776,10 @@ sktclt.on("mete usrs chtrqs",function(dt){
   
     console.log("7mete usrs");
   //console.log(dt);
-  var dvcht_u= document.getElementById("dvcht_u_nm_"+dt.roombth);
   
-    dvcht_u.innerHTML= dt.nmercv+"<br id='brrcv' data-sktid='"+
+  var dvchtrm_usrnm_= document.getElementById("dvchtrm_usrnm_"+dt.roombth);
+  
+    dvchtrm_usrnm_.innerHTML= dt.nmercv+"<br id='brrcv' data-sktid='"+
      dt.sktidrcv+"'/>"+
      dt.nmemnd+"<br id='brmnd' data-sktid='"+dt.sktidmnd+"'/>";
   
@@ -723,26 +789,10 @@ for(var msgcht in dt.chtprv){
  licht+=dt.chtprv[msgcht]+"<br>";
 }//for
 
-var dvcht_c= document.getElementById("dvcht_c_"+dt.roombth);
+var dvchtrm_con_= document.getElementById("dvchtrm_con_"+dt.roombth);
 
-dvcht_c.innerHTML=licht;
+dvchtrm_con_.innerHTML=licht;
   
-if(typeof(scrrtc)=="undefined"){
-  console.log("mete scripts rtc");
-var scr1= document.createElement("script");
-scr1.id="scrrtc"
-scr1.src="https://simplewebrtc.com/latest-v2.js";
-
-var scr2= document.createElement("script");
-scr2.id="scrrtchec"
-scr2.src="scripts/webrtc.js";
-
-document.querySelector("body").appendChild(scr1);
-document.querySelector("body").appendChild(scr2);
-
-  
-
-}//if no script rtc  
   
 });//skcl meter usrs chtrqs
 
@@ -752,31 +802,34 @@ document.querySelector("body").appendChild(scr2);
 function envmsgR(ev,roombthx){
   ev.preventDefault();
   
-  var inchtmsg= document.querySelector("#inchtmsg_"+roombthx);
+  var inchtrm_msg_= document.querySelector("#inchtrm_msg_"+roombthx);
   
-  if(inchtmsg.value!=""){
+  if(inchtrm_msg_.value!=""){
  sktclt.emit("send messagecht_r",
-             {msg:inchtmsg.value,
+             {msg:inchtrm_msg_.value,
       roombth:roombthx});
 //inr_msg.getAttribute("data-room")  
 }//if no vacio
 
-inchtmsg.value="";
+inchtrm_msg_.value="";
   
 }//envmsgR cht prv
+
 
 
 sktclt.on("new msgchtrqs",function(dt){
   //dt{msg,nick,room}
 
 jQuery(function($){
-  var dvcht_c= "#dvcht_c_"+dt.room;
+
+  var dvchtrm_con_= "#dvchtrm_con_"+dt.room;
   
-  $(dvcht_c).append('<b>'+dt.nick+":</b> "+dt.msg+"<br/>");
-  $(dvcht_c).stop().animate(
-    {scrollTop:$(dvcht_c)[0].scrollHeight}, 200);
+  $(dvchtrm_con_).append('<b>'+dt.nick+":</b> "+dt.msg+"<br/>");
+  $(dvchtrm_con_).stop().animate(
+    {scrollTop:$(dvchtrm_con_)[0].scrollHeight}, 200);
 });//jQuery
 });//skcl new msgchtrqs msg privado
+
 
 
 sktclt.on("dejar prv",function(dt){
@@ -788,8 +841,8 @@ sktclt.on("dejar prv",function(dt){
 //=====juego
 
 
-//opciones de juego para crearlo
-function crtgmE(){
+//opciones de juego para crear etw
+function etwgmeopT(){
  console.log("1opciones de juego");
   if(typeof(dvcrtgme)=="undefined"){
   
@@ -799,13 +852,6 @@ var nudiv=document.createElement("DIV");
 nudiv.innerHTML='<div id="dvtitoptgme">'+
  '<div id="dvtitoptgmenme">Game Options</div>'+
  '<div id="dvtitoptgme_x" onclick="crrgmeopT()">X</div></div>'+
-
- '<div id="dvtypgme">'+
- '<span>Type of game:</span>'+
- '<select id="sltypgme">'+
- '<option id="optetw">Explain The Word</option>'+
- '<option id="optoth">Others, in future</option>'+
- '</select></div>'+
 
  '<div style="display:inline-block">'+
  '<span>Select word list:</span><br>'+
@@ -830,13 +876,13 @@ nudiv.innerHTML='<div id="dvtitoptgme">'+
  '</select></div><br>'+
 
  '<div id="dvrdygme">'+
- '<input type="button" id="btrdygme" value="Create" onclick="solgmE()">'+
+ '<input type="button" id="btrdygme" value="Create" onclick="solgmE(\'Explain The Word\')">'+
  '</div></div>';
 
 dvcongme.appendChild(nudiv);
   }//if dvcrtgme no existe
     
-}//crtgmE opciones
+}//etwgmeopT
 
 
 
@@ -847,16 +893,16 @@ function crrgmeopT(){
 
 
 
-//solicitar juego
-function solgmE(){
- var typgme= sltypgme.options[sltypgme.selectedIndex].value;
+//solicitar juego explain the word
+function solgmE(typgmef){
+ //var typgme= sltypgme.options[sltypgme.selectedIndex].value;
  var liswrd= sllst.options[sllst.selectedIndex].id;
  var nroply= slnroply.options[slnroply.selectedIndex].value;
  
  dvcongme.removeChild(dvcrtgme);  
   
  sktclt.emit("solicitar game",
-         {typgme: typgme,
+         {typgme: typgmef,
           liswrd: liswrd,
           nroply: nroply});
 }//solgmE
@@ -935,41 +981,41 @@ function crtgaM(rmjf,nmejuef,lisjuef,nroplyf){
 var nudivj=document.createElement("DIV");
 nudivj.id="dvjue";
 
-nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
-'<div id="dvjnm">'+
-  '<div id="dvjnmtit">Explain The Word</div>'+
-  '<div id="dvjnmmit" onclick="restamjuE()">L</div>'+
-  '<div id="dvjnmcrr" onclick="crrjuE(\''+rmjf+'\')">X</div>'+
+nudivj.innerHTML='<div id="dvjue_cab" draggable="true">'+
+'<div id="dvjue_tit" class="dvchtrm_tit">'+
+  '<div id="dvjue_titnm">Explain The Word</div>'+
+  '<div id="dvjue_titrsz" onclick="restamjuE()">L</div>'+
+  '<div id="dvjue_titcrr" class="prv_titcrr" onclick="crrjuE(\''+rmjf+'\')">X</div>'+
   '</div>'+
   
-'<div id="dvjexp">Explains: <span id="spwrdtogss">wordX</span'+
-'><span id="sptmr">00</span></div></div>'+
+'<div id="dvjue_exp">Explains: <span id="spwrdtogss">wordX</span'+
+'><span id="sptmr">00</span></div>'+
+'</div>'+//dvjue_cab
   
-'<div id="dvjcu">'+
-'<div id="dvjcon"></div>'+
-'<div id="dvjuse">'+
-  '<div id="dvjue_u_nm_'+rmjf+'" class="dvjue_u_nm"></div>'+
-    '<div id="dvjue_u_bts_'+rmjf+'" class="dvjue_u_bts">'+          
+'<div id="dvjue_conusr" class="dvchtrm_conusr">'+
+'<div id="dvjue_con" class="dvchtrm_con"></div>'+
+'<div id="dvjue_usr" class="dvchtrm_usr">'+
+
+  '<div id="dvjue_usrnm_'+rmjf+'" class="dvchtrm_usrnm"></div>'+
+  
+    '<div id="dvjue_usrbts_'+rmjf+'" class="dvchtrm_usrbts">'+          
     '<input type="button" value="_"'+
    ' onclick="empbuT()"></div>'+
   '</div>'+
-'</div>'+
+'</div>'+//_conusr
   
+  '<div id="dvjue_msg">'+
   
-  '<div id="dvjmsg">'+
-  
-'<form id="fmjmsg" class="fmchtmsg" onsubmit="envmsgJ(event)">'+
-'<input type="text" id="injmsg" class="inchtmsg" placeholder="write your text..." data-room="'+rmjf+'">'+
-'<button id="btnjsndm" class="btnchtmsg" type="submit" >'+
+'<form id="fmjue_msg" class="fmchtrm_msg" onsubmit="envmsgJ(event)">'+
+'<input type="text" id="injue_msg" class="inchtrm_msg" placeholder="write your text..." data-room="'+rmjf+'">'+
+
+'<button id="btnjue_sndmsg" class="btchtrm_msg" type="submit" >'+
   '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
   '</button>'+  
-'<button'+
-  ' class="btnchtemj"  onclick="selemJ()">'+
+'<button class="btchtrm_emj"  onclick="selemJ()">'+
   '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
     '</button>'+  
-'</form></div>'+
-     
-     '</div>';;
+'</form></div>';
 
   dvcongme.appendChild(nudivj);
     
@@ -982,7 +1028,7 @@ nudivj.innerHTML='<div id="dvjtit" draggable="true">'+
   jQuery(function($){
 
 var draggableDiv = $('#dvjue').draggable();
-$('#dvjcon', draggableDiv)
+$('#dvjue_con', draggableDiv)
   .mousedown(function(ev) {
   draggableDiv.draggable('disable');
 }).mouseup(function(ev) {
@@ -994,7 +1040,6 @@ $("#dvjue").resizable();
 });//jQuery
 }//if no esta, crea
 };//crtgaM
-
 
 
 
@@ -1012,10 +1057,10 @@ for(var nom in dt.usrjue){
           dt.usrjue[nom][0]+"<br>";
 }//for
 
-var dvjue_u_nm= document.getElementById("dvjue_u_nm_"+dt.nrogme);
+var dvjue_usrnm_= document.getElementById("dvjue_usrnm_"+dt.nrogme);
   
-dvjue_u_nm.innerHTML="";
-dvjue_u_nm.innerHTML=usrj;
+dvjue_usrnm_.innerHTML="";
+dvjue_usrnm_.innerHTML=usrj;
   
  /*   
   if(Object.keys(dt.usrjue).length==dt.nroply){
@@ -1057,7 +1102,7 @@ sktclt.on("los que adivinan",function(dt){
   //dt{usrexpl}
   console.log("a adivinar!");
   spwrdtogss.innerHTML=dt.usrexpl;
-  dvjcon.innerHTML="";
+  dvjue_con.innerHTML="";
 });//skcl los que adivinan
 
 
@@ -1065,9 +1110,13 @@ sktclt.on("los que adivinan",function(dt){
 sktclt.on("no se adivino",function(dt){
 //dt{wrdtogss}
   console.log("no se adivino");
- dvjcon.innerHTML+="The word was <b>"+
+ dvjue_con.innerHTML+="The word was <b>"+
          dt.wrdtogss+"</b><br>";
   
+  jQuery(function($){
+  $("#dvjue_con").stop().animate(
+    {scrollTop:$("#dvjcon")[0].scrollHeight}, 100);
+});//jquery
 });//skcl si no se adivina
 
 
@@ -1085,7 +1134,7 @@ dvjuepnt.innerHTML=dt.pntply;
 sktclt.on("quien gano",function(dt){
 //dt{wnrnme}
 
-dvjcon.innerHTML="The winner is: <b>"+
+dvjue_con.innerHTML="The winner is: <b>"+
               dt.wnrnme+"</b>!<br>";
 
 });//skcl quien gano
@@ -1128,13 +1177,13 @@ dvcongme.removeChild(dvgmebar);
 function envmsgJ(ev){
   ev.preventDefault();
 
-if(injmsg.value!=""){
+if(injue_msg.value!=""){
  sktclt.emit("send messagejue",
-             {msg:injmsg.value,
-        nrogme:injmsg.getAttribute("data-room")});
+             {msg:injue_msg.value,
+        nrogme:injue_msg.getAttribute("data-room")});
 }//if no vacio
 
-injmsg.value="";
+injue_msg.value="";
 }//on send msg jue, del form envmsgJ(event)
 
 
@@ -1144,19 +1193,19 @@ sktclt.on('new messagejue', function(dt){
   
    if(dt.guess){
      
-     dvjcon.innerHTML+="<b>"+dt.nick+":</b> "+
+     dvjue_con.innerHTML+="<b>"+dt.nick+":</b> "+
        dt.msg+"<br/>"+
        "BINGO, you guessed the word!<br>";
      sktclt.emit("10 seg",{nrogme: dt.nrogme});
      
    }else{
-     dvjcon.innerHTML+="<b>"+dt.nick+":</b> "+
+     dvjue_con.innerHTML+="<b>"+dt.nick+":</b> "+
        dt.msg+"<br/>";
    }//else no bingo
   
 jQuery(function($){
-  $("#dvjcon").stop().animate(
-    {scrollTop:$("#dvjcon")[0].scrollHeight}, 100);
+  $("#dvjue_con").stop().animate(
+    {scrollTop:$("#dvjue_con")[0].scrollHeight}, 100);
 });//jquery
 });//on receive msg juego
 
