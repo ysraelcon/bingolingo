@@ -75,10 +75,13 @@ require('./app/routes')(Ap,pssp);
 var Chat=require('./app/models/chat');
 var User=require('./app/models/user');
 
-//usrscnnt{usrid:{user,sktcltid}}
+
 var usrscnnt={};
+//usrscnnt{usrid:{user,sktid}}
 
 var usrsroom={};
+//usrsroom{rmf:{usridf:firstnm}}
+
 var usrssctrm={};
 var usrjue={};
 
@@ -215,7 +218,9 @@ console.log("cerr room "+dt);
 socket.leave(dt);
   
   if(!socket.id) return;
-  if(socket.request.user)
+  
+  //console.log(usrsroom[dt]);
+  if(usrsroom[dt])
   delete usrsroom[dt][socket.request.user._id];
   io.to(dt).emit('mndusrroom',
                 {usrsroom:usrsroom[dt],
@@ -379,6 +384,7 @@ break;
   });//abr chtrqs
   
   
+  
 socket.on("usrs pa chtrqs",function(dt){
  //dt{nmemnd,nmercv,sktidrcv,sktidmnd,roombth}
   console.log("6usrs pa chtrqs");
@@ -417,38 +423,9 @@ cht.chtsprv[dt.roombth]=[];
   });//save
 });//findone
   
-  
-  /*
-  User.findOne({_id:id12[0]},
-  function(err,usr){
-    
-    console.log(id12[0]);
-if(!usr.chats ){
-//usr.chats[dt.roombth]=["hi"]; 
-usr.chats={};
-usr.chats[dt.roombth]=[];
-}//if no existe, crea
-
-
-usr.markModified("chats."+dt.roombth);
-    console.log(usr.chats);
-  chtprv=usr.chats[dt.roombth];
-console.log(chtprv);
-
-usr.save((err)=>{
- if(err) throw err;
-  console.log("savedddd");
-   dt["chtprv"]=chtprv;
-  console.log(dt);
-    io.to(dt.roombth).emit("mete usrs chtrqs", dt);
-});//save
-
-});//findone
-   
-  */
-  
  
 });//skon users pa chat request
+  
   
   
 socket.on("send messagecht_r",function(dt){
@@ -475,26 +452,6 @@ cht.save((err)=>{
  if(err) throw err;
 });//save  
 });//findone  
-  
-  /*
-  User.findOne({_id:id12[0]},
-  function(err,usr){
-    
-var consav=socket.request.user.firstnm+": "+dt.msg;
-if(usr.chats[dt.roombth].length<15){
- usr.chats[dt.roombth].push(consav);
-}else{
-usr.chats[dt.roombth].shift();
-usr.chats[dt.roombth].push(consav);
-}//else shift and push
-
-usr.markModified("chats."+dt.roombth);
-usr.save((err)=>{
- if(err) throw err;
-});//save
-});//findone
-  */
-  
   
   
   io.to(dt.roombth).emit("new msgchtrqs",
@@ -609,7 +566,14 @@ socket.on('entroomj',function(dt){
 var usrid= socket.request.user._id;
 var fn=  socket.request.user.firstnm;
 
-  if(jue[dt.nrogme])
+  if(!jue[dt.nrogme]){
+    
+    console.log("no hay "+dt.nrogme);
+    io.sockets.emit("elim gmebar",
+                 {rmgme:dt.nrogme});
+    
+    }else{//else hay jue
+    
 var nroingme= Object.keys(jue[dt.nrogme].nroplyact).length;
   
   
@@ -619,7 +583,7 @@ if(nroingme< (jue[dt.nrogme].nroply-1) ){
   jue[dt.nrogme].nroplyact[usrid]=[fn,socket.id,0];
   //[fn,sktid,puntaje]
   
-  console.log(jue[dt.nrogme]);
+  console.log(typeof jue[dt.nrogme]);
 
 socket.join(dt.nrogme);
 usrjue[socket.request.user._id]= {firstnm:socket.request.user.firstnm,
@@ -688,6 +652,7 @@ io.to(socket.id).emit("ya comenzo jue",
 
 }//else, comenzado
 
+}//else hay jue
     
 });//skon entra juego
  
@@ -846,18 +811,22 @@ socket.on("slrjue",function(dt){
   var usrid= socket.request.user._id;
   
   if(!socket.id) return;
+  
+  if(jue[dt.room]){
   delete jue[dt.room].nroplyact[usrid];//eliminar
-  //console.log(jue);
-
-  if(jue[dt.room])
+  
+  var nroplyact= jue[dt.room].nroplyact;
   var nroingme= Object.keys(jue[dt.room].nroplyact).length;
+  }//if dt.room
+  
 
   if(nroingme==0){//elimina bar
     io.sockets.emit("elim gmebar",
                  {rmgme:dt.room});
   }else{
+    
     io.sockets.emit("mndusrjue",
-                  {usrjue: jue[dt.room].nroplyact,
+                  {usrjue: nroplyact,
                    nrogme: dt.room});
 }//else mndusrjue
     
