@@ -94,10 +94,13 @@ var jue={};
 var liswrds= require("./wordlists.js");
 
 
+
 //socket connection, poner variable afuera
 io.sockets.on('connection', function(socket) {
   
   console.log("en conexion "+ socket.request.user.firstnm);
+
+  
   
 //----click on chat
   
@@ -110,6 +113,14 @@ usrscnnt[socket.request.user._id]= {user: socket.request.user,
           sktid:socket.id};
 
 io.sockets.emit('usernames', usrscnnt);
+
+ 
+for( var rm in usrsroom){
+io.to(socket.id).emit("actlz rooms",
+  {usrsroom: usrsroom[rm],
+   room:rm});
+  
+}//for actualiza, cuando entra   
    
 }//if usr lgged
 //console.log(socket.request.user.logged_in);
@@ -837,6 +848,9 @@ socket.on("slrjue",function(dt){
   
 socket.on('disconnect', function(data) {
 //console.log(socket.request.user);
+  
+  io.to(socket.id).emit("se desconecto",
+                        {msg:"desconexión o cerro"});
   
   if(!socket.id) return;
   delete usrscnnt[socket.request.user._id];

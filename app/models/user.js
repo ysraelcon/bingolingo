@@ -10,6 +10,7 @@ var usrsch=Mng.Schema({
   gender:String,
   learning:String,
   speaks:String,
+  aboutme:String,
 email:{type:String,unique:true},
 password:{type:String},
   notes:String,
