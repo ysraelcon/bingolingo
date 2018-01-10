@@ -194,7 +194,9 @@ socket.on('send message room', function(dt) {
     //dt{msg(inimsgval),room,typrm}
     
   dt.msg=emoji.emojify(dt.msg);
-   
+  dt.msg=txtlnkeD(dt.msg);
+  
+  
   if(dt.typrm==="public"){
   Chat.findOne({_id:"5a03c2696602c617ed34b85f"},
               function(err,cht){
@@ -445,6 +447,7 @@ socket.on("send messagecht_r",function(dt){
   var id12=dt.roombth.split("_");
  
   dt.msg=emoji.emojify(dt.msg);
+  dt.msg=txtlnkeD(dt.msg);
   
   
 Chat.findOne({_id:"5a36957e2659be546185f785"},
@@ -788,6 +791,7 @@ var sktidply= jue[dt.nrogme].nroplyact[pmrid][1];//[fn,sktid]
   
   
   dt.msg=emoji.emojify(dt.msg);
+  dt.msg=txtlnkeD(dt.msg);
   
    io.to(dt.nrogme).emit('new messagejue',
                    {msg:dt.msg,
@@ -886,3 +890,27 @@ io.sockets.emit("actlz rooms",
 /*var listener = Ap.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });*/
+
+
+//link catcher
+function txtlnkeD(tf){
+var re=/(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
+
+var mctch=tf.match(re);
+
+if(mctch){
+var lc= mctch[0];
+
+var tm= tf.replace(lc,txttolnK(lc))
+
+return tm;
+}else{
+return tf;
+}//else
+
+function txttolnK(lf){
+    var a='<a href="'+lf+'" target="_blank">'+
+            lf+'</a>';
+    return a;        
+}//txttolnK
+}//txtlnkeD

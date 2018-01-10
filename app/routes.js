@@ -35,7 +35,7 @@ Ap.post("/reset/:token",function(req,res){
             resetPasswordExpires: { $gt: Date.now() } },
                function(err, user) {
         if (!user) {
-          
+//heroku          
           return res.send('Password reset token is invalid or has expired. <a href="https://bestalk-test.glitch.me">home</a>');
         }//if
 //console.log(user);
@@ -46,7 +46,7 @@ Ap.post("/reset/:token",function(req,res){
     user.save((err) => {
   if (err) throw err;
       });//save
-    
+//heroku    
     res.send("Password reseted succesfully! <a href='https://bestalk-test.glitch.me'>Login</a>");
     
   });//findone
@@ -86,7 +86,7 @@ Ap.get('/edit',isLoggedIn,function(req,res){
 });//get 
   
 Ap.post('/edit',isLoggedIn,function(req,res){
-  
+ console.log("editando"); 
 // validate information
  req.checkBody('firstnm',
           'First Name is required.').notEmpty();
@@ -107,7 +107,7 @@ const errors = req.validationErrors();
               (err, user) => {
  // updating that event
    
-   //console.log(req.body);
+   console.log(req.body);
  user.avatar= req.body.avatar;  
  user.firstnm = req.body.firstnm;
  user.lastnm = req.body.lastnm;
@@ -116,7 +116,8 @@ const errors = req.validationErrors();
    user.country= req.body.country;
    user.learning= req.body.learning;
    user.speaks= req.body.speaks;
-
+   user.aboutme= req.body.aboutme;
+   
  user.save((err) => {
   if (err) throw err;
 
@@ -168,6 +169,7 @@ Ap.post('/mail',function(req,res){
  from: process.env.MAILSENDER,
  to: req.body.email,//or list
  subject: 'Password Reset',
+//heroku    
  html: '<p>Visit the link for set your new password:</p>'+
     '<a href="https://bestalk-test.glitch.me/reset/'+
     token+
