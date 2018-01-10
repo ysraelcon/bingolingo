@@ -34,7 +34,7 @@ $scope.ediT=function(user){
 
   $scope.user=user;
   $scope.user.avatar= igprfedi.src;
-    
+ console.log($scope.user);   
 $http.post("/edit",$scope.user)
       .then(function(res){
   

@@ -37,13 +37,15 @@
     border-radius:20%;
   font-family:consolas;}
      
-
+.alfrente{z-index:100;}
 
 /*chat room basico..*/
 
 .dvchtrm{
+  /*display: -webkit-flex;
+    -webkit-flex-direction:column;
   display:flex;
-    flex-direction:column;
+    flex-direction:column;*/
   /*overflow:auto;resize:both;*/
   position:absolute !important;
     left:12%;top:10%;
@@ -55,6 +57,8 @@
 
 
  .dvchtrm_tit{
+   display: -webkit-flex;
+     -webkit-flex-direction:row;
    display:flex;
      flex-direction:row;
      justify-content:center;
@@ -62,6 +66,8 @@
    font-family:arial;}
         
   .dvchtrm_titnm{
+    display: -webkit-flex;
+     -webkit-flex-direction:column;
     display:flex;
       flex-direction:column;
       justify-content:center;
@@ -71,6 +77,8 @@
     cursor:move;}
    
 .dvchtrm_titmin,.dvchtrm_titrsz{
+   display: -webkit-flex;
+     -webkit-flex-direction:column;
    display:flex;
      flex-direction:column;
      justify-content:center;
@@ -79,6 +87,8 @@
    cursor:default;}
  
 .dvchtrm_titcrr{
+   display: -webkit-flex;
+     -webkit-flex-direction:column;
    display:flex;
      flex-direction:column;
      justify-content:center;
@@ -89,22 +99,25 @@
 
 
   .dvchtrm_conusr{
+    display: -webkit-flex;
+     -webkit-flex-direction:row;
     display:flex;
       flex-direction:row;
-    position:relative;
-    height:100%;}
+    position:absolute;/*relative;*/
+      top:30px;bottom:30px;
+    width:100%;/*height:100%;*/}
       
   .dvchtrm_con{
     overflow-y:auto;
       word-wrap:break-word;
-    width:100%;height:98%;}
+    width:100%;/*height:98%;*/}
 
 
 .dvchtrm_usr{
   float:right;
     word-wrap:break-word;
   position:relative;
-  width:100px;height:98%;
+  width:100px;/*height:98%*/;
   font-weight:bold;}
 .dvchtrm_usrnm{
   overflow-y:auto;
@@ -114,9 +127,14 @@
     bottom:0px;}
 
         
-  .dvchtrm_msg{width:100%;}
+  .dvchtrm_msg{
+    position:absolute;
+      bottom:0px;
+    width:100%;}
 
 .fmchtrm_msg{
+    display: -webkit-flex;
+     -webkit-flex-direction:row;
     display:flex;
       flex-direction:row;  }  
   .btchtrm_msg{width:40px;} 
@@ -224,6 +242,8 @@ th, td{
        padding-right:5px;}
           
     #dvcrrprfcht{
+	  display: -webkit-flex;
+        -webkit-flex-direction:column;
       display:flex;
         flex-direction:column;
         justify-content:center;
@@ -243,6 +263,8 @@ th, td{
 /*waiting section chtrqs..*/
 
 .dvwti{
+  display: -webkit-flex;
+     -webkit-flex-direction:row;
   display:flex;
     flex-direction:row;
     justify-content:space-evenly;
@@ -270,6 +292,8 @@ th, td{
 /*receiving chat request..*/
 
 .dvchtrqsof{
+  display: -webkit-flex;
+     -webkit-flex-direction:row;
   display:flex;
     flex-direction:row;
     justify-content:space-evenly;
@@ -299,6 +323,8 @@ th, td{
 /*call*/
 
 .dvrcbcll,.dvespcll{
+  display: -webkit-flex;
+     -webkit-flex-direction:row;
   display:flex;
     flex-direction:row;
   position:absolute;

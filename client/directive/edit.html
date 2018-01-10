@@ -2,6 +2,7 @@
 #dvmsgedt{
   font-size:20px;
   color:red;}
+#taabtme{width:173px;}  
 </style>
 
 <form id="fmedt">
@@ -303,6 +304,11 @@ Learning:<br><input type="text"
 Speaks:<br><input type="text"
                name="speaks" ng-model="user.speaks"
         value="{{user.speaks}}"><br>
+
+About me:<br>
+<textarea name="aboutme" id="taabtme"
+ ng-model="user.aboutme" rows="4"
+ value="{{user.aboutme}}"></textarea><br>  
 
 
 <input type="submit"
