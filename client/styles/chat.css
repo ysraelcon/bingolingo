@@ -128,6 +128,8 @@
 
         
   .dvchtrm_msg{
+    display: flex;
+      flex-direction: row;
     position:absolute;
       bottom:0px;
     width:100%;}
@@ -136,13 +138,19 @@
     display: -webkit-flex;
      -webkit-flex-direction:row;
     display:flex;
-      flex-direction:row;  }  
+      flex-direction:row;
+    width:90%;} 
+
   .btchtrm_msg{width:40px;} 
   .btchtrm_emj{
     width:40px;
     margin-right:20px;}
     
   .inchtrm_msg{width:100%;}
+
+.dvemj{
+  position: absolute;
+    bottom: 0px;}
 
   /*..style room basico*/
 

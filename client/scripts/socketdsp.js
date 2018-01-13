@@ -60,15 +60,102 @@ tblusrsbd.innerHTML=conusr;
 
 //---------
 
-var rooms={"gnrl":"General", "eng":"English",
-           "spa":"Spanish","fra":"French",
-"rus":"Russian","por":"Portuguese",
-"ita":"Italian","deu":"German",
-"ara":"Arabic","zho":"Chinese",
-"kor":"Korean","ind":"Indonesian",
-"jpn":"Japanese","hin":"Hindi",
-"swe":"Swedish","tur":"Turkish",
-"ben":"Bengali","slk":"Slovak",
+var rooms={
+"gnrl":"General",
+
+"abk":"Abkhazian","aar":"Afar",
+"afr":"Afrikaans","aka":"Akan",
+"sqi":"Albanian","amh":"Amharic",
+"ara":"Arabic","arg":"Aragonese",
+"hye":"Armenian","asm":"Assamese",
+"ava":"Avaric","ave":"Avestan",
+"aym":"Aymara","aze":"Azerbaijani",
+"bam":"Bambara","bak":"Bashkir",
+"eus":"Basque","bel":"Belarusian",
+"ben":"Bengali","bih":"Bihari languages",
+"bis":"Bislama","bos":"Bosnian",
+"bre":"Breton","bul":"Bulgarian",
+"mya":"Burmese","cat":"Catalan, Valencian",
+"khm":"Central Khmer","cha":"Chamorro",
+"che":"Chechen","nya":"Chichewa, Chewa, Nyanja",
+"zho":"Chinese","chu":"Church Slavic, Church Slavonic, Old Church Slavonic, Old Slavonic, Old Bulgarian",
+"chv":"Chuvash","cor":"Cornish",
+"cos":"Corsican","cre":"Cree",
+"hrv":"Croatian","ces":"Czech",
+"dan":"Danish","div":"Divehi, Dhivehi, Maldivian",
+"nld":"Dutch, Flemish","dzo":"Dzongkha",
+"eng":"English","epo":"Esperanto",
+"est":"Estonian","ewe":"Ewe",
+"fao":"Faroese","fij":"Fijian",
+"fin":"Finnish","fra":"French",
+"ful":"Fulah","gla":"Gaelic, Scottish Gaelic",
+"glg":"Galician","lug":"Ganda",
+"kat":"Georgian","deu":"German",
+"ell":"Greek (modern)","grn":"Guaraní",
+"guj":"Gujarati","hat":"Haitian, Haitian Creole",
+"hau":"Hausa","heb":"Hebrew (modern)",
+"her":"Herero","hin":"Hindi",
+"hmo":"Hiri Motu","hun":"Hungarian",
+"isl":"Icelandic","ido":"Ido",
+"ibo":"Igbo","ind":"Indonesian",
+"ina":"Interlingua","ile":"Interlingue",
+"iku":"Inuktitut","ipk":"Inupiaq",
+"gle":"Irish","ita":"Italian",
+"jpn":"Japanese","jav":"Javanese",
+"kal":"Kalaallisut, Greenlandic","kan":"Kannada",
+"kau":"Kanuri","kas":"Kashmiri",
+"kaz":"Kazakh","kik":"Kikuyu, Gikuyu",
+"kin":"Kinyarwanda","kir":"Kirghiz, Kyrgyz",
+"kom":"Komi","kon":"Kongo",
+"kor":"Korean","kua":"Kuanyama, Kwanyama",
+"kur":"Kurdish","lao":"Lao",
+"lat":"Latin","lav":"Latvian",
+"lim":"Limburgan, Limburger, Limburgish","lin":"Lingala",
+"lit":"Lithuanian","lub":"Luba-Katanga",
+"ltz":"Luxembourgish, Letzeburgesch","mkd":"Macedonian",
+"mlg":"Malagasy","msa":"Malay",
+"mal":"Malayalam","mlt":"Maltese",
+"glv":"Manx","mri":"Maori",
+"mar":"Marathi","mah":"Marshallese",
+"mon":"Mongolian","nau":"Nauru",
+"nav":"Navajo, Navaho","ndo":"Ndonga",
+"nep":"Nepali","nde":"North Ndebele",
+"sme":"Northern Sami","nor":"Norwegian",
+"nob":"Norwegian Bokmål","nno":"Norwegian Nynorsk",
+"oci":"Occitan","oji":"Ojibwa",
+"ori":"Oriya","orm":"Oromo",
+"oss":"Ossetian, Ossetic","pli":"Pali",
+"pan":"Panjabi, Punjabi","pus":"Pashto, Pushto",
+"fas":"Persian","pol":"Polish",
+"por":"Portuguese","que":"Quechua",
+"ron":"Romanian, Moldavian, Moldovan","roh":"Romansh",
+"run":"Rundi","rus":"Russian",
+"smo":"Samoan","sag":"Sango",
+"san":"Sanskrit","srd":"Sardinian",
+"srp":"Serbian","sna":"Shona",
+"iii":"Sichuan Yi, Nuosu","snd":"Sindhi",
+"sin":"Sinhala, Sinhalese","slk":"Slovak",
+"slv":"Slovenian","som":"Somali",
+"nbl":"South Ndebele","sot":"Southern Sotho",
+"spa":"Spanish, Castilian","sun":"Sundanese",
+"swa":"Swahili","ssw":"Swati",
+"swe":"Swedish","tgl":"Tagalog",
+"tah":"Tahitian","tgk":"Tajik",
+"tam":"Tamil","tat":"Tatar",
+"tel":"Telugu","tha":"Thai",
+"bod":"Tibetan","tir":"Tigrinya",
+"ton":"Tonga (Tonga Islands)","tso":"Tsonga",
+"tsn":"Tswana","tur":"Turkish",
+"tuk":"Turkmen","twi":"Twi",
+"uig":"Uighur, Uyghur","ukr":"Ukrainian",
+"urd":"Urdu","uzb":"Uzbek",
+"ven":"Venda","vie":"Vietnamese",
+"vol":"Volapük","wln":"Walloon",
+"cym":"Welsh","fry":"Western Frisian",
+"wol":"Wolof","xho":"Xhosa",
+"yid":"Yiddish","yor":"Yoruba",
+"zha":"Zhuang, Chuang","zul":"Zulu",
+
 "mul":"MULTILINGUAL",
 "Musics":"Musics","TV":"TV",
 "Travel":"Travel","News":"News",
@@ -77,23 +164,111 @@ var rooms={"gnrl":"General", "eng":"English",
            "bstlk":"BesTalk"
           };//rooms
 
-var roomsxcls={lng:{"gnrl":"General", "eng":"English",
-           "spa":"Spanish","fra":"French",
-"rus":"Russian","por":"Portuguese",
-"ita":"Italian","deu":"German",
-"ara":"Arabic","zho":"Chinese",
-"kor":"Korean","ind":"Indonesian",
-"jpn":"Japanese","hin":"Hindi",
-"swe":"Swedish","tur":"Turkish",
-"ben":"Bengali","slk":"Slovak",
+var roomsxcls={lng:{
+"abk":"Abkhazian","aar":"Afar",
+"afr":"Afrikaans","aka":"Akan",
+"sqi":"Albanian","amh":"Amharic",
+"ara":"Arabic","arg":"Aragonese",
+"hye":"Armenian","asm":"Assamese",
+"ava":"Avaric","ave":"Avestan",
+"aym":"Aymara","aze":"Azerbaijani",
+"bam":"Bambara","bak":"Bashkir",
+"eus":"Basque","bel":"Belarusian",
+"ben":"Bengali","bih":"Bihari languages",
+"bis":"Bislama","bos":"Bosnian",
+"bre":"Breton","bul":"Bulgarian",
+"mya":"Burmese","cat":"Catalan, Valencian",
+"khm":"Central Khmer","cha":"Chamorro",
+"che":"Chechen","nya":"Chichewa, Chewa, Nyanja",
+"zho":"Chinese","chu":"Church Slavic, Church Slavonic, Old Church Slavonic, Old Slavonic, Old Bulgarian",
+"chv":"Chuvash","cor":"Cornish",
+"cos":"Corsican","cre":"Cree",
+"hrv":"Croatian","ces":"Czech",
+"dan":"Danish","div":"Divehi, Dhivehi, Maldivian",
+"nld":"Dutch, Flemish","dzo":"Dzongkha",
+"eng":"English","epo":"Esperanto",
+"est":"Estonian","ewe":"Ewe",
+"fao":"Faroese","fij":"Fijian",
+"fin":"Finnish","fra":"French",
+"ful":"Fulah","gla":"Gaelic, Scottish Gaelic",
+"glg":"Galician","lug":"Ganda",
+"kat":"Georgian","deu":"German",
+"ell":"Greek (modern)","grn":"Guaraní",
+"guj":"Gujarati","hat":"Haitian, Haitian Creole",
+"hau":"Hausa","heb":"Hebrew (modern)",
+"her":"Herero","hin":"Hindi",
+"hmo":"Hiri Motu","hun":"Hungarian",
+"isl":"Icelandic","ido":"Ido",
+"ibo":"Igbo","ind":"Indonesian",
+"ina":"Interlingua","ile":"Interlingue",
+"iku":"Inuktitut","ipk":"Inupiaq",
+"gle":"Irish","ita":"Italian",
+"jpn":"Japanese","jav":"Javanese",
+"kal":"Kalaallisut, Greenlandic","kan":"Kannada",
+"kau":"Kanuri","kas":"Kashmiri",
+"kaz":"Kazakh","kik":"Kikuyu, Gikuyu",
+"kin":"Kinyarwanda","kir":"Kirghiz, Kyrgyz",
+"kom":"Komi","kon":"Kongo",
+"kor":"Korean","kua":"Kuanyama, Kwanyama",
+"kur":"Kurdish","lao":"Lao",
+"lat":"Latin","lav":"Latvian",
+"lim":"Limburgan, Limburger, Limburgish","lin":"Lingala",
+"lit":"Lithuanian","lub":"Luba-Katanga",
+"ltz":"Luxembourgish, Letzeburgesch","mkd":"Macedonian",
+"mlg":"Malagasy","msa":"Malay",
+"mal":"Malayalam","mlt":"Maltese",
+"glv":"Manx","mri":"Maori",
+"mar":"Marathi","mah":"Marshallese",
+"mon":"Mongolian","nau":"Nauru",
+"nav":"Navajo, Navaho","ndo":"Ndonga",
+"nep":"Nepali","nde":"North Ndebele",
+"sme":"Northern Sami","nor":"Norwegian",
+"nob":"Norwegian Bokmål","nno":"Norwegian Nynorsk",
+"oci":"Occitan","oji":"Ojibwa",
+"ori":"Oriya","orm":"Oromo",
+"oss":"Ossetian, Ossetic","pli":"Pali",
+"pan":"Panjabi, Punjabi","pus":"Pashto, Pushto",
+"fas":"Persian","pol":"Polish",
+"por":"Portuguese","que":"Quechua",
+"ron":"Romanian, Moldavian, Moldovan","roh":"Romansh",
+"run":"Rundi","rus":"Russian",
+"smo":"Samoan","sag":"Sango",
+"san":"Sanskrit","srd":"Sardinian",
+"srp":"Serbian","sna":"Shona",
+"iii":"Sichuan Yi, Nuosu","snd":"Sindhi",
+"sin":"Sinhala, Sinhalese","slk":"Slovak",
+"slv":"Slovenian","som":"Somali",
+"nbl":"South Ndebele","sot":"Southern Sotho",
+"spa":"Spanish, Castilian","sun":"Sundanese",
+"swa":"Swahili","ssw":"Swati",
+"swe":"Swedish","tgl":"Tagalog",
+"tah":"Tahitian","tgk":"Tajik",
+"tam":"Tamil","tat":"Tatar",
+"tel":"Telugu","tha":"Thai",
+"bod":"Tibetan","tir":"Tigrinya",
+"ton":"Tonga (Tonga Islands)","tso":"Tsonga",
+"tsn":"Tswana","tur":"Turkish",
+"tuk":"Turkmen","twi":"Twi",
+"uig":"Uighur, Uyghur","ukr":"Ukrainian",
+"urd":"Urdu","uzb":"Uzbek",
+"ven":"Venda","vie":"Vietnamese",
+"vol":"Volapük","wln":"Walloon",
+"cym":"Welsh","fry":"Western Frisian",
+"wol":"Wolof","xho":"Xhosa",
+"yid":"Yiddish","yor":"Yoruba",
+"zha":"Zhuang, Chuang","zul":"Zulu",
+  
 "mul":"MULTILINGUAL"},
+               
 thm:{
+"gnrl":"General",   
 "Musics":"Musics","TV":"TV",
 "Travel":"Travel","News":"News",
 "Politics":"Politics","Religion":"Religion",
 "Others":"Others",
            "bstlk":"BesTalk"}
           };//rooms x clase
+
 
 
 //entrar language room, from datalist
@@ -115,20 +290,10 @@ sprM(roomf,dvlngrmscon);
 }//goiN room
 
 
-
 //entrar theme room
-function gothmrM(){
- 
-  if(inlstthmrm.value!=""){
- var roomf= inlstthmrm.value;
+function gothmrM(roomf){
  entrrooM(roomf);
  sprM(roomf,dvthmrmscon);
-inlstthmrm.value="";
-
-}//if no vacio
-  else{
-    alert("Select theme room in the list");
-  }//else select theme room
 }//gothmrM
 
 
@@ -391,7 +556,7 @@ function goscT(){
 
   var sctroom= insctrm.value.replace(/\s/g,"_");
  crtrooM(sctroom);
-
+ insctrm.value="";
   sktclt.emit("slide in sct", sctroom);
 }//goscT
 
@@ -457,11 +622,11 @@ nudiv.innerHTML='<div class="dvchtrm_tit">'+
   '<button id="btchtrm_msg_'+rmx+'" class="btchtrm_msg" type="submit" >'+
   '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
   '</button>'+
-
-  '<button class="btchtrm_emj" onclick="selemJ()">'+
+'</form>'+ 
+  '<button class="btchtrm_emj" onclick="selemjI(\''+rmx+'\')">'+
   '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
     '</button>'+
-  '</form>'+  
+   
   '</div>';
 
 dvconcht.appendChild(nudiv);
@@ -511,9 +676,49 @@ $('#dvchtrm_'+rmx).resizable();
 });//jQuery
     
   }//if no dvchtrm
-    
-    
+      
 }//crtrooM
+
+
+//seleccionar emoji
+function selemjI(rmf){
+//hay div, no, crea div
+var dvchtrm_usr_= document.getElementById("dvchtrm_usr_"+rmf);
+var dvemj_= document.getElementById("dvemj_"+rmf);
+
+if(!dvemj_){
+var nudiv= document.createElement("div");
+nudiv.id= "dvemj_"+rmf;
+nudiv.setAttribute("class","dvemj");
+
+nudiv.innerHTML= '<input type="button" value="😄" onclick="metemJ(\''+rmf+'\',\'smile\')">'+
+'<input type="button" value="😠" onclick="metemJ(\''+rmf+'\',\'angry\')">'+
+'<input type="button" value="😆" onclick="metemJ(\''+rmf+'\',\'laughing\')">'+
+'<input type="button" value="👍" onclick="metemJ(\''+rmf+'\',\'thumbsup\')">';
+  
+
+dvchtrm_usr_.appendChild(nudiv);
+
+}//if no dvemj_
+else{
+	dvchtrm_usr_.removeChild(dvemj_);
+}//else quitarlo
+
+}//selemjI
+
+
+function metemJ(rmf,palemj){
+  var inchtrm_msg_= document.getElementById("inchtrm_msg_"+rmf);
+  
+  inchtrm_msg_.value+=":"+palemj+":";
+
+  var dvemj_= document.getElementById("dvemj_"+rmf);
+  var dvchtrm_usr_= document.getElementById("dvchtrm_usr_"+rmf);
+
+  dvchtrm_usr_.removeChild(dvemj_);
+
+}//metemJ
+
 
 
 
@@ -743,11 +948,11 @@ nudiv.innerHTML='<div class="dvchtrm_tit">'+
   '<button id="btnchtrm_msg_'+roombthx+'" class="btnchtmsg" type="submit" >'+
   '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
   '</button>'+
-
-  '<button class="btnchtrm_emj"  onclick="selemJ()">'+
+'</form>'+
+  '<button class="btnchtrm_emj"  onclick="selemjI(\''+roombthx+'\')">'+
   '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
     '</button>'+
-  '</form></div>';    
+  '</div>';    
     
 dvconcht.appendChild(nudiv);
 
@@ -1045,7 +1250,7 @@ function crtgaM(rmjf,nmejuef,lisjuef,nroplyf){
 var nudivj=document.createElement("DIV");
 nudivj.id="dvjue";
 
-nudivj.innerHTML='<div id="dvjue_cab" draggable="true">'+
+nudivj.innerHTML='<div id="dvjue_cab">'+
 '<div id="dvjue_tit" class="dvchtrm_tit">'+
   '<div id="dvjue_titnm">Explain The Word</div>'+
   '<div id="dvjue_titrsz" onclick="restamjuE()">L</div>'+
@@ -1056,9 +1261,9 @@ nudivj.innerHTML='<div id="dvjue_cab" draggable="true">'+
 '><span id="sptmr">00</span></div>'+
 '</div>'+//dvjue_cab
   
-'<div id="dvjue_conusr" class="dvchtrm_conusr">'+
-'<div id="dvjue_con" class="dvchtrm_con"></div>'+
-'<div id="dvjue_usr" class="dvchtrm_usr">'+
+'<div id="dvjue_conusr" class="">'+
+'<div id="dvjue_con" class=""></div>'+
+'<div id="dvjue_usr" class="">'+
 
   '<div id="dvjue_usrnm_'+rmjf+'" class="dvchtrm_usrnm"></div>'+
   
@@ -1099,9 +1304,19 @@ $('#dvjue_con', draggableDiv)
   draggableDiv.draggable('enable');
 });
   
+ var draggableDiv = $('#dvjue').draggable(); 
+  $('#dvjue_exp', draggableDiv)
+  .mousedown(function(ev) {
+  draggableDiv.draggable('disable');
+}).mouseup(function(ev) {
+  draggableDiv.draggable('enable');
+});  
+
+ 
 $("#dvjue").resizable();
 
 });//jQuery
+
 }//if no esta, crea
 };//crtgaM
 
@@ -1242,9 +1457,29 @@ function envmsgJ(ev){
   ev.preventDefault();
 
 if(injue_msg.value!=""){
+
+ var msg= injue_msg.value;	
+ 
+ var pal= spwrdtogss.innerHTML;
+ var palval= pal[0]!=pal[0].toUpperCase();
+
+ if(palval){
+ var re= new RegExp("\\b"+pal+"\\b","i");
+ if(re.test(msg)){
+ alert("can't say the word, explain it!");
+}//if esta, alerta
+else{
  sktclt.emit("send messagejue",
              {msg:injue_msg.value,
         nrogme:injue_msg.getAttribute("data-room")});
+}//else
+ }//if pal val true p dif P
+else{
+	sktclt.emit("send messagejue",
+             {msg:injue_msg.value,
+        nrogme:injue_msg.getAttribute("data-room")});
+}//else enviar normal
+		
 }//if no vacio
 
 injue_msg.value="";
