@@ -130,6 +130,18 @@ if(btcll.style.backgroundColor=="green"){
 });//skcl se cuelga llmd
 
 
+//join group voice chat
+function joincllscT(btf,rmf){
+
+if(btf.style.backgroundColor=="green"){
+ btf.removeAttribute("style");
+ hangUp();
+}else{
+ btf.style.backgroundColor= "green";
+ clL(rmf);
+}//else llama
+}//joincllscT
+
 
 //=====webrtc
 

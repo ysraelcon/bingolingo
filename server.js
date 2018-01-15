@@ -300,13 +300,40 @@ socket.on("slide in sct",function(dt){
 socket.join(dt);
   console.log(io.sockets.adapter.rooms[dt]);
 
-io.to(dt).emit('mndusrroom',
+io.to(dt).emit('mndusrsctrm',
              {usrsroom:usrsroom[dt],
               sktid:socket.id,
               room:dt});
 
 });//skon slide in secret room
           
+ 
+
+socket.on("ver su prf",function(dt){
+ //dt{usridrcv,sktidrcv,sktidmnd}
+console.log("ver su perfil");
+console.log(dt); 
+var usr={};  
+User.findOne({_id:dt.usridrcv},
+             (err,user)=>{
+  //console.log(user);
+  usr.firstnm=user.firstnm;
+usr.lastnm=user.lastnm;
+usr.avatar=user.avatar;
+usr.age=user.age;
+usr.gender=user.gender;
+usr.country=user.country;
+usr.speaks=user.speaks;
+usr.learning=user.learning;
+usr.aboutme=user.aboutme;
+  io.to(dt.sktidmnd).emit("perfil a ver",
+  {user:usr,
+   usridrcv:dt.usridrcv,
+   sktidrcv:dt.sktidrcv});
+});//findone  
+  
+});//skon ver su prf
+  
   
   
 //====private chats
@@ -333,7 +360,7 @@ socket.on("mnd chtrqs",function(dt){
    
  console.log(io.sockets.adapter.rooms[roombth]); 
   
-  socket.to(dt.sktidrcv).emit("recibe chtrqs",
+  io.to(dt.sktidrcv).emit("recibe chtrqs",
         {nmemnd:socket.request.user.firstnm,
        sktidmnd:dt.sktidmnd,
      sktidrcv:dt.sktidrcv,
