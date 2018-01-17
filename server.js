@@ -100,7 +100,19 @@ io.sockets.on('connection', function(socket) {
   
   console.log("en conexion "+ socket.request.user.firstnm);
 
+ console.log("lanza barras de juego");
   
+  for(var juex in jue){
+ if(Object.keys(jue[juex].nroplyact).length!=0){
+ 
+ io.sockets.emit("los demas barjue",
+               {nrogme: juex,
+                typgme: jue[juex].typgme,
+                liswrdnm: jue[juex].liswrdnm,
+                nroply: jue[juex].nroply});
+
+}//if hay jugadores
+}//for
   
 //----click on chat
   
@@ -577,7 +589,8 @@ jue[nrogme]= {nrogme: nrogme,
               tmp:0,
               mod:"",
               wrdtogss:"",
-             typegme: dt.typgme,
+             typgme: dt.typgme,
+              liswrdnm:dt.liswrd,
              liswrd: liswrds[dt.liswrd],
              plytrn:"", 
              nroply: dt.nroply,
@@ -586,14 +599,14 @@ jue[nrogme]= {nrogme: nrogme,
 
 io.to(socket.id).emit("crear juego",
              {nrogme: nrogme,
-              typegme: dt.typgme,
+              typgme: dt.typgme,
              liswrd: dt.liswrd,
              nroply: dt.nroply });
 //socket.broadcast.emit("los demas barjue",
 io.sockets.emit("los demas barjue",
                 {nrogme:nrogme,
                  typgme:dt.typgme,
-                 liswrd:dt.liswrd,
+                 liswrdnm:dt.liswrd,
                  nroply:dt.nroply});
   
 });//skon solicitar game  

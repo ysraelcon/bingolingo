@@ -6,7 +6,7 @@
   /*overflow:auto;resize:both;*/
   position:absolute !important;
     top:10%;
-  width:250px;height:250px;
+  width:270px;height:250px;
   border:1px solid grey;
     border-radius:5px;
   background-color:#D2B48C;}
@@ -84,6 +84,7 @@
 
 #dvcrtgme{
   display:inline-block;
+    text-align:center;
   border:1px dashed;}
 
 
