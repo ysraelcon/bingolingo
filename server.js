@@ -153,7 +153,8 @@ socket.on('open room',function(dt){
   
   
   socket.join(dt);
-  console.log(io.sockets.adapter.rooms[dt]);   
+  console.log("joined in "+dt);
+  //console.log(io.sockets.adapter.rooms[dt]);   
   
 Chat.findOne({_id:"5a03c2696602c617ed34b85f"},
              function(err,cht){

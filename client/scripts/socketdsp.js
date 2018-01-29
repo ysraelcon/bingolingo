@@ -1210,9 +1210,9 @@ nudiv.innerHTML='<div id="dvtitoptgme">'+
  '<div style="display:inline-block">'+
  '<span>Select word list:</span><br>'+
  '<select id="sllst">'+
- '<option id="nros">10 numbers</option>'+
- '<option id="abc">alphabet</option>'+
-  '<option id="house">house\'s things</option>'+
+ '<option id="nros">20 numbers</option>'+
+  '<option id="essentials">essentials</option>'+
+  '<option id="business">business</option>'+
   '<option id="sharedlingo">sharedlingo\'s words</option>'+
 '<option id="proposed">proposed words</option>'+
  '<option id="optld">load list, in future</option>'+
