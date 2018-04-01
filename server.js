@@ -1,4 +1,6 @@
 
+// 1.. 
+
 require('dotenv').config();
 
 var Exp = require('express');
@@ -70,7 +72,7 @@ require('./app/routes')(Ap,pssp);
 
  
 
-//======socket part
+//====== 2.. socket part
 
 var Chat=require('./app/models/chat');
 var User=require('./app/models/user');

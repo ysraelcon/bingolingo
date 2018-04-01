@@ -9,6 +9,9 @@ pencil:
 
 font-awesome:
  http://fontawesome.io/icons/
+ 
++debugger
+chrome-devtools://devtools/bundled/inspector.html?ws=bestalk-test.glitch.me:80/00addfd0-2862-4279-b663-c669853eaf55
 
 +errores:
 -
