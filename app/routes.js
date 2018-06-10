@@ -35,7 +35,7 @@ Ap.post("/reset/:token",function(req,res){
             resetPasswordExpires: { $gt: Date.now() } },
                function(err, user) {
         if (!user) {
-//heroku          
+//heroku 3c..  
           return res.send('Password reset token is invalid or has expired. <a href="https://bestalk-test.glitch.me">home</a>');
         }//if
 //console.log(user);
@@ -169,7 +169,7 @@ Ap.post('/mail',function(req,res){
  from: process.env.MAILSENDER,
  to: req.body.email,//or list
  subject: 'Password Reset',
-//heroku    
+//heroku 3c..
  html: '<p>Visit the link for set your new password:</p>'+
     '<a href="https://bestalk-test.glitch.me/reset/'+
     token+

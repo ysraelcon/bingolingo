@@ -142,7 +142,7 @@ io.to(socket.id).emit("actlz rooms",
 
   
   
-//----open room
+//---- 2a.. open room
   
 socket.on('open room',function(dt){
  //dt="gnrl" room
@@ -301,7 +301,7 @@ cht.save((err)=>{
 });//reporte 
   
   
-//=====secret rooms
+//===== 2b.. secret rooms
   
 socket.on("slide in sct",function(dt){
  //dt=secret name's room
@@ -351,7 +351,7 @@ usr.aboutme=user.aboutme;
   
   
   
-//====private chats
+//==== 2c.. private chats
   
 socket.on("mnd chtrqs",function(dt){
   //dt{sktidrcv,usridrcv,sktidmnd}
@@ -576,7 +576,7 @@ console.log("saved note");
   
   
   
-//=====jueg  
+//===== 2d.. jueg  
   
   
 socket.on("solicitar game",function(dt){
@@ -763,8 +763,10 @@ if(wnr==""){
   jue[rmjf].tmp=90;
   jue[rmjf].mod="ten";
   
-  var pmrid= Object.keys(jue[rmjf].nroplyact)[ jue[rmjf].plytrn%jue[rmjf].nroply];
+  var pmrid= Object.keys(jue[rmjf].nroplyact)[ jue[rmjf].plytrn% Object.keys(jue[rmjf].nroplyact).length ];
+  
 var pmrusr= jue[rmjf].nroplyact[pmrid];//[fn,sktid]
+  
 
 jue[rmjf].wrdtogss= jue[rmjf].liswrd[rndnuM(0,jue[rmjf].liswrd.length)];  
 
@@ -818,7 +820,7 @@ socket.on("10 seg",function(dt){
 socket.on('send messagejue',function(dt){
   //dt{msg,nrogme}
   
-  var pmrid= Object.keys(jue[dt.nrogme].nroplyact)[ jue[dt.nrogme].plytrn%jue[dt.nrogme].nroply];
+  var pmrid= Object.keys(jue[dt.nrogme].nroplyact)[ jue[dt.nrogme].plytrn% Object.keys(jue[dt.nrogme].nroplyact).length ];
 
 var sktidply= jue[dt.nrogme].nroplyact[pmrid][1];//[fn,sktid]
   
