@@ -15,31 +15,28 @@ $routeProvider.when('/profile',
   
  //console.log('profilen');
         
-$http.get("/profile")
-      .then(function(res){
+$http.get("/profile").then(function(res){
   
  $scope.user=res.data;
 });//route get /profile
   
 $scope.logout=function(){
   
- $http.get("/logout")
-       .then(function(res){
+ $http.get("/logout").then(function(res){
   $location.path("/");
 });//then
 };//logout
-  
-  
-$scope.ediT=function(user){
 
-  $scope.user=user;
+  
+$scope.ediT= function(user){
+
+  $scope.user= user;
   $scope.user.avatar= igprfedi.src;
  console.log($scope.user);   
-$http.post("/edit",$scope.user)
-      .then(function(res){
+$http.post("/edit",$scope.user).then(function(res){
   
  $scope.message=res.data.message;
-  
+
 if($scope.message===undefined){
  //$location.path("/profile");
  $scope.edit=false;

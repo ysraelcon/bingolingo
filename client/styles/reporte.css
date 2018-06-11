@@ -1,48 +1,42 @@
 
 
-   #dvrptscr{
-      display:flex;
-        justify-content:center;
-        align-items:center;
-      position:absolute;
-        top:0;
-      width:100%;height:100%;
-      background:rgba(0,0,0,0.7);
-    }
-    #dvrpt{
-      width:50%;height:50%;
-      /*border:1px dotted;*/}
-    
-    #dvrpttit{
-      display:flex;
-        justify-content:center;
-      position:relative;
-    }
-    #dvrpttit>div{
-      display:inline-block;
-    }
-    
-    #dvrpttitnm{
-      text-align:center;
-      width:100%;
-      background:black;
-        color:yellow;
-    }
-    #dvrpttitx{
-      text-align:center;
-      position:absolute;
-        right:0px;
-      width:50px;
-      background:white;
-      cursor:pointer;
-    }
-    #inrpttit{
-      text-align:center;
-      width:100%;
-    }
-    #tarpt{
-      width:100%;height:50%;
-    }
-    #btsndrpt{
-      width:100%;
-    }
+#dvrptscr{
+  display:flex; justify-content:center; align-items:center;
+  position:absolute; top:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.7);
+}
+#dvrpt{
+  width:50%;height:50%;
+  /*border:1px dotted;*/}
+
+#dvrpttit{
+  display:flex; justify-content:center;
+  position:relative;
+}
+#dvrpttit>div{
+  display:inline-block;
+}
+
+#dvrpttitnm{
+  text-align:center;
+  width:100%;
+  background:black; color:yellow;
+}
+#dvrpttitx{
+  text-align:center;
+  position:absolute; right:0px;
+  width:50px;
+  background:white;
+  cursor:pointer;
+}
+#inrpttit{
+  text-align:center;
+  width:100%;
+}
+#tarpt{
+  width:100%;height:50%;
+}
+#btsndrpt{
+  width:100%;
+}

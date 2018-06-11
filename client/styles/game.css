@@ -1,14 +1,11 @@
 /*style game..*/
    
 #dvjue{
-  display:flex;
-    flex-direction:column;
+  display:flex; flex-direction:column;
   /*overflow:auto;resize:both;*/
-  position:absolute !important;
-    top:10%;
+  position:absolute !important; top:10%;
   width:270px;height:250px;
-  border:1px solid grey;
-    border-radius:5px;
+  border:1px solid grey; border-radius:5px;
   background-color:#D2B48C;}
     
 #dvjue_tit{
@@ -39,12 +36,9 @@
   border:1px solid black;}
 
 #dvjue_conusr{
-	display: -webkit-flex;
-     -webkit-flex-direction:row;
-    display:flex;
-      flex-direction:row;
-    position:absolute;/*relative;*/
-      top:50px;bottom:30px;
+	display: -webkit-flex; -webkit-flex-direction:row;
+    display:flex; flex-direction:row;
+    position:absolute; top:50px;bottom:30px;
     width:100%;/*height:100%;*/}
   
 #dvjue_con,#dvjue_usr{border:1px solid grey;}
@@ -62,11 +56,9 @@
   font-weight:bold;}	
 
 .dvjuepnt{
-  display:inline-block;
-    text-align:center;
+  display:inline-block; text-align:center;
   width:30px;
-  border:1px solid;
-    border-radius:50%;
+  border:1px solid; border-radius:50%;
 }
 
 .dvjue_u_nm{
@@ -75,37 +67,32 @@
 }
 
 #dvjue_msg{
-	position:absolute;
-	  bottom:0px;
+	position:absolute; bottom:0px;
 	width:100%;}
 
 /*style crear tipo de juego..*/
 
 
 #dvcrtgme{
-  display:inline-block;
-    text-align:center;
+  display:inline-block; text-align:center;
   border:1px dashed;}
 
 
       
-      #dvrdygme{
-        text-align:center;
-      }
-      #btrdygme{
-        width:50%;
-      }
-#dvtitoptgme{
-  display:flex;
-    flex-direction:row;
+#dvrdygme{
+  text-align:center;
 }
-      #dvtitoptgmenme{
-        display:inline-block;
-          text-align:center;
-        width:100%;
-        background-color:black;
-          color:white;
-      }
+#btrdygme{
+  width:50%;
+}
+#dvtitoptgme{
+  display:flex; flex-direction:row;
+}
+#dvtitoptgmenme{
+  display:inline-block; text-align:center;
+  width:100%;
+  background-color:black; color:white;
+}
 #dvtitoptgme_x{
   display:inline-block;
     text-align:center;
@@ -113,11 +100,11 @@
   cursor:pointer;
 }
       
-      dvcrtgme select{border:none;}
-      
-      #dvwaigme{
-        display:inline-block;
-      }
+dvcrtgme select{border:none;}
+
+#dvwaigme{
+  display:inline-block;
+}
 
 /*style barra de juego a juntarse*/
 

@@ -14,10 +14,9 @@ angular.module('laApp.home',['ngRoute'])
         function($scope,$http,$location){
 
           
-$scope.logiN=function(){
+$scope.logiN= function(){
   
-$http.post("/login",$scope.user)
-      .then(function(res){
+$http.post("/login",$scope.user).then(function(res){
   
  $scope.message=res.data.message;
   
@@ -29,15 +28,14 @@ if($scope.message===undefined){
 };//login
 
 //olvido password
-$scope.fgtpwD=function(){
+$scope.fgtpwD= function(){
   
-  if(typeof($scope.user)=="undefined"||
+if(typeof($scope.user)=="undefined"||
     $scope.user.email==""){
-alert("write your email in login");
+ alert("write your email in login");
 }else{
 
-  $http.post("/mail",$scope.user)
-    .then(function(res){
+$http.post("/mail",$scope.user).then(function(res){
     
     //console.log(res);
 //alert("Check your email for get your password")
@@ -47,10 +45,9 @@ alert("write your email in login");
   
 };//fgtpwD
           
-$scope.signuP=function(){
+$scope.signuP= function(){
   
-$http.post("/signup",$scope.user)
-      .then(function(res){
+$http.post("/signup",$scope.user).then(function(res){
   
  $scope.message=res.data.message;
   
