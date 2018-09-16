@@ -6,3 +6,9 @@
     RewriteRule ^.*$ - [NC,L]
 
     RewriteRule ^(.*) /index.html [NC,L]
+    
+ //para redireccionamiento
+ 	
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www.bestalk.herokuapp.com [NC]
+RewriteRule ^(.*)$ https://bestalk.herokuapp.com/$1 [L,R=301]

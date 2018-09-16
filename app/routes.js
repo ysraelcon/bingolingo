@@ -1,41 +1,38 @@
+//fecha: 16-09-18
 
-var User=require('../app/models/user');
-var Chat=require('../app/models/chat');
-var ndmlr= require('nodemailer');
+var User= require('../app/models/user');
+var Chat= require('../app/models/chat');
+var ndmailer= require('nodemailer');
 
 
-module.exports=function(Ap,pssp){
+module.exports= function(appf,passportf){
 
-Ap.get("/",function(req,res){
+appf.get("/",function(req,res){
  //res.render("login.ejs",{msg:""});
- 
 });
 
   
-Ap.get("/home",function(req,res){
- 
-  res.json({message:req.flash("registerMessage")});
-               
+appf.get("/home",function(req,res){
+  res.json({message:req.flash("registerMessage")});             
 });
 
   /*
-Ap.get("/signup",function(req,res){
+appf.get("/signup",function(req,res){
  res.render("signup.ejs");
 });*/
 
-Ap.get("/reset/:token",function(req,res){
-  
+appf.get("/reset/:token",function(req,res){
  res.render("reset.ejs",{token:req.params.token});
 });//get reset
   
   
-Ap.post("/reset/:token",function(req,res){
+appf.post("/reset/:token",function(req,res){
   console.log(req.body.password);
   User.findOne({ resetPasswordToken: req.params.token,
-            resetPasswordExpires: { $gt: Date.now() } },
-               function(err, user) {
+            resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+    
         if (!user) {
-//heroku          
+//heroku 3c..  
           return res.send('Password reset token is invalid or has expired. <a href="https://bestalk-test.glitch.me">home</a>');
         }//if
 //console.log(user);
@@ -44,23 +41,22 @@ Ap.post("/reset/:token",function(req,res){
         user.resetPasswordExpires = undefined;
     
     user.save((err) => {
-  if (err) throw err;
-      });//save
+     if (err) throw err;
+    });//save
 //heroku    
     res.send("Password reseted succesfully! <a href='https://bestalk-test.glitch.me'>Login</a>");
     
   });//findone
   
-  
 });//post reset
 
 
-Ap.get("/login",function(req,res){
+appf.get("/login",function(req,res){
  //res.render("login.ejs",{msg:req.flash('loginMsg')});
   res.json({message:req.flash("loginMsg")});
 });
   
-Ap.post("/login",pssp.authenticate('login',
+appf.post("/login",passportf.authenticate('login',
   {successRedirect:'/profile',
   failureRedirect:'/login',
   failureFlash:true}
@@ -68,50 +64,46 @@ Ap.post("/login",pssp.authenticate('login',
 
 
 
-Ap.post('/signup',pssp.authenticate('register',{
+appf.post('/signup',passportf.authenticate('register',{
  successRedirect:'/profile',
  failureRedirect:'/home',
  failureFlash:true
 }));//post
 
-Ap.get('/profile',isLoggedIn,function(req,res){
+appf.get('/profile',isLoggedIn,function(req,res){
  res.json(req.user);
   //res.render('/profile/profile.html',{user:req.user});
   //res.render('profile.ejs',{user:req.user});
 });//get f
   
-Ap.get('/edit',isLoggedIn,function(req,res){
+appf.get('/edit',isLoggedIn,function(req,res){
  res.json({message:req.flash("errors")});
   //res.render('edit.ejs',{user:req.user});
 });//get 
   
-Ap.post('/edit',isLoggedIn,function(req,res){
+appf.post('/edit',isLoggedIn,function(req,res){
  console.log("editando"); 
 // validate information
- req.checkBody('firstnm',
-          'First Name is required.').notEmpty();
- req.checkBody('age',
-          'Age is required.').notEmpty();
+ req.checkBody('firstnm', 'First Name is required.').notEmpty();
+ req.checkBody('age', 'Age is required.').notEmpty();
 
 // if there are errors, redirect and save errors to flash
 const errors = req.validationErrors();
   if (errors) {
-  console.log(errors);
-   req.flash('errors',
-             errors.map(err => err.msg));
+   console.log(errors);
+   req.flash('errors', errors.map(err => err.msg));
    return res.redirect("/edit");
   }//if
 
 // finding a current event
- User.findOne({_id:req.user._id},
-              (err, user) => {
+ User.findOne({_id:req.user._id}, (err, user) => {
  // updating that event
    
    console.log(req.body);
- user.avatar= req.body.avatar;  
- user.firstnm = req.body.firstnm;
- user.lastnm = req.body.lastnm;
- user.gender= req.body.gender;
+   user.avatar= req.body.avatar;  
+   user.firstnm = req.body.firstnm;
+   user.lastnm = req.body.lastnm;
+   user.gender= req.body.gender;
    user.age= req.body.age;
    user.country= req.body.country;
    user.learning= req.body.learning;
@@ -123,43 +115,40 @@ const errors = req.validationErrors();
 
 // success flash message
 // redirect back to the /events
- req.flash('success',
-           'Successfully updated event.');
+ req.flash('success', 'Successfully updated event.');
  res.redirect('/profile');
 });//ev.save
 });//ev.findone
   
 });//post edit
 
-Ap.get('/logout',function(req,res){
+appf.get('/logout',function(req,res){
  req.logout();
 res.redirect('/');
 });//get
   
   
-Ap.post('/mail',function(req,res){
+appf.post('/mail',function(req,res){
     
   var token=Math.random().toString(36)
         .replace(/[^a-z]+/g, '').substr(0, 5);
   console.log(token);
   
-  User.findOne({ email: req.body.email },
-                function(err, user){
+  User.findOne({ email: req.body.email }, function(err, user){
     
     if(!user){
           
           //return res.redirect('/mail');
       res.json({message:"No email address exists."});
-        }//if
-    else{
+    }else{
       
       user.resetPasswordToken = token;
       user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
       user.save((err) => {
-  if (err) throw err;
+       if (err) throw err;
       });//save
       
-      var transporter= ndmlr.createTransport({
+      var transporter= ndmailer.createTransport({
     service:'gmail',
     auth:{user: process.env.MAILSENDER,
           pass: process.env.MAILSENDERPWD}
@@ -169,7 +158,7 @@ Ap.post('/mail',function(req,res){
  from: process.env.MAILSENDER,
  to: req.body.email,//or list
  subject: 'Password Reset',
-//heroku    
+//heroku 3c..
  html: '<p>Visit the link for set your new password:</p>'+
     '<a href="https://bestalk-test.glitch.me/reset/'+
     token+

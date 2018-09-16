@@ -1,14 +1,16 @@
+//fecha: 16-09-18
+
 var lclstrtg=require('passport-local').Strategy;
 var User=require('../app/models/user');
 
 
-module.exports=function(pssp){
+module.exports= function(passportf){
   
- pssp.serializeUser(function(user,done){
+ passportf.serializeUser(function(user,done){
   done(null,user.id);
 });//serialize
 
-pssp.deserializeUser(function(id,done){
+passportf.deserializeUser(function(id,done){
  User.findById(id,function(err,user){
   done(err,user);
 });//find
@@ -16,20 +18,18 @@ pssp.deserializeUser(function(id,done){
 
 
 
-pssp.use('register',new lclstrtg({
+passportf.use('register',new lclstrtg({
  usernameField:'email',
  passwordField:'password',
  passReqToCallback:true},
  function(req,email,password,done){
   
-  User.findOne({email:email},
-              function(err,user){
+  User.findOne({email:email}, function(err,user){
     
   if(err){return done(err);}
   if(user){
     console.log("email taken");
-   return done(null,false,
-               req.flash('registerMessage', "email is already taken"));
+   return done(null,false, req.flash('registerMessage', "email is already taken"));
 }else{
   
  var newUser=new User();
@@ -49,25 +49,22 @@ pssp.use('register',new lclstrtg({
 }));//lclstrtg use register
 
 
-pssp.use('login',new lclstrtg({
+passportf.use('login',new lclstrtg({
  usernameField:'email',
  passwordField:'password',
  passReqToCallback:true},
  function(req,email,password,done){
   
-  User.findOne({email:email},
-    function(err,user){
+  User.findOne({email:email}, function(err,user){
     
   if(err){return done(err);}
   if(!user){
     console.log("no username");
-   return done(null,false,
-               req.flash('loginMsg',"Incorrect username"));
+   return done(null,false, req.flash('loginMsg',"Incorrect username"));
 }//if
   if(!user.validPassword(password)){
     console.log("wrong password");
- return done(null,false,
-             req.flash('loginMsg',"Incorrect password"));
+ return done(null,false, req.flash('loginMsg',"Incorrect password"));
 }//if
 
 return done(null,user);

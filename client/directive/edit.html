@@ -1,3 +1,7 @@
+<!--
+fecha: 16-09-18
+-->
+
 <style>
 #dvmsgedt{
   font-size:20px;
@@ -7,46 +11,41 @@
 
 <form id="fmedt">
 
-<div id="dvmsgedt"
-     ng-show="message">{{message}}</div>  
+<div id="dvmsgedt" ng-show="message">{{message}}</div>  
   
 <img id="igprfedi" class="igprfavtr"
      name="avatar"
- ng-src="{{user.avatar}}" alt="avatar"
- ><br>
+     ng-src="{{user.avatar}}" alt="avatar"><br>
 
 Change your avatar:<br>
-<input type="file"
- onchange="loaimG()"
- id="inflimg">
-<br>
-
-
+<input type="file" id="inflimg"
+       onchange="cargar_img()"><br>
   
 First Name:<br>
 <input type="text"
-        ng-model="user.firstnm" name="firstnm"
-                   value="{{user.firstnm}}"><br>
+       ng-model="user.firstnm" name="firstnm"
+       value="{{user.firstnm}}"><br>
 
 Last Name:<br>
 <input type="text"
-                  name="lastnm" ng-model="user.lastnm"
-              value="{{user.lastnm}}"><br>
+       name="lastnm" ng-model="user.lastnm"
+       value="{{user.lastnm}}"><br>
 
-Gender: <input type="radio"
-               name="gender" ng-model="user.gender"       
-             value="M"> Male
-  <input type="radio"
-         name="gender" ng-model="user.gender"
-         value="F"> Female<br>
+Gender: 
+<input type="radio"
+       name="gender" ng-model="user.gender"       
+       value="M"> Male
+<input type="radio"
+       name="gender" ng-model="user.gender"
+       value="F"> Female<br>
 
 Age:<br>
 <input type="number"
-            name="age" ng-model="user.age"      
-          value="{{user.age}}" required><br>
+       name="age" ng-model="user.age"      
+       value="{{user.age}}" required><br>
 
-Country:<br><select name="country"
-                 ng-model="user.country">
+Country:<br>
+<select name="country" ng-model="user.country">
 <option value="">Country...</option>
 <option value="AF">Afghanistan</option>
 <option value="AL">Albania</option>
@@ -297,18 +296,20 @@ Country:<br><select name="country"
 <option value="ZW">Zimbabwe</option>
 </select><br>
 
-Learning:<br><input type="text"
-                 name="learning" ng-model="user.learning"
-          value="{{user.learning}}"><br>
+Learning:<br>
+<input type="text"
+       name="learning" ng-model="user.learning"
+       value="{{user.learning}}"><br>
 
-Speaks:<br><input type="text"
-               name="speaks" ng-model="user.speaks"
-        value="{{user.speaks}}"><br>
+Speaks:<br>
+<input type="text"
+       name="speaks" ng-model="user.speaks"
+       value="{{user.speaks}}"><br>
 
 About me:<br>
 <textarea name="aboutme" id="taabtme"
- ng-model="user.aboutme" rows="4"
- value="{{user.aboutme}}"></textarea><br>  
+          ng-model="user.aboutme" rows="4"
+          value="{{user.aboutme}}"></textarea><br>  
 
 
 <input type="submit"

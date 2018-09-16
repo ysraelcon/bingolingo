@@ -1,3 +1,5 @@
+//fecha: 16-09-18
+
 var Mng=require('mongoose');
 var bcrypt=require('bcrypt-nodejs');
 
@@ -11,8 +13,8 @@ var usrsch=Mng.Schema({
   learning:String,
   speaks:String,
   aboutme:String,
-email:{type:String,unique:true},
-password:{type:String},
+  email:{type:String,unique:true},
+  password:{type:String},
   notes:String,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
@@ -21,13 +23,11 @@ password:{type:String},
 //city,in,description,yearborn,monthborn,
 
 usrsch.methods.generateHash= function(password){
- return bcrypt.hashSync(password,
-                bcrypt.genSaltSync(6),null);
+ return bcrypt.hashSync(password, bcrypt.genSaltSync(6),null);
 };//hash password
 
 usrsch.methods.validPassword=function(password){
- return bcrypt.compareSync(password,
-                           this.password);
+ return bcrypt.compareSync(password, this.password);
 };//validar password
 
 module.exports=Mng.model('User',usrsch);

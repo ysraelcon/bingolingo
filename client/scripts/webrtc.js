@@ -1,4 +1,6 @@
-function slcllM(btf,roombthx){
+//fecha: 16-09-18
+
+function solicitar_llamada(btf,roombthx){
  if(btf.style.backgroundColor=="green"){
   btf.removeAttribute("style");
   sktclt.emit("colgar llamada",
@@ -27,8 +29,8 @@ nudiv.innerHTML= '<div class="dvrcbcllnm"><b>'+dt.nmemnd+
   '</b> is '+
   '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>'+//phone
   '... </div>'+
-'<div class="dvrcbcllmas" onclick="acpclL(\''+dt.rmrtc+'\')">+</div>'+
-'<div class="dvrcbcllcrr" onclick="cncclL(\''+dt.rmrtc+'\')">x</div>';
+'<div class="dvrcbcllmas" onclick="aceptar_llamada(\''+dt.rmrtc+'\')">+</div>'+
+'<div class="dvrcbcllcrr" onclick="cancelar_llamada(\''+dt.rmrtc+'\')">x</div>';
 
 var dvchtrm_con_= document.getElementById("dvchtrm_con_"+dt.rmrtc);
 
@@ -44,7 +46,7 @@ nudiv.setAttribute("class","dvespcll");
 
 nudiv.innerHTML= '<div class="dvespcllnm">waiting for '+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>... </div>'+
-'<div class="dvespcllcrr" onclick="crrclL(\''+dt.rmrtc+'\')">x</div>';
+'<div class="dvespcllcrr" onclick="cerrar_llamada(\''+dt.rmrtc+'\')">x</div>';
 
 var dvchtrm_con_= document.getElementById("dvchtrm_con_"+dt.rmrtc);
 
@@ -57,7 +59,7 @@ dvchtrm_con_.appendChild(nudiv);
 
 
 //cancelar llamada enviada
-function crrclL(rmf){
+function cerrar_llamada(rmf){
  
 var dvchtrm_con_= document.getElementById("dvchtrm_con_"+rmf);
 var dvespcll= document.getElementById("dvespcll_"+rmf);
@@ -68,12 +70,12 @@ if(dvespcll){
  dvchtrm_con_.removeChild(dvespcll);
 }//if esta
 
-}//crrclL
+}//cerrar_llamada
 
 
 
 //cancelar llamada recibida
-function cncclL(rmf){
+function cancelar_llamada(rmf){
  
 var dvchtrm_con_= document.getElementById("dvchtrm_con_"+rmf);
 var dvrcbcll= document.getElementById("dvrcbcll_"+rmf);
@@ -84,36 +86,36 @@ if(dvrcbcll){
  dvchtrm_con_.removeChild(dvrcbcll);
 }//if esta
 
-}//cncclL
+}//cancelar_llamada
 
 
 
 sktclt.on("se cancelo llmd",function(dt){
  //dt{rmrtc}
 
-crrclL(dt.rmrtc);
-cncclL(dt.rmrtc);
+cerrar_llamada(dt.rmrtc);
+cancelar_llamada(dt.rmrtc);
 });//skcl se cancelo llmd
 
 
 
 //se acepta la llamada y empieza a correr
-function acpclL(rmf){
- cncclL(rmf);
+function aceptar_llamada(rmf){
+ cancelar_llamada(rmf);
   
  var btcll= document.getElementById("btcll_"+rmf);
 
 btcll.style.backgroundColor= "green";
  sktclt.emit("correr llmd",
               {rmrtc:rmf});
-}//acpclL
+}//aceptar_llamada
 
 
 
 sktclt.on("correr webrtc",function(dt){
  //dt{rmrtc}
 
-clL(dt.rmrtc);
+iniciar_llamada(dt.rmrtc);
 });//skcl correr webrtc
 
 
@@ -129,6 +131,18 @@ if(btcll.style.backgroundColor=="green"){
 }//if verde
 });//skcl se cuelga llmd
 
+
+//join group voice chat
+function juntarse_llamadasct(btf,rmf){
+
+if(btf.style.backgroundColor=="green"){
+ btf.removeAttribute("style");
+ hangUp();
+}else{
+ btf.style.backgroundColor= "green";
+ iniciar_llamada(rmf);
+}//else llama
+}//juntarse_llamadasct
 
 
 //=====webrtc
@@ -154,12 +168,12 @@ function doJoin(room) {
     });//create room
 }//doJoin
 
-function clL(rmf){
+function iniciar_llamada(rmf){
  room=rmf;
 //GUM(); 
  doJoin(room);
  
-}//clL
+}//iniciar_llamada
 
 
 function hangUp() {
