@@ -1,3 +1,5 @@
+//fecha: 16-09-18
+
 function solicitar_llamada(btf,roombthx){
  if(btf.style.backgroundColor=="green"){
   btf.removeAttribute("style");

@@ -1,3 +1,5 @@
+//fecha: 16-09-18
+
 var Mng=require('mongoose');
 var bcrypt=require('bcrypt-nodejs');
 

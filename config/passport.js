@@ -1,3 +1,5 @@
+//fecha: 16-09-18
+
 var lclstrtg=require('passport-local').Strategy;
 var User=require('../app/models/user');
 

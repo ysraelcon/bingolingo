@@ -1,3 +1,5 @@
+//fecha: 16-09-18
+
 angular.module('laApp.home',['ngRoute'])
  .config(['$routeProvider',//'$locationProvider',
           function($routeProvider){

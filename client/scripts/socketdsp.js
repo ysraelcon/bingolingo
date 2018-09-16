@@ -1,3 +1,4 @@
+//fecha: 16-09-18
 //despues de socket.io/socket.io.js
 
 //conexión socket
