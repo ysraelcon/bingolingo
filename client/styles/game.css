@@ -1,4 +1,4 @@
-/* fecha: 16-09-18 */
+/* fecha: 16-09-18, 19-09 */
 /*style game..*/
    
 #dvjue{
@@ -20,36 +20,36 @@
     color:white;
   cursor:move;}
 
-#dvjue_titrsz,#dvjue_titcrr{
+#dvjue_titrsz,#dvjue_titcerrar{
   text-align:center;
   width:30px;
   cursor:pointer;}
-#dvjue_titcrr{
+#dvjue_titcerrar{
   border-radius:0 5px 0 0;}
 
-#dvjnmcrr{
+#dvjnmcerrar{
   background-color:red;
     color:white;}    
   
 
-#sptmr{
+#sptimer{
   float:right;
   border:1px solid black;}
 
-#dvjue_conusr{
+#dvjue_conuser{
 	display: -webkit-flex; -webkit-flex-direction:row;
     display:flex; flex-direction:row;
     position:absolute; top:50px;bottom:30px;
     width:100%;/*height:100%;*/}
   
-#dvjue_con,#dvjue_usr{border:1px solid grey;}
+#dvjue_con,#dvjue_user{border:1px solid grey;}
 
 #dvjue_con{
   overflow-y:auto;
       word-wrap:break-word;
     width:100%;}
 
-#dvjue_usr{
+#dvjue_user{
   float:right;
     word-wrap:break-word;
   position:relative;
@@ -74,47 +74,47 @@
 /*style crear tipo de juego..*/
 
 
-#dvcrtgme{
+#dvcreategame{
   display:inline-block; text-align:center;
   border:1px dashed;}
 
 
       
-#dvrdygme{
+#dvrdygame{
   text-align:center;
 }
-#btrdygme{
+#btrdygame{
   width:50%;
 }
-#dvtitoptgme{
+#dvtitoptgame{
   display:flex; flex-direction:row;
 }
-#dvtitoptgmenme{
+#dvtitoptgamenme{
   display:inline-block; text-align:center;
   width:100%;
   background-color:black; color:white;
 }
-#dvtitoptgme_x{
+#dvtitoptgame_x{
   display:inline-block;
     text-align:center;
   width:50px;
   cursor:pointer;
 }
       
-dvcrtgme select{border:none;}
+dvcreategame select{border:none;}
 
-#dvwaigme{
+#dvwaigame{
   display:inline-block;
 }
 
 /*style barra de juego a juntarse*/
 
-.dvgmebar{
+.dvgamebar{
   display:table;
   border:1px dotted;
 }
 
-.dvgmebar div{
+.dvgamebar div{
   display:inline-block;
   border:1px dashed;
     margin:5px;

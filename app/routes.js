@@ -1,4 +1,4 @@
-//fecha: 16-09-18
+//fecha: 16-09-18, 17-09
 
 var User= require('../app/models/user');
 var Chat= require('../app/models/chat');
@@ -28,17 +28,19 @@ appf.get("/reset/:token",function(req,res){
   
 appf.post("/reset/:token",function(req,res){
   console.log(req.body.password);
+  
   User.findOne({ resetPasswordToken: req.params.token,
-            resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+            resetPasswordExpires: { $gt: Date.now() } },
+            function(err, user) {
     
-        if (!user) {
-//heroku 3c..  
-          return res.send('Password reset token is invalid or has expired. <a href="https://bestalk-test.glitch.me">home</a>');
-        }//if
-//console.log(user);
-        user.password = user.generateHash(req.body.password);
-        user.resetPasswordToken = undefined;
-        user.resetPasswordExpires = undefined;
+    if (!user) {
+  //heroku 3c..  
+      return res.send('Password reset token is invalid or has expired. <a href="https://bestalk-test.glitch.me">home</a>');
+    }//if
+  //console.log(user);
+    user.password = user.generateHash(req.body.password);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
     
     user.save((err) => {
      if (err) throw err;
@@ -56,12 +58,12 @@ appf.get("/login",function(req,res){
   res.json({message:req.flash("loginMsg")});
 });
   
+  
 appf.post("/login",passportf.authenticate('login',
   {successRedirect:'/profile',
   failureRedirect:'/login',
   failureFlash:true}
 ));//post login
-
 
 
 appf.post('/signup',passportf.authenticate('register',{
@@ -70,16 +72,19 @@ appf.post('/signup',passportf.authenticate('register',{
  failureFlash:true
 }));//post
 
+  
 appf.get('/profile',isLoggedIn,function(req,res){
  res.json(req.user);
   //res.render('/profile/profile.html',{user:req.user});
   //res.render('profile.ejs',{user:req.user});
 });//get f
   
+  
 appf.get('/edit',isLoggedIn,function(req,res){
  res.json({message:req.flash("errors")});
   //res.render('edit.ejs',{user:req.user});
 });//get 
+  
   
 appf.post('/edit',isLoggedIn,function(req,res){
  console.log("editando"); 
@@ -88,7 +93,8 @@ appf.post('/edit',isLoggedIn,function(req,res){
  req.checkBody('age', 'Age is required.').notEmpty();
 
 // if there are errors, redirect and save errors to flash
-const errors = req.validationErrors();
+ const errors = req.validationErrors();
+  
   if (errors) {
    console.log(errors);
    req.flash('errors', errors.map(err => err.msg));
@@ -111,20 +117,21 @@ const errors = req.validationErrors();
    user.aboutme= req.body.aboutme;
    
  user.save((err) => {
+   
   if (err) throw err;
-
-// success flash message
-// redirect back to the /events
- req.flash('success', 'Successfully updated event.');
- res.redirect('/profile');
-});//ev.save
+  // success flash message
+  // redirect back to the /events
+   req.flash('success', 'Successfully updated event.');
+   res.redirect('/profile');
+ });//ev.save
 });//ev.findone
   
 });//post edit
 
+  
 appf.get('/logout',function(req,res){
  req.logout();
-res.redirect('/');
+ res.redirect('/');
 });//get
   
   
@@ -148,41 +155,38 @@ appf.post('/mail',function(req,res){
        if (err) throw err;
       });//save
       
-      var transporter= ndmailer.createTransport({
-    service:'gmail',
-    auth:{user: process.env.MAILSENDER,
-          pass: process.env.MAILSENDERPWD}
-  });//transporter
+      var transporter= ndmailer.createTransport(
+              {service:'gmail',
+              auth:{user: process.env.MAILSENDER,
+                    pass: process.env.MAILSENDERPWD}
+               });//transporter
   
-  var mailopts={
- from: process.env.MAILSENDER,
- to: req.body.email,//or list
- subject: 'Password Reset',
-//heroku 3c..
- html: '<p>Visit the link for set your new password:</p>'+
-    '<a href="https://bestalk-test.glitch.me/reset/'+
-    token+
-    '">Reset Password</a>'+
-    '<h2>Continue enjoying of BesTalk!</h2>'
-};//mailopts
+      var mailopts= {
+           from: process.env.MAILSENDER,
+           to: req.body.email,//or list
+           subject: 'Password Reset',
+          //heroku 3c..
+           html: '<p>Visit the link for set your new password:</p>'+
+              '<a href="https://bestalk-test.glitch.me/reset/'+
+              token+
+              '">Reset Password</a>'+
+              '<h2>Continue enjoying of BesTalk!</h2>'
+           };//mailopts
   
   
- transporter.sendMail(mailopts, function(err, info){
-   if(err)
-     console.log(err)
-   else
-     console.log(info);
-});//sendmail 
+     transporter.sendMail(mailopts, function(err, info){
+       if(err)
+         console.log(err)
+       else
+         console.log(info);
+     });//sendmail 
   
-  res.json({message:"Check your mail for get your password"});
+     res.json({message:"Check your mail for get your password"});
       
     }//else
     console.log(user);
   });//findone
-  
-  
-  
-  
+ 
 });//post enviar mail 
   
    
@@ -196,4 +200,4 @@ function isLoggedIn(req,res,next){
  if(req.isAuthenticated())
   return next();
  res.redirect('/');
-}
+}//isLoggedIn

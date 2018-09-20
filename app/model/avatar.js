@@ -1,10 +1,10 @@
-//fecha: 16-09-18
+//fecha: 16-09-18, 17-09
 
-var Mng=require('mongoose');
+var mongoose= require('mongoose');
 
-var avtrsch=Mng.Schema({
-  avatars:Mng.Schema.Types.Mixed
+var avatarsch= mongoose.Schema({
+  avatars: mongoose.Schema.Types.Mixed
 });
 
 
-module.exports=Mng.model("Chat",avtrsch);
+module.exports= mongoose.model("Chat", avatarsch);

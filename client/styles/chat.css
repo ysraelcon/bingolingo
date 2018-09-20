@@ -1,35 +1,35 @@
-/* fecha: 16-09-18 */
+/* fecha: 16-09-18, 19-09 */
 /*style chat..*/
   
-  .dvrmsnm{
+  .dvroomsnm{
     display:block; text-align:center;
     border-bottom:1px solid black;
     font-family:arial;
     color:#2F4F4F;}
-#dvrmsctnm{
+#dvroomsecretnm{
     display:block; text-align:center;
     border-bottom:1px solid black;
     font-family:arial;
     color:#2F4F4F;}
 
 
-.inlstrms{
+.inlistrooms{
   width:120px;
 }
 
-.fmgorms{
+.fmgorooms{
   display:inline-block;
 }
 
 
-.spchtrm{
+.spchatroom{
 border:1px solid black; border-radius:5px;
   /*box-shadow:5px -5px 5px grey;*/
   margin-left:5px;
 font-family:Tahoma, Geneva, sans-serif;
 background-color:#2F4F4F; color:white;
 cursor:pointer;}
-.spchtcnt{
+.spchatcant{
   border:1px solid grey; border-radius:20%;
   font-family:consolas;}
      
@@ -37,7 +37,7 @@ cursor:pointer;}
 
 /*chat room basico..*/
 
-.dvchtrm{
+.dvchatroom{
   /*display: -webkit-flex;
     -webkit-flex-direction:column;
   display:flex;
@@ -50,13 +50,13 @@ cursor:pointer;}
   background-color:white;}
 
 
-.dvchtrm_tit{
+.dvchatroom_tit{
  display: -webkit-flex; -webkit-flex-direction:row;
  display:flex; flex-direction:row; justify-content:center;
  height:30px;
  font-family:arial;}
 
-.dvchtrm_titnm{
+.dvchatroom_titnm{
   display: -webkit-flex; -webkit-flex-direction:column;
   display:flex; flex-direction:column; justify-content:center;
     text-align:center;
@@ -64,14 +64,14 @@ cursor:pointer;}
   border-radius:5px 0 0 0;
   cursor:move;}
    
-.dvchtrm_titmin,.dvchtrm_titrsz{
+.dvchatroom_titmin,.dvchatroom_titrsz{
    display: -webkit-flex; -webkit-flex-direction:column;
    display:flex; flex-direction:column; justify-content:center;
      text-align:center;
    width:10%;height:100%;
    cursor:default;}
  
-.dvchtrm_titcrr{
+.dvchatroom_titcerrar{
    display: -webkit-flex; -webkit-flex-direction:column;
    display:flex; flex-direction:column; justify-content:center;
      text-align:center;
@@ -80,47 +80,47 @@ cursor:pointer;}
    cursor:default;}
 
 
-.dvchtrm_conusr{
+.dvchatroom_conuser{
   display: -webkit-flex; -webkit-flex-direction:row;
   display:flex; flex-direction:row;
   position:absolute; top:30px;bottom:30px;
   width:100%;/*height:100%;*/}
 
-.dvchtrm_con{
+.dvchatroom_con{
   overflow-y:auto; word-wrap:break-word;
   width:100%;/*height:98%;*/}
 
 
-.dvchtrm_usr{
+.dvchatroom_user{
   float:right;
     word-wrap:break-word;
   position:relative;
   width:100px;/*height:98%*/;
   font-weight:bold;}
-.dvchtrm_usrnm{
+.dvchatroom_usernm{
   overflow-y:auto;
     word-wrap:break-word;}
-.dvchtrm_usrbts{
+.dvchatroom_userbts{
   position:absolute;
     bottom:0px;}
 
         
-.dvchtrm_msg{
+.dvchatroom_msg{
   display: flex; flex-direction: row;
   position:absolute; bottom:0px;
   width:100%;}
 
-.fmchtrm_msg{
+.fmchatroom_msg{
     display: -webkit-flex; -webkit-flex-direction:row;
     display:flex; flex-direction:row;
     width:90%;} 
 
-.btchtrm_msg{width:40px;} 
-.btchtrm_emj{
+.btchatroom_msg{width:40px;} 
+.btchatroom_emj{
   width:40px;
   margin-right:20px;}
 
-.inchtrm_msg{width:100%;}
+.inchatroom_msg{width:100%;}
 
 .dvemj{
   position: absolute;
@@ -133,14 +133,14 @@ cursor:pointer;}
 .gnrl_titnm{
   background-color:#9370db;/*purpura*/
     color:white;}
-.gnrl_titcrr{
+.gnrl_titcerrar{
   background-color:#483D8B;/*ouroura oscuro*/
     color:white;
   /*#800000 #4B0082*/} 
 
 .gnrl_con{
   background-color:#ffDAB9;}/*carne*/
-.gnrl_usr{
+.gnrl_user{
   background-color:#FFF0F5;/*rosa suave*/
     color:black;}
 
@@ -163,26 +163,26 @@ cursor:pointer;}
 .prv_titnm{
   background-color:#2E8B57;
     color:white;}
-.prv_titcrr{
+.prv_titcerrar{
   background-color:#800000;
     color:white;/*#800000 #4B0082*/}
 
 .prv_con{
   background-color:#DEB887;}
-.prv_usr{
+.prv_user{
   background-color:#FFA07A;}
 
 /*..colores privado*/
      
 
-/*img prf tabla*/
-.igprftbl{
+/*img profile tabla*/
+.igprofiletbl{
   width:30px;height:30px;}
 
 
  /*tabla users chat..*/
      
-#tblusrs{
+#tblusers{
   width:100%;
   border-collapse:collapse; border-radius:5px;
   background-color:#34495E}
@@ -209,35 +209,35 @@ tbody>tr:hover{/*:not(:first-child):hover*/
 th, td{
     text-align: center;}
 
-/*style inf user cht rqs..*/
+/*style inf user chat request..*/
 
-#dvinfusr{
+#dvinfuser{
     display:inline-flex; flex-direction:row;
     border:1px solid grey;}
         
-#dvinfusr>div{
+#dvinfuser>div{
    border:1px dashed grey;
      padding-right:5px;}
           
-#dvcrrprfcht{
+#dvcerrarprofilechat{
 display: -webkit-flex; -webkit-flex-direction:column;
   display:flex; flex-direction:column; justify-content:center;
   padding:5px;}
 
-#dvcrrprfcht:hover{
+#dvcerrarprofilechat:hover{
 background-color:grey;
   cursor:pointer;}
     
-#dvinfprfcht{
+#dvinfprofilechat{
   background-color:#f5f5f5;}
 
-      #dvinfprfcht>li:hover{
+      #dvinfprofilechat>li:hover{
     background-color:grey;
       cursor:pointer;}
       
-/*waiting section chtrqs..*/
+/*waiting section chatrequest..*/
 
-.dvwti{
+.dvwaiting{
   display: -webkit-flex; -webkit-flex-direction:row;
   display:flex; flex-direction:row; justify-content:space-evenly;
   position:absolute; bottom:0px;
@@ -245,16 +245,16 @@ background-color:grey;
   border:1px solid grey;
     border-radius:5px;}
 
-.dvwti>div{
+.dvwaiting>div{
   border:1px solid grey;
     border-radius:5px;}
 
-#dvwti_t{
+#dvwaiting_t{
   text-align:center;
   width:90%;
   background-color:#2e8b57;
     color:white;}
-#dvwti_x{
+#dvwaiting_x{
   text-align:center;
   width:10%;
   background-color:#800000;
@@ -262,7 +262,7 @@ background-color:grey;
 
 /*receiving chat request..*/
 
-.dvchtrqsof{
+.dvchatrequestof{
   display: -webkit-flex; -webkit-flex-direction:row;
   display:flex; flex-direction:row; justify-content:space-evenly;
   position:absolute; top:0px;
@@ -270,18 +270,18 @@ background-color:grey;
   border:1px solid grey;
     border-radius:5px;}
 
-.dvchtrqsof>div{
+.dvchatrequestof>div{
   border:1px solid grey;
     border-radius:5px;}
-#dvchtrqsof_t{
+#dvchatrequestof_t{
   text-align:center;
   width:80%;
   background-color:#2e8b57;
     color:white;}
-#dvchtrqsof_m{
+#dvchatrequestof_m{
   text-align:center;
   width:10%;}
-#dvchtrqsof_x{
+#dvchatrequestof_x{
   text-align:center;
   width:10%;
   background-color:#800000;
@@ -289,7 +289,7 @@ background-color:grey;
 
 /*call*/
 
-.dvrcbcll,.dvespcll{
+.dvrecibecall,.dvespcall{
   display: -webkit-flex; -webkit-flex-direction:row;
   display:flex; flex-direction:row;
   position:absolute; top:10%;
@@ -297,50 +297,50 @@ background-color:grey;
   background-color:white;
     color:grey;
 }
-.dvrcbcllnm,.dvespcllnm{
+.dvrecibecallnm,.dvespcallnm{
   width:40%;
 }
-.dvrcbcllnm b{color:black}
-.dvrcbcllmas,.dvrcbcllcrr,.dvespcllcrr{
+.dvrecibecallnm b{color:black}
+.dvrecibecallmas,.dvrecibecallcerrar,.dvespcallcerrar{
   text-align:center;
   width:10%;
   border:1px solid; border-radius:5%;
     margin-left:5px;
 }
-.dvrcbcllmas{
+.dvrecibecallmas{
  background-color:#2E8B57;
    color:white;}
-.dvrcbcllcrr,.dvespcllcrr{
+.dvrecibecallcerrar,.dvespcallcerrar{
  background-color:#800000;
    color:white;}
 
 
 /*ver perfil user*/
 
-#dvprfusr{
+#dvprofileuser{
   position:absolute; top:20%;left:20%;
   width:60%;height:60%;
   border:1px solid grey; border-radius:5px; 
   background-color:white;}
 
-#dvprfusr_tit{
+#dvprofileuser_tit{
   position:relative;
   height:30px;
   border-radius:5px 5px 0 0;}
-#dvprfusr_titnme{
+#dvprofileuser_titnme{
   text-align:center;
   position:absolute; left:0px;right:30px;
   height:100%;
   background-color:#ccc;
   cursor:move;}
-#dvprfusr_titcrr{
+#dvprofileuser_titcerrar{
   text-align:center;
   position:absolute; right:0px;
   width:30px;height:100%;
   border:1px solid grey; border-radius:0 5px 0 0;
   cursor:pointer;}
 
-#dvprfusr_con{
+#dvprofileuser_con{
   display:flex; flex-direction:column; align-items:center;
     overflow-y:auto;
   position:absolute; top:30px;bottom:30px;
@@ -348,14 +348,14 @@ background-color:grey;
   background-color:black;
     color:white;}
 
-#imgprfusr{
+#imgprofileuser{
   width:50px;height:50px;
   border-radius:50%;
     border:2px solid white;}
 
 
 
-#dvprfusr_chtrqs{
+#dvprofileuser_chatrequest{
   display:flex; justify-content:center;
   position:absolute; bottom:0px;
   width:100%;height:30px;
