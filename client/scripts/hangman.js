@@ -71,13 +71,15 @@ function jugar_hangman(){
 <div id="dvjuegohangman_tit"
      style="display:flex;
             flex-direction:row;
-            justify-content:center;">
+            justify-content:center;
+            border:1px solid;">
 <div id="dvjuegohangman_titulo"
      style="width:70%;
             text-align:center;">Hangman</div>
 <div id="dvjuegohangman_cerrar"
      style="width:30%;
-            text-align:center;"
+            text-align:center;
+            border:1px solid;"
      onclick="cerrar_hangman()">X</div>
 </div><!-- dv juego hangman tit -->
 
@@ -436,7 +438,7 @@ function definicion_wordnik(wordf,dvresultf){
       var relwords="";    
       //console.log(resp[pr].relatedWords[0].words)
       
- if(resp[pr].relatedWords[0].words){
+ if(resp[pr].relatedWords.length!==0){
 
   resp[pr].relatedWords[0].words.forEach(function(v){
   relwords+=v+", "
