@@ -1,14 +1,14 @@
-//fecha: 16-09-18
+//fecha: 16-09-18, 17-09
 
-var Mng=require('mongoose');
+var mongoose=require('mongoose');
 
-var chtsch=Mng.Schema({
-  reportes:[],
-  chats:Mng.Schema.Types.Mixed,
-  chtsprv:Mng.Schema.Types.Mixed
+var chatsch= mongoose.Schema({
+  reportes: [],
+  chats: mongoose.Schema.Types.Mixed,
+  chtsprv: mongoose.Schema.Types.Mixed
 });
 
 
-module.exports=Mng.model("Chat",chtsch);
+module.exports= mongoose.model("Chat", chatsch);
 
 //http://mongoosejs.com/docs/schematypes.html
