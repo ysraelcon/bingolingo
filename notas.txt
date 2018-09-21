@@ -1,4 +1,85 @@
 //fecha: 16-09-18
+
+heroku: pl...-ten
+
+---------------
+
+lista de cambios:
+
+archivos: routes.js, index.html, home.html
+
+** routes.js
+
+glitch:
+<a href="https://bestalk-test.glitch.me">home</a>
+heroku:
+<a href="https://bestalk.herokuapp.com">home</a>
+
+glitch:
+<a href='https://bestalk-test.glitch.me'>Login</a>
+heroku:
+<a href='https://bestalk.herokuapp.com'>Login</a>
+
+glitch:
+<a href="https://bestalk-test.glitch.me/reset/
+heroku:
+<a href="https://bestalk.herokuapp.com/reset/
+
+
+
+** index.html
+
+glitch:
+<!-- 1c.. heroku -->  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110169179-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110169179-1');
+</script>
+
+
+heroku:
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110169179-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110169179-2');
+</script>
+
+
+
+glitch:
+
+heroku:
+<meta property="og:url"
+ content="https://bestalk.herokuapp.com">
+
+
+
+** home.html
+
+glitch:
+<!-- 2c.. heroku -->    
+<h1 id="h1info">First release running on: <a href="https://bestalk.herokuapp.com" target="_self">BesTalk.herokuapp.com</a></h1><br>
+<h3>this the Beta Version:</h3><br>
+
+heroku:
+
+<!-- 2c.. heroku   
+<h1 id="h1info">First release running on: <a href="https://bestalk.herokuapp.com" target="_self">BesTalk.herokuapp.com</a></h1><br>
+<h3>this the Beta Version:</h3><br> -->  
+
+-----------------
+
+
+
 html:
 
 pencil:
