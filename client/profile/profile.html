@@ -696,24 +696,25 @@ function cargar_img(){
  var reader= new FileReader();
 
  reader.onloadend= function(){
- var imgprovisional= new Image();
+   
+   var imgprovisional= new Image();
 
-  imgprovisional.onload= function(){
+   imgprovisional.onload= function(){
 
- var can= document.createElement("canvas");
- can.width=50;
- can.height=50;
+     var can= document.createElement("canvas");
+     can.width=50;
+     can.height=50;
 
- var coc= can.getContext("2d");
+     var coc= can.getContext("2d");
 
- coc.drawImage(this,0,0, can.width,can.height);
+     coc.drawImage(this,0,0, can.width,can.height);
 
 
- igprofileedi.src= can.toDataURL("image/png");
+     igprofileedi.src= can.toDataURL("image/png");
 
-  }//onload imgprovisional
+    }//onload imgprovisional
 
-  imgprovisional.src= reader.result;
+    imgprovisional.src= reader.result;
 
  }//onloadend reader
 
@@ -989,10 +990,10 @@ function abrir_tab(dvpiemst,dvconf,thistbf){
      dvtabsq[i].style.color= "";
  }//for vuleve tabs normal
 
-if(thistbf){
- thistbf.style.backgroundColor= coltab[thistbf.id][0];
- thistbf.style.color= coltab[thistbf.id][1];
-}//if hay tab
+ if(thistbf){
+   thistbf.style.backgroundColor= coltab[thistbf.id][0];
+   thistbf.style.color= coltab[thistbf.id][1];
+ }//if hay tab
 }//opentab
 </script>
       

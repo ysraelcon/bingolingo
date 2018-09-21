@@ -143,6 +143,10 @@ function arrancar_nuevo_juego(){
   concanv.clearRect(0,0,canv.width,canv.height)
   //word= "happening".toUpperCase().split("");//!!! da nueva palabra
   dibujar_wordlin(mword)
+  dibujar_letra_en_word([mword[0],0]);
+  mword[0]=1;
+  dibujar_letra_en_word([mword[mword.length-1],mword.length-1]);
+  mword[mword.length-1]=1;
   dibujar_abc();
   canv.onclick= tocar_letra_en_canvas;
   mfundibujo[0]();

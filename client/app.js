@@ -7,9 +7,9 @@ var app= angular.module('laApp',
  .config(['$routeProvider','$locationProvider', 
    function($routeProvider,$locationProvider){
      
- $locationProvider.hashPrefix('');
- //$locationProvider.html5Mode(true);    
- $routeProvider.otherwise({redirectTo:'/'});
+   $locationProvider.hashPrefix('');
+   //$locationProvider.html5Mode(true);    
+   $routeProvider.otherwise({redirectTo:'/'});
           
 }]);//config
 
