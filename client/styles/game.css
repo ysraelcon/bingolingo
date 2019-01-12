@@ -1,7 +1,7 @@
 /* fecha: 16-09-18, 19-09 */
 /*style game..*/
    
-#dvjue{
+#dv_jue{
   display:flex; flex-direction:column;
   /*overflow:auto;resize:both;*/
   position:absolute !important; top:10%;
@@ -9,10 +9,10 @@
   border:1px solid grey; border-radius:5px;
   background-color:#D2B48C;}
     
-#dvjue_tit{
+#dv_jue_tit{
   height:25px;}
 
-#dvjue_titnm{
+#dv_jue_tit_nm{
   text-align:center;
   width:100%;
   border-radius:5px 0 0 0;
@@ -20,101 +20,101 @@
     color:white;
   cursor:move;}
 
-#dvjue_titrsz,#dvjue_titcerrar{
+#dv_jue_tit_rsz,#dv_jue_tit_cerrar{
   text-align:center;
   width:30px;
   cursor:pointer;}
-#dvjue_titcerrar{
+#dv_jue_tit_cerrar{
   border-radius:0 5px 0 0;}
 
-#dvjnmcerrar{
+#dv_j_nm_cerrar{
   background-color:red;
     color:white;}    
   
 
-#sptimer{
+#sp_timer{
   float:right;
   border:1px solid black;}
 
-#dvjue_conuser{
+#dv_jue_con_user{
 	display: -webkit-flex; -webkit-flex-direction:row;
     display:flex; flex-direction:row;
     position:absolute; top:50px;bottom:30px;
     width:100%;/*height:100%;*/}
   
-#dvjue_con,#dvjue_user{border:1px solid grey;}
+#dv_jue_con,#dv_jue_user{border:1px solid grey;}
 
-#dvjue_con{
+#dv_jue_con{
   overflow-y:auto;
       word-wrap:break-word;
     width:100%;}
 
-#dvjue_user{
+#dv_jue_user{
   float:right;
     word-wrap:break-word;
   position:relative;
   width:100px;/*height:98%*/;
   font-weight:bold;}	
 
-.dvjuepnt{
+.cl_dv_jue_pnt{
   display:inline-block; text-align:center;
   width:30px;
   border:1px solid; border-radius:50%;
 }
 
-.dvjue_u_nm{
+.cl_dv_jue_u_nm{
   overflow-y:auto;
     word-wrap:break-word;
 }
 
-#dvjue_msg{
+#dv_jue_msg{
 	position:absolute; bottom:0px;
 	width:100%;}
 
 /*style crear tipo de juego..*/
 
 
-#dvcreategame{
+#dv_create_game{
   display:inline-block; text-align:center;
   border:1px dashed;}
 
 
       
-#dvrdygame{
+#dv_rdy_game{
   text-align:center;
 }
-#btrdygame{
+#bt_rdy_game{
   width:50%;
 }
-#dvtitoptgame{
+#dv_tit_opt_game{
   display:flex; flex-direction:row;
 }
-#dvtitoptgamenme{
+#dv_tit_opt_game_nme{
   display:inline-block; text-align:center;
   width:100%;
   background-color:black; color:white;
 }
-#dvtitoptgame_x{
+#dv_tit_opt_game_x{
   display:inline-block;
     text-align:center;
   width:50px;
   cursor:pointer;
 }
       
-dvcreategame select{border:none;}
+dv_create_game select{border:none;}
 
-#dvwaigame{
+#dv_wai_game{
   display:inline-block;
 }
 
 /*style barra de juego a juntarse*/
 
-.dvgamebar{
+.cl_dv_game_bar{
   display:table;
   border:1px dotted;
 }
 
-.dvgamebar div{
+.cl_dv_game_bar div{
   display:inline-block;
   border:1px dashed;
     margin:5px;

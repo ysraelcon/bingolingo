@@ -4,7 +4,7 @@ fecha: 16-09-18
 
 <style>
 /*style fondo..*/
-#dvfnd{
+#dv_fnd{
     position:relative;
     width:100%;
     /*border:1px solid;*/
@@ -12,10 +12,10 @@ fecha: 16-09-18
     background-color:black;
       color:white;}
   
-#sperr{
+#sp_err{
   position:absolute; right:0px; bottom:0px;
 }
-#sperr i{
+#sp_err i{
   color:yellow;
   cursor:pointer;
 }
@@ -24,7 +24,7 @@ fecha: 16-09-18
 
 <style>
   
-#dvrptscr{
+#dv_rpt_scr{
   display:flex;
     justify-content:center;
     align-items:center;
@@ -33,26 +33,26 @@ fecha: 16-09-18
   width:100%;height:100%;
   background:rgba(0,0,0,0.7);
 }
-#dvrpt{
+#dv_rpt{
   width:50%;height:50%;
   /*border:1px dotted;*/}
 
-#dvrpttit{
+#dv_rpt_tit{
   display:flex;
     justify-content:center;
   position:relative;
 }
-#dvrpttit>div{
+#dv_rpt_tit>div{
   display:inline-block;
 }
     
-#dvrpttitnm{
+#dv_rpt_tit_nm{
   text-align:center;
   width:100%;
   background:black;
     color:yellow;
 }
-#dvrpttitx{
+#dv_rpt_tit_x{
   text-align:center;
   position:absolute;
     right:0px;
@@ -60,25 +60,25 @@ fecha: 16-09-18
   background:white;
   cursor:pointer;
 }
-#inrpttit{
+#in_rpt_tit{
   text-align:center;
   width:100%;
 }
-#tarpt{
+#ta_rpt{
   width:100%;height:50%;
 }
-#btsndrpt{
+#bt_snd_rpt{
   width:100%;
 }
     
 </style>
   
-<div id="dvfnd">
+<div id="dv_fnd">
 <span>Made with 
  <img src="https://png.icons8.com/potato/color/24" title="Potato" width="24" height="24">
  by BesTalk Team</span> 
     
-<span id="sperr" onclick="rpT()">Report 
+<span id="sp_err" onclick="rpT()">Report 
  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
  errors</span>
    
@@ -88,32 +88,32 @@ fecha: 16-09-18
 
 <script>
 //cerrar report
-function crrrpT(){
-  dvngvw.removeChild(dvrptscr);
+function crr_rpT(){
+  dv_ng_vw.removeChild(dv_rpt_scr);
 }
   
    
 function rpT(){
 
   var dv= document.createElement("div");
-  dv.id="dvrptscr";
-  dv.innerHTML='<div id="dvrpt">'+
-'  <div id="dvrpttit">'+
-'    <div id="dvrpttitnm">Errors or Suggestions</div>'+
-'    <div id="dvrpttitx" onclick="crrrpT()">X</div>'+
+  dv.id= "dv_rpt_scr";
+  dv.innerHTML='<div id="dv_rpt">'+
+'  <div id="dv_rpt_tit">'+
+'    <div id="dv_rpt_tit_nm">Errors or Suggestions</div>'+
+'    <div id="dv_rpt_tit_x" onclick="crr_rpT()">X</div>'+
 '  </div>'+
-'  <input type="text" id="inrpttit"'+
+'  <input type="text" id="in_rpt_tit"'+
 '         placeholder="Title (optional)">'+
 '  <br>'+
-'  <textarea id="tarpt"'+
+'  <textarea id="ta_rpt"'+
 '    placeholder="write the error or suggestion..."'+
 '  ></textarea>'+
 '  <br>'+
-'  <input type="button" id="btsndrpt"'+
+'  <input type="button" id="bt_snd_rpt"'+
 '         value="Send"'+
-'         onclick="sndrpT()">'+
+'         onclick="snd_rpT()">'+
 '</div>';
 
-  dvngvw.appendChild(dv);
+  dv_ng_vw.appendChild(dv);
 }//rpT
 </script>

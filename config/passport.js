@@ -32,17 +32,17 @@ passportf.use('register',new lclstrtg({
    return done(null,false, req.flash('registerMessage', "email is already taken"));
 }else{
   
- var newUser=new User();
+ var new_User=new User();
   
- newUser.email=email;
- newUser.firstnm=req.body.firstnm;
- newUser.lastnm=req.body.lastnm;
-  //console.log(req.body.firstnm);
- newUser.password= newUser.generateHash(password);
+ new_User.email=email;
+ new_User.firstname= req.body.firstname;
+ new_User.lastname= req.body.lastname;
+  //console.log(req.body.firstname);
+ new_User.password= new_User.generateHash(password);
   
- newUser.save(function(err){
+ new_User.save(function(err){
   if(err){throw err};
-  return done(null,newUser);
+  return done(null,new_User);
   });//save
 }//else 
 });//findone

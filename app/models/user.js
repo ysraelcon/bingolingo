@@ -3,16 +3,16 @@
 var mongoose= require('mongoose');
 var bcrypt= require('bcrypt-nodejs');
 
-var usersch= mongoose.Schema({
+var user_sch= mongoose.Schema({
   avatar: String,
-  firstnm: String,
-  lastnm: String,
+  firstname: String,
+  lastname: String,
   country: String,
   age: Number,
   gender: String,
   learning: String,
   speaks: String,
-  aboutme: String,
+  about_me: String,
   email: {type: String, unique:true},
   password: {type: String},
   notes: String,
@@ -22,15 +22,15 @@ var usersch= mongoose.Schema({
 });//user datos
 //city,in,description,yearborn,monthborn,
 
-usersch.methods.generateHash= function(password){
+user_sch.methods.generateHash= function(password){
  return bcrypt.hashSync(password, bcrypt.genSaltSync(6), null);
 };//hash password
 
-usersch.methods.validPassword= function(password){
+user_sch.methods.validPassword= function(password){
  return bcrypt.compareSync(password, this.password);
 };//validar password
 
-module.exports= mongoose.model('User', usersch);
+module.exports= mongoose.model('User', user_sch);
 
 
 

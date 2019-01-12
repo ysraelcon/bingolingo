@@ -1,23 +1,23 @@
-//fecha: 16-09-18, 19-09, 20-09
+//fecha: 16-09-18, 19-09, 20-09, 09-01-19
 // 1.. 
 
 require('dotenv').config();
 
 var express = require('express');
-var bdparser= require("body-parser");
+var bd_parser= require("body-parser");
 var app = express();
 var server= require("http").createServer(app);
 var io= require("socket.io").listen(server);
-var passportskio= require('passport.socketio');
+var passport_skio= require('passport.socketio');
 var morgan= require('morgan');
 var mongoose= require("mongoose");
-var expressejsly= require('express-ejs-layouts');
+var express_ejs_ly= require('express-ejs-layouts');
 var flash= require('connect-flash');
-var ckparser= require('cookie-parser');
-var exprsession= require('express-session');
-var exprvalidator= require('express-validator');
-var mongocnnt= require('connect-mongo')(exprsession);
-var ndmailer= require('nodemailer');
+var ck_parser= require('cookie-parser');
+var expr_session= require('express-session');
+var expr_validator= require('express-validator');
+var mongo_cnnt= require('connect-mongo')(expr_session);
+var nodemailer= require('nodemailer');
 var passport= require('passport');
 var emoji= require('node-emoji');
 
@@ -26,37 +26,37 @@ server.listen(port, process.env.IP);
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DB_URI, {useMongoClient:true});
-var sessionstr= new mongocnnt({mongooseConnection:mongoose.connection});
+var session_str= new mongo_cnnt({mongooseConnection:mongoose.connection});
 
 
 require('./config/passport')(passport);
 app.use(express.static(__dirname+'/client')); //para activar angularjs
-app.use(bdparser.json());
-app.use(bdparser.urlencoded({extended:true}));
-app.use(exprvalidator());
-app.use(ckparser());
+app.use(bd_parser.json());
+app.use(bd_parser.urlencoded({extended:true}));
+app.use(expr_validator());
+app.use(ck_parser());
 app.use(morgan('dev'));
 
 
 app.set('view engine','ejs');//ejs html
-app.use(expressejsly);
+app.use(express_ejs_ly);
 
 
-app.use(exprsession({
+app.use(expr_session({
  secret:process.env.SECRET,
  saveUninitialized:true,
  resave:true,
- store:sessionstr
+ store:session_str
 }));
 
 
 //passport.socketio
-io.use(passportskio.authorize({
+io.use(passport_skio.authorize({
   key: 'connect.sid',
   secret: process.env.SECRET,
-  store: sessionstr,
+  store: session_str,
   passport: passport,
-  cookieParser: ckparser
+  cookieParser: ck_parser
 }));
 
 
@@ -78,26 +78,26 @@ var Chat= require('./app/models/chat');
 var User= require('./app/models/user');
 
 
-var userscnnt={};
-//userscnnt{userid:{user,sktid}}
+var users_cnnt={};
+//users_cnnt{user_id:{user,skt_id}}
 
-var usersroom={};
-//usersroom{roomf:{useridf:firstnm}}
+var users_room={};
+//users_room{roomf:{user_idf:firstname}}
 
-var userssecretroom={};
-var usersjue={};
-//usersjue{sktid:{firstnm,sktid},...}
+var users_secret_room={};
+var users_jue={};
+//users_jue{skt_id:{firstname,skt_id},...}
 
-//user{_id,email,firstnm,lastnm,chats[]}
+//user{_id,email,firstname,lastname,chats[]}
 
 //juego
 var jue={};
 /*
-jue{juenro:{nrogame,tiempo,wordtoguess,typegame,
-  listwordnm,listword,playertrn,nroplayer,nroplayeract},...}
+jue{jue_nro:{nro_game,tiempo,word_to_guess,type_game,
+  list_word_name,list_word,player_trn,nro_player,nro_player_act},...}
 */
   
-var listwords= require("./wordlists.js");
+var list_words= require("./wordlists.js");
 
 
 
@@ -105,18 +105,18 @@ var listwords= require("./wordlists.js");
 io.sockets.on('connection', function(socket) {
   
   
- console.log("en conexion "+ socket.request.user.firstnm);
+ console.log("en conexion "+ socket.request.user.firstname);
 
  console.log("lanza barras de juego");
   
  for(var juex in jue){
-  if(Object.keys(jue[juex].nroplayeract).length!=0){
+  if(Object.keys(jue[juex].nro_player_act).length!=0){
  
-   io.sockets.emit("los demas barjue",
-                 {nrogame: juex,
-                  typegame: jue[juex].typegame,
-                  listwordnm: jue[juex].listwordnm,
-                  nroplayer: jue[juex].nroplayer});
+   io.sockets.emit("los demas bar jue",
+                 {nro_game: juex,
+                  type_game: jue[juex].type_game,
+                  list_word_name: jue[juex].list_word_name,
+                  nro_player: jue[juex].nro_player});
 
   }//if hay jugadores
  }//for
@@ -125,19 +125,19 @@ io.sockets.on('connection', function(socket) {
   
 socket.on("user va a chat",function(){
 
- console.log("entro a chat "+ socket.request.user.firstnm);
+ console.log("entro a chat "+ socket.request.user.firstname);
  
  if(socket.request.user){
 
-  userscnnt[socket.request.user._id]= {user: socket.request.user,
-            sktid:socket.id};
+  users_cnnt[socket.request.user._id]= {user: socket.request.user,
+            skt_id:socket.id};
 
-  io.sockets.emit('usernames', userscnnt);
+  io.sockets.emit('usernames', users_cnnt);
 
 
-  for( var room in usersroom){
+  for( var room in users_room){
     io.to(socket.id).emit("actualizar rooms",
-           {usersroom: usersroom[room],
+           {users_room: users_room[room],
             room:room});
 
   }//for actualiza, cuando entra   
@@ -153,11 +153,11 @@ socket.on("user va a chat",function(){
 socket.on('open room',function(roomf){
  //roomf="gnrl" roomf
   
-  if(!usersroom[roomf]){
-   usersroom[roomf]={};
+  if(!users_room[roomf]){
+   users_room[roomf]={};
   }//if indef
-  //console.log(usersroom[roomf])
-  usersroom[roomf][socket.request.user._id]= socket.request.user.firstnm;
+  //console.log(users_room[roomf])
+  users_room[roomf][socket.request.user._id]= socket.request.user.firstname;
   
   
   socket.join(roomf);
@@ -168,7 +168,7 @@ socket.on('open room',function(roomf){
                function(err,chatf){
 
     if(!chatf.chats[roomf]){
-      //chatf.chats[roomf.roombth]=["hi"]; 
+      //chatf.chats[roomf.room_bth]=["hi"]; 
       //chatf.chats={};
       chatf.chats[roomf]=[];
     }//if no existe, crea
@@ -182,14 +182,14 @@ socket.on('open room',function(roomf){
       //console.log("savedddd");
 
       io.to(roomf).emit('manda users al room',
-                    {usersroom:usersroom[roomf],
-                     chatroom:chatf.chats[roomf],
-                     sktid:socket.id,
+                    {users_room:users_room[roomf],
+                     chat_room:chatf.chats[roomf],
+                     skt_id:socket.id,
                      room:roomf});
       io.sockets.emit("actualizar rooms",
-                      {usersroom:usersroom[roomf],
-                       chatroom:chatf.chats[roomf],
-                       sktid:socket.id,
+                      {users_room:users_room[roomf],
+                       chat_room:chatf.chats[roomf],
+                       skt_id:socket.id,
                        room:roomf});
 
     });//save
@@ -211,63 +211,63 @@ socket.on('open room',function(roomf){
   
   
   
-socket.on('send message room', function(objmsgf) {
-    //objmsgf{msg(inimsgval),room,typeroom}
-  console.log("enviar msg a room: "+objmsgf.typeroom)
-  objmsgf.msg= emoji.emojify(objmsgf.msg);
-  objmsgf.msg= haber_link(objmsgf.msg);
+socket.on('send message room', function(obj_msgf) {
+    //obj_msgf{msg(in_msg_val),room,type_room}
+  console.log("enviar msg a room: "+obj_msgf.type_room)
+  obj_msgf.msg= emoji.emojify(obj_msgf.msg);
+  obj_msgf.msg= haber_link(obj_msgf.msg);
   
   
-  if(objmsgf.typeroom==="public"){
+  if(obj_msgf.type_room==="public"){
 
     Chat.findOne({_id:"5a03c2696602c617ed34b85f"},
               function(err,chatf){
 
-      var consav=socket.request.user.firstnm+": "+objmsgf.msg;
+      var con_sav=socket.request.user.firstname+": "+obj_msgf.msg;
      
-      if(chatf.chats[objmsgf.room].length<15){
-        chatf.chats[objmsgf.room].push(consav);
+      if(chatf.chats[obj_msgf.room].length<15){
+        chatf.chats[obj_msgf.room].push(con_sav);
       }else{
-        chatf.chats[objmsgf.room].shift();
-        chatf.chats[objmsgf.room].push(consav);
+        chatf.chats[obj_msgf.room].shift();
+        chatf.chats[obj_msgf.room].push(con_sav);
       }//else shift and push
 
-      chatf.markModified("chats."+objmsgf.room);
+      chatf.markModified("chats."+obj_msgf.room);
       chatf.save((err)=>{
         if(err) throw err;
       });//save
     });//findone
-  }//if typeroom public
+  }//if type_room public
     
-  io.to(objmsgf.room).emit('new message room',
-             {msg:objmsgf.msg,
-              nick:socket.request.user.firstnm,
-              room:objmsgf.room});
+  io.to(obj_msgf.room).emit('new message room',
+             {msg:obj_msgf.msg,
+              nick:socket.request.user.firstname,
+              room:obj_msgf.room});
 });//skon send msg
 
 
   
 socket.on("cerrar room",function(roomf){
-  //roomf="roombth o gnrl" room
+  //roomf="room_bth o gnrl" room
   console.log("cerró room "+roomf);
   
   socket.leave(roomf);
   
   if(!socket.id) return;
   
-  //console.log(usersroom[roomf]);
-  if(usersroom[roomf])
-    delete usersroom[roomf][socket.request.user._id];
+  //console.log(users_room[roomf]);
+  if(users_room[roomf])
+    delete users_room[roomf][socket.request.user._id];
 
   io.to(roomf).emit('manda users al room',
-                {usersroom:usersroom[roomf],
+                {users_room:users_room[roomf],
                  room:roomf});
   /*
   io.to(socket.id).emit('manda users al room',
-                {usersroom:usersroom[roomf],
+                {users_room:users_room[roomf],
                  room:roomf});*/
   io.sockets.emit("actualizar rooms",
-                {usersroom:usersroom[roomf],
+                {users_room:users_room[roomf],
                  room:roomf});
 
   /*else{
@@ -280,19 +280,19 @@ socket.on("cerrar room",function(roomf){
   
   
   
-socket.on("typing",function(objroomf){
-  //objroomf{room}
+socket.on("typing",function(obj_roomf){
+  //obj_roomf{room}
   
-  socket.to(objroomf.room).broadcast.emit("who type",
-                  {firstnm: socket.request.user.firstnm,
-                   room:objroomf.room});
+  socket.to(obj_roomf.room).broadcast.emit("who type",
+                  {firstname: socket.request.user.firstname,
+                   room:obj_roomf.room});
   
 });//typing
   
   
   
-socket.on("reporte",function(objrptf){
-  //objrptf{tit,rpt}
+socket.on("reporte",function(obj_rptf){
+  //obj_rptf{tit,rpt}
   console.log("guarda reporte");
 
   Chat.findOne({_id:"5a3694ecfe052c4f9add75ff"},
@@ -300,8 +300,8 @@ socket.on("reporte",function(objrptf){
 
     chatf.reportes.push(
          [socket.request.user._id,
-          socket.request.user.firstnm,
-          objrptf]);
+          socket.request.user.firstname,
+          obj_rptf]);
 
     chatf.save((err)=>{
      if(err) throw err;
@@ -313,50 +313,50 @@ socket.on("reporte",function(objrptf){
   
 //===== 2b.. secret rooms
   
-socket.on("slide in secret",function(roomsecretf){
- //roomsecretf=secret name's room
-  console.log("slide in: "+roomsecretf)
+socket.on("slide in secret",function(room_secretf){
+ //room_secretf=secret name's room
+  console.log("slide in: "+room_secretf)
   
-  if(!usersroom[roomsecretf]){
-   usersroom[roomsecretf]={};
+  if(!users_room[room_secretf]){
+   users_room[room_secretf]={};
   }//if indef
-  //console.log(usersroom[roomsecretf])
-  usersroom[roomsecretf][socket.request.user._id]= socket.request.user.firstnm;
+  //console.log(users_room[room_secretf])
+  users_room[room_secretf][socket.request.user._id]= socket.request.user.firstname;
 
-  socket.join(roomsecretf);
-  console.log(io.sockets.adapter.rooms[roomsecretf]);
+  socket.join(room_secretf);
+  console.log(io.sockets.adapter.rooms[room_secretf]);
 
-  io.to(roomsecretf).emit('manda users a secretroom',
-             {usersroom:usersroom[roomsecretf],
-              sktid:socket.id,
-              room:roomsecretf});
+  io.to(room_secretf).emit('manda users a secretroom',
+             {users_room:users_room[room_secretf],
+              skt_id:socket.id,
+              room:room_secretf});
 
 });//skon slide in secret room
           
  
 
-socket.on("ver su profile",function(objuserf){
-   //objuserf{useridrcv,sktidrcv,sktidmnd}
+socket.on("ver su profile",function(obj_userf){
+   //obj_userf{user_id_rcv,skt_id_rcv,skt_id_mnd}
   console.log("ver su perfil");
-  console.log(objuserf); 
+  console.log(obj_userf); 
   var user={}; 
  
-  User.findOne({_id:objuserf.useridrcv},
+  User.findOne({_id:obj_userf.user_id_rcv},
                (err,user)=>{
       //console.log(user);
-    user.firstnm=user.firstnm;
-    user.lastnm=user.lastnm;
+    user.firstname=user.firstname;
+    user.lastname=user.lastname;
     user.avatar=user.avatar;
     user.age=user.age;
     user.gender=user.gender;
     user.country=user.country;
     user.speaks=user.speaks;
     user.learning=user.learning;
-    user.aboutme=user.aboutme;
-      io.to(objuserf.sktidmnd).emit("perfil a ver",
+    user.about_me=user.about_me;
+      io.to(obj_userf.skt_id_mnd).emit("perfil a ver",
           {user:user,
-           useridrcv:objuserf.useridrcv,
-           sktidrcv:objuserf.sktidrcv});
+           user_id_rcv:obj_userf.user_id_rcv,
+           skt_id_rcv:obj_userf.skt_id_rcv});
   });//findone  
   
 });//skon ver su profile
@@ -365,99 +365,99 @@ socket.on("ver su profile",function(objuserf){
   
 //==== 2c.. private chats
   
-socket.on("manda chatrequest",function(objuserf){
-  //objuserf{sktidrcv,useridrcv,sktidmnd}
-  console.log("2hizo chatrequest");
-  console.log(objuserf);
-  var idmnd=socket.request.user._id;
+socket.on("manda chat request",function(obj_userf){
+  //obj_userf{skt_id_rcv,user_id_rcv,skt_id_mnd}
+  console.log("2hizo chat request");
+  console.log(obj_userf);
+  var id_mnd=socket.request.user._id;
   
-  var useridrcv=objuserf.useridrcv;
+  var user_id_rcv=obj_userf.user_id_rcv;
   
-  var roombth=idmnd> useridrcv?
-         idmnd+"_"+useridrcv:
-         useridrcv+"_"+idmnd;
+  var room_bth=id_mnd> user_id_rcv?
+         id_mnd+"_"+user_id_rcv:
+         user_id_rcv+"_"+id_mnd;
   
-  if(!usersroom[roombth]){
-   usersroom[roombth]={};
+  if(!users_room[room_bth]){
+   users_room[room_bth]={};
   }//if indef
-  //usersroom{roomnme{userid:firstnm,...},...}
-  usersroom[roombth][socket.request.user._id]= socket.request.user.firstnm;
+  //users_room{room_nme{user_id:firstname,...},...}
+  users_room[room_bth][socket.request.user._id]= socket.request.user.firstname;
   
-  socket.join(roombth);
+  socket.join(room_bth);
    
-  console.log(io.sockets.adapter.rooms[roombth]); 
+  console.log(io.sockets.adapter.rooms[room_bth]); 
   
-  io.to(objuserf.sktidrcv).emit("recibe chatrequest",
-          {nmemnd:socket.request.user.firstnm,
-           sktidmnd:objuserf.sktidmnd,
-           sktidrcv:objuserf.sktidrcv,
-           roombth:roombth
-          }); //sktcltid de quien la manda
+  io.to(obj_userf.skt_id_rcv).emit("recibe chat request",
+          {nme_mnd:socket.request.user.firstname,
+           skt_id_mnd:obj_userf.skt_id_mnd,
+           skt_id_rcv:obj_userf.skt_id_rcv,
+           room_bth:room_bth
+          }); //skt_clt_id de quien la manda
     
-  if(userscnnt[useridrcv])
-    var nmercv= userscnnt[useridrcv].user.firstnm;
+  if(users_cnnt[user_id_rcv])
+    var nme_rcv= users_cnnt[user_id_rcv].user.firstname;
   
-  io.to(roombth).emit("espera chatrequest",
-          {sktidmnd:objuserf.sktcltid,
-           sktidrcv:objuserf.sktidrcv,
-           nmercv:nmercv,
-           roombth:roombth});
+  io.to(room_bth).emit("espera chat request",
+          {skt_id_mnd:obj_userf.skt_clt_id,
+           skt_id_rcv:obj_userf.skt_id_rcv,
+           nme_rcv:nme_rcv,
+           room_bth:room_bth});
     
 });//skon hicieron request
  
   
   
-socket.on("cancel chatrequest",function(objuserf){
- //objuserf{sktidrcv,roombth}
+socket.on("cancel chat request",function(obj_userf){
+ //obj_userf{skt_id_rcv,room_bth}
  console.log("cancelo chat request")
  //y sacarlo del room
 
- socket.to(objuserf.sktidrcv).emit("eliminar chatrequest",
-    {roombth:objuserf.roombth});
+ socket.to(obj_userf.skt_id_rcv).emit("eliminar chat request",
+    {room_bth:obj_userf.room_bth});
 });//skon cancel request
   
   
   
   
-socket.on("abrir chatrequest",function(objuserf){
- //objuserf{roombth,sktidmnd}
+socket.on("abrir chat request",function(obj_userf){
+ //obj_userf{room_bth,skt_id_mnd}
 
-  console.log("4abre chatrequest");
+  console.log("4abre chat request");
 
-  usersroom[objuserf.roombth][socket.request.user._id]= socket.request.user.firstnm;
+  users_room[obj_userf.room_bth][socket.request.user._id]= socket.request.user.firstname;
 
-  socket.join(objuserf.roombth);
+  socket.join(obj_userf.room_bth);
     
-  console.log(io.sockets.adapter.rooms[objuserf.roombth]);
-  var nmercv=socket.request.user.firstnm;
+  console.log(io.sockets.adapter.rooms[obj_userf.room_bth]);
+  var nme_rcv= socket.request.user.firstname;
    
-  var useridmnd="";
+  var user_id_mnd= "";
 
-  for(var useri in userscnnt){
-    if(userscnnt[useri].sktid== objuserf.sktidmnd){
-      useridmnd=useri;
+  for(var useri in users_cnnt){
+    if(users_cnnt[useri].skt_id== obj_userf.skt_id_mnd){
+      user_id_mnd=useri;
       break;
     }//if
   }//for
    
-  if(userscnnt[useridmnd]) 
-    var nmemnd=userscnnt[useridmnd].user.firstnm;
+  if(users_cnnt[user_id_mnd]) 
+    var nme_mnd= users_cnnt[user_id_mnd].user.firstname;
    
-  io.to(objuserf.sktidmnd).emit("acepta chatrequest",
-            {nmercv:nmercv,nmemnd:nmemnd,
-             sktidrcv:objuserf.sktidrcv,
-             sktidmnd:objuserf.sktidmn,
-             roombth:objuserf.roombth});
-});//skon abrir chatrequest
+  io.to(obj_userf.skt_id_mnd).emit("acepta chat request",
+            {nme_rcv:nme_rcv,nme_mnd:nme_mnd,
+             skt_id_rcv:obj_userf.skt_id_rcv,
+             skt_id_mnd:obj_userf.skt_idmn,
+             room_bth:obj_userf.room_bth});
+});//skon abrir chat request
   
   
   
-socket.on("users al chatrequest",function(objuserf){
- //objuserf{nmemnd,nmercv,sktidrcv,sktidmnd,roombth}
-  console.log("6users para chatrequest");
+socket.on("users al chat request",function(obj_userf){
+ //obj_userf{nme_mnd,nme_rcv,skt_id_rcv,skt_id_mnd,room_bth}
+  console.log("6users para chat request");
   
   //buscar 30 lines chat historial aqui !!!
-  var id12= objuserf.roombth.split("_");
+  var id12= obj_userf.room_bth.split("_");
   
   var chatprv;
   
@@ -470,20 +470,20 @@ socket.on("users al chatrequest",function(objuserf){
     }//if no chatsprv, crear
     
     
-    if(!chatf.chatsprv[objuserf.roombth]){
+    if(!chatf.chatsprv[obj_userf.room_bth]){
 
-      chatf.chatsprv[objuserf.roombth]=[];
+      chatf.chatsprv[obj_userf.room_bth]=[];
     }//if no existe, crea
     
-    chatf.markModified("chatsprv."+objuserf.roombth);
+    chatf.markModified("chatsprv."+obj_userf.room_bth);
     
-    chatprv=chatf.chatsprv[objuserf.roombth]; 
+    chatprv=chatf.chatsprv[obj_userf.room_bth]; 
     
     chatf.save((err)=>{
       if(err) throw err;  
   
-      objuserf["chatprv"]=chatprv;
-      io.to(objuserf.roombth).emit("mete users en chatrequest", objuserf);
+      obj_userf["chatprv"]=chatprv;
+      io.to(obj_userf.room_bth).emit("mete users en chat request", obj_userf);
 
     });//save
   });//findone
@@ -492,28 +492,28 @@ socket.on("users al chatrequest",function(objuserf){
   
   
   
-socket.on("send messagechat_r",function(objmsgf){
-    //objmsgf{msg,roombth}
-  console.log("envio messagechat_r")
-  var id12= objmsgf.roombth.split("_");
+socket.on("send message chat r",function(obj_msgf){
+    //obj_msgf{msg,room_bth}
+  console.log("envio message chat r")
+  var id12= obj_msgf.room_bth.split("_");
  
-  objmsgf.msg= emoji.emojify(objmsgf.msg);
-  objmsgf.msg= haber_link(objmsgf.msg);
+  obj_msgf.msg= emoji.emojify(obj_msgf.msg);
+  obj_msgf.msg= haber_link(obj_msgf.msg);
   
   
   Chat.findOne({_id:"5a36957e2659be546185f785"},
              function(err,chatf){
     
-    var consav=socket.request.user.firstnm+": "+objmsgf.msg;
+    var con_sav=socket.request.user.firstname+": "+obj_msgf.msg;
 
-    if(chatf.chatsprv[objmsgf.roombth].length<15){
-      chatf.chatsprv[objmsgf.roombth].push(consav);
+    if(chatf.chatsprv[obj_msgf.room_bth].length<15){
+      chatf.chatsprv[obj_msgf.room_bth].push(con_sav);
     }else{
-      chatf.chatsprv[objmsgf.roombth].shift();
-      chatf.chatsprv[objmsgf.roombth].push(consav);
+      chatf.chatsprv[obj_msgf.room_bth].shift();
+      chatf.chatsprv[obj_msgf.room_bth].push(con_sav);
     }//else shift and push    
 
-    chatf.markModified("chatsprv."+objmsgf.roombth); 
+    chatf.markModified("chatsprv."+obj_msgf.room_bth); 
        
     chatf.save((err)=>{
      if(err) throw err;
@@ -521,54 +521,54 @@ socket.on("send messagechat_r",function(objmsgf){
   });//findone  
   
   
-  io.to(objmsgf.roombth).emit("new msgchatrequest",
-             {msg:objmsgf.msg,
-              nick:socket.request.user.firstnm,
-              room:objmsgf.roombth});
+  io.to(obj_msgf.room_bth).emit("new msg chat request",
+             {msg:obj_msgf.msg,
+              nick:socket.request.user.firstname,
+              room:obj_msgf.room_bth});
 });//skon send message chat rquest
   
 
   
-socket.on("solicitar llamada",function(objroomcallf){
-  //objroomcallf{roomrtc:roombth}
+socket.on("solicitar llamada",function(obj_room_callf){
+  //obj_room_callf{room_rtc:room_bth}
   console.log("solicita llamada");
-  io.to(objroomcallf.roomrtc).emit("solicitud de aceptacion de la llamada",
-      {roomrtc:objroomcallf.roomrtc, sktidmnd:socket.id,
-       nmemnd: socket.request.user.firstnm});
+  io.to(obj_room_callf.room_rtc).emit("solicitud de aceptacion de la llamada",
+      {room_rtc:obj_room_callf.room_rtc, skt_id_mnd:socket.id,
+       nme_mnd: socket.request.user.firstname});
   
 });//skon solicitar llamada  
   
  
   
-socket.on("cancelar llamada entrante", function(objroomcallf){
-  //objroomcallf{roomrtc}
-  console.log("cancelar llamada entrante de: "+objroomcallf.roomrtc)
-  io.to(objroomcallf.roomrtc).emit("se cancelo llamada",
-                    {roomrtc:objroomcallf.roomrtc});
+socket.on("cancelar llamada entrante", function(obj_room_callf){
+  //obj_room_callf{room_rtc}
+  console.log("cancelar llamada entrante de: "+obj_room_callf.room_rtc)
+  io.to(obj_room_callf.room_rtc).emit("se cancelo llamada",
+                    {room_rtc:obj_room_callf.room_rtc});
 });//skon cancelar llamada entr  
   
 
   
-socket.on("correr llamada",function(objroomcallf){
-  //objroomcallf{roomrtc}
-  console.log("correr llamada en: "+objroomcallf.roomrtc)
-  io.to(objroomcallf.roomrtc).emit("correr webrtc",
-                      {roomrtc:objroomcallf.roomrtc});
+socket.on("correr llamada",function(obj_room_callf){
+  //obj_room_callf{room_rtc}
+  console.log("correr llamada en: "+obj_room_callf.room_rtc)
+  io.to(obj_room_callf.room_rtc).emit("correr web rtc",
+                      {room_rtc:obj_room_callf.room_rtc});
 });//skon correr llamada  
   
  
-socket.on("colgar llamada",function(objroomcallf){
-  //objroomcallf{roomrtc}
-  console.log("colgar llamada en: "+objroomcallf.roomrtc)
-  io.to(objroomcallf.roomrtc).emit("se cuelga llamada",
-                   {roomrtc:objroomcallf.roomrtc});
+socket.on("colgar llamada",function(obj_room_callf){
+  //obj_room_callf{room_rtc}
+  console.log("colgar llamada en: "+obj_room_callf.room_rtc)
+  io.to(obj_room_callf.room_rtc).emit("se cuelga llamada",
+                   {room_rtc:obj_room_callf.room_rtc});
 });//skon colgar llamada 
   
   
   
 //guardar nota
-socket.on("save note",function(objntef){
-  //objntef{nte}
+socket.on("save note",function(obj_ntef){
+  //obj_ntef{nte}
 
   User.findOne({_id: socket.request.user._id},
       function(err,userf){
@@ -577,7 +577,7 @@ socket.on("save note",function(objntef){
      userf.notes="";
     }
 
-    userf.notes=objntef.nte;
+    userf.notes= obj_ntef.nte;
 
     userf.save((err)=>{
       if(err) throw err;
@@ -592,130 +592,130 @@ socket.on("save note",function(objntef){
 //===== 2d.. jueg  
   
   
-socket.on("solicitar game",function(objgamef){
-  //objgamef{typegame,listword,nroplayer}
+socket.on("solicitar game",function(obj_gamef){
+  //obj_gamef{type_game,list_word,nro_player}
 
   console.log("2solicitar juego");
-  console.log(objgamef);
+  console.log(obj_gamef);
 
-  var nrogame= "jue"+Object.keys(jue).length;  
+  var nro_game= "jue"+Object.keys(jue).length;  
 
 
-  jue[nrogame]= {nrogame: nrogame,
+  jue[nro_game]= {nro_game: nro_game,
                 tiempo:0,
                 mod:"",
-                wordtoguess:"",
-                typegame: objgamef.typegame,
-                listwordnm:objgamef.listword,
-                listword: listwords[objgamef.listword],
-                playertrn:"", 
-                nroplayer: objgamef.nroplayer,
-                nroplayeract: {}
+                word_to_guess:"",
+                type_game: obj_gamef.type_game,
+                list_word_name:obj_gamef.list_word,
+                list_word: list_words[obj_gamef.list_word],
+                player_trn:"", 
+                nro_player: obj_gamef.nro_player,
+                nro_player_act: {}
                };//jue{}
 
   io.to(socket.id).emit("crear juego",
-                 {nrogame: nrogame,
-                  typegame: objgamef.typegame,
-                  listword: objgamef.listword,
-                  nroplayer: objgamef.nroplayer });
-  //socket.broadcast.emit("los demas barjue",
-  io.sockets.emit("los demas barjue",
-                  {nrogame:nrogame,
-                   typegame:objgamef.typegame,
-                   listwordnm:objgamef.listword,
-                   nroplayer:objgamef.nroplayer});
+                 {nro_game: nro_game,
+                  type_game: obj_gamef.type_game,
+                  list_word: obj_gamef.list_word,
+                  nro_player: obj_gamef.nro_player });
+  //socket.broadcast.emit("los demas bar jue",
+  io.sockets.emit("los demas bar jue",
+                  {nro_game:nro_game,
+                   type_game:obj_gamef.type_game,
+                   list_word_name:obj_gamef.list_word,
+                   nro_player:obj_gamef.nro_player});
   
 });//skon solicitar game  
   
   
-socket.on('entrar roomj',function(objgamef){
- //objgamef{nrogame,typegame,listword,nroplayer}
+socket.on('entrar roomj',function(obj_gamef){
+ //obj_gamef{nro_game,type_game,list_word,nro_player}
   console.log("3entrando al juego");
-  console.log(objgamef);
+  console.log(obj_gamef);
     
-  var userid= socket.request.user._id;
-  var fn=  socket.request.user.firstnm;
+  var user_id= socket.request.user._id;
+  var fn=  socket.request.user.firstname;
 
-  if(!jue[objgamef.nrogame]){
+  if(!jue[obj_gamef.nro_game]){
     
-    console.log("no hay "+objgamef.nrogame);
-    io.sockets.emit("eliminar gamebar",
-                 {roomgame:objgamef.nrogame});
+    console.log("no hay "+obj_gamef.nro_game);
+    io.sockets.emit("eliminar game bar",
+                 {room_game:obj_gamef.nro_game});
     
   }else{//else hay jue
     
-    var nroingame= Object.keys(jue[objgamef.nrogame].nroplayeract).length;
+    var nro_in_game= Object.keys(jue[obj_gamef.nro_game].nro_player_act).length;
   
   
-    if(nroingame< (jue[objgamef.nrogame].nroplayer-1) ){
-      console.log("cant menor que nroplayer-1");
+    if(nro_in_game< (jue[obj_gamef.nro_game].nro_player-1) ){
+      console.log("cant menor que nro_player-1");
 
-      jue[objgamef.nrogame].nroplayeract[userid]=[fn,socket.id,0];
-      //[fn,sktid,puntaje]
+      jue[obj_gamef.nro_game].nro_player_act[user_id]=[fn,socket.id,0];
+      //[fn,skt_id,puntaje]
 
-      console.log(typeof jue[objgamef.nrogame]);
+      console.log(typeof jue[obj_gamef.nro_game]);
 
-      socket.join(objgamef.nrogame);
-      usersjue[socket.request.user._id]= {firstnm:socket.request.user.firstnm,
-                 sktid:socket.id};
+      socket.join(obj_gamef.nro_game);
+      users_jue[socket.request.user._id]= {firstname:socket.request.user.firstname,
+                 skt_id:socket.id};
   
-      var usergame= jue[objgamef.nrogame].nroplayeract; 
+      var usergame= jue[obj_gamef.nro_game].nro_player_act; 
 
-      io.to(objgamef.nrogame).emit("manda user al juego",
-                           {usersjue:usergame,
-                            nrogame:objgamef.nrogame,
-                            typegame:objgamef.typegame,
-                            listword:objgamef.listword,
-                            nroplayer:objgamef.nroplayer});
+      io.to(obj_gamef.nro_game).emit("manda user al juego",
+                           {users_jue:usergame,
+                            nro_game:obj_gamef.nro_game,
+                            type_game:obj_gamef.type_game,
+                            list_word:obj_gamef.list_word,
+                            nro_player:obj_gamef.nro_player});
 
-    }//if nroplayeract<nroplayer-1: junta
+    }//if nro_player_act<nro_player-1: junta
 
-    else if(nroingame== (jue[objgamef.nrogame].nroplayer-1) ){
-      console.log("cant igual que nroplayer-1")
+    else if(nro_in_game== (jue[obj_gamef.nro_game].nro_player-1) ){
+      console.log("cant igual que nro_player-1")
 
-      jue[objgamef.nrogame].nroplayeract[userid]=[fn,socket.id,0];
-        //[fn,sktid,puntaje]
+      jue[obj_gamef.nro_game].nro_player_act[user_id]=[fn,socket.id,0];
+        //[fn,skt_id,puntaje]
 
 
-      socket.join(objgamef.nrogame);
+      socket.join(obj_gamef.nro_game);
 
-      //decir que roomgame, para luego eliminarlo en disconnect
-      usersjue[socket.request.user._id]= {firstnm:socket.request.user.firstnm,
-                 sktid:socket.id};
+      //decir que room_game, para luego eliminarlo en disconnect
+      users_jue[socket.request.user._id]= {firstname:socket.request.user.firstname,
+                 skt_id:socket.id};
   
-      var usergame= jue[objgamef.nrogame].nroplayeract; 
+      var usergame= jue[obj_gamef.nro_game].nro_player_act; 
 
-      io.to(objgamef.nrogame).emit("manda user al juego",
-                           {usersjue:usergame,
-                            nrogame:objgamef.nrogame,
-                            typegame:objgamef.typegame,
-                            listword:objgamef.listword,
-                            nroplayer:objgamef.nroplayer});
+      io.to(obj_gamef.nro_game).emit("manda user al juego",
+                           {users_jue:usergame,
+                            nro_game:obj_gamef.nro_game,
+                            type_game:obj_gamef.type_game,
+                            list_word:obj_gamef.list_word,
+                            nro_player:obj_gamef.nro_player});
 
-      //strgame(jue[objgamef.nrogame]);
-      //start playerer 0 va sumando 0%nroplayer
-      var playertrn= 0;
-      jue[objgamef.nrogame].playertrn= 0;
+      //str_game(jue[obj_gamef.nro_game]);
+      //start playerer 0 va sumando 0%nro_player
+      var player_trn= 0;
+      jue[obj_gamef.nro_game].player_trn= 0;
 
-      var pmrid= Object.keys(jue[objgamef.nrogame].nroplayeract)[playertrn];
-      var pmruser= jue[objgamef.nrogame].nroplayeract[pmrid];//[fn,sktid]
+      var pmr_id= Object.keys(jue[obj_gamef.nro_game].nro_player_act)[player_trn];
+      var pmr_user= jue[obj_gamef.nro_game].nro_player_act[pmr_id];//[fn,skt_id]
 
-      jue[objgamef.nrogame].wordtoguess= jue[objgamef.nrogame].listword[dar_aleatoriapos(0, jue[objgamef.nrogame].listword.length)];  
+      jue[obj_gamef.nro_game].word_to_guess= jue[obj_gamef.nro_game].list_word[dar_aleatoria_pos(0, jue[obj_gamef.nro_game].list_word.length)];  
 
-      io.to(objgamef.nrogame).emit("los que adivinan",
-                      {userexpl: pmruser[0]});
-      io.to(pmruser[1]).emit("el del turno",
-                       {word: jue[objgamef.nrogame].wordtoguess});
+      io.to(obj_gamef.nro_game).emit("los que adivinan",
+                      {userexpl: pmr_user[0]});
+      io.to(pmr_user[1]).emit("el del turno",
+                       {word: jue[obj_gamef.nro_game].word_to_guess});
 
       //tiempo=20;
-        //nota el tiempo de ese juego jue[objgamef.nrogame].tiempo
-      jue[objgamef.nrogame].tiempo=90;
-      jue[objgamef.nrogame].mod="ten";
+        //nota el tiempo de ese juego jue[obj_gamef.nro_game].tiempo
+      jue[obj_gamef.nro_game].tiempo=90;
+      jue[obj_gamef.nro_game].mod="ten";
 
 
-      cuenta_abajo(objgamef.nrogame,jue[objgamef.nrogame].playertrn);
+      cuenta_abajo(obj_gamef.nro_game,jue[obj_gamef.nro_game].player_trn);
 
-    }//elseif nroplayeract==nroplayer-1 : junta y comienza
+    }//elseif nro_player_act==nro_player-1 : junta y comienza
     else{
       console.log("juego comenzado");
 
@@ -744,7 +744,7 @@ function cuenta_abajo(roomjf){
   else if(jue[roomjf].mod=="ten"){
 
     io.to(roomjf).emit("no se adivino",
-                    {wordtoguess: jue[roomjf].wordtoguess});
+                    {word_to_guess: jue[roomjf].word_to_guess});
 
     jue[roomjf].tiempo= 10;
     jue[roomjf].mod="turn";
@@ -754,17 +754,17 @@ function cuenta_abajo(roomjf){
   else if(jue[roomjf].mod=="turn"){
   
     console.log("new turn?");
-    console.log(Object.keys(jue[roomjf].nroplayeract));
+    console.log(Object.keys(jue[roomjf].nro_player_act));
     var winner="";
 
-    for(var i=0;i<Object.keys( jue[roomjf].nroplayeract).length;i++){
+    for(var i=0;i<Object.keys( jue[roomjf].nro_player_act).length;i++){
 
-     if(jue[roomjf].nroplayeract[
-          Object.keys(jue[roomjf].nroplayeract)[i]
+     if(jue[roomjf].nro_player_act[
+          Object.keys(jue[roomjf].nro_player_act)[i]
          ][2]>= 10){
 
-      winner=jue[roomjf].nroplayeract[
-         Object.keys(jue[roomjf].nroplayeract)[i]
+      winner=jue[roomjf].nro_player_act[
+         Object.keys(jue[roomjf].nro_player_act)[i]
        ][0];
       console.log("ganó");
       console.log(winner);
@@ -775,23 +775,23 @@ function cuenta_abajo(roomjf){
 
     if(winner==""){
   
-      jue[roomjf].playertrn++;
+      jue[roomjf].player_trn++;
       jue[roomjf].tiempo= 90;
       jue[roomjf].mod="ten";
 
-      var pmrid= Object.keys(jue[roomjf].nroplayeract)[ jue[roomjf].playertrn% Object.keys(jue[roomjf].nroplayeract).length ];
+      var pmr_id= Object.keys(jue[roomjf].nro_player_act)[ jue[roomjf].player_trn% Object.keys(jue[roomjf].nro_player_act).length ];
 
-      var pmruser= jue[roomjf].nroplayeract[pmrid];//[fn,sktid]
+      var pmr_user= jue[roomjf].nro_player_act[pmr_id];//[fn,skt_id]
   
 
-      jue[roomjf].wordtoguess= jue[roomjf].listword[dar_aleatoriapos(0,jue[roomjf].listword.length)];  
+      jue[roomjf].word_to_guess= jue[roomjf].list_word[dar_aleatoria_pos(0,jue[roomjf].list_word.length)];  
 
-      if(Object.keys(jue[roomjf].nroplayeract).length>1){
+      if(Object.keys(jue[roomjf].nro_player_act).length>1){
   
         io.to(roomjf).emit("los que adivinan",
-                        {userexpl: pmruser[0]});
-        io.to(pmruser[1]).emit("el del turno",
-                              {word: jue[roomjf].wordtoguess});
+                        {userexpl: pmr_user[0]});
+        io.to(pmr_user[1]).emit("el del turno",
+                              {word: jue[roomjf].word_to_guess});
 
   
         cuenta_abajo(roomjf); 
@@ -799,7 +799,7 @@ function cuenta_abajo(roomjf){
     }//if no winner
     else{
       io.to(roomjf).emit("quien gano",
-                   {winnernme:winner});
+                   {winner_nme:winner});
     }//else, quien gano
   
   }//else if next
@@ -811,18 +811,18 @@ function cuenta_abajo(roomjf){
 
 
   
-function dar_aleatoriapos(a,b){
+function dar_aleatoria_pos(a,b){
   return Math.floor(Math.random() * b) + a;
 };//random number entre 0 y m.length
   
   
   
-socket.on("10 seg",function(objnrogamef){
-  //objnrogamef{nrogame}
+socket.on("10 seg",function(objnro_gamef){
+  //objnro_gamef{nro_game}
   console.log("10 seg next turn");
-  console.log(jue[objnrogamef.nrogame].tiempo);
-  jue[objnrogamef.nrogame].tiempo=10;
-  jue[objnrogamef.nrogame].mod="turn";
+  console.log(jue[objnro_gamef.nro_game].tiempo);
+  jue[objnro_gamef.nro_game].tiempo=10;
+  jue[objnro_gamef.nro_game].mod="turn";
  //next turn
 });//10 seg para next turn player    
   
@@ -831,44 +831,44 @@ socket.on("10 seg",function(objnrogamef){
 
   
   
-socket.on('send messagejue',function(objmsggamef){
-  //objmsggamef{msg,nrogame}
-  console.log("enviar msgjue: "+objmsggamef)
-  var pmrid= Object.keys(jue[objmsggamef.nrogame].nroplayeract)[ jue[objmsggamef.nrogame].playertrn% Object.keys(jue[objmsggamef.nrogame].nroplayeract).length ];
+socket.on('send message jue',function(obj_msg_gamef){
+  //obj_msg_gamef{msg,nro_game}
+  console.log("enviar msgjue: "+obj_msg_gamef)
+  var pmr_id= Object.keys(jue[obj_msg_gamef.nro_game].nro_player_act)[ jue[obj_msg_gamef.nro_game].player_trn% Object.keys(jue[obj_msg_gamef.nro_game].nro_player_act).length ];
 
-  var sktidplayer= jue[objmsggamef.nrogame].nroplayeract[pmrid][1];//[fn,sktid]
+  var skt_id_player= jue[obj_msg_gamef.nro_game].nro_player_act[pmr_id][1];//[fn,skt_id]
   
-  var smejug=sktidplayer==socket.id;//same jugador ?
-  var re=new RegExp(jue[objmsggamef.nrogame].wordtoguess,"i");
+  var sme_jug= skt_id_player==socket.id;//same jugador ?
+  var re=new RegExp(jue[obj_msg_gamef.nro_game].word_to_guess,"i");
   
-  if(re.test(objmsggamef.msg)&&
-     jue[objmsggamef.nrogame].mod=="ten"&&
-     !(smejug)){
+  if(re.test(obj_msg_gamef.msg)&&
+     jue[obj_msg_gamef.nro_game].mod=="ten"&&
+     !(sme_jug)){
     var guess=true;
     
   }//if
   
   
-  objmsggamef.msg= emoji.emojify(objmsggamef.msg);
-  objmsggamef.msg= haber_link(objmsggamef.msg);
+  obj_msg_gamef.msg= emoji.emojify(obj_msg_gamef.msg);
+  obj_msg_gamef.msg= haber_link(obj_msg_gamef.msg);
   
-  io.to(objmsggamef.nrogame).emit('new messagejue',
-                   {msg:objmsggamef.msg,
-                    nrogame:objmsggamef.nrogame,
-                    nick:socket.request.user.firstnm,
+  io.to(obj_msg_gamef.nro_game).emit('new message jue',
+                   {msg:obj_msg_gamef.msg,
+                    nro_game:obj_msg_gamef.nro_game,
+                    nick:socket.request.user.firstname,
                     guess:guess});
   
   if(guess){
-    var userid= socket.request.user._id;
-    jue[objmsggamef.nrogame].nroplayeract[userid][2]+=1;
+    var user_id= socket.request.user._id;
+    jue[obj_msg_gamef.nro_game].nro_player_act[user_id][2]+=1;
     //puntaje
     console.log("punteo");
-    console.log(jue[objmsggamef.nrogame].nroplayeract);
-    var pntplayer= jue[objmsggamef.nrogame].nroplayeract[userid][2];
+    console.log(jue[obj_msg_gamef.nro_game].nro_player_act);
+    var pnt_player= jue[obj_msg_gamef.nro_game].nro_player_act[user_id][2];
     
-    io.to(objmsggamef.nrogame).emit("actualiza puntaje",
-                {userid: userid,
-                 pntplayer: pntplayer});  
+    io.to(obj_msg_gamef.nro_game).emit("actualiza puntaje",
+                {user_id: user_id,
+                 pnt_player: pnt_player});  
     
   }//if adivina, suma 1
   
@@ -876,32 +876,32 @@ socket.on('send messagejue',function(objmsggamef){
   
    
 
-socket.on("salir del juego",function(objroomjf){
-  //objroomjf{room}
-  console.log("sale del jue: "+objroomjf),
+socket.on("salir del juego",function(obj_room_jf){
+  //obj_room_jf{room}
+  console.log("sale del jue: "+obj_room_jf),
  
-  socket.leave(objroomjf.room);
+  socket.leave(obj_room_jf.room);
 
-  var userid= socket.request.user._id;
+  var user_id= socket.request.user._id;
   
   if(!socket.id) return;
   
-  if(jue[objroomjf.room]){
-    delete jue[objroomjf.room].nroplayeract[userid];//eliminar
+  if(jue[obj_room_jf.room]){
+    delete jue[obj_room_jf.room].nro_player_act[user_id];//eliminar
   
-    var nroplayeract= jue[objroomjf.room].nroplayeract;
-    var nroingame= Object.keys(jue[objroomjf.room].nroplayeract).length;
-  }//if objroomjf.room
+    var nro_player_act= jue[obj_room_jf.room].nro_player_act;
+    var nro_in_game= Object.keys(jue[obj_room_jf.room].nro_player_act).length;
+  }//if obj_room_jf.room
   
 
-  if(nroingame==0){//elimina bar
-    io.sockets.emit("eliminar gamebar",
-                 {roomgame:objroomjf.room});
+  if(nro_in_game==0){//elimina bar
+    io.sockets.emit("eliminar game bar",
+                 {room_game:obj_room_jf.room});
   }else{
     
     io.sockets.emit("manda user al juego",
-                  {usersjue: nroplayeract,
-                   nrogame: objroomjf.room});
+                  {users_jue: nro_player_act,
+                   nro_game: obj_room_jf.room});
 }//else manda user al juego
     
 });//skon salir del juego
@@ -917,27 +917,27 @@ socket.on('disconnect', function() {
   
   if(!socket.id) return;
   
-  delete userscnnt[socket.request.user._id];
-  io.sockets.emit('usernames', userscnnt);
+  delete users_cnnt[socket.request.user._id];
+  io.sockets.emit('usernames', users_cnnt);
   
-  console.log("se desconecto "+ socket.request.user.firstnm);
+  console.log("se desconecto "+ socket.request.user.firstname);
   
-  for(var room in usersroom){
-    if(usersroom[room][socket.request.user._id]){
+  for(var room in users_room){
+    if(users_room[room][socket.request.user._id]){
        if(!socket.id) return;
-       delete usersroom[room][socket.request.user._id];
+       delete users_room[room][socket.request.user._id];
        io.to(room).emit('manda users al room',
-                {usersroom:usersroom[room],
+                {users_room:users_room[room],
                  room:room});
        io.sockets.emit("actualizar rooms",
-                        {usersroom:usersroom[room],
+                        {users_room:users_room[room],
                          room:room});   
     }//if
   }//for
    
   /* del control total de usuarios, eliminarlo
-   delete usersjue[socket.request.user._id];
-  io.sockets.emit("manda user al juego",usersjue);*/
+   delete users_jue[socket.request.user._id];
+  io.sockets.emit("manda user al juego",users_jue);*/
 });//skon disconnect
   
   

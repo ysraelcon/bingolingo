@@ -2,31 +2,31 @@
 
 var User= require('../app/models/user');
 var Chat= require('../app/models/chat');
-var ndmailer= require('nodemailer');
+var nodemailer= require('nodemailer');
 
 
 module.exports= function(appf,passportf){
 
-appf.get("/",function(req,res){
+appf.get("/", function(req,res){
  //res.render("login.ejs",{msg:""});
 });
 
   
-appf.get("/home",function(req,res){
+appf.get("/home", function(req,res){
   res.json({message:req.flash("registerMessage")});             
 });
 
   /*
-appf.get("/signup",function(req,res){
- res.render("signup.ejs");
+appf.get("/sign_up", function(req,res){
+ res.render("sign_up.ejs");
 });*/
 
-appf.get("/reset/:token",function(req,res){
- res.render("reset.ejs",{token:req.params.token});
+appf.get("/reset/:token", function(req,res){
+ res.render("reset.ejs", {token: req.params.token});
 });//get reset
   
   
-appf.post("/reset/:token",function(req,res){
+appf.post("/reset/:token", function(req,res){
   console.log(req.body.password);
   
   User.findOne({ resetPasswordToken: req.params.token,
@@ -59,43 +59,43 @@ appf.post("/reset/:token",function(req,res){
 });//post reset
 
 
-appf.get("/login",function(req,res){
+appf.get("/login", function(req,res){
  //res.render("login.ejs",{msg:req.flash('loginMsg')});
-  res.json({message:req.flash("loginMsg")});
+  res.json({message: req.flash("loginMsg")});
 });
   
   
-appf.post("/login",passportf.authenticate('login',
-  {successRedirect:'/profile',
-  failureRedirect:'/login',
-  failureFlash:true}
+appf.post("/login", passportf.authenticate('login',
+  {successRedirect: '/profile',
+  failureRedirect: '/login',
+  failureFlash: true}
 ));//post login
 
 
-appf.post('/signup',passportf.authenticate('register',{
- successRedirect:'/profile',
- failureRedirect:'/home',
- failureFlash:true
+appf.post('/sign_up',passportf.authenticate('register',{
+ successRedirect: '/profile',
+ failureRedirect: '/home',
+ failureFlash: true
 }));//post
 
   
-appf.get('/profile',isLoggedIn,function(req,res){
+appf.get('/profile', isLoggedIn, function(req,res){
  res.json(req.user);
   //res.render('/profile/profile.html',{user:req.user});
   //res.render('profile.ejs',{user:req.user});
 });//get f
   
   
-appf.get('/edit',isLoggedIn,function(req,res){
+appf.get('/edit', isLoggedIn, function(req,res){
  res.json({message:req.flash("errors")});
   //res.render('edit.ejs',{user:req.user});
 });//get 
   
   
-appf.post('/edit',isLoggedIn,function(req,res){
+appf.post('/edit', isLoggedIn, function(req,res){
  console.log("editando"); 
 // validate information
- req.checkBody('firstnm', 'First Name is required.').notEmpty();
+ req.checkBody('firstname', 'First Name is required.').notEmpty();
  req.checkBody('age', 'Age is required.').notEmpty();
 
 // if there are errors, redirect and save errors to flash
@@ -113,14 +113,14 @@ appf.post('/edit',isLoggedIn,function(req,res){
    
    console.log(req.body);
    user.avatar= req.body.avatar;  
-   user.firstnm = req.body.firstnm;
-   user.lastnm = req.body.lastnm;
+   user.firstname = req.body.firstname;
+   user.lastname = req.body.lastname;
    user.gender= req.body.gender;
    user.age= req.body.age;
    user.country= req.body.country;
    user.learning= req.body.learning;
    user.speaks= req.body.speaks;
-   user.aboutme= req.body.aboutme;
+   user.about_me= req.body.about_me;
    
  user.save((err) => {
    
@@ -135,15 +135,15 @@ appf.post('/edit',isLoggedIn,function(req,res){
 });//post edit
 
   
-appf.get('/logout',function(req,res){
+appf.get('/logout', function(req,res){
  req.logout();
  res.redirect('/');
 });//get
   
   
-appf.post('/mail',function(req,res){
+appf.post('/mail', function(req,res){
     
-  var token=Math.random().toString(36)
+  var token= Math.random().toString(36)
         .replace(/[^a-z]+/g, '').substr(0, 5);
   console.log(token);
   
@@ -152,7 +152,7 @@ appf.post('/mail',function(req,res){
     if(!user){
           
           //return res.redirect('/mail');
-      res.json({message:"No email address exists."});
+      res.json({message: "No email address exists."});
     }else{
       
       user.resetPasswordToken = token;
@@ -161,7 +161,7 @@ appf.post('/mail',function(req,res){
        if (err) throw err;
       });//save
       
-      var transporter= ndmailer.createTransport(
+      var transporter= nodemailer.createTransport(
               {service:'gmail',
               auth:{user: process.env.MAILSENDER,
                     pass: process.env.MAILSENDERPWD}
@@ -190,7 +190,7 @@ appf.post('/mail',function(req,res){
          console.log(info);
      });//sendmail 
   
-     res.json({message:"Check your mail for get your password"});
+     res.json({message: "Check your mail for get your password"});
       
     }//else
     console.log(user);

@@ -42,11 +42,11 @@ var L= {
 };//letras
 
 
-var mfundibujo= [
+var m_fun_dibujo= [
  dibujar_base, dibujar_poste, dibujar_poste_arriba, dibujar_poste_abajo,
  dibujar_cabeza, dibujar_columna,
   dibujar_pata_izq, dibujar_pata_der, dibujar_brazo_izq, dibujar_brazo_der
-];//mfundibujo
+];//m_fun_dibujo
 
 var word= "COOLING"
 var mword= word.split("")
@@ -54,64 +54,64 @@ var mword= word.split("")
 var nfallo=0;
 
 
-var concanv= canv.getContext("2d");
-concanv.textBaseline= "bottom";
-concanv.font= "12px sans-serif"
+var con_canv= canv.getContext("2d");
+con_canv.textBaseline= "bottom";
+con_canv.font= "12px sans-serif"
 
 
 
 function jugar_hangman(){
 
- if(typeof(dvjuegohangman)=="undefined"){
-  var dvhangman= document.createElement("div");
-  dvhangman.id="dvjuegohangman";
-  dvhangman.style="display:inline-block;background:white";
+ if(typeof(dv_juego_hangman)=="undefined"){
+  var dv_hangman= document.createElement("div");
+  dv_hangman.id="dv_juego_hangman";
+  dv_hangman.style="display:inline-block;background:white";
 
-  dvhangman.innerHTML=`
-<div id="dvjuegohangman_tit"
+  dv_hangman.innerHTML=`
+<div id="dv_juego_hangman_tit"
      style="display:flex;
             flex-direction:row;
             justify-content:center;
             border:1px solid;">
-<div id="dvjuegohangman_titulo"
+<div id="dv_juego_hangman_titulo"
      style="width:70%;
             text-align:center;">Hangman</div>
-<div id="dvjuegohangman_cerrar"
+<div id="dv_juego_hangman_cerrar"
      style="width:30%;
             text-align:center;
             border:1px solid;"
      onclick="cerrar_hangman()">X</div>
 </div><!-- dv juego hangman tit -->
 
-<div id="dvjuegohangman_cont">
+<div id="dv_juego_hangman_cont">
 
 <canvas id="canv"
         style="border:1px solid;
         width:300px;height:300px"
         width="300" height="300"></canvas>
 
-<div id="dvdefinicionjuego"></div>
+<div id="dv_definicion_juego"></div>
 
 </div><!-- dv juego hangman cont-->
 
   `;
 
 
- dvcongame.appendChild(dvhangman);
+ dv_con_game.appendChild(dv_hangman);
 
- concanv= canv.getContext("2d");
- concanv.textBaseline= "bottom";
- concanv.font= "12px sans-serif"
+ con_canv= canv.getContext("2d");
+ con_canv.textBaseline= "bottom";
+ con_canv.font= "12px sans-serif"
 
  //setTimeout(function(){
    dibujar_new_game();//},2000);
 
- }//if no dvjuegohangman
+ }//if no dv_juego_hangman
 }//jugar_hangman
 
 
 function cerrar_hangman(){
-  dvcongame.removeChild(dvjuegohangman);
+  dv_con_game.removeChild(dv_juego_hangman);
 }//cerrar_hangman
 
 
@@ -132,15 +132,15 @@ function nuevo_juego(ev){
 
 
 function cargando_juego(){
-   concanv.clearRect(0,0,canv.width,canv.height)
- concanv.fillText("LOADING . . .",100,150);
- concanv.strokeRect(90,130,100,20)
+   con_canv.clearRect(0,0,canv.width,canv.height)
+ con_canv.fillText("LOADING . . .",100,150);
+ con_canv.strokeRect(90,130,100,20)
 }//cargando_juego
 
 
 function arrancar_nuevo_juego(){
-  dvdefinicionjuego.innerHTML= "";
-  concanv.clearRect(0,0,canv.width,canv.height)
+  dv_definicion_juego.innerHTML= "";
+  con_canv.clearRect(0,0,canv.width,canv.height)
   //word= "happening".toUpperCase().split("");//!!! da nueva palabra
   dibujar_wordlin(mword)
   dibujar_letra_en_word([mword[0],0]);
@@ -149,10 +149,10 @@ function arrancar_nuevo_juego(){
   mword[mword.length-1]=1;
   dibujar_abc();
   canv.onclick= tocar_letra_en_canvas;
-  mfundibujo[0]();
-  mfundibujo[1]();
-  mfundibujo[2]();
-  mfundibujo[3]();
+  m_fun_dibujo[0]();
+  m_fun_dibujo[1]();
+  m_fun_dibujo[2]();
+  m_fun_dibujo[3]();
   nfallo=4;
 }//arrancar_nuevo_juego
 
@@ -165,25 +165,25 @@ function dentro_de_rango(vx,x1,x2){
 //dibujar_new_game();
 
 function dibujar_new_game(){
- concanv.clearRect(0,0,canv.width,canv.height)
- concanv.fillText("NEW GAME",100,150);
- concanv.strokeRect(90,130,100,20)
+ con_canv.clearRect(0,0,canv.width,canv.height)
+ con_canv.fillText("NEW GAME",100,150);
+ con_canv.strokeRect(90,130,100,20)
  canv.onclick= nuevo_juego;
 }//dibujar_new_game
 
 
 function dibujar_definicion(){
-  concanv.fillText("DEFINITION",25,70);
-  concanv.strokeRect(20,50,100,20);
+  con_canv.fillText("DEFINITION",25,70);
+  con_canv.strokeRect(20,50,100,20);
 }//dibujar_definicion
 
 
 function dibujar_new_game2(){
   dibujar_definicion();
-  concanv.clearRect(0,190,canv.width,canv.height)
+  con_canv.clearRect(0,190,canv.width,canv.height)
 
- concanv.fillText("NEW GAME",100,150+100);
- concanv.strokeRect(90,130+100,100,20)
+ con_canv.fillText("NEW GAME",100,150+100);
+ con_canv.strokeRect(90,130+100,100,20)
  canv.onclick= nuevo_juego2;
 }//dibujar_new_game2
 
@@ -204,7 +204,7 @@ function nuevo_juego2(ev){
 
 
 function dar_definicion(){
-  definicion_wordnik(word,dvdefinicionjuego);
+  definicion_wordnik(word,dv_definicion_juego);
   /*dvdefinicionjuego.innerHTML= word
      +"<br>"+"definicion...";*/
 }//dar_definicion
@@ -223,26 +223,26 @@ function dibujar_poste_abajo(){
   dibujar_linea(175,25+50,175,50+50)//poste abajo
 }//dibujar_poste_abajo
 function dibujar_cabeza(){
-  concanv.beginPath();
-  concanv.arc(175,60+50,10,0,2*Math.PI);
-  concanv.stroke();
-  concanv.closePath()
+  con_canv.beginPath();
+  con_canv.arc(175,60+50,10,0,2*Math.PI);
+  con_canv.stroke();
+  con_canv.closePath()
 }//dibujar_cabeza
 function dibujar_sonrisa(){
-    concanv.beginPath();
-    concanv.strokeStyle="green";
-  concanv.arc(175,60+50,6,0,1*Math.PI);
-  concanv.stroke();
-      concanv.strokeStyle="black";
-  concanv.closePath()
+    con_canv.beginPath();
+    con_canv.strokeStyle="green";
+  con_canv.arc(175,60+50,6,0,1*Math.PI);
+  con_canv.stroke();
+      con_canv.strokeStyle="black";
+  con_canv.closePath()
 }//dibujar_sonrisa
 function dibujar_tristeza(){
-    concanv.beginPath();
-    concanv.strokeStyle="red";
-  concanv.arc(175,60+50+6,6,1*Math.PI,2*Math.PI);
-  concanv.stroke();
-      concanv.strokeStyle="black";
-  concanv.closePath()
+    con_canv.beginPath();
+    con_canv.strokeStyle="red";
+  con_canv.arc(175,60+50+6,6,1*Math.PI,2*Math.PI);
+  con_canv.stroke();
+      con_canv.strokeStyle="black";
+  con_canv.closePath()
 }//dibujar_tristeza
 function dibujar_columna(){
   dibujar_linea(175,70+50,175,100+50)//columna
@@ -284,9 +284,9 @@ function dibujar_wordlin(mwordf){
 
 
 function dibujar_letra_en_word(letpos,color){
-  concanv.fillStyle= color||concanv.fillStyle;
- concanv.fillText(letpos[0],letpos[1]*25+25+5,30)
- concanv.fillStyle="black";
+  con_canv.fillStyle= color||con_canv.fillStyle;
+ con_canv.fillText(letpos[0],letpos[1]*25+25+5,30)
+ con_canv.fillStyle="black";
 }//dibujar_letra_en_word
 
 
@@ -323,7 +323,7 @@ function toco_letra(x,y,l){
 
       if(menc.length==0){
          dibujar_linea_en_letra(l,"red")
-         mfundibujo[nfallo]();
+         m_fun_dibujo[nfallo]();
          nfallo++;
          //dibujar ahorcadero
       }//if
@@ -358,8 +358,8 @@ function tocar_letra_en_canvas(ev){
 
 function dibujar_letra(l){
  
- concanv.fillText(l.v,l.x*25+5,l.y*15+215);
- concanv.strokeRect(l.x*25,(l.y*15+215)-15,20,15);
+ con_canv.fillText(l.v,l.x*25+5,l.y*15+215);
+ con_canv.strokeRect(l.x*25,(l.y*15+215)-15,20,15);
 }//dibujar_letra
 
 
@@ -369,15 +369,15 @@ function dibujar_linea_en_letra(l,color){
 }//dibujar_linea_en_letra
 
 function dibujar_linea(x1,y1,x2,y2,color){
- var colant= concanv.strokeStyle;
-  concanv.strokeStyle= color||"black";
-  concanv.beginPath()
-  concanv.moveTo(x1,y1);
-  concanv.lineTo(x2,y2);
-  concanv.closePath()
-  concanv.stroke();
+ var colant= con_canv.strokeStyle;
+  con_canv.strokeStyle= color||"black";
+  con_canv.beginPath()
+  con_canv.moveTo(x1,y1);
+  con_canv.lineTo(x2,y2);
+  con_canv.closePath()
+  con_canv.stroke();
 
- concanv.strokeStyle= colant;
+ con_canv.strokeStyle= colant;
 }//dibujar_linea
 
 function aleatoria_wordnik(wordf){
@@ -418,7 +418,7 @@ function aleatoria_wordnik(wordf){
 }//aleatoria_wordnik
 
 
-function definicion_wordnik(wordf,dvresultf){
+function definicion_wordnik(wordf,dv_resultf){
  //definicion wordnik wordnet.3.0     
     var hk="https://cors-anywhere.herokuapp.com/";          
     var url1="http://api.wordnik.com:80/v4/word.json/";
@@ -428,7 +428,7 @@ function definicion_wordnik(wordf,dvresultf){
               
   var xhr=new XMLHttpRequest();   
   xhr.open("GET", hk+url1+wordf+url2, true);    
-  dvresultf.innerHTML ="loading...";    
+  dv_resultf.innerHTML ="loading...";    
       
  xhr.onload = function() {
   
@@ -439,27 +439,27 @@ function definicion_wordnik(wordf,dvresultf){
      
  for(var pr in resp){
        
-      var relwords="";    
+      var rel_words="";    
       //console.log(resp[pr].relatedWords[0].words)
       
  if(resp[pr].relatedWords.length!==0){
 
   resp[pr].relatedWords[0].words.forEach(function(v){
-  relwords+=v+", "
+  rel_words+=v+", "
   });//for each
 
  }//if related words
        
  list+=resp[pr].partOfSpeech+". "
       +resp[pr].text+"<br>"
-      +"["+relwords+"]<br>";
+      +"["+rel_words+"]<br>";
  }//for
      
- dvresultf.innerHTML=list;
+ dv_resultf.innerHTML=list;
  };//onload
 
  xhr.onerror= function(){
-   dvresultf.innerHTML= "no found";
+   dv_resultf.innerHTML= "no found";
  }//onerror xhr
 
  xhr.send();
