@@ -7,6 +7,7 @@ var socket_client= io.connect();
 
 //====entra al chat
 function entrar_a_chat(){
+  console.log("entra a chat")
  socket_client.emit("user va a chat",socket_client.id);
 }//click tab chat
 
@@ -255,8 +256,8 @@ thm:{
 
 
 //entrar language room, from datalist
-function goiN(){
-  
+function entrar_lang_room(){
+  console.log("entra lang room")
   for(var opt in dt_list_room.options){
     
     if(dt_list_room.options[opt].value== in_list_room.value){
@@ -270,10 +271,11 @@ function goiN(){
  
   spanear_room(roomf,dv_lang_rooms_con);
   in_list_room.value="";  
-}//goiN room
+}//entrar_lang_room
 
 
 function go_theme_room(roomf){
+  console.log("go theme room:"+roomf)
  entrar_a_room(roomf);
  spanear_room(roomf,dv_theme_rooms_con);
 }//go_theme_room
@@ -281,7 +283,7 @@ function go_theme_room(roomf){
 
 
 function spanear_room(roomf,dv_a_metf){
-  
+  console.log("spanea room:"+roomf)
   if(!document.getElementById("sp_room_"+roomf) ){
     
     var sp_room= document.createElement("span");
@@ -302,6 +304,7 @@ function spanear_room(roomf,dv_a_metf){
 
 //entrar language room, click on name
 function entrar_a_room(roomx){
+  console.log("entra a room:"+roomx)
   crear_room(roomx);
   //juntarlo al room: gnrl !!!
   socket_client.emit("open room",roomx);
@@ -371,7 +374,7 @@ socket_client.on("actualizar rooms",function(obj_roomf){
 
 
 function minimizar_dv_chat(roomx){//roomx
-  
+  console.log("minimiza dv chat:"+roomx)
   jQuery(function($){
 
     var dv_chat_room_tit_min_= "#dv_chat_room_tit_min_"+roomx;
@@ -402,6 +405,7 @@ function minimizar_dv_chat(roomx){//roomx
 
 
 function restaurar_tam_chat(roomx){//roomx
+  console.log("restaura tam chat:"+roomx)
   var dv_chat_room_= document.querySelector("#dv_chat_room_"+roomx);
   
   if(dv_chat_room_.offsetWidth<dv_con_chat.offsetWidth){
@@ -418,6 +422,7 @@ function restaurar_tam_chat(roomx){//roomx
 
 
 function cerrar_dv_chat(roomx){//roomx
+  console.log("cierra dv chat:"+roomx)
   var dv_chat_room_= document.querySelector("#dv_chat_room_"+roomx);
   dv_con_chat.removeChild(dv_chat_room_);
   socket_client.emit("cerrar room",roomx);  
@@ -428,6 +433,7 @@ function cerrar_dv_chat(roomx){//roomx
 //botones chat, como zumbido, bell, volume-up
 
 function es_boton_vacio(){
+  console.log("es boton vacio")
   alert("Empty Button :)");
 }//es_boton_vacio
 
@@ -437,7 +443,7 @@ function es_boton_vacio(){
 
 
 function enviar_msg(ev,roomx){//event,roomx
-  
+  console.log("envia msg:ev, "+roomx)
   ev.preventDefault();
   var in_chat_room_msg_= document.querySelector("#in_chat_room_msg_"+roomx);
 
@@ -535,7 +541,7 @@ socket_client.on("who type",function(obj_roomf){
 
 //slide in secret room
 function go_secret(){
-
+  console.log("go secret")
   var secret_room= in_secret_room.value.replace(/\s/g,"_");
   crear_room(secret_room);
   in_secret_room.value="";
@@ -545,7 +551,7 @@ function go_secret(){
 
 
 function crear_room(roomx){
-
+  console.log("crea room:"+roomx)
   var dv_chat_room_= document.getElementById("dv_chat_room_"+roomx);
   
   if(!dv_chat_room_){
@@ -664,6 +670,7 @@ function crear_room(roomx){
 
 function seleccionar_emoji(roomf){
   //hay div, no, crea div
+  console.log("selecciona emoji")
   var dv_chat_room_user_= document.getElementById("dv_chat_room_user_"+roomf);
   var dv_emj_= document.getElementById("dv_emj_"+roomf);
 
@@ -689,6 +696,7 @@ function seleccionar_emoji(roomf){
 
 
 function meter_emoji(roomf,pal_emj){
+  console.log("mete emoji:"+roomf+"/-/"+pal_emj)
   var in_chat_room_msg_= document.getElementById("in_chat_room_msg_"+roomf);
   
   in_chat_room_msg_.value+=":"+pal_emj+":";
@@ -742,7 +750,7 @@ function nooP(){}//no operations, for swap functions
 
 //cuadro, profile, chat request, al clicar user
 function mostrar_user_profile_chat_r(ele,ev){
- 
+ console.log("muestra user profile chat r:"+ele)
   if(ele.id!=socket_client.id)//if no es el mismo 
   if(typeof(dv_inf_user)=="undefined"){
    
@@ -779,7 +787,7 @@ function informar_profile(ele){
 }//info profile*/
 
 function informar_profile(ele){
-  
+  console.log("informa profile:"+ele)
   if(ele.id!=socket_client.id){//if no es el mismo 
     
     var user_id_rcv= ele.getAttribute("data-user-id");
@@ -796,7 +804,7 @@ function informar_profile(ele){
 socket_client.on("perfil a ver",function(obj_userf){
   //obj_userf{user,user_id_rcv,skt_id_rcv}
   console.log("perfil a ver");
-  console.log(JSON.stringify(obj_userf.user));
+  //console.log(JSON.stringify(obj_userf.user));
  
   if(typeof(dv_profile_user)=="undefined"){
     
@@ -847,7 +855,7 @@ socket_client.on("perfil a ver",function(obj_userf){
 
 
 function mandar_chat_request(ele){
-  console.log("1mando chat request");
+  console.log("1manda chat request");
   var prt_id= ele.id.substr(8,ele.id.length);
   
   var user_id_rcv= ele.getAttribute("data-user-id");
@@ -857,12 +865,12 @@ function mandar_chat_request(ele){
                user_id_rcv: user_id_rcv,
               skt_id_mnd:socket_client.id});
  
-  cerrar_infuser();
+  cerrar_inf_user();
 }//mandar_chat_request
 
 
 function mandar_chat_request_profile(ele){
-  console.log("manda chat request");
+  console.log("manda chat request profile");
 
   var skt_id_rcv= ele.getAttribute("data-skt-id-rcv");
   var user_id_rcv= ele.getAttribute("data-user-id-rcv");  
@@ -876,11 +884,13 @@ function mandar_chat_request_profile(ele){
 
 
 function cerrar_profile_user(){
+  console.log("cierra profile user")
   dv_con_chat.removeChild(dv_profile_user);
 }//cerrar_profile_user
 
 
 function cerrar_inf_user(){
+  console.log("cierra inf user")
   dv_con_chat.removeChild(dv_inf_user);
 }//cerrar inf profile y chat request
 
@@ -888,7 +898,7 @@ function cerrar_inf_user(){
 
 socket_client.on("recibe chat request",function(obj_roomf){
   //obj_roomf{nme_mnd,id_rcv,skt_id_mnd,skt_id_rcv,room_bth}
-  console.log("3me dieron chat request");
+  console.log("3recibes chat request");
   console.log(JSON.stringify(obj_roomf));
   
   var nudiv= document.createElement("div");
@@ -938,7 +948,7 @@ socket_client.on("espera chat request",function(obj_roomf){
 
 
 function cerrar_waiting(skt_id_rcvf,room_bthf){
-
+  console.log("cierra waiting")
   var dv_waiting= document.getElementById("dv_waiting_"+room_bthf);
 
   dv_con_chat.removeChild(dv_waiting);
@@ -952,7 +962,7 @@ function cerrar_waiting(skt_id_rcvf,room_bthf){
 
 socket_client.on("eliminar chat request",function(obj_roomf){
   //obj_roomf{room_bth}
-  console.log("eliminar chat request")
+  console.log("elimina chat request")
   var dv_chat_request_of= document.getElementById("dv_chat_request_of_"+obj_roomf.room_bth);
 
   dv_con_chat.removeChild(dv_chat_request_of);
@@ -961,7 +971,7 @@ socket_client.on("eliminar chat request",function(obj_roomf){
 
 
 function abrir_chat_request(room_bthx,skt_id_mndx){
-  
+  console.log("abre chat request:"+room_bthx+"/-/"+skt_id_mndx)
   var dv_chat_room_= document.getElementById("dv_chat_room_"+room_bthx); 
   
   if(!dv_chat_room_){
@@ -987,7 +997,7 @@ function abrir_chat_request(room_bthx,skt_id_mndx){
       '<div class="cl_dv_chat_room_tit_rsz"'+
       ' onclick="restaurar_tam_chat(\''+room_bthx+'\')">L</div>'+
 
-      '<div class="cl_dv_chat_room_tit_cerrar prv_tit_cerrar"'+
+      '<div class="cl_dv_chat_room_tit_cerrar cl_prv_tit_cerrar"'+
       ' onclick="cerrar_dv_chat(\''+room_bthx+'\')">x</div>'+
 
       '</div>'+//dv_chat_room_tit
@@ -1116,10 +1126,10 @@ socket_client.on("mete users en chat request",function(obj_roomf){
   //obj_roomf{nme_mnd,nme_rcv,skt_id_rcv,skt_id_mnd,room_bth,chat_prv}
   
   console.log("7mete users");
-  //console.log(obj_roomf);
+  console.log(obj_roomf);
   
   var dv_chat_room_username_= document.getElementById("dv_chat_room_username_"+obj_roomf.roomb_th);
-  
+  console.log(typeof(dv_chat_room_username_))
   dv_chat_room_username_.innerHTML= obj_roomf.nme_rcv+"<br id='br_rcv' data-skt-id='"+
     obj_roomf.skt_id_rcv+"'/>"+
     obj_roomf.nme_mnd+"<br id='br_mnd' data-skt-id='"+obj_roomf.skt_id_mnd+"'/>";
@@ -1139,6 +1149,7 @@ socket_client.on("mete users en chat request",function(obj_roomf){
 
 
 function enviar_msg_prv(ev,room_bthx){
+  console.log("envia msg prv:"+room_bthx)
   ev.preventDefault();
   
   var in_chat_room_msg_= document.querySelector("#in_chat_room_msg_"+room_bthx);
@@ -1180,7 +1191,7 @@ socket_client.on("dejar prv",function(dt){
 
 socket_client.on("se desconecto",function(obj_msgf){
  //obj_msgf{msg}
-  console.log("se desconecto +"+ JSON.stringify(obj_msgf));
+  console.log("se desconecto: "+ JSON.stringify(obj_msgf));
   alert("lost connection, for appear on the user table again, click on the chat tab"); 
 });//skcl se desconecto o cerro
 
@@ -1236,6 +1247,7 @@ function mostrar_etw_game_opt(){
 
 
 function cerrar_game_opt(){
+  console.log("cierra game opt")
   dv_con_game.removeChild(dv_create_game);
 }//cerrar_gameopt
 
@@ -1243,6 +1255,7 @@ function cerrar_game_opt(){
 
 //solicitar juego explain the word
 function solicitar_juego(){
+  console.log("solicita juego")
   //var typegame= sltypgame.options[sltypgame.selectedIndex].value;
   var type_game= in_ch_vce.checked? "Explain The Word (By Voice)": "Explain The Word"; 
   var list_word= sl_list.options[sl_list.selectedIndex].id;
@@ -1261,7 +1274,7 @@ function solicitar_juego(){
 socket_client.on("crear juego",function(obj_gamef){
   //obj_gamef{nro_game,type_game,list_word,nro_player}
 
-  console.log("2crear juego");
+  console.log("2crea juego");
   console.log(JSON.stringify(obj_gamef));
   
   crear_juego(obj_gamef.nro_game,obj_gamef.type_game,
@@ -1284,7 +1297,7 @@ socket_client.on("los demas bar jue",function(obj_bar_juef){
 function dar_bar_jue(roomjf,nme_juef,
                 lis_juef,nro_playerf){
 
-  console.log("crear barra de juego");
+  console.log("crear barra de juego:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
   var dv_game_bar_= document.getElementById("dv_game_bar_"+roomjf);
 
   if(!dv_game_bar_){
@@ -1316,7 +1329,7 @@ function dar_bar_jue(roomjf,nme_juef,
 //mostrar cuadro, join, spectate
 function juntarse_a_juego(roomj,nme_juef,lis_juef,nro_playerf){
   
-  console.log("juntarse juego");
+  console.log("juntarse juego:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
   crear_juego(roomj,nme_juef,lis_juef,nro_playerf);
 }//juntarse o spectate
 
@@ -1324,7 +1337,7 @@ function juntarse_a_juego(roomj,nme_juef,lis_juef,nro_playerf){
 
 //crear ventana juego
 function crear_juego(roomjf,nme_juef,lis_juef,nro_playerf){
-  console.log("2creando vent juego");
+  console.log("2creando vent juego:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
   
   if(typeof(dv_jue)=="undefined"){
      
@@ -1444,7 +1457,7 @@ socket_client.on("manda user al juego",function(obj_gamef){
 
 socket_client.on("ya comenzo jue",function(obj_msgf){
   //obj_msgf{msg} 
-
+  console.log("ya comienza jue")
   alert(obj_msgf.msg);
 });//skcl ya comenzo juego, esta completo
      
@@ -1512,7 +1525,7 @@ socket_client.on("quien gano",function(obj_winnerf){
 
 
 function restaurar_tam_jue(){
-  
+  console.log("restaura tam jue")
   if(dv_jue.offsetWidth<dv_con_game.offsetWidth){
     
     dv_jue.style.height= dv_con_game.offsetHeight+"px";
@@ -1527,6 +1540,7 @@ function restaurar_tam_jue(){
 
 
 function cerrar_juego(roomj){
+  console.log("cierra jue:"+roomj)
   dv_con_game.removeChild(dv_jue);
   socket_client.emit("salir del juego",{room:roomj});
 }//cerrar juego
@@ -1535,7 +1549,7 @@ function cerrar_juego(roomj){
 
 socket_client.on("eliminar game bar",function(obj_room_gamef){
   //obj_room_gamef{room_game}
-  console.log("eliminar game bar")
+  console.log("elimina game bar")
   var dv_game_bar= document.getElementById("dv_game_bar_"+obj_room_gamef.room_game);
 
   dv_con_game.removeChild(dv_game_bar);
@@ -1545,6 +1559,7 @@ socket_client.on("eliminar game bar",function(obj_room_gamef){
 
 
 function enviar_msg_jue(ev){
+  console.log("envia msg jue")
   ev.preventDefault();
 
   if(in_jue_msg.value!=""){
@@ -1661,13 +1676,14 @@ setTimeout(function(){
 
 
 function seleccionar_emoji_jue(){
+  console.log("selecciona emoji jue")
   alert("emojies in construction, write :smile: for :)\n\nlist: https://www.webpagefx.com/tools/emoji-cheat-sheet/");
 }//select emjoy
 
 //https://github.com/encharm/Font-Awesome-SVG-PNG/blob/master/black/svg/pencil.svg
 
 function enviar_reporte(){
-
+  console.log("envia reporte")
   socket_client.emit("reporte",{
              tit: in_reporte_tit.value,
              rpt: ta_reporte.value});
@@ -1681,7 +1697,7 @@ function enviar_reporte(){
 
 //editar notas
 function editar_nota(){
-
+  console.log("edita nota")
   ta_notes_con.removeAttribute("readonly");
   
   bt_notes_edit.style.display= "none";
@@ -1692,7 +1708,7 @@ function editar_nota(){
 
 //guardar nota
 function guardar_nota(){
-
+  console.log("guarda nota")
   socket_client.emit("save note",{nte: ta_notes_con.value}); 
 
   ta_notes_con.setAttribute("readonly","");
@@ -1708,7 +1724,7 @@ function guardar_nota(){
 
 //definicion wordnik wordnet.3.0
 function definir_wordnik(word){
-      
+  console.log("difine wordnik:"+word)
   var hk= "https://cors-anywhere.herokuapp.com/";     
 
   var url1= "http://api.wordnik.com:80/v4/word.json/";
@@ -1759,7 +1775,7 @@ function definir_wordnik(word){
 
 
 function definir_yandex(word){
-  
+  console.log("define yandex:"+word)
   var apik= "dict.1.1.20171201T200832Z.77f7f25aec7d41b6.7bf840f1b594d83a20e756ec3117a3f6393466b0";
   var url1= "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?";
   
@@ -1819,7 +1835,7 @@ function definir_yandex(word){
 
 //traducir frase
 function traducir_frase(phr){
-  
+  console.log("traduce frase:"+phr)
   var apik= "trnsl.1.1.20151020T150119Z.a9c85d2a39f6fe5d.c34e526096f815916127444ce3d86ab82e945c35";
   var url1= "https://translate.yandex.net/api/v1.5/tr.json/translate?";
   
@@ -1855,5 +1871,6 @@ function traducir_frase(phr){
 
 //dar image profile provisional
 function dar_img_provisional(){
+  console.log("da img provisional")
   return "data:image/png;base64,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";
 }//dar_img_provisional

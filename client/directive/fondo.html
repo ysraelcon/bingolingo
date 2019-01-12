@@ -78,7 +78,7 @@ fecha: 16-09-18
  <img src="https://png.icons8.com/potato/color/24" title="Potato" width="24" height="24">
  by BesTalk Team</span> 
     
-<span id="sp_err" onclick="rpT()">Report 
+<span id="sp_err" onclick="mostrar_reporte()">Report 
  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
  errors</span>
    
@@ -87,20 +87,21 @@ fecha: 16-09-18
 
 
 <script>
-//cerrar report
-function crr_rpT(){
+
+function cerrar_reporte(){
+  console.log("cierra reporte")
   dv_ng_vw.removeChild(dv_rpt_scr);
-}
+}//cerrar_reporte
   
    
-function rpT(){
-
+function mostrar_reporte(){
+  console.log("muestra reporte")
   var dv= document.createElement("div");
   dv.id= "dv_rpt_scr";
   dv.innerHTML='<div id="dv_rpt">'+
 '  <div id="dv_rpt_tit">'+
 '    <div id="dv_rpt_tit_nm">Errors or Suggestions</div>'+
-'    <div id="dv_rpt_tit_x" onclick="crr_rpT()">X</div>'+
+'    <div id="dv_rpt_tit_x" onclick="cerrar_reporte()">X</div>'+
 '  </div>'+
 '  <input type="text" id="in_rpt_tit"'+
 '         placeholder="Title (optional)">'+
@@ -111,9 +112,9 @@ function rpT(){
 '  <br>'+
 '  <input type="button" id="bt_snd_rpt"'+
 '         value="Send"'+
-'         onclick="snd_rpT()">'+
+'         onclick="enviar_reporte()">'+
 '</div>';
 
   dv_ng_vw.appendChild(dv);
-}//rpT
+}//mostrar_reporte
 </script>

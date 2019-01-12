@@ -16,8 +16,8 @@ angular.module('la_App.home',['ngRoute'])
         function($scope,$http,$location){
 
           
-      $scope.logiN= function(){
-  
+      $scope.entrar_login= function(){
+        console.log("entra login")
         $http.post("/login",$scope.user).then(function(res){
   
           $scope.message= res.data.message;
@@ -31,7 +31,7 @@ angular.module('la_App.home',['ngRoute'])
 
 
       $scope.olvido_password= function(){
-
+        console.log("olvida password")
         if(typeof($scope.user)=="undefined"||
           $scope.user.email==""){
           alert("write your email in login");
@@ -48,8 +48,8 @@ angular.module('la_App.home',['ngRoute'])
       };//olvido_password
           
           
-      $scope.sign_uP= function(){
-
+      $scope.entrar_sign_up= function(){
+        console.log("entra sign up")
         $http.post("/sign_up",$scope.user).then(function(res){
 
           $scope.message= res.data.message;

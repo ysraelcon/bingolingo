@@ -8,11 +8,13 @@ var nodemailer= require('nodemailer');
 module.exports= function(appf,passportf){
 
 appf.get("/", function(req,res){
+  console.log("get / :req,res")
  //res.render("login.ejs",{msg:""});
 });
 
   
 appf.get("/home", function(req,res){
+  console.log("get /home :req,res")
   res.json({message:req.flash("registerMessage")});             
 });
 
@@ -22,11 +24,13 @@ appf.get("/sign_up", function(req,res){
 });*/
 
 appf.get("/reset/:token", function(req,res){
+  console.log("get /reset/:token :req,res")
  res.render("reset.ejs", {token: req.params.token});
 });//get reset
   
   
 appf.post("/reset/:token", function(req,res){
+  console.log("post /reset/:token :req,res")
   console.log(req.body.password);
   
   User.findOne({ resetPasswordToken: req.params.token,
@@ -60,6 +64,7 @@ appf.post("/reset/:token", function(req,res){
 
 
 appf.get("/login", function(req,res){
+  console.log("get /login :req,res")
  //res.render("login.ejs",{msg:req.flash('loginMsg')});
   res.json({message: req.flash("loginMsg")});
 });
@@ -72,7 +77,7 @@ appf.post("/login", passportf.authenticate('login',
 ));//post login
 
 
-appf.post('/sign_up',passportf.authenticate('register',{
+appf.post('/sign_up', passportf.authenticate('register',{
  successRedirect: '/profile',
  failureRedirect: '/home',
  failureFlash: true
@@ -80,6 +85,7 @@ appf.post('/sign_up',passportf.authenticate('register',{
 
   
 appf.get('/profile', isLoggedIn, function(req,res){
+  console.log("get /profile :req,res")
  res.json(req.user);
   //res.render('/profile/profile.html',{user:req.user});
   //res.render('profile.ejs',{user:req.user});
@@ -87,13 +93,14 @@ appf.get('/profile', isLoggedIn, function(req,res){
   
   
 appf.get('/edit', isLoggedIn, function(req,res){
+ console.log("get /edit :req,res") 
  res.json({message:req.flash("errors")});
   //res.render('edit.ejs',{user:req.user});
 });//get 
   
   
 appf.post('/edit', isLoggedIn, function(req,res){
- console.log("editando"); 
+ console.log("post /edit :req,res"); 
 // validate information
  req.checkBody('firstname', 'First Name is required.').notEmpty();
  req.checkBody('age', 'Age is required.').notEmpty();
@@ -136,13 +143,14 @@ appf.post('/edit', isLoggedIn, function(req,res){
 
   
 appf.get('/logout', function(req,res){
+  console.log("get /logout :req,res")
  req.logout();
  res.redirect('/');
 });//get
   
   
 appf.post('/mail', function(req,res){
-    
+    console.log("post /mail para resetear password :req,res")
   var token= Math.random().toString(36)
         .replace(/[^a-z]+/g, '').substr(0, 5);
   console.log(token);
@@ -206,6 +214,7 @@ appf.post('/mail', function(req,res){
 
 
 function isLoggedIn(req,res,next){
+  console.log("esta logeado?")
  if(req.isAuthenticated())
   return next();
  res.redirect('/');

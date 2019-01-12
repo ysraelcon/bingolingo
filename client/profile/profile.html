@@ -443,7 +443,7 @@ BesTalk, the best of exchange language websites.
 </datalist>
         
   
-<input type="button" value="Go in" onclick="goiN()">
+<input type="button" value="Go in" onclick="entrar_lang_room()">
 
 </form><!-- fm go rooms -->
         
@@ -547,7 +547,7 @@ sl_tema.onchange= function(){
 var tema= "dia";
   
 function cambiar_tema(){
-
+  console.log("cambia tema")
   if(tema=="dia"){
    btn_tema.removeAttribute("style");
    dv_con_chat.classList.remove("desierto_dia");
@@ -696,6 +696,7 @@ animation-fill-mode:forwards;}
 <script>
 //script user
 function mostrar_edit_profile(){
+  console.log("muestra edit_profile")
   dv_user_profile.style.display= "none";
   sp_user_edit_profile.style.display= "inline";
   btn_cancel_edit_profile.style.display= "inline";
@@ -704,6 +705,7 @@ function mostrar_edit_profile(){
 
 
 function cancelar_edit_profile(){
+  console.log("cancela edit_profile")
   dv_user_profile.removeAttribute("style");
   sp_user_edit_profile.removeAttribute("style");
   btn_cancel_edit_profile.removeAttribute("style");
@@ -713,7 +715,7 @@ function cancelar_edit_profile(){
 
 //cargar imagen
 function cargar_img(){
-
+ console.log("carga img")
  var reader= new FileReader();
 
  reader.onloadend= function(){
@@ -986,7 +988,7 @@ function cargar_img(){
         
 //script open tab..
 function abrir_tab(dv_pie_mst,dv_conf,this_tbf){
-
+ console.log("abre tab:"+dv_pie_mst+"/-/"+dv_conf+"/-/"+this_tbf)
  var col_tab={"dv_tab_chat":["#f5f5f5","black"],
              "dv_tab_game":["#D2B48C","black"],
              "dv_tab_comunity":["#0079a9","white"],
@@ -1023,6 +1025,7 @@ function abrir_tab(dv_pie_mst,dv_conf,this_tbf){
 <script>
 //mostrar diccionario
 function mostrar_dict(btf){
+  console.log("muestra dict:"+btf)
   if(btf.style.color=="green"){
     btf.removeAttribute("style");
     dv_dict.removeAttribute("style");
@@ -1035,6 +1038,7 @@ function mostrar_dict(btf){
 
   //mostrar notas
 function mostrar_nota(btf){
+  console.log("muestra nota:"+btf)
   if(btf.style.color=="green"){
     btf.removeAttribute("style");
     dv_notes_wrapper.removeAttribute("style");
@@ -1095,12 +1099,13 @@ function mostrar_nota(btf){
 <script>
 
 function cerrar_reporte(){
+  console.log("cierra reporte")
   dv_ng_view.removeChild(dv_reporte_scr);
 }//cerrar_reporte
 
 
 function dar_reporte(){
-
+  console.log("da reporte")
   var dv= document.createElement("div");
   dv.id="dv_reporte_scr";
   dv.innerHTML='<div id="dv_reporte">'+

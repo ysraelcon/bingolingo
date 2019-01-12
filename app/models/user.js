@@ -23,10 +23,12 @@ var user_sch= mongoose.Schema({
 //city,in,description,yearborn,monthborn,
 
 user_sch.methods.generateHash= function(password){
+  console.log("genera hash del: password")
  return bcrypt.hashSync(password, bcrypt.genSaltSync(6), null);
 };//hash password
 
 user_sch.methods.validPassword= function(password){
+  console.log("valida password: password")
  return bcrypt.compareSync(password, this.password);
 };//validar password
 

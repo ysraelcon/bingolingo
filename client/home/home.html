@@ -288,7 +288,7 @@ BesTalk, the best of exchange language websites.
        placeholder="Password" required><br>
 
 <button type="submit" id="bt_login"
-        ng-click="logiN()">Login</button><br>
+        ng-click="entrar_login()">Login</button><br>
 
 <p>Don't have a BesTalk account yet? <span id="sp_sign_up2" onclick="mostrar_log_sign(dv_sign_up)">Sign up!</span></p>
   
@@ -327,7 +327,7 @@ BesTalk, the best of exchange language websites.
        placeholder="Repeat password"><br>
 
 <button type="submit" id="bt_sign_up"
-        ng-click="sign_uP()">Sign Up</button>
+        ng-click="entrar_sign_up()">Sign Up</button>
   
 <p>Already have an account? <span id="sp_login2" onclick="mostrar_log_sign(dv_login)">Log in!</span></p>
   <!-- <a
@@ -345,6 +345,7 @@ BesTalk, the best of exchange language websites.
 
 <script>
 function validar_password(){
+  console.log("valida repeticion de password")
   if(in_pw.value==in_cpw.value){
      return true;
   }else{
@@ -356,6 +357,7 @@ function validar_password(){
   
   
 function mostrar_log_sign(ele){
+  console.log("muestra dv log sign:"+ele)
   var dvs= document.querySelectorAll("#dv_log_sign>div");
 
   for(var i=0;i<dvs.length;i++){
@@ -368,11 +370,13 @@ function mostrar_log_sign(ele){
   
 //mostrar log in
 function mostrar_login(){
+  console.log("muestra login")
  mostrar_log_sign(dv_login);
  dv_login_sign_up_scr.style.display= "block";
 }//mostrar_login
 //mostrar sign up
 function mostrar_sign_up(){
+  console.log("muestra sign up")
   mostrar_log_sign(dv_sign_up);
  dv_login_sign_up_scr.style.display= "block";
 }//mostrar_sign_up
@@ -426,6 +430,7 @@ dv_login_sign_up_scr.addEventListener("click",function(){
 
 <script>
 function dar_info(){
+  console.log("da info")
   alert("Welcome to BesTalk!\n\nA exchange language website in development which will bring us the best of SharedLingo, SharedTalk and LiveMocha...\n\nWorking Feautures:\n\nChat:\n- Language rooms, theme rooms and secret rooms.\n- Private chat, with option to voice call.\n- Emojies :)\n\nGame:\n- Explain the word.\n\nJoin us for more!");
 }//info
 </script>

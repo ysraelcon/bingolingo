@@ -152,7 +152,7 @@ socket.on("user va a chat",function(){
   
 socket.on('open room',function(roomf){
  //roomf="gnrl" roomf
-  
+  console.log("open room:"+roomf)
   if(!users_room[roomf]){
    users_room[roomf]={};
   }//if indef
@@ -249,7 +249,7 @@ socket.on('send message room', function(obj_msgf) {
   
 socket.on("cerrar room",function(roomf){
   //roomf="room_bth o gnrl" room
-  console.log("cerró room "+roomf);
+  console.log("cerró room:"+roomf);
   
   socket.leave(roomf);
   
@@ -369,11 +369,11 @@ socket.on("manda chat request",function(obj_userf){
   //obj_userf{skt_id_rcv,user_id_rcv,skt_id_mnd}
   console.log("2hizo chat request");
   console.log(obj_userf);
-  var id_mnd=socket.request.user._id;
+  var id_mnd= socket.request.user._id;
   
-  var user_id_rcv=obj_userf.user_id_rcv;
+  var user_id_rcv= obj_userf.user_id_rcv;
   
-  var room_bth=id_mnd> user_id_rcv?
+  var room_bth= id_mnd> user_id_rcv?
          id_mnd+"_"+user_id_rcv:
          user_id_rcv+"_"+id_mnd;
   
@@ -444,9 +444,9 @@ socket.on("abrir chat request",function(obj_userf){
     var nme_mnd= users_cnnt[user_id_mnd].user.firstname;
    
   io.to(obj_userf.skt_id_mnd).emit("acepta chat request",
-            {nme_rcv:nme_rcv,nme_mnd:nme_mnd,
+            {nme_rcv:nme_rcv, nme_mnd:nme_mnd,
              skt_id_rcv:obj_userf.skt_id_rcv,
-             skt_id_mnd:obj_userf.skt_idmn,
+             skt_id_mnd:obj_userf.skt_id_mnd,
              room_bth:obj_userf.room_bth});
 });//skon abrir chat request
   
@@ -455,7 +455,7 @@ socket.on("abrir chat request",function(obj_userf){
 socket.on("users al chat request",function(obj_userf){
  //obj_userf{nme_mnd,nme_rcv,skt_id_rcv,skt_id_mnd,room_bth}
   console.log("6users para chat request");
-  
+  console.log(obj_userf)
   //buscar 30 lines chat historial aqui !!!
   var id12= obj_userf.room_bth.split("_");
   
@@ -466,7 +466,7 @@ socket.on("users al chat request",function(obj_userf){
     
    
     if(!chatf.chatsprv){
-      chatf.chatsprv={};
+      chatf.chatsprv= {};
     }//if no chatsprv, crear
     
     
@@ -477,12 +477,12 @@ socket.on("users al chat request",function(obj_userf){
     
     chatf.markModified("chatsprv."+obj_userf.room_bth);
     
-    chatprv=chatf.chatsprv[obj_userf.room_bth]; 
+    chatprv= chatf.chatsprv[obj_userf.room_bth]; 
     
     chatf.save((err)=>{
       if(err) throw err;  
   
-      obj_userf["chatprv"]=chatprv;
+      obj_userf["chatprv"]= chatprv;
       io.to(obj_userf.room_bth).emit("mete users en chat request", obj_userf);
 
     });//save
@@ -833,7 +833,7 @@ socket.on("10 seg",function(objnro_gamef){
   
 socket.on('send message jue',function(obj_msg_gamef){
   //obj_msg_gamef{msg,nro_game}
-  console.log("enviar msgjue: "+obj_msg_gamef)
+  console.log("enviar msg jue: "+obj_msg_gamef)
   var pmr_id= Object.keys(jue[obj_msg_gamef.nro_game].nro_player_act)[ jue[obj_msg_gamef.nro_game].player_trn% Object.keys(jue[obj_msg_gamef.nro_game].nro_player_act).length ];
 
   var skt_id_player= jue[obj_msg_gamef.nro_game].nro_player_act[pmr_id][1];//[fn,skt_id]

@@ -1,6 +1,7 @@
 //fecha: 16-09-18, 19-09, 20-09
 
 function solicitar_llamada(btf,room_bthx){
+  console.log("solicita llamada:"+room_bthx)
   if(btf.style.backgroundColor=="green"){
     btf.removeAttribute("style");
     socket_client.emit("colgar llamada",
@@ -18,7 +19,7 @@ function solicitar_llamada(btf,room_bthx){
 
 socket_client.on("solicitud de aceptacion de la llamada",function(dt){
  //dt{room_rtc,skt_id_mnd,nme_mnd}
-
+console.log("solicitud de aceptacion de la llamada")
   if(dt.sktid_mnd!=socket_client.id){
  
     var nudiv= document.createElement("div");
@@ -60,7 +61,7 @@ socket_client.on("solicitud de aceptacion de la llamada",function(dt){
 
 //cancelar llamada enviada
 function cerrar_llamada(roomf){
- 
+ console.log("cierra llamada:"+roomf)
   var dv_chat_room_con_= document.getElementById("dv_chat_room_con_"+roomf);
   var dv_esp_call= document.getElementById("dv_esp_call_"+roomf);
 
@@ -76,7 +77,7 @@ function cerrar_llamada(roomf){
 
 //cancelar llamada recibida
 function cancelar_llamada(roomf){
- 
+  console.log("cancela llamada:"+roomf)
   var dv_chat_room_con_= document.getElementById("dv_chat_room_con_"+roomf);
   var dv_recibe_call= document.getElementById("dv_recibe_call_"+roomf);
 
@@ -92,7 +93,7 @@ function cancelar_llamada(roomf){
 
 socket_client.on("se cancelo llamada",function(dt){
   //dt{room_rtc}
-
+ console.log("se cancela llamada")
   cerrar_llamada(dt.room_rtc);
   cancelar_llamada(dt.room_rtc);
 });//skcl se cancelo llamada
@@ -101,6 +102,7 @@ socket_client.on("se cancelo llamada",function(dt){
 
 //se acepta la llamada y empieza a correr
 function aceptar_llamada(roomf){
+  console.log("acepta llamada")
   cancelar_llamada(roomf);
   
   var bt_call= document.getElementById("bt_call_"+roomf);
@@ -114,7 +116,7 @@ function aceptar_llamada(roomf){
 
 socket_client.on("correr web rtc",function(dt){
   //dt{roomrtc}
-
+  console.log("corre web rtc")
   iniciar_llamada(dt.room_rtc);
 });//skcl correr webrtc
 
@@ -122,6 +124,7 @@ socket_client.on("correr web rtc",function(dt){
 
 socket_client.on("se cuelga llamada",function(dt){
   //dt{roomrtc}
+  console.log("se cuelga llamada")
   hangUp();
   
   var bt_call= document.getElementById("bt_call_"+dt.room_rtc);
@@ -134,7 +137,7 @@ socket_client.on("se cuelga llamada",function(dt){
 
 //join group voice chat
 function juntarse_llamada_secret(btf,roomf){
-
+  console.log("juntarse llamada secret:"+roomf)
   if(btf.style.backgroundColor=="green"){
     btf.removeAttribute("style");
     hangUp();
@@ -152,6 +155,7 @@ var web_rtc;
 
 // for simplistic metrics gathering
 function track(name, info) {
+  console.log("track")
     if (web_rtc && web_rtc.connection) {
         web_rtc.connection.emit('metrics', name, info || {});
     }
@@ -160,6 +164,7 @@ function track(name, info) {
 
 
 function doJoin(room) {
+    console.log("do join:"+room)
     web_rtc.startLocalVideo();
     web_rtc.createRoom(room, function (err, name) {
         if(!err){ console.log("creado bien");}
@@ -169,6 +174,7 @@ function doJoin(room) {
 }//doJoin
 
 function iniciar_llamada(roomf){
+  console.log("inicia llamada:"+roomf)
   room=roomf;
   //GUM(); 
   doJoin(room);
@@ -177,6 +183,7 @@ function iniciar_llamada(roomf){
 
 
 function hangUp() {
+  console.log("colgad")
   web_rtc.stopLocalVideo();
   web_rtc.leaveRoom();
 }//colgar
