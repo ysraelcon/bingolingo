@@ -875,7 +875,7 @@ function mandar_chat_request_profile(ele){
   var skt_id_rcv= ele.getAttribute("data-skt-id-rcv");
   var user_id_rcv= ele.getAttribute("data-user-id-rcv");  
 
-  socket_client.emit("manda chat request",
+  socket_client.emit("mandar chat request",
               {skt_id_rcv:skt_id_rcv,
                user_id_rcv: user_id_rcv,
               skt_id_mnd:socket_client.id});
@@ -896,7 +896,7 @@ function cerrar_inf_user(){
 
 
 
-socket_client.on("recibe chat request",function(obj_roomf){
+socket_client.on("recibir chat request",function(obj_roomf){
   //obj_roomf{nme_mnd,id_rcv,skt_id_mnd,skt_id_rcv,room_bth}
   console.log("3recibes chat request");
   console.log(JSON.stringify(obj_roomf));
@@ -907,18 +907,192 @@ socket_client.on("recibe chat request",function(obj_roomf){
 
   nudiv.innerHTML='<div id="dv_chat_request_of_t">Chat request from '+
   obj_roomf.nme_mnd+'</div>'+
-    '<div id="dv_chat_request_of_m" onclick="abrir_chat_request(\''+
-  obj_roomf.room_bth+'\',\''+
-  obj_roomf.skt_id_mnd+'\')">+</div>'+
-    '<div id="dv_chat_request_of_x">X</div>';
+    '<div id="dv_chat_request_of_m" onclick="aceptar_chat_request(\''
++obj_roomf.room_bth+'\')">+</div>'+
+    '<div id="dv_chat_request_of_x" onclick="cancelar_chat_request_of(\''+obj_roomf.room_bth+"\',\'"
+        +obj_roomf.skt_id_rcv+"\',\'"+obj_roomf.skt_id_mnd+'\')">X</div>';
 
   dv_con_chat.appendChild(nudiv);
   
-});//skclon recibe chat request
+});//skclon recibir chat request
 
 
 
-socket_client.on("espera chat request",function(obj_roomf){
+function aceptar_chat_request(room_bthx){
+
+  eliminar_chat_request_of(room_bthx)
+  
+ socket_client.emit("aceptar chat request",
+  {room_bth:room_bthx})
+
+}//aceptar_chat_request
+
+
+
+socket_client.on("crear chat privado", function(obj_roomf){
+//obj_roomf{room_bth}
+
+ crear_chat_privado(obj_roomf.room_bth);
+
+});//skclon crear chat privado
+
+
+
+
+
+function cancelar_chat_request_of(room_bthx,skt_id_rcvf,skt_id_mndf){
+ console.log("cancela chat request")
+  
+  
+ socket_client.emit("cancelar chat request of",
+      {skt_id_mnd:skt_id_mndf,skt_id_rcv:skt_id_rcvf,
+       room_bth:room_bthx})
+
+}//cancelar_chat_request_of
+
+
+
+socket_client.on("cancelar chat request of",function(obj_roomf){
+  //obj_roomf{room_bth,skt_id_mnd,skt_id_rcv}
+  console.log("on: cancela chat request of")
+  cerrar_waiting(obj_roomf.skt_id_rcv,obj_roomf.room_bth)
+});//skon cancelar chat request of
+
+
+
+function crear_chat_privado(room_bthx){
+ console.log("crea chat privado")
+
+var dv_chat_room_= document.getElementById("dv_chat_room_"+room_bthx);
+
+
+if(!dv_chat_room_){
+    
+    var dvs= document.querySelectorAll("#dv_con_chat>div");
+
+    for(var i=0;i<dvs.length;i++){
+     dvs[i].classList.remove("alfrente");
+    }//for    
+
+    var nudiv=document.createElement("DIV");
+    nudiv.id="dv_chat_room_"+room_bthx;
+    nudiv.classList.add("cl_dv_chat_room");    
+
+    nudiv.innerHTML='<div class="cl_dv_chat_room_tit">'+
+
+        '<div class="cl_dv_chat_room_tit_nm cl_prv_tit_nm">Chat with</div>'+
+
+      '<div id="dv_chat_room_tit_min_'+room_bthx+
+      '" class="cl_dv_chat_room_tit_min"'+
+      ' onclick="minimizar_dv_chat(\''+room_bthx+'\')">-</div>'+
+
+      '<div class="cl_dv_chat_room_tit_rsz"'+
+      ' onclick="restaurar_tam_chat(\''+room_bthx+'\')">L</div>'+
+
+      '<div class="cl_dv_chat_room_tit_cerrar cl_prv_tit_cerrar"'+
+      ' onclick="cerrar_dv_chat(\''+room_bthx+'\')">x</div>'+
+
+      '</div>'+//dv_chat_room_tit
+
+
+      '<div id="dv_chat_room_con_user_'+room_bthx+
+      '" class="cl_dv_chat_room_con_user">'+
+
+      '<div id="dv_chat_room_con_'+room_bthx+'" class="cl_dv_chat_room_con cl_prv_con"></div>'+
+
+    '<div id="dv_chat_room_user_'+room_bthx+'" class="cl_dv_chat_room_user cl_prv_user">'+
+
+    '<div id="dv_chat_room_username_'+room_bthx+'" class="cl_dv_chat_room_username"></div>'+
+
+        '<div class="cl_dv_chat_room_user_bts">'+  
+
+      '<button id="bt_call_'+room_bthx+
+      '" onclick="solicitar_llamada(this,\''+room_bthx+'\')">'+
+
+    '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>'+//phone
+    '</button>'+
+
+      '<button id="bt_mte_call_'+room_bthx+'" class="cl_bt_mte_call">'+
+    '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M463 945l-101 101q-42-103-42-214v-128q0-26 19-45t45-19 45 19 19 45v128q0 53 15 113zm1114-602l-361 361v128q0 132-94 226t-226 94q-55 0-109-19l-96 96q97 51 205 51 185 0 316.5-131.5t131.5-316.5v-128q0-26 19-45t45-19 45 19 19 45v128q0 221-147.5 384.5t-364.5 187.5v132h256q26 0 45 19t19 45-19 45-45 19h-640q-26 0-45-19t-19-45 19-45 45-19h256v-132q-125-13-235-81l-254 254q-10 10-23 10t-23-10l-82-82q-10-10-10-23t10-23l1234-1234q10-10 23-10t23 10l82 82q10 10 10 23t-10 23zm-380-132l-621 621v-512q0-132 94-226t226-94q102 0 184.5 59t116.5 152z"/></svg>'+//microphhone-slash
+    '</button>'+
+      '<audio id="lcl_aud" style="display:none" oncontextmenu="return false;" disabled></audio>'+  
+      '</div>'+//_user_bts
+      '</div>'+//_user
+      '</div>'+//_con_user
+
+      '<div id="dv_chat_room_msg_'+room_bthx+'" class="cl_dv_chat_room_msg">'+
+      '<form class="cl_fm_chat_room_msg" onsubmit="enviar_msg_prv(event,\''+room_bthx+'\')">'+
+
+      '<input type="text" id="in_chat_room_msg_'+room_bthx+'" class="cl_in_chat_room_msg" autocorrect="off" autocomplete="off"'+
+      ' data-room="'+room_bthx+
+      '" placeholder="write your message...">'+
+
+      '<button id="btn_chat_room_msg_'+room_bthx+'" class="cl_btn_chat_msg" type="submit" >'+
+      '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
+      '</button>'+
+    '</form>'+
+      '<button class="cl_btn_chat_room_emj"  onclick="seleccionar_emoji(\''+room_bthx+'\')">'+
+      '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
+        '</button>'+
+      '</div>';    
+    
+    dv_con_chat.appendChild(nudiv);
+
+    
+    nudiv.addEventListener("click",function(){
+
+      var cls_act= nudiv.getAttribute("class");
+      var re= new RegExp("alfrente","i");
+
+      if(!re.test(cls_act)){
+        var dvs= document.querySelectorAll("#dv_con_chat>div");
+
+        for(var i=0;i<dvs.length;i++){
+         dvs[i].classList.remove("alfrente");
+        }//for
+
+        this.classList.add("alfrente");
+        //console.log("al frente");
+      }//if no la tiene
+
+    });//click, poner al frente     
+    
+    
+    jQuery(function($){
+
+      var dv_chat_room_= "#dv_chat_room_"+room_bthx;
+      var dv_chat_room_con_= "#dv_chat_room_con_"+room_bthx;  
+
+      var draggableDiv= $(dv_chat_room_).draggable();
+      $(dv_chat_room_con_, draggableDiv)
+        .mousedown(function(ev){
+        draggableDiv.draggable('disable');
+      }).mouseup(function(ev){
+        draggableDiv.draggable('enable');
+      });
+
+      $(dv_chat_room_).resizable();
+
+      var in_chat_room_msg_= document.getElementById("in_chat_room_msg_"+room_bthx);
+
+      in_chat_room_msg_.addEventListener("keydown",
+                            function(){
+            esta_tipeando(in_chat_room_msg_);
+      });//addeventlistener keydown tyP  
+
+    });//jQuery
+ 
+    socket_client.emit("mandar usuarios al chat privado",
+           {room_bth:room_bthx})
+
+    console.log("creado chat room");
+  }//if dv_chat_room_ no creado
+
+}//crear_chat_privado
+
+
+
+socket_client.on("esperar chat request",function(obj_roomf){
   //obj_roomf{id_mnd,id_rcv,skt_id_mnd,skt_id_rcv,nme_rcv,room_bth}
   
   //if(obj_roomf.skt_id_mnd==socket_client.id){
@@ -943,20 +1117,35 @@ socket_client.on("espera chat request",function(obj_roomf){
     dv_con_chat.appendChild(nudiv);
   }//if dv_waiting no creado
   //}//if es el que espera
-});//skcl espera chat request
+});//skcl esperar chat request
 
 
 
 function cerrar_waiting(skt_id_rcvf,room_bthf){
   console.log("cierra waiting")
-  var dv_waiting= document.getElementById("dv_waiting_"+room_bthf);
-
-  dv_con_chat.removeChild(dv_waiting);
+  eliminar_waiting(room_bthf)
 
   socket_client.emit("cancel chat request",
               {skt_id_rcv:skt_id_rcvf,
                room_bth:room_bthf});
 }//cerrar_waiting
+
+
+
+socket_client.on("cerrar waiting", function(obj_roomf){
+
+ eliminar_waiting(obj_roomf.room_bth)
+
+});//skclon cerrar waiting
+
+
+
+function eliminar_waiting(room_bthx){
+
+ var dv_waiting= document.getElementById("dv_waiting_"+room_bthx);
+ dv_con_chat.removeChild(dv_waiting)
+
+}//eliminar_waiting
 
 
 
@@ -968,6 +1157,16 @@ socket_client.on("eliminar chat request",function(obj_roomf){
   dv_con_chat.removeChild(dv_chat_request_of);
 });//skcl eliminar chat request
 
+
+
+function eliminar_chat_request_of(room_bthx){
+
+  console.log("elimina chat request of")
+  var dv_chat_request_of= document.getElementById("dv_chat_request_of_"+room_bthx);
+
+  dv_con_chat.removeChild(dv_chat_request_of);
+
+}//eliminar_chat_request
 
 
 function abrir_chat_request(room_bthx,skt_id_mndx){
@@ -1116,23 +1315,25 @@ socket_client.on("acepta chat request",function(obj_roomf){
 
   dv_con_chat.removeChild(dv_waiting);
   
-  abrir_chat_request(obj_roomf.room_bth);
-  socket_client.emit("users al chat request",obj_roomf);  
+  //abrir_chat_request(obj_roomf.room_bth);
+  //socket_client.emit("users al chat request",obj_roomf);  
 });//skcon acepta chat reqquest
 
 
 
-socket_client.on("mete users en chat request",function(obj_roomf){
+//mete users en chat request
+socket_client.on("meter usuarios al chat privado",function(obj_roomf){
+  //obj_user{m_names,room_bth,chat_prv}
   //obj_roomf{nme_mnd,nme_rcv,skt_id_rcv,skt_id_mnd,room_bth,chat_prv}
   
   console.log("7mete users");
   console.log(obj_roomf);
   
-  var dv_chat_room_username_= document.getElementById("dv_chat_room_username_"+obj_roomf.roomb_th);
-  console.log(typeof(dv_chat_room_username_))
-  dv_chat_room_username_.innerHTML= obj_roomf.nme_rcv+"<br id='br_rcv' data-skt-id='"+
-    obj_roomf.skt_id_rcv+"'/>"+
-    obj_roomf.nme_mnd+"<br id='br_mnd' data-skt-id='"+obj_roomf.skt_id_mnd+"'/>";
+  var dv_chat_room_username_= document.getElementById("dv_chat_room_username_"+obj_roomf.room_bth);
+  
+  dv_chat_room_username_.innerHTML= obj_roomf.m_names[1][0]+"<br id='br_rcv' data-skt-id='"+
+    obj_roomf.m_names[1][1]+"'/>"+
+    obj_roomf.m_names[0][0]+"<br id='br_mnd' data-skt-id='"+obj_roomf.m_names[0][1]+"'/>";
   
   var li_chat="";
 
@@ -1327,10 +1528,10 @@ function dar_bar_jue(roomjf,nme_juef,
 
 
 //mostrar cuadro, join, spectate
-function juntarse_a_juego(roomj,nme_juef,lis_juef,nro_playerf){
+function juntarse_a_juego(roomjf,nme_juef,lis_juef,nro_playerf){
   
   console.log("juntarse juego:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
-  crear_juego(roomj,nme_juef,lis_juef,nro_playerf);
+  crear_juego(roomjf,nme_juef,lis_juef,nro_playerf);
 }//juntarse o spectate
 
 

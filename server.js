@@ -21,7 +21,7 @@ var nodemailer= require('nodemailer');
 var passport= require('passport');
 var emoji= require('node-emoji');
 
-var port= process.env.PORT||3000;
+var port= process.env.PORT||80;//3000 y default 80
 server.listen(port, process.env.IP);
 
 mongoose.Promise = global.Promise;
@@ -198,10 +198,10 @@ socket.on('open room',function(roomf){
   
   /* creado nuevo objeto, para chats prv, otro para reportes
   
-  //_id chatsprv 5a36957e2659be546185f785
+  //_id chtsprv 5a36957e2659be546185f785
   //_id reportes 5a3694ecfe052c4f9add75ff
   var newChat=new Chat();
-  newChat.chatsprv= {};
+  newChat.chtsprv= {};
   newChat.save(function(err){
   if(err) throw err;
   });//save
@@ -365,7 +365,7 @@ socket.on("ver su profile",function(obj_userf){
   
 //==== 2c.. private chats
   
-socket.on("manda chat request",function(obj_userf){
+socket.on("mandar chat request",function(obj_userf){
   //obj_userf{skt_id_rcv,user_id_rcv,skt_id_mnd}
   console.log("2hizo chat request");
   console.log(obj_userf);
@@ -381,13 +381,13 @@ socket.on("manda chat request",function(obj_userf){
    users_room[room_bth]={};
   }//if indef
   //users_room{room_nme{user_id:firstname,...},...}
-  users_room[room_bth][socket.request.user._id]= socket.request.user.firstname;
+  users_room[room_bth][socket.request.user._id]= [socket.request.user.firstname,socket.id];
   
   socket.join(room_bth);
    
   console.log(io.sockets.adapter.rooms[room_bth]); 
   
-  io.to(obj_userf.skt_id_rcv).emit("recibe chat request",
+  io.to(obj_userf.skt_id_rcv).emit("recibir chat request",
           {nme_mnd:socket.request.user.firstname,
            skt_id_mnd:obj_userf.skt_id_mnd,
            skt_id_rcv:obj_userf.skt_id_rcv,
@@ -397,14 +397,23 @@ socket.on("manda chat request",function(obj_userf){
   if(users_cnnt[user_id_rcv])
     var nme_rcv= users_cnnt[user_id_rcv].user.firstname;
   
-  io.to(room_bth).emit("espera chat request",
+  io.to(room_bth).emit("esperar chat request",
           {skt_id_mnd:obj_userf.skt_clt_id,
            skt_id_rcv:obj_userf.skt_id_rcv,
            nme_rcv:nme_rcv,
            room_bth:room_bth});
     
-});//skon hicieron request
+});//skon mandar chat request
  
+
+  
+socket.on("cancelar chat request of", function(obj_roomf){
+//obj_roomf{room_bth,skt_id_rcv,skt_id_mnd}
+  console.log("cancela chat request of")
+  socket.to(obj_roomf.skt_id_mnd)
+    .emit("cancelar chat request of", obj_roomf)
+
+});//skon cancelar chat request of  
   
   
 socket.on("cancel chat request",function(obj_userf){
@@ -452,6 +461,74 @@ socket.on("abrir chat request",function(obj_userf){
   
   
   
+socket.on("aceptar chat request", function(obj_roomf){
+console.log("aceptar chat request")
+  //console.log(socket.id)
+  
+ var room_bth= obj_roomf.room_bth;
+
+ io.to(room_bth).emit("cerrar waiting",{room_bth:room_bth}) 
+  
+ users_room[room_bth][socket.request.user._id]= [socket.request.user.firstname,socket.id];
+
+  socket.join(room_bth);
+  
+ io.to(room_bth).emit("crear chat privado", obj_roomf);
+  //io.to(skt_mnd).emit("acepta chat request",obj_roomf);
+
+});//skon aceptar chat request  
+  
+ 
+  
+socket.on("mandar usuarios al chat privado", function(obj_roomf){
+  //obj_roomf{room_bth}
+ console.log("mandar usuarios al chat privado")
+ var room_bth= obj_roomf.room_bth;
+
+var m_names= [];
+
+for(var ele in users_room[room_bth]){
+  m_names.push(users_room[room_bth][ele])
+}//for
+
+var obj_user= {};
+obj_user.m_names= m_names;
+obj_user.room_bth= room_bth;
+
+var chatprv;
+  
+  Chat.findOne({_id:"5a36957e2659be546185f785"},
+             function(err,chatf){
+    
+   
+    if(!chatf.chtsprv){
+      chatf.chtsprv= {};
+    }//if no chtsprv, crear
+    
+    
+    if(!chatf.chtsprv[room_bth]){
+
+      chatf.chtsprv[room_bth]=[];
+    }//if no existe, crea
+    
+    chatf.markModified("chtsprv");//"chtsprv."+room_bth
+    
+    chatprv= chatf.chtsprv[room_bth]; 
+    
+    chatf.save((err)=>{
+      if(err) throw err;  
+  
+      obj_user["chat_prv"]= chatprv;
+      io.to(room_bth).emit("meter usuarios al chat privado", obj_user);
+
+    });//save
+    });//findOne
+
+//obj_user{m_names,room_bth,chat_prv}
+});//skon mandar usuarios al chat privado 
+ 
+  
+  
 socket.on("users al chat request",function(obj_userf){
  //obj_userf{nme_mnd,nme_rcv,skt_id_rcv,skt_id_mnd,room_bth}
   console.log("6users para chat request");
@@ -465,24 +542,24 @@ socket.on("users al chat request",function(obj_userf){
              function(err,chatf){
     
    
-    if(!chatf.chatsprv){
-      chatf.chatsprv= {};
-    }//if no chatsprv, crear
+    if(!chatf.chtsprv){
+      chatf.chtsprv= {};
+    }//if no chtsprv, crear
     
     
-    if(!chatf.chatsprv[obj_userf.room_bth]){
+    if(!chatf.chtsprv[obj_userf.room_bth]){
 
-      chatf.chatsprv[obj_userf.room_bth]=[];
+      chatf.chtsprv[obj_userf.room_bth]=[];
     }//if no existe, crea
     
-    chatf.markModified("chatsprv."+obj_userf.room_bth);
+    chatf.markModified("chtsprv."+obj_userf.room_bth);
     
-    chatprv= chatf.chatsprv[obj_userf.room_bth]; 
+    chatprv= chatf.chtsprv[obj_userf.room_bth]; 
     
     chatf.save((err)=>{
       if(err) throw err;  
   
-      obj_userf["chatprv"]= chatprv;
+      obj_userf["chat_prv"]= chatprv;
       io.to(obj_userf.room_bth).emit("mete users en chat request", obj_userf);
 
     });//save
@@ -506,14 +583,14 @@ socket.on("send message chat r",function(obj_msgf){
     
     var con_sav=socket.request.user.firstname+": "+obj_msgf.msg;
 
-    if(chatf.chatsprv[obj_msgf.room_bth].length<15){
-      chatf.chatsprv[obj_msgf.room_bth].push(con_sav);
+    if(chatf.chtsprv[obj_msgf.room_bth].length<15){
+      chatf.chtsprv[obj_msgf.room_bth].push(con_sav);
     }else{
-      chatf.chatsprv[obj_msgf.room_bth].shift();
-      chatf.chatsprv[obj_msgf.room_bth].push(con_sav);
+      chatf.chtsprv[obj_msgf.room_bth].shift();
+      chatf.chtsprv[obj_msgf.room_bth].push(con_sav);
     }//else shift and push    
 
-    chatf.markModified("chatsprv."+obj_msgf.room_bth); 
+    chatf.markModified("chtsprv."+obj_msgf.room_bth); 
        
     chatf.save((err)=>{
      if(err) throw err;
