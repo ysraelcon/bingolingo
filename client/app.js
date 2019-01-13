@@ -1,8 +1,8 @@
 //fecha: 16-09-18
 
-var app= angular.module('laApp',
-          ['ngRoute','laApp.home',
-           'laApp.profile'])
+var app= angular.module('la_App',
+          ['ngRoute','la_App.home',
+           'la_App.profile'])
 
  .config(['$routeProvider','$locationProvider', 
    function($routeProvider,$locationProvider){

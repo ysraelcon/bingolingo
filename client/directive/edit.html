@@ -3,33 +3,33 @@ fecha: 16-09-18
 -->
 
 <style>
-#dvmsgedt{
+#dv_msg_edt{
   font-size:20px;
   color:red;}
-#taabtme{width:173px;}  
+#ta_abt_me{width:173px;}  
 </style>
 
-<form id="fmedt">
+<form id="fm_edt">
 
-<div id="dvmsgedt" ng-show="message">{{message}}</div>  
+<div id="dv_msg_edt" ng-show="message">{{message}}</div>  
   
-<img id="igprfedi" class="igprfavtr"
+<img id="ig_prf_edi" class="cl_ig_prf_avtr"
      name="avatar"
      ng-src="{{user.avatar}}" alt="avatar"><br>
 
 Change your avatar:<br>
-<input type="file" id="inflimg"
+<input type="file" id="in_fl_img"
        onchange="cargar_img()"><br>
   
 First Name:<br>
 <input type="text"
-       ng-model="user.firstnm" name="firstnm"
-       value="{{user.firstnm}}"><br>
+       ng-model="user.firstname" name="firstname"
+       value="{{user.firstname}}"><br>
 
 Last Name:<br>
 <input type="text"
-       name="lastnm" ng-model="user.lastnm"
-       value="{{user.lastnm}}"><br>
+       name="lastname" ng-model="user.lastname"
+       value="{{user.lastname}}"><br>
 
 Gender: 
 <input type="radio"
@@ -307,12 +307,12 @@ Speaks:<br>
        value="{{user.speaks}}"><br>
 
 About me:<br>
-<textarea name="aboutme" id="taabtme"
-          ng-model="user.aboutme" rows="4"
-          value="{{user.aboutme}}"></textarea><br>  
+<textarea name="about_me" id="ta_abt_me"
+          ng-model="user.about_me" rows="4"
+          value="{{user.about_me}}"></textarea><br>  
 
 
 <input type="submit"
-       value="Update" ng-click="ediT(user)">
+       value="Update" ng-click="editar_profile(user)">
 
 </form>

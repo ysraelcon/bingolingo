@@ -1,6 +1,6 @@
 //fecha: 16-09-18, 18-09
 
-angular.module('laApp.home',['ngRoute'])
+angular.module('la_App.home',['ngRoute'])
     .config(['$routeProvider',//'$locationProvider',
           function($routeProvider){
       //$locationProvider.html5Mode(true);
@@ -16,11 +16,11 @@ angular.module('laApp.home',['ngRoute'])
         function($scope,$http,$location){
 
           
-      $scope.logiN= function(){
-  
+      $scope.entrar_login= function(){
+        console.log("entra login")
         $http.post("/login",$scope.user).then(function(res){
   
-          $scope.message=res.data.message;
+          $scope.message= res.data.message;
 
           if($scope.message===undefined){
            $location.path("/profile");
@@ -31,7 +31,7 @@ angular.module('laApp.home',['ngRoute'])
 
 
       $scope.olvido_password= function(){
-
+        console.log("olvida password")
         if(typeof($scope.user)=="undefined"||
           $scope.user.email==""){
           alert("write your email in login");
@@ -41,23 +41,23 @@ angular.module('laApp.home',['ngRoute'])
 
             //console.log(res);
             //alert("Check your email for get your password")
-            $scope.message=res.data.message;
+            $scope.message= res.data.message;
           });//then post email
         }//else
 
       };//olvido_password
           
           
-      $scope.signuP= function(){
+      $scope.entrar_sign_up= function(){
+        console.log("entra sign up")
+        $http.post("/sign_up",$scope.user).then(function(res){
 
-        $http.post("/signup",$scope.user).then(function(res){
-
-          $scope.message=res.data.message;
+          $scope.message= res.data.message;
 
           if($scope.message===undefined){
            $location.path("/profile");
           }//if
         });//then
-      };//signup
+      };//sign_up
   
 }]);//controller

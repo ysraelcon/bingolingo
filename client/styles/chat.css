@@ -1,35 +1,35 @@
 /* fecha: 16-09-18, 19-09 */
 /*style chat..*/
   
-  .dvroomsnm{
+  .cl_dv_rooms_nm{
     display:block; text-align:center;
     border-bottom:1px solid black;
     font-family:arial;
     color:#2F4F4F;}
-#dvroomsecretnm{
+#dv_room_secret_nm{
     display:block; text-align:center;
     border-bottom:1px solid black;
     font-family:arial;
     color:#2F4F4F;}
 
 
-.inlistrooms{
+.cl_in_list_rooms{
   width:120px;
 }
 
-.fmgorooms{
+.cl_fm_go_rooms{
   display:inline-block;
 }
 
 
-.spchatroom{
+.cl_sp_chat_room{
 border:1px solid black; border-radius:5px;
   /*box-shadow:5px -5px 5px grey;*/
   margin-left:5px;
 font-family:Tahoma, Geneva, sans-serif;
 background-color:#2F4F4F; color:white;
 cursor:pointer;}
-.spchatcant{
+.cl_sp_chat_cant{
   border:1px solid grey; border-radius:20%;
   font-family:consolas;}
      
@@ -37,7 +37,7 @@ cursor:pointer;}
 
 /*chat room basico..*/
 
-.dvchatroom{
+.cl_dv_chat_room{
   /*display: -webkit-flex;
     -webkit-flex-direction:column;
   display:flex;
@@ -50,13 +50,13 @@ cursor:pointer;}
   background-color:white;}
 
 
-.dvchatroom_tit{
+.cl_dv_chat_room_tit{
  display: -webkit-flex; -webkit-flex-direction:row;
  display:flex; flex-direction:row; justify-content:center;
  height:30px;
  font-family:arial;}
 
-.dvchatroom_titnm{
+.cl_dv_chat_room_tit_nm{
   display: -webkit-flex; -webkit-flex-direction:column;
   display:flex; flex-direction:column; justify-content:center;
     text-align:center;
@@ -64,14 +64,14 @@ cursor:pointer;}
   border-radius:5px 0 0 0;
   cursor:move;}
    
-.dvchatroom_titmin,.dvchatroom_titrsz{
+.cl_dv_chat_room_tit_min, .cl_dv_chat_room_tit_rsz{
    display: -webkit-flex; -webkit-flex-direction:column;
    display:flex; flex-direction:column; justify-content:center;
      text-align:center;
    width:10%;height:100%;
    cursor:default;}
  
-.dvchatroom_titcerrar{
+.cl_dv_chat_room_tit_cerrar{
    display: -webkit-flex; -webkit-flex-direction:column;
    display:flex; flex-direction:column; justify-content:center;
      text-align:center;
@@ -80,49 +80,49 @@ cursor:pointer;}
    cursor:default;}
 
 
-.dvchatroom_conuser{
+.cl_dv_chat_room_con_user{
   display: -webkit-flex; -webkit-flex-direction:row;
   display:flex; flex-direction:row;
   position:absolute; top:30px;bottom:30px;
   width:100%;/*height:100%;*/}
 
-.dvchatroom_con{
+.cl_dv_chat_room_con{
   overflow-y:auto; word-wrap:break-word;
   width:100%;/*height:98%;*/}
 
 
-.dvchatroom_user{
+.cl_dv_chat_room_user{
   float:right;
     word-wrap:break-word;
   position:relative;
   width:100px;/*height:98%*/;
   font-weight:bold;}
-.dvchatroom_usernm{
+.cl_dv_chat_room_usernm{
   overflow-y:auto;
     word-wrap:break-word;}
-.dvchatroom_userbts{
+.cl_dv_chat_room_user_bts{
   position:absolute;
     bottom:0px;}
 
         
-.dvchatroom_msg{
+.cl_dv_chat_room_msg{
   display: flex; flex-direction: row;
   position:absolute; bottom:0px;
   width:100%;}
 
-.fmchatroom_msg{
+.cl_fm_chat_room_msg{
     display: -webkit-flex; -webkit-flex-direction:row;
     display:flex; flex-direction:row;
     width:90%;} 
 
-.btchatroom_msg{width:40px;} 
-.btchatroom_emj{
+.cl_bt_chat_room_msg{width:40px;} 
+.cl_bt_chat_room_emj{
   width:40px;
   margin-right:20px;}
 
-.inchatroom_msg{width:100%;}
+.cl_in_chat_room_msg{width:100%;}
 
-.dvemj{
+.cl_dv_emj{
   position: absolute;
     bottom: 0px;}
 
@@ -130,17 +130,17 @@ cursor:pointer;}
 
 
  /*colores general..*/
-.gnrl_titnm{
+.cl_gnrl_tit_nm{
   background-color:#9370db;/*purpura*/
     color:white;}
-.gnrl_titcerrar{
+.cl_gnrl_tit_cerrar{
   background-color:#483D8B;/*ouroura oscuro*/
     color:white;
   /*#800000 #4B0082*/} 
 
-.gnrl_con{
+.cl_gnrl_con{
   background-color:#ffDAB9;}/*carne*/
-.gnrl_user{
+.cl_gnrl_user{
   background-color:#FFF0F5;/*rosa suave*/
     color:black;}
 
@@ -148,11 +148,11 @@ cursor:pointer;}
 
 
 /*typing*/
-.dvtyp{
+.cl_dv_typ{
   position:absolute; top:0px;
   width:70%;/*height:20%;*/
   background-color:white;}
-.sptyp{
+.cl_sp_typ{
   color:grey;}
 
 
@@ -160,29 +160,29 @@ cursor:pointer;}
 
 /*colores privado..*/
 
-.prv_titnm{
+.cl_prv_tit_nm{
   background-color:#2E8B57;
     color:white;}
-.prv_titcerrar{
+.cl_prv_tit_cerrar{
   background-color:#800000;
     color:white;/*#800000 #4B0082*/}
 
-.prv_con{
+.cl_prv_con{
   background-color:#DEB887;}
-.prv_user{
+.cl_prv_user{
   background-color:#FFA07A;}
 
 /*..colores privado*/
      
 
 /*img profile tabla*/
-.igprofiletbl{
+.cl_ig_profile_tbl{
   width:30px;height:30px;}
 
 
  /*tabla users chat..*/
      
-#tblusers{
+#tbl_users{
   width:100%;
   border-collapse:collapse; border-radius:5px;
   background-color:#34495E}
@@ -211,33 +211,33 @@ th, td{
 
 /*style inf user chat request..*/
 
-#dvinfuser{
+#dv_inf_user{
     display:inline-flex; flex-direction:row;
     border:1px solid grey;}
         
-#dvinfuser>div{
+#dv_inf_user>div{
    border:1px dashed grey;
      padding-right:5px;}
           
-#dvcerrarprofilechat{
+#dv_cerrar_profile_chat{
 display: -webkit-flex; -webkit-flex-direction:column;
   display:flex; flex-direction:column; justify-content:center;
   padding:5px;}
 
-#dvcerrarprofilechat:hover{
+#dv_cerrar_profile_chat:hover{
 background-color:grey;
   cursor:pointer;}
     
-#dvinfprofilechat{
+#dv_inf_profile_chat{
   background-color:#f5f5f5;}
 
-      #dvinfprofilechat>li:hover{
+      #dv_inf_profile_chat>li:hover{
     background-color:grey;
       cursor:pointer;}
       
 /*waiting section chatrequest..*/
 
-.dvwaiting{
+.cl_dv_waiting{
   display: -webkit-flex; -webkit-flex-direction:row;
   display:flex; flex-direction:row; justify-content:space-evenly;
   position:absolute; bottom:0px;
@@ -245,16 +245,16 @@ background-color:grey;
   border:1px solid grey;
     border-radius:5px;}
 
-.dvwaiting>div{
+.cl_dv_waiting>div{
   border:1px solid grey;
     border-radius:5px;}
 
-#dvwaiting_t{
+#dv_waiting_t{
   text-align:center;
   width:90%;
   background-color:#2e8b57;
     color:white;}
-#dvwaiting_x{
+#dv_waiting_x{
   text-align:center;
   width:10%;
   background-color:#800000;
@@ -262,7 +262,7 @@ background-color:grey;
 
 /*receiving chat request..*/
 
-.dvchatrequestof{
+.cl_dv_chat_request_of{
   display: -webkit-flex; -webkit-flex-direction:row;
   display:flex; flex-direction:row; justify-content:space-evenly;
   position:absolute; top:0px;
@@ -270,18 +270,18 @@ background-color:grey;
   border:1px solid grey;
     border-radius:5px;}
 
-.dvchatrequestof>div{
+.cl_dv_chat_request_of>div{
   border:1px solid grey;
     border-radius:5px;}
-#dvchatrequestof_t{
+#dv_chat_request_of_t{
   text-align:center;
   width:80%;
   background-color:#2e8b57;
     color:white;}
-#dvchatrequestof_m{
+#dv_chat_request_of_m{
   text-align:center;
   width:10%;}
-#dvchatrequestof_x{
+#dv_chat_request_of_x{
   text-align:center;
   width:10%;
   background-color:#800000;
@@ -289,7 +289,7 @@ background-color:grey;
 
 /*call*/
 
-.dvrecibecall,.dvespcall{
+.cl_dv_recibe_call,.cl_dv_esp_call{
   display: -webkit-flex; -webkit-flex-direction:row;
   display:flex; flex-direction:row;
   position:absolute; top:10%;
@@ -297,50 +297,50 @@ background-color:grey;
   background-color:white;
     color:grey;
 }
-.dvrecibecallnm,.dvespcallnm{
+.cl_dv_recibe_call_nm,.cl_dv_esp_call_nm{
   width:40%;
 }
-.dvrecibecallnm b{color:black}
-.dvrecibecallmas,.dvrecibecallcerrar,.dvespcallcerrar{
+.cl_dv_recibe_call_nm b{color:black}
+.cl_dv_recibe_call_mas,.cl_dv_recibe_call_cerrar,.cl_dv_esp_call_cerrar{
   text-align:center;
   width:10%;
   border:1px solid; border-radius:5%;
     margin-left:5px;
 }
-.dvrecibecallmas{
+.cl_dv_recibe_call_mas{
  background-color:#2E8B57;
    color:white;}
-.dvrecibecallcerrar,.dvespcallcerrar{
+.cl_dv_recibe_call_cerrar,.cl_dv_esp_call_cerrar{
  background-color:#800000;
    color:white;}
 
 
 /*ver perfil user*/
 
-#dvprofileuser{
+#dv_profile_user{
   position:absolute; top:20%;left:20%;
   width:60%;height:60%;
   border:1px solid grey; border-radius:5px; 
   background-color:white;}
 
-#dvprofileuser_tit{
+#dv_profile_user_tit{
   position:relative;
   height:30px;
   border-radius:5px 5px 0 0;}
-#dvprofileuser_titnme{
+#dv_profile_user_tit_nme{
   text-align:center;
   position:absolute; left:0px;right:30px;
   height:100%;
   background-color:#ccc;
   cursor:move;}
-#dvprofileuser_titcerrar{
+#dv_profile_user_tit_cerrar{
   text-align:center;
   position:absolute; right:0px;
   width:30px;height:100%;
   border:1px solid grey; border-radius:0 5px 0 0;
   cursor:pointer;}
 
-#dvprofileuser_con{
+#dv_profile_user_con{
   display:flex; flex-direction:column; align-items:center;
     overflow-y:auto;
   position:absolute; top:30px;bottom:30px;
@@ -348,14 +348,14 @@ background-color:grey;
   background-color:black;
     color:white;}
 
-#imgprofileuser{
+#img_profile_user{
   width:50px;height:50px;
   border-radius:50%;
     border:2px solid white;}
 
 
 
-#dvprofileuser_chatrequest{
+#dv_profile_user_chat_request{
   display:flex; justify-content:center;
   position:absolute; bottom:0px;
   width:100%;height:30px;
