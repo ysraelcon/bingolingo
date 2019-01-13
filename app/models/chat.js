@@ -5,7 +5,7 @@ var mongoose=require('mongoose');
 var chat_sch= mongoose.Schema({
   reportes: [],
   chats: mongoose.Schema.Types.Mixed,
-  chtsprv: mongoose.Schema.Types.Mixed
+  chats_prv: mongoose.Schema.Types.Mixed
 });
 
 

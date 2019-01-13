@@ -198,10 +198,10 @@ socket.on('open room',function(roomf){
   
   /* creado nuevo objeto, para chats prv, otro para reportes
   
-  //_id chtsprv 5a36957e2659be546185f785
+  //_id chats_prv 5a36957e2659be546185f785
   //_id reportes 5a3694ecfe052c4f9add75ff
   var newChat=new Chat();
-  newChat.chtsprv= {};
+  newChat.chats_prv= {};
   newChat.save(function(err){
   if(err) throw err;
   });//save
@@ -501,19 +501,19 @@ var chatprv;
              function(err,chatf){
     
    
-    if(!chatf.chtsprv){
-      chatf.chtsprv= {};
-    }//if no chtsprv, crear
+    if(!chatf.chats_prv){
+      chatf.chats_prv= {};
+    }//if no chats_prv, crear
     
     
-    if(!chatf.chtsprv[room_bth]){
+    if(!chatf.chats_prv[room_bth]){
 
-      chatf.chtsprv[room_bth]=[];
+      chatf.chats_prv[room_bth]=[];
     }//if no existe, crea
     
-    chatf.markModified("chtsprv");//"chtsprv."+room_bth
+    chatf.markModified("chats_prv");//"chats_prv."+room_bth
     
-    chatprv= chatf.chtsprv[room_bth]; 
+    chatprv= chatf.chats_prv[room_bth]; 
     
     chatf.save((err)=>{
       if(err) throw err;  
@@ -542,19 +542,19 @@ socket.on("users al chat request",function(obj_userf){
              function(err,chatf){
     
    
-    if(!chatf.chtsprv){
-      chatf.chtsprv= {};
-    }//if no chtsprv, crear
+    if(!chatf.chats_prv){
+      chatf.chats_prv= {};
+    }//if no chats_prv, crear
     
     
-    if(!chatf.chtsprv[obj_userf.room_bth]){
+    if(!chatf.chats_prv[obj_userf.room_bth]){
 
-      chatf.chtsprv[obj_userf.room_bth]=[];
+      chatf.chats_prv[obj_userf.room_bth]=[];
     }//if no existe, crea
     
-    chatf.markModified("chtsprv."+obj_userf.room_bth);
+    chatf.markModified("chats_prv."+obj_userf.room_bth);
     
-    chatprv= chatf.chtsprv[obj_userf.room_bth]; 
+    chatprv= chatf.chats_prv[obj_userf.room_bth]; 
     
     chatf.save((err)=>{
       if(err) throw err;  
@@ -583,14 +583,14 @@ socket.on("send message chat r",function(obj_msgf){
     
     var con_sav=socket.request.user.firstname+": "+obj_msgf.msg;
 
-    if(chatf.chtsprv[obj_msgf.room_bth].length<15){
-      chatf.chtsprv[obj_msgf.room_bth].push(con_sav);
+    if(chatf.chats_prv[obj_msgf.room_bth].length<15){
+      chatf.chats_prv[obj_msgf.room_bth].push(con_sav);
     }else{
-      chatf.chtsprv[obj_msgf.room_bth].shift();
-      chatf.chtsprv[obj_msgf.room_bth].push(con_sav);
+      chatf.chats_prv[obj_msgf.room_bth].shift();
+      chatf.chats_prv[obj_msgf.room_bth].push(con_sav);
     }//else shift and push    
 
-    chatf.markModified("chtsprv."+obj_msgf.room_bth); 
+    chatf.markModified("chats_prv."+obj_msgf.room_bth); 
        
     chatf.save((err)=>{
      if(err) throw err;
