@@ -1,11 +1,11 @@
-//fecha: 16-09-18, 19-09, 20-09, 09-01-19 L796
+//notes line to fix: L796
 //despues de socket.io/socket.io.js
 
 //conexión socket
 var socket_client= io.connect();
 
 
-//====entra al chat
+//====== entra al chat
 function entrar_a_chat(){
   console.log("entra a chat")
  socket_client.emit("user va a chat",socket_client.id);
@@ -25,7 +25,7 @@ socket_client.on("usernames",function(users_cnntf){
    con_user+="<tr id=\'"+users_cnntf[username].skt_id+
     "\' data-user-id='"+username+
     "' onclick='informar_profile(this)' >"+
-    "<td><img class='cl_ig_profile_tbl' src='"+
+    "<td><img class='w30p h30p' src='"+
      (users_cnntf[username].user.avatar||dar_img_provisional() )+"'></td>"+
     "<td>"+users_cnntf[username].user.firstname+
     " "+users_cnntf[username].user.lastname+"</td>"+
@@ -521,9 +521,9 @@ socket_client.on("who type",function(obj_roomf){
   
   var nudiv= document.createElement("div");
   nudiv.id= "dv_typ_"+obj_roomf.room;
-  nudiv.setAttribute("class","cl_dv_typ"); 
+  nudiv.setAttribute("class","pos_abs top_0p w70 bac_col_whi"); 
   
-  nudiv.innerHTML="<b>"+obj_roomf.firstname+"</b>"+"<span  class='cl_sp_typ'> is typing...</span>"+
+  nudiv.innerHTML="<b>"+obj_roomf.firstname+"</b>"+"<span  style='color:grey'> is typing...</span>"+
     '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M491 1536l91-91-235-235-91 91v107h128v128h107zm523-928q0-22-22-22-10 0-17 7l-542 542q-7 7-7 17 0 22 22 22 10 0 17-7l542-542q7-7 7-17zm-54-192l416 416-832 832h-416v-416zm683 96q0 53-37 90l-166 166-416-416 166-165q36-38 90-38 53 0 91 38l235 234q37 39 37 91z"/></svg>';//pencil
 
   var dv_chat_room_con_user_= document.getElementById("dv_chat_room_con_user_"+obj_roomf.room);
@@ -559,61 +559,60 @@ function crear_room(roomx){
     var dvs= document.querySelectorAll("#dv_con_chat>div");
 
     for(var i=0;i<dvs.length;i++){
-     dvs[i].classList.remove("alfrente");
+     dvs[i].classList.remove("al_frente");
     }//for   
     
      var nudiv=document.createElement("DIV");
      nudiv.id="dv_chat_room_"+roomx;
-     nudiv.classList.add("cl_dv_chat_room","alfrente");
+     nudiv.classList.add("pos_absi","top_10","lef_10","flex_col","w80","h60","max_w600p","bor_r","bor_s","al_frente");
 
-     nudiv.innerHTML='<div class="cl_dv_chat_room_tit">'+
+     nudiv.innerHTML='<div class="flex_row bor_r h30p">'+
 
-        '<div class="cl_dv_chat_room_tit_nm cl_gnrl_tit_nm">'+(rooms[roomx]||roomx)+'</div>'+
+        '<div class="w70 flex_col cen cur_mov bac_col_97d col_whi bor_r5000 fon_ari fon_bol">'
+        +(rooms[roomx]||roomx)+'</div>'+
 
       '<div id="dv_chat_room_tit_min_'+roomx+
-      '" class="cl_dv_chat_room_tit_min"'+
+      '" class="w10 flex_col cen bac_col_whi"'+
       ' onclick="minimizar_dv_chat(\''+roomx+'\')">-</div>'+
 
-      '<div class="cl_dv_chat_room_tit_rsz"'+
+      '<div class="w10 flex_col cen fon_ari bac_col_whi"'+
       ' onclick="restaurar_tam_chat(\''+roomx+'\')">L</div>'+
 
-      '<div class="cl_dv_chat_room_tit_cerrar cl_gnrl_tit_cerrar"'+
-      ' onclick="cerrar_dv_chat(\''+roomx+'\')">x</div>'+
+      '<div class="w10 flex_col cen bor_r0500 fon_ari bac_col_438 col_whi"'+
+      ' onclick="cerrar_dv_chat(\''+roomx+'\')">X</div>'+
 
       '</div>'+//dv_chat_room_tit
 
       '<div id="dv_chat_room_con_user_'+roomx+
-      '" class="cl_dv_chat_room_con_user">'+
+      '" class="pos_abs top_30p bot_30p w100 flex_row">'+
 
-      '<div id="dv_chat_room_con_'+roomx+'" class="cl_dv_chat_room_con cl_gnrl_con"></div>'+
+      '<div id="dv_chat_room_con_'+roomx+'" class="bac_col_bfd wor_wra ove_y w70"></div>'+
 
-      '<div id="dv_chat_room_user_'+roomx+'" class="cl_dv_chat_room_user cl_gnrl_user">'+
+      '<div id="dv_chat_room_user_'+roomx+'" class="bac_col_fff w30 fon_bol wor_wra ove_y">'+
 
         '<div id="dv_chat_room_username_'+roomx+
       '" class="cl_dv_chat_room_username"></div>'+
-
-        '<div id="dv_chat_room_user_bts_'+roomx+
-      '" class="cl_dv_chat_room_user_bts">'+ 
-        '<input type="button" value="_"'+
-       ' onclick="es_boton_vacio()"></div>'+
 
       '</div>'+//dv_chat_room_user
       '</div>'+ //dv_chat_room_con_user
 
       '<div id="dv_chat_room_msg_'+roomx+
-      '" class="cl_dv_chat_room_msg">'+
-      '<form class="cl_fm_chat_room_msg" onsubmit="enviar_msg(event,\''+roomx+'\')">'+
+      '" class="pos_abs bot_0p h30p flex_row w100">'+
+      '<form class="pos_rel flex_row h100 w70" onsubmit="enviar_msg(event,\''+roomx+'\')">'+
 
-      '<input type="text" id="in_chat_room_msg_'+roomx+'" class="cl_in_chat_room_msg" autocorrect="off" autocomplete="off"'+
-      ' data-room="'+roomx+'" placeholder="write your message">'+
+      '<div class="pos_abs top_0p bot_0p lef_0p rig_30p"><input type="text" id="in_chat_room_msg_'+roomx+'" class="w100 h100" autocorrect="off" autocomplete="off"'+
+      ' data-room="'+roomx+'" placeholder="write your message"></div>'+
 
-      '<button id="bt_chat_room_msg_'+roomx+'" class="cl_bt_chat_room_msg" type="submit" >'+
+      '<button id="bt_chat_room_msg_'+roomx+'" class="pos_abs rig_0p h100 w30p" type="submit" >'+
       '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
       '</button>'+
     '</form>'+ 
-      '<button class="bt_chat_room_emj" onclick="seleccionar_emoji(\''+roomx+'\')">'+
+       '<div id="dv_chat_room_user_bts_eng" class="pos_rel w30 bac_col_fff">'+
+      '<button class="h100" onclick="seleccionar_emoji(\''+roomx+'\')">'+
       '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
         '</button>'+
+       '<input type="button" class="pos_abs h100" value="_" onclick="es_boton_vacio()">'+
+       '</div>'+
 
       '</div>';
 
@@ -622,16 +621,16 @@ function crear_room(roomx){
     nudiv.addEventListener("click",function(){
 
       var cls_act= nudiv.getAttribute("class");
-      var re= new RegExp("alfrente","i");
+      var re= new RegExp("al_frente","i");
 
       if(!re.test(cls_act)){
         var dvs= document.querySelectorAll("#dv_con_chat>div");
 
         for(var i=0;i<dvs.length;i++){
-         dvs[i].classList.remove("alfrente");
+         dvs[i].classList.remove("al_frente");
         }//for
 
-        this.classList.add("alfrente");
+        this.classList.add("al_frente");
         //console.log("al frente");
       }//if no la tiene
 
@@ -677,7 +676,7 @@ function seleccionar_emoji(roomf){
   if(!dv_emj_){
     var nudiv= document.createElement("div");
     nudiv.id= "dv_emj_"+roomf;
-    nudiv.setAttribute("class","dv_emj");
+    nudiv.setAttribute("class","cl_dv_emj");
 
     nudiv.innerHTML= '<input type="button" value="😄" onclick="meter_emoji(\''+roomf+'\',\'smile\')">'+
     '<input type="button" value="😠" onclick="meter_emoji(\''+roomf+'\',\'angry\')">'+
@@ -748,34 +747,7 @@ socket_client.on("manda users a secret room",function(obj_room_secretf){
 
 function nooP(){}//no operations, for swap functions
 
-//cuadro, profile, chat request, al clicar user
-function mostrar_user_profile_chat_r(ele,ev){
- console.log("muestra user profile chat r:"+ele)
-  if(ele.id!=socket_client.id)//if no es el mismo 
-  if(typeof(dv_inf_user)=="undefined"){
-   
-    var nue_dv_inf_user= document.createElement("DIV");
-    nue_dv_inf_user.id="dv_inf_user";
-    nue_dv_inf_user.style="position:fixed;"+
-    "left:"+ev.clientX+"px;"+
-    "top:"+ev.clientY+"px";
 
-    nue_dv_inf_user.innerHTML= '<div id="dv_inf_profile_chat">'+
-        '<li id="liprofile'+ele.id+
-      '" data-user-id="'+
-      ele.getAttribute("data-user-id")+
-      '" onclick="informar_profile(this)">Profile</li>'+
-
-        '<li id="li_chat_request'+ele.id+
-      '" onclick="mandar_chat_request(this)" data-user-id="'+
-        ele.getAttribute("data-user-id")+
-        '">Chat Request</li>'+
-        '</div>'+
-        '<div id="dv_cerrar_profile_chat" onclick="cerrar_infuser()">x</div>';
-
-     dv_con_chat.appendChild(nue_dv_inf_user);
-   }//if no existe: crea
-}//mostrar_user_profile_chat_r
 
 
 /*
@@ -810,17 +782,19 @@ socket_client.on("perfil a ver",function(obj_userf){
     
     var nudiv= document.createElement("div");
     nudiv.id= "dv_profile_user";
-    nudiv.classList.add("alfrente");    
+    nudiv.setAttribute("class","pos_absi bor_1p_gre bor_r bac_col_whi al_frente")
+//    nudiv.classList.add("al_frente");  
+    nudiv.setAttribute("style","top:20%;left:20%;width:60%;height:60%")
 
-    nudiv.innerHTML= '<div id="dv_profile_user_tit">'+
-    '<div id="dv_profile_user_tit_nme">'+
+    nudiv.innerHTML= '<div id="dv_profile_user_tit" class="pos_rel h30p" style="border-radius:5px 5px 0 0">'+
+    '<div id="dv_profile_user_tit_nme" class="cen pos_abs lef_0p rig_30p h100 cur_mov bac_col_ccc">'+
     obj_userf.user.firstname+" "+obj_userf.user.lastname+
-    '</div><div id="dv_profile_user_tit_cerrar" onclick="cerrar_profile_user()">X</div>'+
+    '</div><div id="dv_profile_user_tit_cerrar" class="cen pos_abs rig_0p w30p h100 bor_1p_grey bor_r0500 cur_poi" onclick="cerrar_profile_user()">X</div>'+
     '</div>'+
 
-    '<div id="dv_profile_user_con">'+
-    '<img id="img_profile_user" src="'+
-    obj_userf.user.avatar+
+    '<div id="dv_profile_user_con" class="flex_col ali_cen ove_y pos_abs top_30p bot_30p w100 bac_col_bla col_whi">'+
+    '<img id="img_profile_user" class="w50p h50p bor_r50" style="border:2px solid white" src="'+
+    (obj_userf.user.avatar||dar_img_provisional())+
     '" alt="img_profile"><p>'+
     obj_userf.user.age+", "+obj_userf.user.gender+
     '</p><p>'+obj_userf.user.country+
@@ -828,7 +802,7 @@ socket_client.on("perfil a ver",function(obj_userf){
     '</p><p>'+obj_userf.user.learning+
     '</p><p>'+obj_userf.user.about_me+
     '</div>'+
-    '<div id="dv_profile_user_chat_request">'+
+    '<div id="dv_profile_user_chat_request" class="flex_row cen pos_abs bot_0p w100 h30p bac_col_ccc" style="border-radius:0 0 5px 5px">'+
     '<input type="button" value="Chat Request" '+
      ' data-user-id-rcv="'+obj_userf.user_id_rcv+
     '" data-skt-id-rcv="'+obj_userf.skt_id_rcv+ 
@@ -903,13 +877,14 @@ socket_client.on("recibir chat request",function(obj_roomf){
   
   var nudiv= document.createElement("div");
   nudiv.id= "dv_chat_request_of_"+obj_roomf.room_bth;
-  nudiv.classList.add("cl_dv_chat_request_of");  
+  nudiv.setAttribute("class","flex_row pos_abs top_0p bor_1p_grey bor_r"); 
+  nudiv.setAttribute("style","justify-content:space-evenly;width:200px")
 
-  nudiv.innerHTML='<div id="dv_chat_request_of_t">Chat request from '+
+  nudiv.innerHTML='<div id="dv_chat_request_of_t" class="cen w80 bac_col_285 col_whi">Chat request from '+
   obj_roomf.nme_mnd+'</div>'+
-    '<div id="dv_chat_request_of_m" onclick="aceptar_chat_request(\''
+    '<div id="dv_chat_request_of_m" class="cen w10" onclick="aceptar_chat_request(\''
 +obj_roomf.room_bth+'\')">+</div>'+
-    '<div id="dv_chat_request_of_x" onclick="cancelar_chat_request_of(\''+obj_roomf.room_bth+"\',\'"
+    '<div id="dv_chat_request_of_x" class="cen w10 bac_col_800 col_whi" onclick="cancelar_chat_request_of(\''+obj_roomf.room_bth+"\',\'"
         +obj_roomf.skt_id_rcv+"\',\'"+obj_roomf.skt_id_mnd+'\')">X</div>';
 
   dv_con_chat.appendChild(nudiv);
@@ -971,69 +946,72 @@ if(!dv_chat_room_){
     var dvs= document.querySelectorAll("#dv_con_chat>div");
 
     for(var i=0;i<dvs.length;i++){
-     dvs[i].classList.remove("alfrente");
+     dvs[i].classList.remove("al_frente");
     }//for    
 
     var nudiv=document.createElement("DIV");
     nudiv.id="dv_chat_room_"+room_bthx;
-    nudiv.classList.add("cl_dv_chat_room");    
+    nudiv.classList.add("pos_absi","top_10","lef_10","flex_col","w80","h60","max_w600p","bor_r","bor_s");    
 
-    nudiv.innerHTML='<div class="cl_dv_chat_room_tit">'+
+    nudiv.innerHTML='<div class="flex_row bor_r h30p">'+
 
-        '<div class="cl_dv_chat_room_tit_nm cl_prv_tit_nm">Chat with</div>'+
+        '<div class="w70 flex_col cen cur_mov bac_col_285 col_whi bor_r5000 fon_ari fon_bol">Chat with</div>'+
 
       '<div id="dv_chat_room_tit_min_'+room_bthx+
-      '" class="cl_dv_chat_room_tit_min"'+
+      '" class="w10 flex_col cen bac_col_whi"'+
       ' onclick="minimizar_dv_chat(\''+room_bthx+'\')">-</div>'+
 
-      '<div class="cl_dv_chat_room_tit_rsz"'+
+      '<div class="w10 flex_col cen fon_ari bac_col_whi"'+
       ' onclick="restaurar_tam_chat(\''+room_bthx+'\')">L</div>'+
 
-      '<div class="cl_dv_chat_room_tit_cerrar cl_prv_tit_cerrar"'+
+      '<div class="w10 flex_col cen bor_r0500 fon_ari bac_col_800 col_whi"'+
       ' onclick="cerrar_dv_chat(\''+room_bthx+'\')">x</div>'+
 
       '</div>'+//dv_chat_room_tit
 
 
       '<div id="dv_chat_room_con_user_'+room_bthx+
-      '" class="cl_dv_chat_room_con_user">'+
+      '" class="pos_abs top_30p bot_30p w100 flex_row">'+
 
-      '<div id="dv_chat_room_con_'+room_bthx+'" class="cl_dv_chat_room_con cl_prv_con"></div>'+
+      '<div id="dv_chat_room_con_'+room_bthx+'" class="bac_col_db8 wor_wra ove_y w70"></div>'+
 
-    '<div id="dv_chat_room_user_'+room_bthx+'" class="cl_dv_chat_room_user cl_prv_user">'+
+    '<div id="dv_chat_room_user_'+room_bthx+'" class="bac_col_fa7 w30 fon_bol wor_wra ove_y">'+
 
     '<div id="dv_chat_room_username_'+room_bthx+'" class="cl_dv_chat_room_username"></div>'+
 
-        '<div class="cl_dv_chat_room_user_bts">'+  
+        
+      '</div>'+//_user
+      '</div>'+//_con_user
 
+      '<div id="dv_chat_room_msg_'+room_bthx+'" class="pos_abs bot_0p h30p flex_row w100">'+
+      '<form class="pos_rel flex_row h100 w70" onsubmit="enviar_msg_prv(event,\''+room_bthx+'\')">'+
+      '<div class="pos_abs top_0p bot_0p lef_0p rig_30p">'+
+      '<input type="text" id="in_chat_room_msg_'+room_bthx+'" class="w100 h100" autocorrect="off" autocomplete="off"'+
+      ' data-room="'+room_bthx+
+      '" placeholder="write your message..."></div>'+
+
+      '<button id="btn_chat_room_msg_'+room_bthx+'" class="pos_abs rig_0p h100 w30p" type="submit" >'+
+      '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
+      '</button>'+
+    '</form>'+
+      
+      
+      '<div class="pos_rel w30 bac_col_fa7">'+  
+
+      '<button class="h100"  onclick="seleccionar_emoji(\''+room_bthx+'\')">'+
+      '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
+        '</button>'+
       '<button id="bt_call_'+room_bthx+
-      '" onclick="solicitar_llamada(this,\''+room_bthx+'\')">'+
+      '" class="h100" onclick="solicitar_llamada(this,\''+room_bthx+'\')">'+
 
     '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>'+//phone
     '</button>'+
 
-      '<button id="bt_mte_call_'+room_bthx+'" class="cl_bt_mte_call">'+
+      '<button id="bt_mte_call_'+room_bthx+'" class="h100">'+
     '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M463 945l-101 101q-42-103-42-214v-128q0-26 19-45t45-19 45 19 19 45v128q0 53 15 113zm1114-602l-361 361v128q0 132-94 226t-226 94q-55 0-109-19l-96 96q97 51 205 51 185 0 316.5-131.5t131.5-316.5v-128q0-26 19-45t45-19 45 19 19 45v128q0 221-147.5 384.5t-364.5 187.5v132h256q26 0 45 19t19 45-19 45-45 19h-640q-26 0-45-19t-19-45 19-45 45-19h256v-132q-125-13-235-81l-254 254q-10 10-23 10t-23-10l-82-82q-10-10-10-23t10-23l1234-1234q10-10 23-10t23 10l82 82q10 10 10 23t-10 23zm-380-132l-621 621v-512q0-132 94-226t226-94q102 0 184.5 59t116.5 152z"/></svg>'+//microphhone-slash
     '</button>'+
       '<audio id="lcl_aud" style="display:none" oncontextmenu="return false;" disabled></audio>'+  
       '</div>'+//_user_bts
-      '</div>'+//_user
-      '</div>'+//_con_user
-
-      '<div id="dv_chat_room_msg_'+room_bthx+'" class="cl_dv_chat_room_msg">'+
-      '<form class="cl_fm_chat_room_msg" onsubmit="enviar_msg_prv(event,\''+room_bthx+'\')">'+
-
-      '<input type="text" id="in_chat_room_msg_'+room_bthx+'" class="cl_in_chat_room_msg" autocorrect="off" autocomplete="off"'+
-      ' data-room="'+room_bthx+
-      '" placeholder="write your message...">'+
-
-      '<button id="btn_chat_room_msg_'+room_bthx+'" class="cl_btn_chat_msg" type="submit" >'+
-      '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
-      '</button>'+
-    '</form>'+
-      '<button class="cl_btn_chat_room_emj"  onclick="seleccionar_emoji(\''+room_bthx+'\')">'+
-      '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
-        '</button>'+
       '</div>';    
     
     dv_con_chat.appendChild(nudiv);
@@ -1042,16 +1020,16 @@ if(!dv_chat_room_){
     nudiv.addEventListener("click",function(){
 
       var cls_act= nudiv.getAttribute("class");
-      var re= new RegExp("alfrente","i");
+      var re= new RegExp("al_frente","i");
 
       if(!re.test(cls_act)){
         var dvs= document.querySelectorAll("#dv_con_chat>div");
 
         for(var i=0;i<dvs.length;i++){
-         dvs[i].classList.remove("alfrente");
+         dvs[i].classList.remove("al_frente");
         }//for
 
-        this.classList.add("alfrente");
+        this.classList.add("al_frente");
         //console.log("al frente");
       }//if no la tiene
 
@@ -1106,10 +1084,11 @@ socket_client.on("esperar chat request",function(obj_roomf){
     
     var nudiv= document.createElement("div");
     nudiv.id= "dv_waiting_"+obj_roomf.room_bth;
-    nudiv.classList.add("cl_dv_waiting");
+    nudiv.setAttribute("class","flex_row pos_abs bot_0p bor_1p_grey bor_r");
+    nudiv.setAttribute("style","justify-content:space-evenly;width:200px")
 
-    nudiv.innerHTML='<div id="dv_waiting_t">Waiting for '+obj_roomf.nme_rcv+'...</div>'+
-     '<div id="dv_waiting_x" onclick=\'cerrar_waiting("'+
+    nudiv.innerHTML='<div id="dv_waiting_t" class="cen w90 bac_col_285 col_whi">Waiting for '+obj_roomf.nme_rcv+'...</div>'+
+     '<div id="dv_waiting_x" class="cen w10 bac_col_800 col_whi" onclick=\'cerrar_waiting("'+
          obj_roomf.skt_id_rcv+'","'+
          obj_roomf.room_bth+
                    '")\'>X</div>';
@@ -1178,69 +1157,72 @@ function abrir_chat_request(room_bthx,skt_id_mndx){
     var dvs= document.querySelectorAll("#dv_con_chat>div");
 
     for(var i=0;i<dvs.length;i++){
-     dvs[i].classList.remove("alfrente");
+     dvs[i].classList.remove("al_frente");
     }//for    
 
     var nudiv=document.createElement("DIV");
     nudiv.id="dv_chat_room_"+room_bthx;
-    nudiv.classList.add("cl_dv_chat_room");    
+    nudiv.classList.add("pos_abs flex_col w80 h60 bor_r bor_s");    
 
-    nudiv.innerHTML='<div class="cl_dv_chat_room_tit">'+
+    nudiv.innerHTML='<div class="flex_row bor_r h30p">'+
 
-        '<div class="cl_dv_chat_room_tit_nm cl_prv_tit_nm">Chat with</div>'+
+        '<div class="w70 flex_col cen cur_mov bac_col_285 col_whi bor_r5000 fon_ari fon_bol">Chat with</div>'+
 
       '<div id="dv_chat_room_tit_min_'+room_bthx+
-      '" class="cl_dv_chat_room_tit_min"'+
+      '" class="w10 flex_col cen"'+
       ' onclick="minimizar_dv_chat(\''+room_bthx+'\')">-</div>'+
 
-      '<div class="cl_dv_chat_room_tit_rsz"'+
+      '<div class="w10 flex_col cen fon_ari"'+
       ' onclick="restaurar_tam_chat(\''+room_bthx+'\')">L</div>'+
 
-      '<div class="cl_dv_chat_room_tit_cerrar cl_prv_tit_cerrar"'+
+      '<div class="w10 flex_col cen bor_r0500 fon_ari bac_col_800 col_whi"'+
       ' onclick="cerrar_dv_chat(\''+room_bthx+'\')">x</div>'+
 
       '</div>'+//dv_chat_room_tit
 
 
       '<div id="dv_chat_room_con_user_'+room_bthx+
-      '" class="cl_dv_chat_room_con_user">'+
+      '" class="pos_abs top_30p bot_30p w100 flex_row">'+
 
-      '<div id="dv_chat_room_con_'+room_bthx+'" class="cl_dv_chat_room_con cl_prv_con"></div>'+
+      '<div id="dv_chat_room_con_'+room_bthx+'" class="bac_col_db8 wor_wra ove_y w70"></div>'+
 
-    '<div id="dv_chat_room_user_'+room_bthx+'" class="cl_dv_chat_room_user cl_prv_user">'+
+    '<div id="dv_chat_room_user_'+room_bthx+'" class="bac_col_fa7 w30 fon_bol wor_wra ove_y">'+
 
     '<div id="dv_chat_room_username_'+room_bthx+'" class="cl_dv_chat_room_username"></div>'+
 
-        '<div class="cl_dv_chat_room_user_bts">'+  
+        
+      '</div>'+//_user
+      '</div>'+//_con_user
 
+      '<div id="dv_chat_room_msg_'+room_bthx+'" class="pos_abs bot_0p h30p flex_row w100">'+
+      '<form class="pos_rel flex_row h100 w70" onsubmit="enviar_msg_prv(event,\''+room_bthx+'\')">'+
+      '<div class="pos_abs top_0p bot_0p lef_0p rig_30p">'+
+      '<input type="text" id="in_chat_room_msg_'+room_bthx+'" class="w100 h100" autocorrect="off" autocomplete="off"'+
+      ' data-room="'+room_bthx+
+      '" placeholder="write your message..."></div>'+
+
+      '<button id="btn_chat_room_msg_'+room_bthx+'" class="pos_abs rig_0p h100 w30p" type="submit" >'+
+      '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
+      '</button>'+
+    '</form>'+
+      
+      
+      '<div class="pos_rel w30">'+  
+
+      '<button class="h100"  onclick="seleccionar_emoji(\''+room_bthx+'\')">'+
+      '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
+        '</button>'+
       '<button id="bt_call_'+room_bthx+
-      '" onclick="solicitar_llamada(this,\''+room_bthx+'\')">'+
+      '" class="h100" onclick="solicitar_llamada(this,\''+room_bthx+'\')">'+
 
     '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>'+//phone
     '</button>'+
 
-      '<button id="bt_mte_call_'+room_bthx+'" class="cl_bt_mte_call">'+
+      '<button id="bt_mte_call_'+room_bthx+'" class="h100">'+
     '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M463 945l-101 101q-42-103-42-214v-128q0-26 19-45t45-19 45 19 19 45v128q0 53 15 113zm1114-602l-361 361v128q0 132-94 226t-226 94q-55 0-109-19l-96 96q97 51 205 51 185 0 316.5-131.5t131.5-316.5v-128q0-26 19-45t45-19 45 19 19 45v128q0 221-147.5 384.5t-364.5 187.5v132h256q26 0 45 19t19 45-19 45-45 19h-640q-26 0-45-19t-19-45 19-45 45-19h256v-132q-125-13-235-81l-254 254q-10 10-23 10t-23-10l-82-82q-10-10-10-23t10-23l1234-1234q10-10 23-10t23 10l82 82q10 10 10 23t-10 23zm-380-132l-621 621v-512q0-132 94-226t226-94q102 0 184.5 59t116.5 152z"/></svg>'+//microphhone-slash
     '</button>'+
       '<audio id="lcl_aud" style="display:none" oncontextmenu="return false;" disabled></audio>'+  
       '</div>'+//_user_bts
-      '</div>'+//_user
-      '</div>'+//_con_user
-
-      '<div id="dv_chat_room_msg_'+room_bthx+'" class="cl_dv_chat_room_msg">'+
-      '<form class="cl_fm_chat_room_msg" onsubmit="enviar_msg_prv(event,\''+room_bthx+'\')">'+
-
-      '<input type="text" id="in_chat_room_msg_'+room_bthx+'" class="cl_in_chat_room_msg" autocorrect="off" autocomplete="off"'+
-      ' data-room="'+room_bthx+
-      '" placeholder="write your message...">'+
-
-      '<button id="btn_chat_room_msg_'+room_bthx+'" class="cl_btn_chat_msg" type="submit" >'+
-      '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
-      '</button>'+
-    '</form>'+
-      '<button class="cl_btn_chat_room_emj"  onclick="seleccionar_emoji(\''+room_bthx+'\')">'+
-      '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
-        '</button>'+
       '</div>';    
     
     dv_con_chat.appendChild(nudiv);
@@ -1249,16 +1231,16 @@ function abrir_chat_request(room_bthx,skt_id_mndx){
     nudiv.addEventListener("click",function(){
 
       var cls_act= nudiv.getAttribute("class");
-      var re= new RegExp("alfrente","i");
+      var re= new RegExp("al_frente","i");
 
       if(!re.test(cls_act)){
         var dvs= document.querySelectorAll("#dv_con_chat>div");
 
         for(var i=0;i<dvs.length;i++){
-         dvs[i].classList.remove("alfrente");
+         dvs[i].classList.remove("al_frente");
         }//for
 
-        this.classList.add("alfrente");
+        this.classList.add("al_frente");
         //console.log("al frente");
       }//if no la tiene
 
@@ -1409,10 +1391,10 @@ function mostrar_etw_game_opt(){
   
     var nudiv= document.createElement("DIV");
     nudiv.id= "dv_create_game";
-
-    nudiv.innerHTML='<div id="dv_tit_opt_game">'+
-     '<div id="dv_tit_opt_game_nme">Game Options</div>'+
-     '<div id="dv_tit_opt_game_x" onclick="cerrar_game_opt()">X</div></div>'+
+    nudiv.setAttribute("class","inl_blo cen bor")
+    nudiv.innerHTML='<div id="dv_tit_opt_game" class="flex_row">'+
+     '<div id="dv_tit_opt_game_nme" class="inl_blo cen w100 bac_col_bla col_whi">Game Options</div>'+
+     '<div id="dv_tit_opt_game_x" class="inl_blo cen w50p cur_poi" onclick="cerrar_game_opt()">X</div></div>'+
 
      '<div style="display:inline-block">'+
      '<span>Select word list:</span><br>'+
@@ -1436,8 +1418,8 @@ function mostrar_etw_game_opt(){
      '<option id="opt8">8</option>'+
      '</select></div><br>'+
     '<label><input type="checkbox" id="in_ch_vce">By Voice</label><br>'+
-     '<div id="dv_rdy_game">'+
-     '<input type="button" id="bt_rdy_game" value="Create" onclick="solicitar_juego()">'+
+     '<div id="dv_rdy_game" class="cen">'+
+     '<input type="button" id="bt_rdy_game" class="w50" value="Create" onclick="solicitar_juego()">'+
      '</div></div>';
 
     dv_con_game.appendChild(nudiv);
@@ -1505,7 +1487,8 @@ function dar_bar_jue(roomjf,nme_juef,
     var nudiv= document.createElement("DIV");
     nudiv.id= "dv_game_bar_"+roomjf;
 
-    nudiv.setAttribute("class","cl_dv_game_bar");
+    nudiv.setAttribute("class","bor");
+    nudiv.setAttribute("style","display:table")
     nudiv.setAttribute("onclick","juntarse_a_juego(\'"+roomjf+"\',\'"+
                        nme_juef+"\',\'"+
                        lis_juef+"\',\'"+
@@ -1513,11 +1496,11 @@ function dar_bar_jue(roomjf,nme_juef,
 
     nudiv.setAttribute("data-id-gm",roomjf);
 
-    nudiv.innerHTML= '<div id="dv_bar_jue_nm">'+
+    nudiv.innerHTML= '<div id="dv_bar_jue_nm" class="inl_blo bor">'+
      nme_juef+'</div>'+
-     '<div id="dv_bar_jue_lis">'+lis_juef+
+     '<div id="dv_bar_jue_lis" class="inl_blo bor">'+lis_juef+
      '</div>'+
-     '<div id="dv_bar_jue_nro_player>1/'+ //nrojug/totjug
+     '<div id="dv_bar_jue_nro_player" class="inl_blo bor">1/'+ //nrojug/totjug
     '<span id="sp_nro_player">'+ nro_playerf+
       '</span>'+'</div>';
 
@@ -1544,21 +1527,22 @@ function crear_juego(roomjf,nme_juef,lis_juef,nro_playerf){
      
     var nudivj= document.createElement("DIV");
     nudivj.id= "dv_jue";
-
+    nudivj.classList.add("flex_col","pos_absi","top_10","bor_r","bor_1p_grey","bac_col_db82")
+    nudivj.setAttribute("style","width:270px;height:250px")
     nudivj.innerHTML='<div id="dv_jue_cab">'+
-    '<div id="dv_jue_tit" class="cl_dv_chat_room_tit">'+
-      '<div id="dv_jue_tit_nm">'+nme_juef+'</div>'+
-      '<div id="dv_jue_tit_rsz" onclick="restaurar_tam_jue()">L</div>'+
-      '<div id="dv_jue_tit_cerrar" class="cl_prv_tit_cerrar" onclick="cerrar_juego(\''+roomjf+'\')">X</div>'+
+    '<div id="dv_jue_tit" class="flex_row cen fon_ari">'+
+      '<div id="dv_jue_tit_nm" class="w100 cen bor_r5000 bac_col_285 col_whi cur_mov">'+nme_juef+'</div>'+
+      '<div id="dv_jue_tit_rsz" class="cen w30p cur_poi" onclick="restaurar_tam_jue()">L</div>'+
+      '<div id="dv_jue_tit_cerrar" class="cen w30p cur_poi bac_col_800 col_whi bor_r0500" onclick="cerrar_juego(\''+roomjf+'\')">X</div>'+
       '</div>'+
 
     '<div id="dv_jue_exp">Explains: <span id="sp_word_to_guess">wordX</span'+
-    '><span id="sp_timer">00</span></div>'+
+    '><span id="sp_timer" class="flo_rig bor_1p_bla">00</span></div>'+
     '</div>'+//dv_jue_cab
 
-    '<div id="dv_jue_con_user" class="">'+
-    '<div id="dv_jue_con" class=""></div>'+
-    '<div id="dv_jue_user" class="">'+
+    '<div id="dv_jue_con_user" class="flex_row pos_abs top_50p bot_30p w100">'+
+    '<div id="dv_jue_con" class="ove_y wor_wra w100 bor_1p_grey"></div>'+
+    '<div id="dv_jue_user" class="wor_wra pos_rel fon_bol bor_1p_grey" style="width:100px">'+
 
       '<div id="dv_jue_username_'+roomjf+'" class="cl_dv_chat_room_username"></div>'+
 
@@ -1568,18 +1552,19 @@ function crear_juego(roomjf,nme_juef,lis_juef,nro_playerf){
       '</div>'+
     '</div>'+//_con_user
 
-      '<div id="dv_jue_msg">'+
+      '<div id="dv_jue_msg" class="pos_abs bot_0p h30p flex_row w90">'+
 
-    '<form id="fm_jue_msg" class="cl_fm_chat_room_msg" onsubmit="enviar_msg_jue(event)">'+
-    '<input type="text" id="in_jue_msg" class="cl_in_chat_room_msg" placeholder="write your text..." data-room="'+roomjf+'">'+
-
-    '<button id="btn_jue_snd_msg" class="cl_bt_chat_room_msg" type="submit" >'+
+    '<form id="fm_jue_msg" class="pos_abs lef_0p top_0p bot_0p rig_30p" onsubmit="enviar_msg_jue(event)">'+
+      '<div class="pos_abs top_0p bot_0p lef_0p rig_30p">'+
+    '<input type="text" id="in_jue_msg" class="w100 h100" placeholder="write your text..." data-room="'+roomjf+'"></div>'+
+ 
+    '<button id="btn_jue_snd_msg" class="pos_abs rig_0p h100 w30p" type="submit" >'+
       '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
-      '</button>'+  
-    '<button class="cl_bt_chat_room_emj"  onclick="seleccionar_emoji_jue()">'+
+      '</button></form>'+  
+    '<button class="pos_abs rig_0p h100"  onclick="seleccionar_emoji_jue()">'+
       '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
         '</button>'+  
-    '</form></div>';
+    '</div>';
 
     dv_con_game.appendChild(nudivj);
 
@@ -1627,7 +1612,7 @@ socket_client.on("manda user al juego",function(obj_gamef){
   var userj= "";
 
   for(var nom in obj_gamef.users_jue){
-   userj+= '<div id="dv_jue_pnt_'+nom+'" class="cl_dv_jue_pnt">0</div>'+ 
+   userj+= '<div id="dv_jue_pnt_'+nom+'" class="inl_blo cen w30p bor_1p_bla bor_r50">0</div>'+ 
             obj_gamef.users_jue[nom][0]+"<br>";
   }//for
 
@@ -1736,6 +1721,7 @@ function restaurar_tam_jue(){
   }//if pequeño
   else{
     dv_jue.removeAttribute("style");
+    dv_jue.setAttribute("style","width:270px;height:250px");
   }//else retorna
 }//restaurar tamaño del juego
 
@@ -2075,3 +2061,7 @@ function dar_img_provisional(){
   console.log("da img provisional")
   return "data:image/png;base64,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";
 }//dar_img_provisional
+
+
+//--------reciclaje
+
