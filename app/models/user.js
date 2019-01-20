@@ -1,4 +1,3 @@
-//fecha: 16-09-18, 17-09
 
 var mongoose= require('mongoose');
 var bcrypt= require('bcrypt-nodejs');

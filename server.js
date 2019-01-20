@@ -1,4 +1,3 @@
-//fecha: 16-09-18, 19-09, 20-09, 09-01-19
 // 1.. 
 
 require('dotenv').config();
@@ -326,7 +325,7 @@ socket.on("slide in secret",function(room_secretf){
   socket.join(room_secretf);
   console.log(io.sockets.adapter.rooms[room_secretf]);
 
-  io.to(room_secretf).emit('manda users a secretroom',
+  io.to(room_secretf).emit('manda users a secret room',
              {users_room:users_room[room_secretf],
               skt_id:socket.id,
               room:room_secretf});

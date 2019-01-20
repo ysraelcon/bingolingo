@@ -1,9 +1,6 @@
-<!--
-fecha: 16-09-18, 18-09
--->
 
-<!-- efectos navidad -->
- <script type="text/javascript" src="/scripts/snow.js"></script> 
+<!-- efectos navidad 
+ <script type="text/javascript" src="/scripts/snow.js"></script> -->
 
 <style>
 /*style head..*/
@@ -222,6 +219,11 @@ text-decoration:underline;
    
 
 <h2 id="h2_welcome">Welcome to BesTalk</h2><br>
+  
+<!-- 2c.. heroku -->    
+<h1 id="h1_info">First release running on: <a href="https://bestalk.herokuapp.com" target="_self">BesTalk.herokuapp.com</a></h1><br>
+<h3>this the Beta Version:</h3><br>  
+  
 <h3 id="h3_msg">A language exchange website in development which will bring us the best of SharedLingo, SharedTalk and LiveMocha...</h3><br>
   
 <h4>Working Features:</h4><br>
@@ -244,10 +246,6 @@ text-decoration:underline;
 <h5>And more in construction... <span id="sp_join_us" onclick="mostrar_sign_up()">Join us!</span></h5><br>   
     
 
-
-<!-- 2c.. heroku   
-<h1 id="h1_info">First release running on: <a href="https://bestalk.herokuapp.com" target="_self">BesTalk.herokuapp.com</a></h1><br>
-<h3>this the Beta Version:</h3><br>  --> 
 
 
 
@@ -397,32 +395,16 @@ dv_login_sign_up_scr.addEventListener("click",function(){
 
 
 
-<style>
-/*style fondo..*/
-#dv_fondo{
-    position:absolute; bottom:0px;
-    width:100%;
-    /*border:1px solid;*/
-    font-size:15px; font-family:arial;
-    background-color:black;
-      color:white;}
-  
-#sp_inf{
-  position:absolute; right:20px; bottom:0px;
-    cursor:pointer;
-}
-  
-/*..style fondo*/
-</style>
 
   
-<div id="dv_fondo">
+<div id="dv_fondo" class="pos_abs bot_0p w100 fon_ari fon_15p bac_col_bla col_whi">
 <span>Made with 
  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIoSURBVEhL5ZJPTxNBGMYXjCZ68cDRb+DJD0CCISjWNkLbXVpp9n8Zg3S3wkFC2zDdglDprp5NNIYrRuSkiRy4ePFTcOLOgeihMePM+C50t0Oz4JEneTKZP89v3n13pKupdwjdClwz6zvlBb9angwW5Zuw9X/CGA8HjvkicK3jwLVJj4/euLYOxy4nVmXg2F9i4Ih9196C4xcTxsqNwLG+i6Bx+1W7ALFk2lGUa7Qln0Uw5leoxB3Ofcc+ZK2E+GARSRqioY9hWOT4Bcydqn0fEOfrX+Vi+PPMeN9axI61DBixeM9d65MwnMDtudltQPWLvXHftb6Jgkn8el4jTS27D7io4LUciIKDXFfzfKTPlKyWnhBPz30AZFT0wNt4OIkbmszHliGTFeURWSsXxwF5pmBRu0Or78bDoVd1mbTndeEeq3zNVDi8Xsx02esD7Jn8imWIwqFRaoxfEl/vVEyC1WkOZ27q+V1ARrVenvXoJZFw2FuRfcck69YMqRUen8JrhfSfjQV1BJBRtXTFqNPDLNSpGBwS9jY0q3bzWYn9RFKbSZ2COZyatmkDcP3CkjTceJr5FR6mvaQvYop/PqYjm/cC426quZ+AOl8tI78sCjMvTU2QuQejwj2sZX8ghK4DZrCaWm5PBEEPR0nq3t3IWq2Y7tJ2tSGaXDT0slHMnPTCek3b9ZsV0kbKbYhcTp4lpz0t+x6rua/0X+x6Wn7LM+Ux2L4SkqS/5cRzDLlpspQAAAAASUVORK5CYII=" title="Potato" width="24" height="24">
  by BesTalk Team</span> 
   
     
 <span id="sp_inf" title="info"
+      class="pos_abs rig_20p bot_0p cur_poi"
       onclick="dar_info()">
   <svg width="16" height="16" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1152 1376v-160q0-14-9-23t-23-9h-96v-512q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v160q0 14 9 23t23 9h96v320h-96q-14 0-23 9t-9 23v160q0 14 9 23t23 9h448q14 0 23-9t9-23zm-128-896v-160q0-14-9-23t-23-9h-192q-14 0-23 9t-9 23v160q0 14 9 23t23 9h192q14 0 23-9t9-23zm640 416q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z" fill="#fff"/></svg>
 </span><!-- info-circle -->

@@ -1,26 +1,4 @@
-<!--
-fecha: 16-09-18
--->
 
-<style>
-/*style fondo..*/
-#dv_fnd{
-    position:relative;
-    width:100%;
-    /*border:1px solid;*/
-    font-size:15px; font-family:arial;
-    background-color:black;
-      color:white;}
-  
-#sp_err{
-  position:absolute; right:0px; bottom:0px;
-}
-#sp_err i{
-  color:yellow;
-  cursor:pointer;
-}
-/*..style fondo*/
-</style>
 
 <style>
   
@@ -73,13 +51,13 @@ fecha: 16-09-18
     
 </style>
   
-<div id="dv_fnd">
+<div id="dv_fnd" class="pos_abs bot_0p w100 fon_ari fon_15p bac_col_bla col_whi">
 <span>Made with 
  <img src="https://png.icons8.com/potato/color/24" title="Potato" width="24" height="24">
  by BesTalk Team</span> 
     
-<span id="sp_err" onclick="mostrar_reporte()">Report 
- <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+<span id="sp_err" class="pos_abs rig_0p bot_0p" onclick="mostrar_reporte()">Report 
+ <i class="col_yel cur_poi fa fa-exclamation-triangle" aria-hidden="true"></i>
  errors</span>
    
 </div><!-- footer / Visit the stable page: <a href="https://bingolingo.glitch.me" target="_blank">BingoLingo</a> <br> -->
