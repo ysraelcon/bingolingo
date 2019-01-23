@@ -11,11 +11,11 @@ var app= angular.module('la_App',
    $routeProvider.otherwise({redirectTo:'/'});
           
 }]);//config
-
+/*
 app.directive("appFondo",function(){
   return {strict:"E",
     templateUrl:"directive/fondo.html"};
-});//app-fondo
+});//app-fondo */
 
 app.directive("appEditProfile",function(){
   return {strict:"E",
