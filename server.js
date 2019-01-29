@@ -98,7 +98,41 @@ jue{jue_nro:{nro_game,tiempo,word_to_guess,type_game,
   
 var list_words= require("./wordlists.js");
 
+/*-----indice
 
+.on.user va a chat: em.usernames
+.on.open room: em.manda users al room; actualizar rooms
+.on.send message room: em.new message room
+.on.cerrar room: em.manda users al room; actualizar rooms
+.on.typing: em.who type
+.on.reporte
+.on.slide in secret: em.manda users a secret room
+.on.ver su profile: em.perfil a ver
+.on.mandar chat request: em.recibir chat request, esperar chat request
+.on.cancelar char request of: em.cancelar chat request of
+.on.cancel chat request: em.eliminar chat request
+.on.abrir chat request: em.acepta chat request
+.on.aceptar chat request: em.crear chat privado
+.on.mandar usuarios al chat privado: em.meter usuarios al chat privado
+.on.users al chat request: em.mete users en chat request
+.on.send message chat r: em.new msg chat request
+.on.solicitar llamada: em.solicitud de aceptacion de la llamada
+.on.cancelar llamada entrante: em.se cancelo llamada
+.on.correr llamada: em.correr web rtc
+.on.colgar llamada: em.se cuelga llamada
+.on.save note
+.on.solicitar game: em.crear juego; los demas bar jue
+.on.entrar roomj: em.eliminar game bar; manda user al juego, los que adivinan, ya comenzo jue
+f.cuenta_abajo: em.los que adivinan; el del turno; quien gano
+f.dar_aleatoria_pos
+.on.10 seg
+.on.send message jue: em.new message jue; actualiza puntaje
+.on.salir del juego: em.elimina game bar; manda user al juego
+.on.disconnect: em.manda users al room; usernames; actualizar rooms
+f.haber_link
+f.taggear_a
+
+*/
 
 //socket connection, poner variable afuera
 io.sockets.on('connection', function(socket) {
@@ -123,9 +157,15 @@ io.sockets.on('connection', function(socket) {
 //----click on chat
   
 socket.on("user va a chat",function(){
-
+//socket.id, socket.request.user, socket.rooms, socket.adapter
  console.log("entro a chat "+ socket.request.user.firstname);
- 
+ console.log(socket.request.user)
+  /*
+ console.log(socket.adapter.rooms)
+ { 'OoGV-XjIt2V8k2kmAAAA': Room { sockets: { 'OoGV-XjIt2V8k2kmAAAA': true }, length: 1 },
+  bstlk: Room { sockets: { 'OoGV-XjIt2V8k2kmAAAA': true }, length: 1 } }
+  */
+  
  if(socket.request.user){
 
   users_cnnt[socket.request.user._id]= {user: socket.request.user,
