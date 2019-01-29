@@ -61,11 +61,20 @@ passportf.use('login',new lclstrtg({
     console.log("no username");
    return done(null,false, req.flash('loginMsg',"Incorrect username"));
 }//if
+    
   if(!user.validPassword(password)){
     console.log("wrong password");
  return done(null,false, req.flash('loginMsg',"Incorrect password"));
 }//if
 
+    var d= new Date();
+    user.fecha_de_login= d;
+
+user.save((err)=>{
+ if(err) throw err;
+ console.log("guardo fecha de login: "+ d )
+});//save user
+    
 return done(null,user);
 });//findone
   

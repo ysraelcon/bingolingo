@@ -14,6 +14,8 @@ var user_sch= mongoose.Schema({
   about_me: String,
   email: {type: String, unique:true},
   password: {type: String},
+  fecha_de_registro: {type: Date, 'default': Date.now, index: true},
+  fecha_de_login: {type: Date, 'default': Date.now, index: true},
   notes: String,
   resetPasswordToken: String,
   resetPasswordExpires: Date,

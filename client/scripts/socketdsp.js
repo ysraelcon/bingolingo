@@ -1,8 +1,94 @@
-//notes line to fix: L796
+//notes line to fix: 
 //despues de socket.io/socket.io.js
 
 //conexión socket
 var socket_client= io.connect();
+
+
+/*-----indice
+
+f.entrar_a_chat: em.user va a chat
+.on.usernames
+f.entrar_lang_room: entrar_a_room, spanear_room
+f.go_theme_room: entrar_a_room, spanear_room
+f.spanear_room
+f.entrar_a_room: crear_room, em.open room
+.on.manda users al room
+.on.actualizar rooms: spanear_room
+f.minimizar_dv_chat
+f.restaurar_tam_chat
+f.cerrar_dv_chat
+f.es_boton_vacio
+f.enviar_msg: em.send message room
+.on.new message room
+f.esta_tipeando: em.typing
+.on.who type
+f.go_secret: crear_room, em.slide in secret
+f.crear_room
+f.seleccionar_emoji
+f.meter_emoji
+.on.manda users a secret room
+f.nooP
+
+
+f.informar_profile: em.ver su profile
+.on.perfil a ver
+f.mandar_chat_request: em.manda chat request, cerrar_inf_user
+f.mandar_chat_request_profile: em.mandar chat request, cerrar_profile_user
+f.cerrar_profile_user
+f.cerrar_inf_user
+.on.recibir chat request
+f.aceptar_chat_request: eliminar_chat_request_of, em.aceptar chat request
+.on.crear chat privado: crear_chat_privado
+f.cancelar_chat_request_of: em.cancelar chat request of
+.on.cancelar chat request of: cerrar_waiting
+f.crear_chat_privado
+.on.esperar chat request
+f.cerrar_waiting: eliminar_waiting, em.cancel chat request
+.on.cerrar waiting: eliminar_waiting
+f.eliminar_waiting
+.on.eliminar chat request
+f.eliminar_chat_request_of
+.on.acepta chat request
+.on.meter usuarios al chat privado
+f.enviar_msg_prv: em.send message chat r
+.on.new msg chat request
+.on.se desconecto
+
+
+f.mostrar_etw_game_opt
+f.cerrar_game_opt
+f.solicitar_juego: em.solicitar game
+.on.crear juego: crear_juego
+.on.los demas bar jue: dar_bar_jue
+f.dar_bar_jue
+f.juntarse_a_juego: crear_juego
+f.crear_juego: em.entrar roomj
+.on.manda user al juego
+.on.ya comenzo jue
+.on.el del turno
+.on.corre reloj
+.on.los que adivinan
+.on.no se adivino
+.on.actualiza puntaje
+.on.quien gano
+f.restaurar_tam_jue
+f.cerrar_juego
+.on.eliminar game bar
+f.enviar_msg_jue: em.send message jue
+.on.new message jue: em.10 seg
+f.seleccionar_emoji_jue
+
+
+f.enviar_reporte: em.reporte, cerrar_reporte
+f.editar_nota
+f.guardar_nota: em.save note
+f.definir_wordnik
+f.definir_yandex
+f.traducir_frase
+f.dar_img_provisional
+
+*/
 
 
 //====== entra al chat
@@ -382,9 +468,9 @@ function minimizar_dv_chat(roomx){//roomx
     var dv_chat_room_con_user_= "#dv_chat_room_con_user_"+roomx;
     var dv_chat_room_msg_= "#dv_chat_room_msg_"+roomx;
   
-    if($(dv_chat_room_tit_min_).html()=="-"){
+    if($(dv_chat_room_tit_min_).html()=='<span class="cen_v">-</span>'){
       $(dv_chat_room_).height(30);
-      $(dv_chat_room_tit_min_).html("+");
+      $(dv_chat_room_tit_min_).html('<span class="cen_v">+</span>');
       $(dv_chat_room_con_user_).hide();
       $(dv_chat_room_msg_).hide();
       $(dv_chat_room_).resizable("disable");
@@ -393,7 +479,7 @@ function minimizar_dv_chat(roomx){//roomx
     }//if -
     else{
       $(dv_chat_room_).height(200);
-      $(dv_chat_room_tit_min_).html("-");
+      $(dv_chat_room_tit_min_).html('<span class="cen_v">-</span>');
       $(dv_chat_room_con_user_).show();
       $(dv_chat_room_msg_).show();
       $(dv_chat_room_).resizable("enable");
@@ -402,6 +488,39 @@ function minimizar_dv_chat(roomx){//roomx
   });//jQuery
 }//minimizar_dv_chat
 
+function minimizar_dv_chat2(elx){
+  
+
+var dv_c_r_x= elx.parentElement.parentElement;
+
+console.log("minimiza dv chat:"+dv_c_r_x.id)
+
+  jQuery(function($){
+
+    var dv_chat_room_tit_min_= elx;
+    var dv_chat_room_= dv_c_r_x;
+    var dv_chat_room_con_user_= dv_c_r_x.children[1];
+    var dv_chat_room_msg_= dv_c_r_x.children[2];
+  
+    if($(dv_chat_room_tit_min_).html()=='<span class="cen_v">-</span>'){
+      $(dv_chat_room_).height(30);
+      $(dv_chat_room_tit_min_).html('<span class="cen_v">+</span>');
+      $(dv_chat_room_con_user_).hide();
+      $(dv_chat_room_msg_).hide();
+      $(dv_chat_room_).resizable("disable");
+      $(dv_chat_room_).css('z-index', 9999);
+      
+    }//if -
+    else{
+      $(dv_chat_room_).height(200);
+      $(dv_chat_room_tit_min_).html('<span class="cen_v">-</span>');
+      $(dv_chat_room_con_user_).show();
+      $(dv_chat_room_msg_).show();
+      $(dv_chat_room_).resizable("enable");
+    }//else +
+    
+  });//jQuery
+}//minimizar_dv_chat
 
 
 function restaurar_tam_chat(roomx){//roomx
@@ -564,54 +683,56 @@ function crear_room(roomx){
     
      var nudiv=document.createElement("DIV");
      nudiv.id="dv_chat_room_"+roomx;
-     nudiv.classList.add("pos_absi","top_10","lef_10","flex_col","w80","h60","max_w600p","bor_r","bor_s","al_frente");
+    nudiv.setAttribute("class","pos_a_i top_10 lef_10 w80 h60 bor_r bor_s bac_col_whi al_frente")
+     
 
-     nudiv.innerHTML='<div class="flex_row bor_r h30p">'+
+     nudiv.innerHTML='<div class="h30p w100 pos_a fon_ari bor_r">'+
 
-        '<div class="w70 flex_col cen cur_mov bac_col_97d col_whi bor_r5000 fon_ari fon_bol">'
-        +(rooms[roomx]||roomx)+'</div>'+
+        '<div class="w70 inl_blo pos_r h100 cur_mov bac_col_bstlk col_whi bor_r5000 fon_ari fon_bol"><span class="cen_v">'
+        +(rooms[roomx]||roomx)+'</span></div>'+
 
       '<div id="dv_chat_room_tit_min_'+roomx+
-      '" class="w10 flex_col cen bac_col_whi"'+
-      ' onclick="minimizar_dv_chat(\''+roomx+'\')">-</div>'+
+      '" class="w10 inl_blo pos_r h100"'+
+      ' onclick="minimizar_dv_chat2(this)"><span class="cen_v">-</span></div>'+//\''+roomx+'\'
 
-      '<div class="w10 flex_col cen fon_ari bac_col_whi"'+
-      ' onclick="restaurar_tam_chat(\''+roomx+'\')">L</div>'+
+      '<div class="w10 inl_blo pos_r h100"'+
+      ' onclick="restaurar_tam_chat(\''+roomx+'\')"><span class="cen_v">L</span></div>'+
 
-      '<div class="w10 flex_col cen bor_r0500 fon_ari bac_col_438 col_whi"'+
-      ' onclick="cerrar_dv_chat(\''+roomx+'\')">X</div>'+
+      '<div class="w10 inl_blo pos_r h100 bor_r0500 bac_col_crr_chat_g col_whi"'+
+      ' onclick="cerrar_dv_chat(\''+roomx+'\')"><span class="cen_v">X</span></div>'+
 
       '</div>'+//dv_chat_room_tit
 
       '<div id="dv_chat_room_con_user_'+roomx+
-      '" class="pos_abs top_30p bot_30p w100 flex_row">'+
+      '" class="pos_a top_30p bot_30p w100">'+
 
-      '<div id="dv_chat_room_con_'+roomx+'" class="bac_col_bfd wor_wra ove_y w70"></div>'+
+      '<div id="dv_chat_room_con_'+roomx+'" class="h100 w70 inl_blo pos_r bac_col_con_chat_g wor_wra ove_y"></div>'+
 
-      '<div id="dv_chat_room_user_'+roomx+'" class="bac_col_fff w30 fon_bol wor_wra ove_y">'+
+      '<div id="dv_chat_room_user_'+roomx+'" class="h100 w30 inl_blo pos_r bac_col_usr_chat_g fon_bol wor_wra ove_y">'+
 
         '<div id="dv_chat_room_username_'+roomx+
-      '" class="cl_dv_chat_room_username"></div>'+
+      '" class="pos_a"></div>'+
 
       '</div>'+//dv_chat_room_user
       '</div>'+ //dv_chat_room_con_user
 
       '<div id="dv_chat_room_msg_'+roomx+
-      '" class="pos_abs bot_0p h30p flex_row w100">'+
-      '<form class="pos_rel flex_row h100 w70" onsubmit="enviar_msg(event,\''+roomx+'\')">'+
+      '" class="pos_a bot_0p h30p w100">'+
+       '<div class="h100 w70 inl_blo pos_r">'+
+      '<form class="h100 w100" onsubmit="enviar_msg(event,\''+roomx+'\')">'+
 
-      '<div class="pos_abs top_0p bot_0p lef_0p rig_30p"><input type="text" id="in_chat_room_msg_'+roomx+'" class="w100 h100" autocorrect="off" autocomplete="off"'+
+      '<div class="h100 pos_a lef_0p rig_30p"><input type="text" id="in_chat_room_msg_'+roomx+'" class="w100 h100 pos_a" autocorrect="off" autocomplete="off"'+
       ' data-room="'+roomx+'" placeholder="write your message"></div>'+
 
-      '<button id="bt_chat_room_msg_'+roomx+'" class="pos_abs rig_0p h100 w30p" type="submit" >'+
+      '<button id="bt_chat_room_msg_'+roomx+'" class="w30p h100 pos_a rig_0p" type="submit" >'+
       '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
       '</button>'+
-    '</form>'+ 
-       '<div id="dv_chat_room_user_bts_eng" class="pos_rel w30 bac_col_fff">'+
-      '<button class="h100" onclick="seleccionar_emoji(\''+roomx+'\')">'+
+    '</form></div>'+ 
+       '<div id="dv_chat_room_user_bts_eng" class="h100 inl_blo pos_a w30 bac_col_usr_chat_g">'+
+      '<button class="w30p h100" onclick="seleccionar_emoji(\''+roomx+'\')">'+
       '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
         '</button>'+
-       '<input type="button" class="pos_abs h100" value="_" onclick="es_boton_vacio()">'+
+       '<input type="button" class="w30p h100 pos_a" value="_" onclick="es_boton_vacio()">'+
        '</div>'+
 
       '</div>';
@@ -951,54 +1072,56 @@ if(!dv_chat_room_){
 
     var nudiv=document.createElement("DIV");
     nudiv.id="dv_chat_room_"+room_bthx;
-    nudiv.classList.add("pos_absi","top_10","lef_10","flex_col","w80","h60","max_w600p","bor_r","bor_s");    
+    nudiv.setAttribute("class","pos_a_i top_10 lef_10 w80 h60 bor_r bor_s bac_col_whi")
+       
 
-    nudiv.innerHTML='<div class="flex_row bor_r h30p">'+
+    nudiv.innerHTML='<div class="h30p w100 pos_a fon_ari bor_r">'+
 
-        '<div class="w70 flex_col cen cur_mov bac_col_285 col_whi bor_r5000 fon_ari fon_bol">Chat with</div>'+
+        '<div class="w70 inl_blo pos_r h100 cur_mov bac_col_tit_chat_prv col_whi bor_r5000 fon_ari fon_bol"><span class="cen_v">Chat with</span></div>'+
 
       '<div id="dv_chat_room_tit_min_'+room_bthx+
-      '" class="w10 flex_col cen bac_col_whi"'+
-      ' onclick="minimizar_dv_chat(\''+room_bthx+'\')">-</div>'+
+      '" class="w10 inl_blo pos_r h100"'+
+      ' onclick="minimizar_dv_chat(\''+room_bthx+'\')"><span class="cen_v">-</span></div>'+
 
-      '<div class="w10 flex_col cen fon_ari bac_col_whi"'+
-      ' onclick="restaurar_tam_chat(\''+room_bthx+'\')">L</div>'+
+      '<div class="w10 inl_blo pos_r h100"'+
+      ' onclick="restaurar_tam_chat(\''+room_bthx+'\')"><span class="cen_v">L</span></div>'+
 
-      '<div class="w10 flex_col cen bor_r0500 fon_ari bac_col_800 col_whi"'+
-      ' onclick="cerrar_dv_chat(\''+room_bthx+'\')">x</div>'+
+      '<div class="w10 inl_blo pos_r h100 bor_r0500 bac_col_crr_chat_p col_whi"'+
+      ' onclick="cerrar_dv_chat(\''+room_bthx+'\')"><span class="cen_v">x</span></div>'+
 
       '</div>'+//dv_chat_room_tit
 
 
       '<div id="dv_chat_room_con_user_'+room_bthx+
-      '" class="pos_abs top_30p bot_30p w100 flex_row">'+
+      '" class="pos_a top_30p bot_30p w100">'+
 
-      '<div id="dv_chat_room_con_'+room_bthx+'" class="bac_col_db8 wor_wra ove_y w70"></div>'+
+      '<div id="dv_chat_room_con_'+room_bthx+'" class="h100 w70 inl_blo pos_r bac_col_con_chat_prv wor_wra ove_y"></div>'+
 
-    '<div id="dv_chat_room_user_'+room_bthx+'" class="bac_col_fa7 w30 fon_bol wor_wra ove_y">'+
+    '<div id="dv_chat_room_user_'+room_bthx+'" class="h100 w30 inl_blo pos_r bac_col_usr_chat_prv fon_bol wor_wra ove_y">'+
 
-    '<div id="dv_chat_room_username_'+room_bthx+'" class="cl_dv_chat_room_username"></div>'+
+    '<div id="dv_chat_room_username_'+room_bthx+'" class="cl_dv_chat_room_username" class="pos_a"></div>'+
 
         
       '</div>'+//_user
       '</div>'+//_con_user
 
-      '<div id="dv_chat_room_msg_'+room_bthx+'" class="pos_abs bot_0p h30p flex_row w100">'+
-      '<form class="pos_rel flex_row h100 w70" onsubmit="enviar_msg_prv(event,\''+room_bthx+'\')">'+
-      '<div class="pos_abs top_0p bot_0p lef_0p rig_30p">'+
-      '<input type="text" id="in_chat_room_msg_'+room_bthx+'" class="w100 h100" autocorrect="off" autocomplete="off"'+
+      '<div id="dv_chat_room_msg_'+room_bthx+'" class="pos_a bot_0p h30p w100">'+
+      '<div class="h100 w70 inl_blo pos_r">'+
+      '<form class="h100 w100" onsubmit="enviar_msg_prv(event,\''+room_bthx+'\')">'+
+      '<div class="h100 pos_a lef_0p rig_30p">'+
+      '<input type="text" id="in_chat_room_msg_'+room_bthx+'" class="w100 h100 pos_a" autocorrect="off" autocomplete="off"'+
       ' data-room="'+room_bthx+
       '" placeholder="write your message..."></div>'+
 
-      '<button id="btn_chat_room_msg_'+room_bthx+'" class="pos_abs rig_0p h100 w30p" type="submit" >'+
+      '<button id="btn_chat_room_msg_'+room_bthx+'" class="w30p h100 pos_a rig_0p" type="submit" >'+
       '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
       '</button>'+
-    '</form>'+
+    '</form></div>'+
       
       
-      '<div class="pos_rel w30 bac_col_fa7">'+  
+      '<div class="h100 inl_blo pos_a w30 bac_col_usr_chat_prv">'+  
 
-      '<button class="h100"  onclick="seleccionar_emoji(\''+room_bthx+'\')">'+
+      '<button class="w30p h100"  onclick="seleccionar_emoji(\''+room_bthx+'\')">'+
       '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
         '</button>'+
       '<button id="bt_call_'+room_bthx+
@@ -1148,143 +1271,7 @@ function eliminar_chat_request_of(room_bthx){
 }//eliminar_chat_request
 
 
-function abrir_chat_request(room_bthx,skt_id_mndx){
-  console.log("abre chat request:"+room_bthx+"/-/"+skt_id_mndx)
-  var dv_chat_room_= document.getElementById("dv_chat_room_"+room_bthx); 
-  
-  if(!dv_chat_room_){
-    
-    var dvs= document.querySelectorAll("#dv_con_chat>div");
 
-    for(var i=0;i<dvs.length;i++){
-     dvs[i].classList.remove("al_frente");
-    }//for    
-
-    var nudiv=document.createElement("DIV");
-    nudiv.id="dv_chat_room_"+room_bthx;
-    nudiv.classList.add("pos_abs flex_col w80 h60 bor_r bor_s");    
-
-    nudiv.innerHTML='<div class="flex_row bor_r h30p">'+
-
-        '<div class="w70 flex_col cen cur_mov bac_col_285 col_whi bor_r5000 fon_ari fon_bol">Chat with</div>'+
-
-      '<div id="dv_chat_room_tit_min_'+room_bthx+
-      '" class="w10 flex_col cen"'+
-      ' onclick="minimizar_dv_chat(\''+room_bthx+'\')">-</div>'+
-
-      '<div class="w10 flex_col cen fon_ari"'+
-      ' onclick="restaurar_tam_chat(\''+room_bthx+'\')">L</div>'+
-
-      '<div class="w10 flex_col cen bor_r0500 fon_ari bac_col_800 col_whi"'+
-      ' onclick="cerrar_dv_chat(\''+room_bthx+'\')">x</div>'+
-
-      '</div>'+//dv_chat_room_tit
-
-
-      '<div id="dv_chat_room_con_user_'+room_bthx+
-      '" class="pos_abs top_30p bot_30p w100 flex_row">'+
-
-      '<div id="dv_chat_room_con_'+room_bthx+'" class="bac_col_db8 wor_wra ove_y w70"></div>'+
-
-    '<div id="dv_chat_room_user_'+room_bthx+'" class="bac_col_fa7 w30 fon_bol wor_wra ove_y">'+
-
-    '<div id="dv_chat_room_username_'+room_bthx+'" class="cl_dv_chat_room_username"></div>'+
-
-        
-      '</div>'+//_user
-      '</div>'+//_con_user
-
-      '<div id="dv_chat_room_msg_'+room_bthx+'" class="pos_abs bot_0p h30p flex_row w100">'+
-      '<form class="pos_rel flex_row h100 w70" onsubmit="enviar_msg_prv(event,\''+room_bthx+'\')">'+
-      '<div class="pos_abs top_0p bot_0p lef_0p rig_30p">'+
-      '<input type="text" id="in_chat_room_msg_'+room_bthx+'" class="w100 h100" autocorrect="off" autocomplete="off"'+
-      ' data-room="'+room_bthx+
-      '" placeholder="write your message..."></div>'+
-
-      '<button id="btn_chat_room_msg_'+room_bthx+'" class="pos_abs rig_0p h100 w30p" type="submit" >'+
-      '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
-      '</button>'+
-    '</form>'+
-      
-      
-      '<div class="pos_rel w30">'+  
-
-      '<button class="h100"  onclick="seleccionar_emoji(\''+room_bthx+'\')">'+
-      '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
-        '</button>'+
-      '<button id="bt_call_'+room_bthx+
-      '" class="h100" onclick="solicitar_llamada(this,\''+room_bthx+'\')">'+
-
-    '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>'+//phone
-    '</button>'+
-
-      '<button id="bt_mte_call_'+room_bthx+'" class="h100">'+
-    '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M463 945l-101 101q-42-103-42-214v-128q0-26 19-45t45-19 45 19 19 45v128q0 53 15 113zm1114-602l-361 361v128q0 132-94 226t-226 94q-55 0-109-19l-96 96q97 51 205 51 185 0 316.5-131.5t131.5-316.5v-128q0-26 19-45t45-19 45 19 19 45v128q0 221-147.5 384.5t-364.5 187.5v132h256q26 0 45 19t19 45-19 45-45 19h-640q-26 0-45-19t-19-45 19-45 45-19h256v-132q-125-13-235-81l-254 254q-10 10-23 10t-23-10l-82-82q-10-10-10-23t10-23l1234-1234q10-10 23-10t23 10l82 82q10 10 10 23t-10 23zm-380-132l-621 621v-512q0-132 94-226t226-94q102 0 184.5 59t116.5 152z"/></svg>'+//microphhone-slash
-    '</button>'+
-      '<audio id="lcl_aud" style="display:none" oncontextmenu="return false;" disabled></audio>'+  
-      '</div>'+//_user_bts
-      '</div>';    
-    
-    dv_con_chat.appendChild(nudiv);
-
-    
-    nudiv.addEventListener("click",function(){
-
-      var cls_act= nudiv.getAttribute("class");
-      var re= new RegExp("al_frente","i");
-
-      if(!re.test(cls_act)){
-        var dvs= document.querySelectorAll("#dv_con_chat>div");
-
-        for(var i=0;i<dvs.length;i++){
-         dvs[i].classList.remove("al_frente");
-        }//for
-
-        this.classList.add("al_frente");
-        //console.log("al frente");
-      }//if no la tiene
-
-    });//click, poner al frente     
-    
-    
-    jQuery(function($){
-
-      var dv_chat_room_= "#dv_chat_room_"+room_bthx;
-      var dv_chat_room_con_= "#dv_chat_room_con_"+room_bthx;  
-
-      var draggableDiv= $(dv_chat_room_).draggable();
-      $(dv_chat_room_con_, draggableDiv)
-        .mousedown(function(ev){
-        draggableDiv.draggable('disable');
-      }).mouseup(function(ev){
-        draggableDiv.draggable('enable');
-      });
-
-      $(dv_chat_room_).resizable();
-
-      var in_chat_room_msg_= document.getElementById("in_chat_room_msg_"+room_bthx);
-
-      in_chat_room_msg_.addEventListener("keydown",
-                            function(){
-            esta_tipeando(in_chat_room_msg_);
-      });//addeventlistener keydown tyP  
-
-    });//jQuery
-
-    if(skt_id_mndx){
-
-      var dv_chat_request_of= document.getElementById("dv_chat_request_of_"+room_bthx);
-
-      dv_con_chat.removeChild(dv_chat_request_of);
-
-        socket_client.emit("abrir chat request",
-                    {room_bth:room_bthx,
-                     skt_id_mnd:skt_id_mndx});
-    }//if objeto skt_id_mndx existe
-    console.log("abrio chat request");
-  }//if dv_chat_request_wth no creado
-  
-}//abrir_chat_request
 
 
 
@@ -1297,7 +1284,7 @@ socket_client.on("acepta chat request",function(obj_roomf){
 
   dv_con_chat.removeChild(dv_waiting);
   
-  //abrir_chat_request(obj_roomf.room_bth);
+  
   //socket_client.emit("users al chat request",obj_roomf);  
 });//skcon acepta chat reqquest
 
@@ -1527,7 +1514,8 @@ function crear_juego(roomjf,nme_juef,lis_juef,nro_playerf){
      
     var nudivj= document.createElement("DIV");
     nudivj.id= "dv_jue";
-    nudivj.classList.add("flex_col","pos_absi","top_10","bor_r","bor_1p_grey","bac_col_db82")
+    nudivj.setAttribute("class","flex_col pos_absi top_10 bor_r bor_1p_grey bac_col_db82")
+    //nudivj.classList.add("flex_col","pos_absi","top_10","bor_r","bor_1p_grey","bac_col_db82")
     nudivj.setAttribute("style","width:270px;height:250px")
     nudivj.innerHTML='<div id="dv_jue_cab">'+
     '<div id="dv_jue_tit" class="flex_row cen fon_ari">'+
@@ -2064,4 +2052,5 @@ function dar_img_provisional(){
 
 
 //--------reciclaje
+
 

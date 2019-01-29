@@ -475,9 +475,9 @@ cursor:pointer;}
 <div id="dv_theme_rooms_con">
     
     
-<select id="sl_tema" style="width:140px">
+<select id="sl_tema" style="width:140px" onchange="seleccionar_tema()">
   <option>Select Theme</option>
-  <option value="Music">Music</option>
+  <option value="Musics">Musics</option>
   <option value="TV">TV</option>
   <option value="Travel">Travel</option>
   <option value="News">News</option>
@@ -488,11 +488,12 @@ cursor:pointer;}
 </select>
   
 <script>
-sl_tema.onchange= function(){
+  
+function seleccionar_tema(){
  //console.log(sl_tema.value);
  go_theme_room(sl_tema.value);
  sl_tema.options[0].selected=true;
-};//onchange
+};//seleccionar_tema
   
 </script>
         
