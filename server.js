@@ -100,13 +100,13 @@ var list_words= require("./wordlists.js");
 
 /*-----indice
 
-.on.user va a chat: em.usernames
-.on.open room: em.manda users al room; actualizar rooms
-.on.send message room: em.new message room
-.on.cerrar room: em.manda users al room; actualizar rooms
+.on.pedir usuario en chat: em.recibir usuarios
+.on.abrir room: em.recibir usuarios en el room; actualizar rooms
+.on.enviar msg al room: em.recibir msg en room
+.on.cerrar room: em.recibir usuarios en el room; actualizar rooms
 .on.typing: em.who type
 .on.reporte
-.on.slide in secret: em.manda users a secret room
+.on.entrar a secret room: em.recibir usuarios en secret room
 .on.ver su profile: em.perfil a ver
 .on.mandar chat request: em.recibir chat request, esperar chat request
 .on.cancelar char request of: em.cancelar chat request of
@@ -128,7 +128,7 @@ f.dar_aleatoria_pos
 .on.10 seg
 .on.send message jue: em.new message jue; actualiza puntaje
 .on.salir del juego: em.elimina game bar; manda user al juego
-.on.disconnect: em.manda users al room; usernames; actualizar rooms
+.on.disconnect: em.recibir usuarios en el room; recibir usuarios; actualizar rooms
 f.haber_link
 f.taggear_a
 
@@ -156,7 +156,7 @@ io.sockets.on('connection', function(socket) {
   
 //----click on chat
   
-socket.on("user va a chat",function(){
+socket.on("pedir usuario en chat",function(){
 //socket.id, socket.request.user, socket.rooms, socket.adapter
  console.log("entro a chat "+ socket.request.user.firstname);
  console.log(socket.request.user)
@@ -168,10 +168,10 @@ socket.on("user va a chat",function(){
   
  if(socket.request.user){
 
-  users_cnnt[socket.request.user._id]= {user: socket.request.user,
+  users_cnnt[socket.request.user._id]= {user: socket.request.user, //!!!no mandar el user
             skt_id:socket.id};
 
-  io.sockets.emit('usernames', users_cnnt);
+  io.sockets.emit('recibir usuarios', users_cnnt);
 
 
   for( var room in users_room){
@@ -183,15 +183,15 @@ socket.on("user va a chat",function(){
    
  }//if user lgged
  //console.log(socket.request.user.logged_in);
-});//skon user va a chat
+});//skon pedir usuario en chat
 
 
   
-//---- 2a.. open room
+//---- 2a.. abrir room
   
-socket.on('open room',function(roomf){
+socket.on('abrir room',function(roomf){
  //roomf="gnrl" roomf
-  console.log("open room:"+roomf)
+  console.log("abre room:"+roomf)
   if(!users_room[roomf]){
    users_room[roomf]={};
   }//if indef
@@ -220,7 +220,7 @@ socket.on('open room',function(roomf){
      if(err) throw err;
       //console.log("savedddd");
 
-      io.to(roomf).emit('manda users al room',
+      io.to(roomf).emit('recibir usuarios en el room',
                     {users_room:users_room[roomf],
                      chat_room:chatf.chats[roomf],
                      skt_id:socket.id,
@@ -250,7 +250,7 @@ socket.on('open room',function(roomf){
   
   
   
-socket.on('send message room', function(obj_msgf) {
+socket.on('enviar msg al room', function(obj_msgf) {
     //obj_msgf{msg(in_msg_val),room,type_room}
   console.log("enviar msg a room: "+obj_msgf.type_room)
   obj_msgf.msg= emoji.emojify(obj_msgf.msg);
@@ -278,17 +278,17 @@ socket.on('send message room', function(obj_msgf) {
     });//findone
   }//if type_room public
     
-  io.to(obj_msgf.room).emit('new message room',
+  io.to(obj_msgf.room).emit('recibir msg en room',
              {msg:obj_msgf.msg,
               nick:socket.request.user.firstname,
               room:obj_msgf.room});
-});//skon send msg
+});//skon enviar msg al room
 
 
   
 socket.on("cerrar room",function(roomf){
   //roomf="room_bth o gnrl" room
-  console.log("cerró room:"+roomf);
+  console.log("cierra room:"+roomf);
   
   socket.leave(roomf);
   
@@ -298,11 +298,11 @@ socket.on("cerrar room",function(roomf){
   if(users_room[roomf])
     delete users_room[roomf][socket.request.user._id];
 
-  io.to(roomf).emit('manda users al room',
+  io.to(roomf).emit('recibir usuarios en el room',
                 {users_room:users_room[roomf],
                  room:roomf});
   /*
-  io.to(socket.id).emit('manda users al room',
+  io.to(socket.id).emit('recibir usuarios en el room',
                 {users_room:users_room[roomf],
                  room:roomf});*/
   io.sockets.emit("actualizar rooms",
@@ -352,9 +352,9 @@ socket.on("reporte",function(obj_rptf){
   
 //===== 2b.. secret rooms
   
-socket.on("slide in secret",function(room_secretf){
+socket.on("entrar a secret room",function(room_secretf){
  //room_secretf=secret name's room
-  console.log("slide in: "+room_secretf)
+  console.log("entra a secret room: "+room_secretf)
   
   if(!users_room[room_secretf]){
    users_room[room_secretf]={};
@@ -365,12 +365,12 @@ socket.on("slide in secret",function(room_secretf){
   socket.join(room_secretf);
   console.log(io.sockets.adapter.rooms[room_secretf]);
 
-  io.to(room_secretf).emit('manda users a secret room',
+  io.to(room_secretf).emit('recibir usuarios en secret room',
              {users_room:users_room[room_secretf],
               skt_id:socket.id,
               room:room_secretf});
 
-});//skon slide in secret room
+});//skon entrar a secret room
           
  
 
@@ -1034,7 +1034,7 @@ socket.on('disconnect', function() {
   if(!socket.id) return;
   
   delete users_cnnt[socket.request.user._id];
-  io.sockets.emit('usernames', users_cnnt);
+  io.sockets.emit('recibir usuarios', users_cnnt);
   
   console.log("se desconecto "+ socket.request.user.firstname);
   
@@ -1042,7 +1042,7 @@ socket.on('disconnect', function() {
     if(users_room[room][socket.request.user._id]){
        if(!socket.id) return;
        delete users_room[room][socket.request.user._id];
-       io.to(room).emit('manda users al room',
+       io.to(room).emit('recibir usuarios en el room',
                 {users_room:users_room[room],
                  room:room});
        io.sockets.emit("actualizar rooms",

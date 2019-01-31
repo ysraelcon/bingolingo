@@ -93,13 +93,6 @@ body{
   margin:0px;
   background-color:white;}
   
-#dv_ng_view{
-  /*display:flex;
-    flex-direction:column;
-    align-items:center;*/
-  position:relative;
-  height:100%; width:100%;
-  margin:0px;}
   
 /*..style basic page*/
 </style>  
@@ -111,15 +104,15 @@ body{
 .pos_abs,.pos_a {position:absolute} .pos_absi,.pos_a_i {position:absolute !important} .pos_rel,.pos_r {position:relative}
 .flo_rig {float:right}
   
-.inl_blo {display:inline-block}  
+.inl_blo {display:inline-block} .blo {display:block} .non {display:none}
   
 .flex_col {display: -webkit-flex; -webkit-flex-direction:column;display:flex; flex-direction:column}
 .flex_row {display: -webkit-flex; -webkit-flex-direction:row;display:flex; flex-direction:row}
 .blo {display:block}
 
-.w100,.w {width:100%} .w90 {width:90%} .w80 {width:80%} .w70 {width:70%} .w50 {width:50%} .w30 {width:30%} .w20 {width:20%} .w10 {width:10%}
+.w {width:100%} .w90 {width:90%} .w80 {width:80%} .w70 {width:70%} .w50 {width:50%} .w30 {width:30%} .w20 {width:20%} .w10 {width:10%}
 .w50p {width:50px} .w30p {width:30px} .max_w600p {max-width:600px}
-.h100,.h {height: 100%} .h60 {height:60%} .h50 {height:50%} 
+.h {height: 100%} .h60 {height:60%} .h50 {height:50%} 
 .h50p {height:50px} .h30p {height:30px}   
 
 .bot_0p,.bot {bottom:0px} .bot_30p {bottom:30px}
@@ -127,12 +120,14 @@ body{
 .rig_0p,.rig {right:0px} .rig_30p {right:30px} .rig_30 {right:30%} .rig_20p {right:20px} .rig_10p {right:10px}
 .lef_0p,.lef {left:0px} .lef_10 {left:10%} .lef_10p {left:10px}
   
+.marg {margin:0px}
+  
 .al_frente{z-index:100;}  
 
   
 .cen_v {position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);}  
 .cen {text-align:center; justify-content:center; align-items:center}
-.ver {vertical-align:middle}
+.ali_ver {vertical-align:middle}
 .ali_cen {text-align:center; align-items:center}
 
 .bor {border:1px dashed;}
@@ -158,9 +153,10 @@ body{
 .bac_rgba_7,.bac_col_desv {background:rgba(0,0,0,0.7)}
 .bac_col_db82,.bac_col_gme {background-color:#d2b48c}
 .bac_col_345,.bac_col_tbl_u {background-color:#34495e} .bac_col_ccc,.bac_col_prf_u {background-color:#ccc}
+.bac_col_bac_hom {background-color:#e0ccb7}
   
 
-.col_whi {color:white} .col_yel {color:yellow} .col_bla {color:black} .col_gre {color:grey}
+.col_whi {color:white} .col_yel {color:yellow} .col_bla {color:black} .col_gre {color:grey} .col_gree {color:green}
 .col_244,.col_lrn {color:#2f4f4f} .col_345,.col_tbl_u {color:#34495e}
 
 
@@ -172,7 +168,7 @@ body{
 
  
 
-<div id="dv_ng_view" ng-view></div>
+<div id="dv_ng_view" ng-view class="pos_r w h marg"></div>
   
  
 

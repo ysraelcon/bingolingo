@@ -31,24 +31,18 @@
     to {transform: scaleX(1);}
 }/*@keyframes*/
 
-#h1_tit{
-    display:none;/*inline-block;*/
-    /*border:1px solid;*/
-      margin:0px;
-    font-family:"Playball",cursive; font-size:50px;
-    color:#e0ccb7;}
-	
-#dv_login_sign_up{
-  position:absolute; right:15px;bottom:0px;
-  }
-  #sp_login,#sp_sign_up{cursor:pointer;}	
 /*..style head*/  
 </style>
 
-<h1 id="h1_tit" >BesTalk</h1>
+
+
+<h1 id="h1_tit" class="non">BesTalk</h1>
+
+
 
 <div id="dv_head">
 <!-- <h1 id="h1_tit">BesTalk</h1> -->
+  
   
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="311" height="65" viewbox="0 0 571.000000 125.000000"
@@ -74,8 +68,10 @@ m-853 -379 c13 -20 -88 -185 -154 -252 -38 -39 -53 -48 -76 -45 -23 2 -29 8 -31 34
 </g>
 </svg>
 
-<div id="dv_login_sign_up">
-<span id="sp_login" onclick="mostrar_login()">
+  
+<div id="dv_login_sign_up" class="pos_a bot" style="right:15px">
+  
+<span id="sp_login" class="cur_poi" onclick="mostrar_login()">
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
      width="50px" height="50px" viewbox="0 0 139.000000 142.000000"
      preserveaspectratio="xMidYMid meet">
@@ -86,7 +82,8 @@ fill="#000000" stroke="none">
 </g>
 </svg>
 </span>
-<span id="sp_sign_up" onclick="mostrar_sign_up()">
+  
+<span id="sp_sign_up" class="cur_poi" onclick="mostrar_sign_up()">
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
      width="50px" height="50px" viewbox="0 0 147.000000 135.000000"
      preserveaspectratio="xMidYMid meet">
@@ -98,9 +95,11 @@ fill="#000000" stroke="none">
 </g>
 </svg>
 </span>
+  
 </div><!-- dv login sign up -->
 
 </div><!-- dv head -->
+
 
   
 <style>
@@ -120,13 +119,8 @@ fill="#000000" stroke="none">
   
 #dv_cont>*{display:inline-block;}
   
-#h2_welcome{
-  display:inline-block;
-  font-family:arial;}
 
-#h3_msg{
-  display:inline-block; text-align:center;
-  width:80%;}
+
   
 #dv_login_sign_up_scr{
   display:none;
@@ -134,9 +128,6 @@ fill="#000000" stroke="none">
   width:100%;height:100%;
   background:rgba(0,0,0,0.7);}  
   
-#dv_log_sign{
-  position:relative;
-  /*border:1px solid;*/}
 
 
 #dv_login{
@@ -153,22 +144,15 @@ fill="#000000" stroke="none">
     /*outline:none;*/
     margin:5px 0px 5px 0px;
   background:none;}
-#dv_login a{
-  color:grey;}
+  
+
+  
 #bt_login,#bt_sign_up{
   width:70%;
   border:none; border-radius:10px;
   font-weight:bold;
   background-color:green; color:white;
   cursor:pointer;}
-#bt_sign_up{
-  background-color:#9370DB;
-}
-/*
-#h2_login{
-  font-family:"Playball",cursive;
-  color:black;}*/
-
 
 
 #dv_sign_up{
@@ -179,21 +163,16 @@ fill="#000000" stroke="none">
   background-color:#f5f5f5;
     color:black;}
 
-#dv_sign_up a{
-  color:grey;}
 
-#dv_sign_up input[type=text]{
-  width:120px;}
 
-#dv_sign_up form input:not([type=text]){
-  width:99%;}
+#dv_sign_up input[type=text]{ width:120px;}
+
+#dv_sign_up form input:not([type=text]){width:99%;}
 /*p:not([type=text])
 p:nth-child(n+2)*/
 
 #dv_sign_up *{margin:2px;}
 
-#h2_sign_up{
-  color:black;}
 
 
 #sp_join_us,#sp_login2,#sp_sign_up2{
@@ -202,14 +181,9 @@ text-decoration:underline;
   cursor:pointer;}
 
 
-#dv_msg{
-  font-size:25px;
-  color:red;}
-
-#h1_info{
-  color:green;}
+#dv_msg {font-size:25px;color:red;}
 	
-#ul_chat{text-align:left;}
+#ul_chat {text-align:left;}
   
 /*..style content*/
 </style>
@@ -218,26 +192,27 @@ text-decoration:underline;
 <div id="dv_cont">
    
 
-<h2 id="h2_welcome">Welcome to BesTalk</h2><br>
+<h2 id="h2_welcome" class="fon_ari">Welcome to BesTalk</h2><br>
   
 <!-- 2c.. heroku -->    
-<h1 id="h1_info">First release running on: <a href="https://bestalk.herokuapp.com" target="_self">BesTalk.herokuapp.com</a></h1><br>
+<h1 id="h1_info" class="col_gree">First release running on: <a href="https://bestalk.herokuapp.com" target="_self">BesTalk.herokuapp.com</a></h1><br>
 <h3>this the Beta Version:</h3><br>  
   
-<h3 id="h3_msg">A language exchange website in development which will bring us the best of SharedLingo, SharedTalk and LiveMocha...</h3><br>
+<h3 id="h3_msg" class="">A language exchange website in development which will bring us the best of SharedLingo, SharedTalk and LiveMocha...</h3><br>
   
 <h4>Working Features:</h4><br>
 
 <h3>Chat:</h3><br>
 <ul id="ul_chat">
-<li>All language rooms, theme rooms and secret rooms.</li>
+<li>All language rooms.</li>
 <li>Most commons theme rooms.</li> 
-<li>Secret rooms.</li><!-- 
+<li>Secret rooms.</li>
+<li>Private rooms.</li><!-- 
 <li>Private chat with option to voice call.</li> -->
 <li>Emojies :) :smile:</li>
 </ul><br>
 
-<h3>Game:</h3><br>
+<h3>Play:</h3><br>
 <ul>
 <li>Explain the word.</li>
 <li>Hangman.</li>
@@ -253,7 +228,7 @@ text-decoration:underline;
 
 <div id="dv_login_sign_up_scr">
     
-<div id="dv_log_sign">
+<div id="dv_log_sign" class="pos_r">
 
   
 <div id="dv_login" style="display:none">
@@ -293,7 +268,7 @@ BesTalk, the best of exchange language websites.
 
 <p>Don't have a BesTalk account yet? <span id="sp_sign_up2" onclick="mostrar_log_sign(dv_sign_up)">Sign up!</span></p>
   
-<a href="" ng-click="olvido_password()">Forgot password?</a><br>
+<a href="" class="col_gre" ng-click="olvido_password()">Forgot password?</a><br>
   <!-- <a href="#/sign_up">Sign up!</a> -->
 
 </form><!-- fmlogin -->
@@ -303,7 +278,7 @@ BesTalk, the best of exchange language websites.
   
 <div id="dv_sign_up">
   
-<h2 id="h2_sign_up">Join us</h2>
+<h2 id="h2_sign_up" class="col_bla">Join us</h2>
 
 <div ng-show="message">{{message}}</div>
 
@@ -327,7 +302,7 @@ BesTalk, the best of exchange language websites.
        name="password" id="in_cpw"
        placeholder="Repeat password"><br>
 
-<button type="submit" id="bt_sign_up"
+<button type="submit" id="bt_sign_up" class="bac_col_bstlk"
         ng-click="entrar_sign_up()">Sign Up</button>
   
 <p>Already have an account? <span id="sp_login2" onclick="mostrar_log_sign(dv_login)">Log in!</span></p>
@@ -397,14 +372,14 @@ dv_login_sign_up_scr.addEventListener("click",function(){
 
 
   
-<div id="dv_fondo" class="pos_abs bot_0p w100 fon_ari fon_15p bac_col_bla col_whi">
+<div id="dv_fondo" class="pos_a bot w fon_ari fon_15p bac_col_bla col_whi">
 <span>Made with 
  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIoSURBVEhL5ZJPTxNBGMYXjCZ68cDRb+DJD0CCISjWNkLbXVpp9n8Zg3S3wkFC2zDdglDprp5NNIYrRuSkiRy4ePFTcOLOgeihMePM+C50t0Oz4JEneTKZP89v3n13pKupdwjdClwz6zvlBb9angwW5Zuw9X/CGA8HjvkicK3jwLVJj4/euLYOxy4nVmXg2F9i4Ih9196C4xcTxsqNwLG+i6Bx+1W7ALFk2lGUa7Qln0Uw5leoxB3Ofcc+ZK2E+GARSRqioY9hWOT4Bcydqn0fEOfrX+Vi+PPMeN9axI61DBixeM9d65MwnMDtudltQPWLvXHftb6Jgkn8el4jTS27D7io4LUciIKDXFfzfKTPlKyWnhBPz30AZFT0wNt4OIkbmszHliGTFeURWSsXxwF5pmBRu0Or78bDoVd1mbTndeEeq3zNVDi8Xsx02esD7Jn8imWIwqFRaoxfEl/vVEyC1WkOZ27q+V1ARrVenvXoJZFw2FuRfcck69YMqRUen8JrhfSfjQV1BJBRtXTFqNPDLNSpGBwS9jY0q3bzWYn9RFKbSZ2COZyatmkDcP3CkjTceJr5FR6mvaQvYop/PqYjm/cC426quZ+AOl8tI78sCjMvTU2QuQejwj2sZX8ghK4DZrCaWm5PBEEPR0nq3t3IWq2Y7tJ2tSGaXDT0slHMnPTCek3b9ZsV0kbKbYhcTp4lpz0t+x6rua/0X+x6Wn7LM+Ux2L4SkqS/5cRzDLlpspQAAAAASUVORK5CYII=" title="Potato" width="24" height="24">
  by BesTalk Team</span> 
   
     
 <span id="sp_inf" title="info"
-      class="pos_abs rig_20p bot_0p cur_poi"
+      class="pos_a rig_20p bot cur_poi"
       onclick="dar_info()">
   <svg width="16" height="16" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1152 1376v-160q0-14-9-23t-23-9h-96v-512q0-14-9-23t-23-9h-320q-14 0-23 9t-9 23v160q0 14 9 23t23 9h96v320h-96q-14 0-23 9t-9 23v160q0 14 9 23t23 9h448q14 0 23-9t9-23zm-128-896v-160q0-14-9-23t-23-9h-192q-14 0-23 9t-9 23v160q0 14 9 23t23 9h192q14 0 23-9t9-23zm640 416q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z" fill="#fff"/></svg>
 </span><!-- info-circle -->
