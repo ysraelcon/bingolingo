@@ -190,9 +190,9 @@ appf.post('/mail', function(req,res){
           
            html: '<p>Visit the link for set your new password:</p>'+
         //heroku 3c..
-        //'<a href="https://bestalk.herokuapp.com/reset/'+
+        '<a href="https://bestalk.herokuapp.com/reset/'+
         //glitch..
-              '<a href="https://bestalk-test.glitch.me/reset/'+
+             // '<a href="https://bestalk-test.glitch.me/reset/'+
               token+
               '">Reset Password</a>'+
               '<h2>Continue enjoying of BesTalk!</h2>'
