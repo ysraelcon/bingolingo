@@ -14,6 +14,12 @@ angular.module('la_App.home',['ngRoute'])
            ["$scope","$http","$location",
         function($scope,$http,$location){
 
+      
+     $http.get("/home").then(function(res){
+      console.log("get /home :res")
+       //console.log(res.data)
+      $scope.cant_u= res.data;
+    });//route get /profile    
           
       $scope.entrar_login= function(){
         console.log("entra login")

@@ -10,12 +10,20 @@ module.exports= function(appf,passportf){
 appf.get("/", function(req,res){
   console.log("get / :req,res")
  //res.render("login.ejs",{msg:""});
+  
 });
 
   
 appf.get("/home", function(req,res){
   console.log("get /home :req,res")
-  res.json({message:req.flash("registerMessage")});             
+  
+  var cant_u;
+User.find().find({}, function(err, results) {
+  cant_u= results.length
+  res.json({cant_u:cant_u}) 
+})
+  
+              
 });
 
   /*

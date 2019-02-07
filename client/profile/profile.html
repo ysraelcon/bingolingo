@@ -18,8 +18,6 @@
       font-size:50px;}*/
 
 
-#svg_bestalk{
-  /*margin-left:36px;*/}
 
 #dv_profile_sign{
     display:inline-block;
@@ -29,8 +27,6 @@
 #dv_profile_sign>span{
     margin:10%;
     cursor:pointer;}
-  #dv_profile_sign a{
-    color:black;}
 
 
 /*..style head*/
@@ -61,7 +57,7 @@ BesTalk, the best of exchange language websites.
 </span><!-- user-circle-o -->
   
 <span id="sp_signout">
-<a href="/logout">
+<a href="/logout" class="bla">
 <svg width="16" height="16" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M704 1440q0 4 1 20t.5 26.5-3 23.5-10 19.5-20.5 6.5h-320q-119 0-203.5-84.5t-84.5-203.5v-704q0-119 84.5-203.5t203.5-84.5h320q13 0 22.5 9.5t9.5 22.5q0 4 1 20t.5 26.5-3 23.5-10 19.5-20.5 6.5h-320q-66 0-113 47t-47 113v704q0 66 47 113t113 47h312l11.5 1 11.5 3 8 5.5 7 9 2 13.5zm928-544q0 26-19 45l-544 544q-19 19-45 19t-45-19-19-45v-288h-448q-26 0-45-19t-19-45v-384q0-26 19-45t45-19h448v-288q0-26 19-45t45-19 45 19l544 544q19 19 19 45z"/></svg>
 </a>
 </span><!-- sign-out -->
@@ -89,60 +85,57 @@ BesTalk, the best of exchange language websites.
 #dv_tab_chat:hover{
     background-color:#f5f5f5;
       color:black;}
-#dv_tab_game:hover{
+#dv_tab_play:hover{
     background-color:#D2B48C;
       color:black;}
-#dv_tab_comunity:hover{ /*instructions*/
+#dv_tab_read:hover{ /*instructions*/
     background-color:#0079a9;
       color:white;}
-#dv_tab_lesson:hover{
+#dv_tab_learn:hover{
     background-color:#2f4f4f;
       color:white;}
 
-#sp_tab_chat_ico,#sp_tab_game_ico,#sp_tab_comunity_ico,#sp_tab_lesson_ico{display:none;}
+#sp_tab_chat_ico,#sp_tab_play_ico,#sp_tab_read_ico,#sp_tab_learn_ico{display:none;}
 
 @media only screen and (max-width:400px){
-  #sp_tab_chat_txt,#sp_tab_game_txt,#sp_tab_comunity_txt,#sp_tab_lesson_txt{display:none;}
-  #sp_tab_chat_ico,#sp_tab_game_ico,#sp_tab_comunity_ico,#sp_tab_lesson_ico{display:inline;}
+  #sp_tab_chat_txt,#sp_tab_play_txt,#sp_tab_read_txt,#sp_tab_learn_txt{display:none;}
+  #sp_tab_chat_ico,#sp_tab_play_ico,#sp_tab_read_ico,#sp_tab_learn_ico{display:inline;}
 }/*@media*/
 
 /*..style tabs*/
 </style>
     
     
-<div id="dv_tabs" class="flex_row pos_abs w100" style="top:71px;height:25px">
-<div id="dv_tab_chat" 
+<div id="dv_tabs" class="pos_a w" style="top:71px;height:25px">
+  
+<div id="dv_tab_chat" class="inl_blo h"
      onclick="abrir_tab(dv_con_chat,dv_cont,this);entrar_a_chat()">
 <span id="sp_tab_chat_txt">Chat</span>
 <span id="sp_tab_chat_ico">
   <svg width="16" height="16" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="black" d="M1408 768q0 139-94 257t-256.5 186.5-353.5 68.5q-86 0-176-16-124 88-278 128-36 9-86 16h-3q-11 0-20.5-8t-11.5-21q-1-3-1-6.5t.5-6.5 2-6l2.5-5 3.5-5.5 4-5 4.5-5 4-4.5q5-6 23-25t26-29.5 22.5-29 25-38.5 20.5-44q-124-72-195-177t-71-224q0-139 94-257t256.5-186.5 353.5-68.5 353.5 68.5 256.5 186.5 94 257zm384 256q0 120-71 224.5t-195 176.5q10 24 20.5 44t25 38.5 22.5 29 26 29.5 23 25q1 1 4 4.5t4.5 5 4 5 3.5 5.5l2.5 5 2 6 .5 6.5-1 6.5q-3 14-13 22t-22 7q-50-7-86-16-154-40-278-128-90 16-176 16-271 0-472-132 58 4 88 4 161 0 309-45t264-129q125-92 192-212t67-254q0-77-23-152 129 71 204 178t75 230z" /></svg>
-</span>
-</div><!-- comments -->
-      
-    
-<div id="dv_tab_game"
-     onclick="abrir_tab(dv_con_game,dv_cont,this)">
-<span id="sp_tab_game_txt">Play</span>
-<span id="sp_tab_game_ico">
+</span><!-- comments -->
+</div
+><div id="dv_tab_play" class="inl_blo h"
+     onclick="abrir_tab(dv_con_play,dv_cont,this)">
+<span id="sp_tab_play_txt">Play</span>
+<span id="sp_tab_play_ico">
   <svg width="16" height="16" viewbox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg"><path fill="black" d="M896 1088v-128q0-14-9-23t-23-9h-192v-192q0-14-9-23t-23-9h-128q-14 0-23 9t-9 23v192h-192q-14 0-23 9t-9 23v128q0 14 9 23t23 9h192v192q0 14 9 23t23 9h128q14 0 23-9t9-23v-192h192q14 0 23-9t9-23zm576 64q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm256-256q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm256 128q0 212-150 362t-362 150q-192 0-338-128h-220q-146 128-338 128-212 0-362-150t-150-362 150-362 362-150h896q212 0 362 150t150 362z" /></svg>
-</span>
-</div><!-- gamepad -->
-      
-<div id="dv_tab_comunity"
-     onclick="abrir_tab(dv_con_comunity,dv_cont,this)">
-<span id="sp_tab_comunity_txt">Post</span>
-<span id="sp_tab_comunity_ico">
+</span><!-- gamepad -->
+</div  
+><div id="dv_tab_read" class="inl_blo h"
+     onclick="abrir_tab(dv_con_read,dv_cont,this)">
+<span id="sp_tab_read_txt">Read</span>
+<span id="sp_tab_read_ico">
   <svg width="16" height="16" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="black" d="M640 896q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm384 0q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm384 0q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm384 0q0 174-120 321.5t-326 233-450 85.5q-110 0-211-18-173 173-435 229-52 10-86 13-12 1-22-6t-13-18q-4-15 20-37 5-5 23.5-21.5t25.5-23.5 23.5-25.5 24-31.5 20.5-37 20-48 14.5-57.5 12.5-72.5q-146-90-229.5-216.5t-83.5-269.5q0-174 120-321.5t326-233 450-85.5 450 85.5 326 233 120 321.5z" /></svg>
-</span>
-</div><!-- commenting -->
-      
-<div id="dv_tab_lesson"
-     onclick="abrir_tab(dv_con_lesson,dv_cont,this)">
-<span id="sp_tab_lesson_txt">Learn</span>
-<span id="sp_tab_lesson_ico">
+</span><!-- commenting -->
+</div
+><div id="dv_tab_learn" class="inl_blo h"
+     onclick="abrir_tab(dv_con_learn,dv_cont,this)">
+<span id="sp_tab_learn_txt">Learn</span>
+<span id="sp_tab_learn_ico">
   <svg width="16" height="16" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="black" d="M1703 478q40 57 18 129l-275 906q-19 64-76.5 107.5t-122.5 43.5h-923q-77 0-148.5-53.5t-99.5-131.5q-24-67-2-127 0-4 3-27t4-37q1-8-3-21.5t-3-19.5q2-11 8-21t16.5-23.5 16.5-23.5q23-38 45-91.5t30-91.5q3-10 .5-30t-.5-28q3-11 17-28t17-23q21-36 42-92t25-90q1-9-2.5-32t.5-28q4-13 22-30.5t22-22.5q19-26 42.5-84.5t27.5-96.5q1-8-3-25.5t-2-26.5q2-8 9-18t18-23 17-21q8-12 16.5-30.5t15-35 16-36 19.5-32 26.5-23.5 36-11.5 47.5 5.5l-1 3q38-9 51-9h761q74 0 114 56t18 130l-274 906q-36 119-71.5 153.5t-128.5 34.5h-869q-27 0-38 15-11 16-1 43 24 70 144 70h923q29 0 56-15.5t35-41.5l300-987q7-22 5-57 38 15 59 43zm-1064 2q-4 13 2 22.5t20 9.5h608q13 0 25.5-9.5t16.5-22.5l21-64q4-13-2-22.5t-20-9.5h-608q-13 0-25.5 9.5t-16.5 22.5zm-83 256q-4 13 2 22.5t20 9.5h608q13 0 25.5-9.5t16.5-22.5l21-64q4-13-2-22.5t-20-9.5h-608q-13 0-25.5 9.5t-16.5 22.5z" /></svg>
-</span>
-</div><!-- book -->
+</span><!-- book -->
+</div>
 
 </div><!-- dv tabs --> 
     
@@ -171,12 +164,12 @@ BesTalk, the best of exchange language websites.
 
 #dv_con_chat{
     /*background-color:#f5f5f5;*/}
-#dv_con_game{
+#dv_con_play{
     background-color:#D2B48C;}
-#dv_con_comunity{
+#dv_con_read{
     background-color:#0079a9;
       color:white;}
-#dv_con_lesson{
+#dv_con_learn{
     background-color:#2f4f4f;
       color:white;}
 
@@ -191,7 +184,8 @@ BesTalk, the best of exchange language websites.
 
 .desierto_dia::after {
  content: "";
- background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZFMN599ElGkQLiL3u51LvbvwmLifSs6dsdv-3u98F89hGmC69);
+ background-image: url('data:image/jpeg;base64,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');
+   /*url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZFMN599ElGkQLiL3u51LvbvwmLifSs6dsdv-3u98F89hGmC69);*/
  background-repeat: no-repeat;
  background-size: cover;
  opacity: 0.5;
@@ -236,7 +230,7 @@ BesTalk, the best of exchange language websites.
         
 <div id="dv_lang_rooms">
       
-<div id="dv_lang_rooms_nm" class="blo cen bor_bot fon_ari col_244">Language Rooms</div>
+<div id="dv_lang_rooms_nm" class="blo ali_cen bor_bot fon_ari col_244">Language Rooms</div>
       
 <div id="dv_lang_rooms_con">
         
@@ -470,7 +464,7 @@ cursor:pointer;}
         
 <div id="dv_theme_rooms">
       
-<div id="dv_theme_rooms_nm" class="blo cen bor_bot fon_ari col_244">Theme Rooms</div>
+<div id="dv_theme_rooms_nm" class="blo ali_cen bor_bot fon_ari col_244">Theme Rooms</div>
     
 <div id="dv_theme_rooms_con">
     
@@ -491,7 +485,7 @@ cursor:pointer;}
   
 function seleccionar_tema(){
  //console.log(sl_tema.value);
- go_theme_room(sl_tema.value);
+ ir_a_theme_room(sl_tema.value);
  sl_tema.options[0].selected=true;
 };//seleccionar_tema
   
@@ -515,14 +509,14 @@ function seleccionar_tema(){
         
 <div id="dv_sct_rooms">
       
-<div id="dv_sct_rooms_nm" class="blo cen bor_bot fon_ari col_244">Secret Rooms</div>
+<div id="dv_sct_rooms_nm" class="blo ali_cen bor_bot fon_ari col_244">Secret Rooms</div>
       
 <form class="inl_blo" onsubmit="event.preventDefault()">
         
 <input type="text" id="in_secret_room" style="width:140px"
        placeholder="secret room's name...">
 <input type="button"
-       value="Slide in" onclick="go_secret()">
+       value="Slide in" onclick="ir_a_secret_room()">
 </form>
 </div><!-- dv secret rooms -->
                
@@ -550,7 +544,7 @@ th, td{
         
 <div id="dv_chat_user">
       
-<table id="tbl_users" class="w100 bor_r bac_col_345" style="border-collapse:collapse">
+<table id="tbl_users" class="w bor_r bac_345" style="border-collapse:collapse">
 <caption class="bor_bot fon_ari col_345">Users</caption>
 <thead>
 <tr>
@@ -590,7 +584,7 @@ function cambiar_tema(){
 <!--       
   <link rel="stylesheet" href="/styles/game.css"> -->  
         
-<div id="dv_con_game" class="cl_dv_con_ocul">
+<div id="dv_con_play" class="cl_dv_con_ocul">
       
       
 <input type="button" value="Explain The Word" id="btn_crt_gm"
@@ -605,20 +599,20 @@ function cambiar_tema(){
       
       
       
-<div id="dv_con_comunity" class="cl_dv_con_ocul">In future.</div>
+<div id="dv_con_read" class="cl_dv_con_ocul">In future.</div>
       
-<div id="dv_con_lesson" class="cl_dv_con_ocul">The teacher has not arrived yet.</div>
+<div id="dv_con_learn" class="cl_dv_con_ocul">The teacher has not arrived yet.</div>
       
       
 
 <style>
 #dv_bt_dict{
   display:block !important;
-  position:absolute; right:0px;top:5px;
+  position:absolute; right:0px;top:15px;
   padding:5px;}
 #dv_bt_note{
   display:block !important;
-  position:absolute; right:0px;top:35px;
+  position:absolute; right:0px;top:45px;
   padding:5px;}  
 .borde_curv{
   border-radius: 10px 0 0 10px;
@@ -755,13 +749,10 @@ function cargar_img(){
 
      coc.drawImage(this,0,0, can.width,can.height);
 
-
      ig_profile_edi.src= can.toDataURL("image/png");
-
     }//onload img provisional
 
     img_provisional.src= reader.result;
-
  }//onloadend reader
 
  reader.readAsDataURL(in_fl_img.files[0]);
@@ -1013,9 +1004,9 @@ function cargar_img(){
 function abrir_tab(dv_pie_mst,dv_conf,this_tbf){
  console.log("abre tab:"+dv_pie_mst+"/-/"+dv_conf+"/-/"+this_tbf)
  var col_tab={"dv_tab_chat":["#f5f5f5","black"],
-             "dv_tab_game":["#D2B48C","black"],
-             "dv_tab_comunity":["#0079a9","white"],
-             "dv_tab_lesson":["#2f4f4f","white"]};  
+             "dv_tab_play":["#D2B48C","black"],
+             "dv_tab_read":["#0079a9","white"],
+             "dv_tab_learn":["#2f4f4f","white"]};  
 
  var dv_msts= document.querySelectorAll("#"+dv_conf.id+">div");
 
@@ -1079,12 +1070,12 @@ function mostrar_nota(btf){
     
     
       
-<div id="dv_fondo" class="pos_abs bot_0p w100 fon_ari fon_15p bac_col_bla col_whi">
-<span id="sp_made_with" class="pos_rel lef_10p">Made with 
+<div id="dv_fondo" class="pos_a bot w fon_ari fon_15p bac_bla whi">
+<span id="sp_made_with" class="pos_r lef_10p">Made with 
  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIoSURBVEhL5ZJPTxNBGMYXjCZ68cDRb+DJD0CCISjWNkLbXVpp9n8Zg3S3wkFC2zDdglDprp5NNIYrRuSkiRy4ePFTcOLOgeihMePM+C50t0Oz4JEneTKZP89v3n13pKupdwjdClwz6zvlBb9angwW5Zuw9X/CGA8HjvkicK3jwLVJj4/euLYOxy4nVmXg2F9i4Ih9196C4xcTxsqNwLG+i6Bx+1W7ALFk2lGUa7Qln0Uw5leoxB3Ofcc+ZK2E+GARSRqioY9hWOT4Bcydqn0fEOfrX+Vi+PPMeN9axI61DBixeM9d65MwnMDtudltQPWLvXHftb6Jgkn8el4jTS27D7io4LUciIKDXFfzfKTPlKyWnhBPz30AZFT0wNt4OIkbmszHliGTFeURWSsXxwF5pmBRu0Or78bDoVd1mbTndeEeq3zNVDi8Xsx02esD7Jn8imWIwqFRaoxfEl/vVEyC1WkOZ27q+V1ARrVenvXoJZFw2FuRfcck69YMqRUen8JrhfSfjQV1BJBRtXTFqNPDLNSpGBwS9jY0q3bzWYn9RFKbSZ2COZyatmkDcP3CkjTceJr5FR6mvaQvYop/PqYjm/cC426quZ+AOl8tI78sCjMvTU2QuQejwj2sZX8ghK4DZrCaWm5PBEEPR0nq3t3IWq2Y7tJ2tSGaXDT0slHMnPTCek3b9ZsV0kbKbYhcTp4lpz0t+x6rua/0X+x6Wn7LM+Ux2L4SkqS/5cRzDLlpspQAAAAASUVORK5CYII=" title="Potato" width="24" height="24">
  by BesTalk Team</span> 
         
-<span id="sp_err" class="pos_abs rig_10p bot_0p" onclick="dar_reporte()">Suggestions 
+<span id="sp_err" class="pos_a rig_10p bot" onclick="dar_reporte()">Suggestions 
   <svg class="cur_poi" width="16" height="16" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 654v978q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-978q0-15 11-24 8-7 39-34.5t41.5-36 45.5-37.5 70-55.5 96-73 143.5-107 192.5-140.5q5-4 52.5-40t71.5-52.5 64-35 69-18.5 69 18.5 65 35.5 71 52 52 40q110 80 192.5 140.5t143.5 107 96 73 70 55.5 45.5 37.5 41.5 36 39 34.5q11 9 11 24zm-564 585q263-191 345-252 11-8 12.5-20.5t-6.5-23.5l-38-52q-8-11-21-12.5t-24 6.5q-231 169-343 250-5 3-52 39t-71.5 52.5-64.5 35-69 18.5-69-18.5-64.5-35-71.5-52.5-52-39q-186-134-343-250-11-8-24-6.5t-21 12.5l-38 52q-8 11-6.5 23.5t12.5 20.5q82 61 345 252 10 8 50 38t65 47 64 39.5 77.5 33.5 75.5 11 75.5-11 79-34.5 64.5-39.5 65-47.5 48-36.5z" fill="yellow"/></svg>
 </span><!-- envelope-open -->
        
@@ -1104,20 +1095,20 @@ function dar_reporte(){
   console.log("da reporte")
   var dv= document.createElement("div");
   dv.id="dv_reporte_scr";
-  dv.classList.add("flex_col","cen","pos_abs","top_0p","w100","h100","bac_rgba_7")
-  dv.innerHTML='<div id="dv_reporte" class="w50 h50">'+
+  dv.setAttribute("class","flex_col ali_cen pos_a top w h bac_rgba_7")
+  dv.innerHTML='<div id="dv_reporte" class="w_ h_">'+
 '  <div id="dv_reporte_tit" class="pos_rel flex_row">'+
-'    <div id="dv_reporte_tit_nm" class="w100 cen bac_col_bla col_yel">Errors or Suggestions</div>'+
-'    <div id="dv_reporte_tit_x" class="pos_abs rig_0p cen bac_col_whi cur_poi" style="width:50px" onclick="cerrar_reporte()">X</div>'+
+'    <div id="dv_reporte_tit_nm" class="w ali_cen bac_bla yel">Errors or Suggestions</div>'+
+'    <div id="dv_reporte_tit_x" class="pos_a rig ali_cen bac_whi cur_poi" style="width:50px" onclick="cerrar_reporte()">X</div>'+
 '  </div>'+
-'  <input type="text" id="in_reporte_tit" class="cen w100"'+
+'  <input type="text" id="in_reporte_tit" class="cen w"'+
 '         placeholder="Title (optional)">'+
 '  <br>'+
-'  <textarea id="ta_reporte" class="w100 h50"'+
+'  <textarea id="ta_reporte" class="w h_"'+
 '    placeholder="write the error or suggestion..."'+
 '  ></textarea>'+
 '  <br>'+
-'  <input type="button" id="bt_snd_reporte" class="w100"'+
+'  <input type="button" id="bt_snd_reporte" class="w"'+
 '         value="Send"'+
 '         onclick="enviar_reporte()">'+
 '</div>';
