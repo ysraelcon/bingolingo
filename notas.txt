@@ -1,8 +1,15 @@
 
 heroku: pl...-ten
 
----------------
+----------indice
 
+.por hacer
+.cambios
+
+---------------
+--por hacer
+
+--cambios
 lista de cambios:
 
 archivos: routes.js, index.html, home.html
@@ -76,30 +83,6 @@ heroku:
 <h3>this the Beta Version:</h3><br> -->  
 
 -----------------
-
-
-
-html:
-
-pencil:
- <i class="fa fa-pencil" aria-hidden="true"></i>
- 
- <i class="fa fa-window-minimize" aria-hidden="true"></i>
-<i class="fa fa-window-maximize" aria-hidden="true"></i>
-<i class="fa fa-window-restore" aria-hidden="true"></i>
-
-font-awesome:
- http://fontawesome.io/icons/
- 
-+debugger
-chrome-devtools://devtools/bundled/inspector.html?ws=bestalk-test.glitch.me:80/00addfd0-2862-4279-b663-c669853eaf55
-
-+errores:
-- imagen de desierto desaparece in night mode,
-se podria poner el desierto de noche.
-
-+por completar:
--
 
 
 +soluciones:

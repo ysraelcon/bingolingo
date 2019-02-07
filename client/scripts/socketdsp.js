@@ -467,9 +467,9 @@ function minimizar_dv_chat(roomx){//roomx
     var dv_chat_room_con_user_= "#dv_chat_room_con_user_"+roomx;
     var dv_chat_room_msg_= "#dv_chat_room_msg_"+roomx;
   
-    if($(dv_chat_room_tit_min_).html()=='<span class="cen_v">-</span>'){
+    if($(dv_chat_room_tit_min_).html()=='-'){
       $(dv_chat_room_).height(30);
-      $(dv_chat_room_tit_min_).html('<span class="cen_v">+</span>');
+      $(dv_chat_room_tit_min_).html('+');
       $(dv_chat_room_con_user_).hide();
       $(dv_chat_room_msg_).hide();
       $(dv_chat_room_).resizable("disable");
@@ -478,7 +478,7 @@ function minimizar_dv_chat(roomx){//roomx
     }//if -
     else{
       $(dv_chat_room_).height(200);
-      $(dv_chat_room_tit_min_).html('<span class="cen_v">-</span>');
+      $(dv_chat_room_tit_min_).html('-');
       $(dv_chat_room_con_user_).show();
       $(dv_chat_room_msg_).show();
       $(dv_chat_room_).resizable("enable");
@@ -607,7 +607,7 @@ socket_client.on("who type",function(obj_roomf){
   
   var nudiv= document.createElement("div");
   nudiv.id= "dv_typ_"+obj_roomf.room;
-  nudiv.setAttribute("class","pos_abs top_0p w70 bac_col_whi"); 
+  nudiv.setAttribute("class","pos_abs top w70 bac_whi"); 
   
   nudiv.innerHTML="<b>"+obj_roomf.firstname+"</b>"+"<span  style='color:grey'> is typing...</span>"+
     '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M491 1536l91-91-235-235-91 91v107h128v128h107zm523-928q0-22-22-22-10 0-17 7l-542 542q-7 7-7 17 0 22 22 22 10 0 17-7l542-542q7-7 7-17zm-54-192l416 416-832 832h-416v-416zm683 96q0 53-37 90l-166 166-416-416 166-165q36-38 90-38 53 0 91 38l235 234q37 39 37 91z"/></svg>';//pencil
@@ -649,23 +649,23 @@ function crear_room(roomx){
     
      var nudiv=document.createElement("DIV");
      nudiv.id="dv_chat_room_"+roomx;
-    nudiv.setAttribute("class","pos_a_i top_10 lef_10 w80 h60 bor_r bor_s bac_col_whi al_frente")
+    nudiv.setAttribute("class","pos_a_i top_10 lef_10 w80 h60 bor_r bor_s bac_whi al_frente")
      
 
-     nudiv.innerHTML='<div class="h30p w pos_a fon_ari bor_r">'+
+     nudiv.innerHTML='<div class="tab h30p w pos_a fon_ari bor_r">'+
 
-        '<div class="w70 inl_blo pos_r h cur_mov bac_col_bstlk col_whi bor_r5000 fon_ari fon_bol"><span class="cen_v">'
-        +(rooms[roomx]||roomx)+'</span></div>'+
+        '<div class="tab_cel ali_cen ali_mid w70 h cur_mov bac_col_bstlk whi bor_r5000 fon_ari fon_bol">'
+        +(rooms[roomx]||roomx)+'</div>'+
 
       '<div id="dv_chat_room_tit_min_'+roomx+
-      '" class="w10 inl_blo pos_r h"'+
-      ' onclick="minimizar_dv_chat2(this)"><span class="cen_v">-</span></div>'+//\''+roomx+'\'
+      '" class="tab_cel ali_cen ali_mid w10 h"'+
+      ' onclick="minimizar_dv_chat2(this)">-</div>'+//\''+roomx+'\'
 
-      '<div class="w10 inl_blo pos_r h"'+
-      ' onclick="restaurar_tam_chat(\''+roomx+'\')"><span class="cen_v">L</span></div>'+
+      '<div class="tab_cel ali_cen ali_mid w10 h"'+
+      ' onclick="restaurar_tam_chat(\''+roomx+'\')">L</div>'+
 
-      '<div class="w10 inl_blo pos_r h bor_r0500 bac_col_crr_chat_g col_whi"'+
-      ' onclick="cerrar_dv_chat(\''+roomx+'\')"><span class="cen_v">X</span></div>'+
+      '<div class="tab_cel ali_cen ali_mid w10 h bor_r0500 bac_col_crr_chat_g whi"'+
+      ' onclick="cerrar_dv_chat(\''+roomx+'\')">X</div>'+
 
       '</div>'+//dv_chat_room_tit
 
@@ -683,14 +683,14 @@ function crear_room(roomx){
       '</div>'+ //dv_chat_room_con_user
 
       '<div id="dv_chat_room_msg_'+roomx+
-      '" class="pos_a bot_0p h30p w">'+
+      '" class="pos_a bot h30p w">'+
        '<div class="h w70 inl_blo pos_r">'+
       '<form class="h w" onsubmit="enviar_msg(event,\''+roomx+'\')">'+
 
-      '<div class="h pos_a lef_0p rig_30p"><input type="text" id="in_chat_room_msg_'+roomx+'" class="w h pos_a" autocorrect="off" autocomplete="off"'+
+      '<div class="h pos_a lef rig_30p"><input type="text" id="in_chat_room_msg_'+roomx+'" class="w h pos_a" autocorrect="off" autocomplete="off"'+
       ' data-room="'+roomx+'" placeholder="write your message"></div>'+
 
-      '<button id="bt_chat_room_msg_'+roomx+'" class="w30p h pos_a rig_0p" type="submit" >'+
+      '<button id="bt_chat_room_msg_'+roomx+'" class="w30p h pos_a rig" type="submit" >'+
       '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
       '</button>'+
     '</form></div>'+ 
@@ -869,18 +869,18 @@ socket_client.on("perfil a ver",function(obj_userf){
     
     var nudiv= document.createElement("div");
     nudiv.id= "dv_profile_user";
-    nudiv.setAttribute("class","pos_absi bor_1p_gre bor_r bac_col_whi al_frente")
+    nudiv.setAttribute("class","pos_a_i bor_1p_gre bor_r bac_whi al_frente")
 //    nudiv.classList.add("al_frente");  
     nudiv.setAttribute("style","top:20%;left:20%;width:60%;height:60%")
 
-    nudiv.innerHTML= '<div id="dv_profile_user_tit" class="pos_rel h30p" style="border-radius:5px 5px 0 0">'+
-    '<div id="dv_profile_user_tit_nme" class="cen pos_abs lef_0p rig_30p h cur_mov bac_col_ccc">'+
+    nudiv.innerHTML= '<div id="dv_profile_user_tit" class="pos_r h30p" style="border-radius:5px 5px 0 0">'+
+    '<div id="dv_profile_user_tit_nme" class="ali_cen pos_a lef rig_30p h cur_mov bac_col_ccc">'+
     obj_userf.user.firstname+" "+obj_userf.user.lastname+
-    '</div><div id="dv_profile_user_tit_cerrar" class="cen pos_abs rig_0p w30p h bor_1p_grey bor_r0500 cur_poi" onclick="cerrar_profile_user()">X</div>'+
+    '</div><div id="dv_profile_user_tit_cerrar" class="ali_cen pos_a rig w30p h bor_1p_grey bor_r0500 cur_poi" onclick="cerrar_profile_user()">X</div>'+
     '</div>'+
 
-    '<div id="dv_profile_user_con" class="flex_col ali_cen ove_y pos_abs top_30p bot_30p w bac_col_bla col_whi">'+
-    '<img id="img_profile_user" class="w50p h50p bor_r50" style="border:2px solid white" src="'+
+    '<div id="dv_profile_user_con" class="flex_col ali_cen ove_y pos_a top_30p bot_30p w bac_bla whi">'+
+    '<img id="img_profile_user" class="w50p h50p bor_r_" style="border:2px solid white" src="'+
     (obj_userf.user.avatar||dar_img_provisional())+
     '" alt="img_profile"><p>'+
     obj_userf.user.age+", "+obj_userf.user.gender+
@@ -889,7 +889,7 @@ socket_client.on("perfil a ver",function(obj_userf){
     '</p><p>'+obj_userf.user.learning+
     '</p><p>'+obj_userf.user.about_me+
     '</div>'+
-    '<div id="dv_profile_user_chat_request" class="flex_row cen pos_abs bot_0p w h30p bac_col_ccc" style="border-radius:0 0 5px 5px">'+
+    '<div id="dv_profile_user_chat_request" class="flex_row ali_cen pos_a bot w h30p bac_col_ccc" style="border-radius:0 0 5px 5px">'+
     '<input type="button" value="Chat Request" '+
      ' data-user-id-rcv="'+obj_userf.user_id_rcv+
     '" data-skt-id-rcv="'+obj_userf.skt_id_rcv+ 
@@ -951,14 +951,14 @@ socket_client.on("recibir chat request",function(obj_roomf){
   
   var nudiv= document.createElement("div");
   nudiv.id= "dv_chat_request_of_"+obj_roomf.room_bth;
-  nudiv.setAttribute("class","flex_row pos_abs top_0p bor_1p_grey bor_r"); 
+  nudiv.setAttribute("class","flex_row pos_a top bor_1p_grey bor_r"); 
   nudiv.setAttribute("style","justify-content:space-evenly;width:200px")
 
-  nudiv.innerHTML='<div id="dv_chat_request_of_t" class="cen w80 bac_col_285 col_whi">Chat request from '+
+  nudiv.innerHTML='<div id="dv_chat_request_of_t" class="ali_cen w80 bac_col_285 whi">Chat request from '+
   obj_roomf.nme_mnd+'</div>'+
-    '<div id="dv_chat_request_of_m" class="cen w10" onclick="aceptar_chat_request(\''
+    '<div id="dv_chat_request_of_m" class="ali_cen w10" onclick="aceptar_chat_request(\''
 +obj_roomf.room_bth+'\')">+</div>'+
-    '<div id="dv_chat_request_of_x" class="cen w10 bac_col_800 col_whi" onclick="cancelar_chat_request_of(\''+obj_roomf.room_bth+"\',\'"
+    '<div id="dv_chat_request_of_x" class="ali_cen w10 bac_col_800 whi" onclick="cancelar_chat_request_of(\''+obj_roomf.room_bth+"\',\'"
         +obj_roomf.skt_id_rcv+"\',\'"+obj_roomf.skt_id_mnd+'\')">X</div>';
 
   dv_con_chat.appendChild(nudiv);
@@ -1025,22 +1025,22 @@ if(!dv_chat_room_){
 
     var nudiv=document.createElement("DIV");
     nudiv.id="dv_chat_room_"+room_bthx;
-    nudiv.setAttribute("class","pos_a_i top_10 lef_10 w80 h60 bor_r bor_s bac_col_whi")
+    nudiv.setAttribute("class","pos_a_i top_10 lef_10 w80 h60 bor_r bor_s bac_whi")
        
 
-    nudiv.innerHTML='<div class="h30p w pos_a fon_ari bor_r">'+
+    nudiv.innerHTML='<div class="tab h30p w pos_a fon_ari bor_r">'+
 
-        '<div class="w70 inl_blo pos_r h cur_mov bac_col_tit_chat_prv col_whi bor_r5000 fon_ari fon_bol"><span class="cen_v">Chat with</span></div>'+
+        '<div class="tab_cel ali_cen ali_mid w70 pos_r h cur_mov bac_col_tit_chat_prv whi bor_r5000 fon_ari fon_bol">Chat with</div>'+
 
       '<div id="dv_chat_room_tit_min_'+room_bthx+
-      '" class="w10 inl_blo pos_r h"'+
-      ' onclick="minimizar_dv_chat(\''+room_bthx+'\')"><span class="cen_v">-</span></div>'+
+      '" class="tab_cel ali_cen ali_mid w10 pos_r h"'+
+      ' onclick="minimizar_dv_chat(\''+room_bthx+'\')">-</div>'+
 
-      '<div class="w10 inl_blo pos_r h"'+
-      ' onclick="restaurar_tam_chat(\''+room_bthx+'\')"><span class="cen_v">L</span></div>'+
+      '<div class="tab_cel ali_cen ali_mid w10 pos_r h"'+
+      ' onclick="restaurar_tam_chat(\''+room_bthx+'\')">L</div>'+
 
-      '<div class="w10 inl_blo pos_r h bor_r0500 bac_col_crr_chat_p col_whi"'+
-      ' onclick="cerrar_dv_chat(\''+room_bthx+'\')"><span class="cen_v">x</span></div>'+
+      '<div class="tab_cel ali_cen ali_mid w10 pos_r h bor_r0500 bac_col_crr_chat_p whi"'+
+      ' onclick="cerrar_dv_chat(\''+room_bthx+'\')">x</div>'+
 
       '</div>'+//dv_chat_room_tit
 
@@ -1058,15 +1058,15 @@ if(!dv_chat_room_){
       '</div>'+//_user
       '</div>'+//_con_user
 
-      '<div id="dv_chat_room_msg_'+room_bthx+'" class="pos_a bot_0p h30p w">'+
+      '<div id="dv_chat_room_msg_'+room_bthx+'" class="pos_a bot h30p w">'+
       '<div class="h w70 inl_blo pos_r">'+
       '<form class="h w" onsubmit="enviar_msg_prv(event,\''+room_bthx+'\')">'+
-      '<div class="h pos_a lef_0p rig_30p">'+
+      '<div class="h pos_a lef rig_30p">'+
       '<input type="text" id="in_chat_room_msg_'+room_bthx+'" class="w h pos_a" autocorrect="off" autocomplete="off"'+
       ' data-room="'+room_bthx+
       '" placeholder="write your message..."></div>'+
 
-      '<button id="btn_chat_room_msg_'+room_bthx+'" class="w30p h pos_a rig_0p" type="submit" >'+
+      '<button id="btn_chat_room_msg_'+room_bthx+'" class="w30p h pos_a rig" type="submit" >'+
       '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
       '</button>'+
     '</form></div>'+
@@ -1160,11 +1160,11 @@ socket_client.on("esperar chat request",function(obj_roomf){
     
     var nudiv= document.createElement("div");
     nudiv.id= "dv_waiting_"+obj_roomf.room_bth;
-    nudiv.setAttribute("class","flex_row pos_abs bot_0p bor_1p_grey bor_r");
+    nudiv.setAttribute("class","flex_row pos_a bot bor_1p_grey bor_r");
     nudiv.setAttribute("style","justify-content:space-evenly;width:200px")
 
-    nudiv.innerHTML='<div id="dv_waiting_t" class="cen w90 bac_col_285 col_whi">Waiting for '+obj_roomf.nme_rcv+'...</div>'+
-     '<div id="dv_waiting_x" class="cen w10 bac_col_800 col_whi" onclick=\'cerrar_waiting("'+
+    nudiv.innerHTML='<div id="dv_waiting_t" class="ali_cen w90 bac_285 whi">Waiting for '+obj_roomf.nme_rcv+'...</div>'+
+     '<div id="dv_waiting_x" class="ali_cen w10 bac_800 whi" onclick=\'cerrar_waiting("'+
          obj_roomf.skt_id_rcv+'","'+
          obj_roomf.room_bth+
                    '")\'>X</div>';
@@ -1331,10 +1331,10 @@ function mostrar_etw_game_opt(){
   
     var nudiv= document.createElement("DIV");
     nudiv.id= "dv_create_game";
-    nudiv.setAttribute("class","inl_blo cen bor")
+    nudiv.setAttribute("class","inl_blo ali_cen bor")
     nudiv.innerHTML='<div id="dv_tit_opt_game" class="flex_row">'+
-     '<div id="dv_tit_opt_game_nme" class="inl_blo cen w bac_col_bla col_whi">Game Options</div>'+
-     '<div id="dv_tit_opt_game_x" class="inl_blo cen w50p cur_poi" onclick="cerrar_game_opt()">X</div></div>'+
+     '<div id="dv_tit_opt_game_nme" class="inl_blo ali_cen w bac_bla whi">Game Options</div>'+
+     '<div id="dv_tit_opt_game_x" class="inl_blo ali_cen w50p cur_poi" onclick="cerrar_game_opt()">X</div></div>'+
 
      '<div style="display:inline-block">'+
      '<span>Select word list:</span><br>'+
@@ -1358,11 +1358,11 @@ function mostrar_etw_game_opt(){
      '<option id="opt8">8</option>'+
      '</select></div><br>'+
     '<label><input type="checkbox" id="in_ch_vce">By Voice</label><br>'+
-     '<div id="dv_rdy_game" class="cen">'+
-     '<input type="button" id="bt_rdy_game" class="w50" value="Create" onclick="solicitar_juego()">'+
+     '<div id="dv_rdy_game" class="ali_cen">'+
+     '<input type="button" id="bt_rdy_game" class="w_" value="Create" onclick="solicitar_juego()">'+
      '</div></div>';
 
-    dv_con_game.appendChild(nudiv);
+    dv_con_play.appendChild(nudiv);
   }//if dv_create_game no existe
     
 }//mostrar_etwgameopt
@@ -1371,7 +1371,7 @@ function mostrar_etw_game_opt(){
 
 function cerrar_game_opt(){
   console.log("cierra game opt")
-  dv_con_game.removeChild(dv_create_game);
+  dv_con_play.removeChild(dv_create_game);
 }//cerrar_gameopt
 
 
@@ -1384,7 +1384,7 @@ function solicitar_juego(){
   var list_word= sl_list.options[sl_list.selectedIndex].id;
   var nro_player= sl_nro_player.options[sl_nro_player.selectedIndex].value;
  
-  dv_con_game.removeChild(dv_create_game);  
+  dv_con_play.removeChild(dv_create_game);  
   
   socket_client.emit("solicitar game",
          {type_game: type_game,
@@ -1444,7 +1444,7 @@ function dar_bar_jue(roomjf,nme_juef,
     '<span id="sp_nro_player">'+ nro_playerf+
       '</span>'+'</div>';
 
-    dv_con_game.appendChild(nudiv);
+    dv_con_play.appendChild(nudiv);
   }//if no esta la barra
 }//dar_bar_jue
 
@@ -1467,21 +1467,21 @@ function crear_juego(roomjf,nme_juef,lis_juef,nro_playerf){
      
     var nudivj= document.createElement("DIV");
     nudivj.id= "dv_jue";
-    nudivj.setAttribute("class","flex_col pos_absi top_10 bor_r bor_1p_grey bac_col_db82")
+    nudivj.setAttribute("class","flex_col pos_a_i top_10 bor_r bor_1p_grey bac_db82")
     //nudivj.classList.add("flex_col","pos_absi","top_10","bor_r","bor_1p_grey","bac_col_db82")
     nudivj.setAttribute("style","width:270px;height:250px")
     nudivj.innerHTML='<div id="dv_jue_cab">'+
-    '<div id="dv_jue_tit" class="flex_row cen fon_ari">'+
-      '<div id="dv_jue_tit_nm" class="w cen bor_r5000 bac_col_285 col_whi cur_mov">'+nme_juef+'</div>'+
-      '<div id="dv_jue_tit_rsz" class="cen w30p cur_poi" onclick="restaurar_tam_jue()">L</div>'+
-      '<div id="dv_jue_tit_cerrar" class="cen w30p cur_poi bac_col_800 col_whi bor_r0500" onclick="cerrar_juego(\''+roomjf+'\')">X</div>'+
+    '<div id="dv_jue_tit" class="flex_row ali_cen fon_ari">'+
+      '<div id="dv_jue_tit_nm" class="w ali_cen bor_r5000 bac_285 whi cur_mov">'+nme_juef+'</div>'+
+      '<div id="dv_jue_tit_rsz" class="ali_cen w30p cur_poi" onclick="restaurar_tam_jue()">L</div>'+
+      '<div id="dv_jue_tit_cerrar" class="ali_cen w30p cur_poi bac_800 whi bor_r0500" onclick="cerrar_juego(\''+roomjf+'\')">X</div>'+
       '</div>'+
 
     '<div id="dv_jue_exp">Explains: <span id="sp_word_to_guess">wordX</span'+
     '><span id="sp_timer" class="flo_rig bor_1p_bla">00</span></div>'+
     '</div>'+//dv_jue_cab
 
-    '<div id="dv_jue_con_user" class="flex_row pos_abs top_50p bot_30p w">'+
+    '<div id="dv_jue_con_user" class="flex_row pos_a top_50p bot_30p w">'+
     '<div id="dv_jue_con" class="ove_y wor_wra w bor_1p_grey"></div>'+
     '<div id="dv_jue_user" class="wor_wra pos_rel fon_bol bor_1p_grey" style="width:100px">'+
 
@@ -1493,21 +1493,21 @@ function crear_juego(roomjf,nme_juef,lis_juef,nro_playerf){
       '</div>'+
     '</div>'+//_con_user
 
-      '<div id="dv_jue_msg" class="pos_abs bot_0p h30p flex_row w90">'+
+      '<div id="dv_jue_msg" class="pos_a bot h30p flex_row w90">'+
 
-    '<form id="fm_jue_msg" class="pos_abs lef_0p top_0p bot_0p rig_30p" onsubmit="enviar_msg_jue(event)">'+
-      '<div class="pos_abs top_0p bot_0p lef_0p rig_30p">'+
+    '<form id="fm_jue_msg" class="pos_a lef top bot rig_30p" onsubmit="enviar_msg_jue(event)">'+
+      '<div class="pos_a top bot lef rig_30p">'+
     '<input type="text" id="in_jue_msg" class="w h" placeholder="write your text..." data-room="'+roomjf+'"></div>'+
  
-    '<button id="btn_jue_snd_msg" class="pos_abs rig_0p h w30p" type="submit" >'+
+    '<button id="btn_jue_snd_msg" class="pos_a rig h w30p" type="submit" >'+
       '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
       '</button></form>'+  
-    '<button class="pos_abs rig_0p h"  onclick="seleccionar_emoji_jue()">'+
+    '<button class="pos_a rig h"  onclick="seleccionar_emoji_jue()">'+
       '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
         '</button>'+  
     '</div>';
 
-    dv_con_game.appendChild(nudivj);
+    dv_con_play.appendChild(nudivj);
 
     socket_client.emit("entrar roomj",
                 {nro_game:roomjf, //idjue
@@ -1553,7 +1553,7 @@ socket_client.on("manda user al juego",function(obj_gamef){
   var userj= "";
 
   for(var nom in obj_gamef.users_jue){
-   userj+= '<div id="dv_jue_pnt_'+nom+'" class="inl_blo cen w30p bor_1p_bla bor_r50">0</div>'+ 
+   userj+= '<div id="dv_jue_pnt_'+nom+'" class="inl_blo ali_cen w30p bor_1p_bla bor_r_">0</div>'+ 
             obj_gamef.users_jue[nom][0]+"<br>";
   }//for
 
@@ -1653,10 +1653,10 @@ socket_client.on("quien gano",function(obj_winnerf){
 
 function restaurar_tam_jue(){
   console.log("restaura tam jue")
-  if(dv_jue.offsetWidth<dv_con_game.offsetWidth){
+  if(dv_jue.offsetWidth<dv_con_play.offsetWidth){
     
-    dv_jue.style.height= dv_con_game.offsetHeight+"px";
-    dv_jue.style.width= dv_con_game.offsetWidth+"px";
+    dv_jue.style.height= dv_con_play.offsetHeight+"px";
+    dv_jue.style.width= dv_con_play.offsetWidth+"px";
     dv_jue.style.left= 0;
     dv_jue.style.top= 0;
   }//if pequeño
@@ -1669,7 +1669,7 @@ function restaurar_tam_jue(){
 
 function cerrar_juego(roomj){
   console.log("cierra jue:"+roomj)
-  dv_con_game.removeChild(dv_jue);
+  dv_con_play.removeChild(dv_jue);
   socket_client.emit("salir del juego",{room:roomj});
 }//cerrar juego
 
@@ -1680,7 +1680,7 @@ socket_client.on("eliminar game bar",function(obj_room_gamef){
   console.log("elimina game bar")
   var dv_game_bar= document.getElementById("dv_game_bar_"+obj_room_gamef.room_game);
 
-  dv_con_game.removeChild(dv_game_bar);
+  dv_con_play.removeChild(dv_game_bar);
 
 });//skcl eliminar game bar
 
@@ -2020,9 +2020,9 @@ console.log("minimiza dv chat:"+dv_c_r_x.id)
     var dv_chat_room_con_user_= dv_c_r_x.children[1];
     var dv_chat_room_msg_= dv_c_r_x.children[2];
   
-    if($(dv_chat_room_tit_min_).html()=='<span class="cen_v">-</span>'){
+    if($(dv_chat_room_tit_min_).html()=='-'){
       $(dv_chat_room_).height(30);
-      $(dv_chat_room_tit_min_).html('<span class="cen_v">+</span>');
+      $(dv_chat_room_tit_min_).html('+');
       $(dv_chat_room_con_user_).hide();
       $(dv_chat_room_msg_).hide();
       $(dv_chat_room_).resizable("disable");
@@ -2031,7 +2031,7 @@ console.log("minimiza dv chat:"+dv_c_r_x.id)
     }//if -
     else{
       $(dv_chat_room_).height(200);
-      $(dv_chat_room_tit_min_).html('<span class="cen_v">-</span>');
+      $(dv_chat_room_tit_min_).html('-');
       $(dv_chat_room_con_user_).show();
       $(dv_chat_room_msg_).show();
       $(dv_chat_room_).resizable("enable");
