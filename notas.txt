@@ -5,9 +5,37 @@ heroku: pl...-ten
 
 .por hacer
 .cambios
+.soluciones
 
 ---------------
 --por hacer
+
+
+portada: 1.breve descripcion. 2. mail y password para login. 3. features: chat, play y learn. 4. cuadro de registrar usuarios.
+
+mejorar portada, con imagen referente al contenido y abajo los ultimos usuarios conectados, como sharedtalk o paljit o scrabbin o openlanguageexchange o l-lingo, listar como funciona la pagina how it works
+
+hacerle soporte en chatango/bestalk
+
+publicar en babchat, babelan
+
+learn section: que sea de vocabulario, seccionado por: sustantivo verbo adjetivos adverbio y expresiones, es decir por tipo de palabra, y cada usuario puede ir llenando una leccion.
+
+solo 5 invitados que pueden ver alrededor de la pagina por 10min, para entrar en chat pide registro.
+
+earworms to learn languages.
+
+Best en amarillo, de "BEST"alk, para el titulo
+
+marcar en el usuario, cuando fue la ultima vez que entro
+
+una seccion de desafios, challenges
+
+avisar cuando haya desconexión
+
+que link de videos de youtube se abra en ventana emergente
+
+en learn section: poner aprender con Duolingo.com por ejemplo
 
 --cambios
 lista de cambios:
@@ -85,8 +113,26 @@ heroku:
 -----------------
 
 
-+soluciones:
+--soluciones:
 
+13sl..
+
+db.users.find().sort({fecha_de_login:-1}).limit(2).forEach(printjson);
+
+..13sl
+
+
+12sl..
+
+Object.keys(io.sockets.connected).length
+
+socket.on('connect', function() { 
+connectCounter++; 
+// y guardar en database pasra luego mostrar la cant users online en la portada!!!
+});
+socket.on('disconnect', function() { connectCounter--; });
+
+..12sl
 
 11sl..
 function TranslOpen() {
