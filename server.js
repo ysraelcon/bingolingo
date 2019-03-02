@@ -239,6 +239,7 @@ socket.on('enviar msg al room', function(obj_msgf)
 //obj_msgf{msg(in_msg_val),room,type_room}
 console.log("enviar msg a room: "+obj_msgf.type_room)
 obj_msgf.msg= emoji.emojify(obj_msgf.msg);
+obj_msgf.msg= reemplazarMayor_o_menor(obj_msgf.msg);  
 obj_msgf.msg= haber_link(obj_msgf.msg);
 if(obj_msgf.type_room==="public")
 {
@@ -922,8 +923,7 @@ io.sockets.emit("manda user al juego",users_jue);*/
 
 
 //link catcher
-function 
-haber_link(tf)
+function haber_link(tf)
 {
 var re=/(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
 var mctch=tf.match(re);
@@ -943,3 +943,10 @@ lf+'</a>';
 return a;        
 }//taggear_a
 }//haber_link
+
+function reemplazarMayor_o_menor(t)
+{
+t=t.replace(/</g,"&#60;")
+t=t.replace(/>/g,"&#62;")
+return t;
+}//reemplazarMayor_O_Menor
