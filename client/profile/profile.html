@@ -241,6 +241,7 @@ width:100%;
 padding:10px;
 background-color:black;
 color:white;
+text-align:center
 }
 
 #dv_user_i
@@ -252,7 +253,7 @@ font-family:arial;
 #dv_user_profile
 {
 /*display:flex; flex-direction:column;*/
-align-items:center;
+text-align:center;
 }  
 
 #sp_user_edit_profile, #btn_cancel_edit_profile
@@ -527,7 +528,7 @@ onclick="abrir_tab(dv_con_learn,dv_cont,this)">
 
 
 
-<div id="dv_con_chat" class="desierto_dia">
+<div id="dv_con_chat" class="non desierto_dia">
 
 <button id="btn_tema"
 onclick="cambiar_tema()">
@@ -851,8 +852,7 @@ onclick="jugar_hangman()">
 
 
 
-<div id="dv_con_read"
-class="non">
+<div id="dv_con_read" class="non">
 In future.
 </div><!-- dv con read -->
 
@@ -860,8 +860,7 @@ In future.
 
 
 
-<div id="dv_con_learn"
-class="non">
+<div id="dv_con_learn" class="non">
 The teacher is taking longer to arrive.
 </div><!-- dv con learn -->
 
@@ -869,8 +868,7 @@ The teacher is taking longer to arrive.
 
 
 
-<div id="dv_con_user"
-class="non">
+<div id="dv_con_user">
 
 <div id="dv_user_i">User info</div>
 
