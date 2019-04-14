@@ -57,8 +57,7 @@ con_canv.font= "12px sans-serif"
 
 
 
-function 
-jugar_hangman()
+function jugar_hangman()
 {
 console.log("juega hangman")
 if(typeof(dv_juego_hangman)=="undefined")
@@ -103,8 +102,7 @@ dibujar_new_game();//},2000);
 }//jugar_hangman
 
 
-function 
-cerrar_hangman()
+function cerrar_hangman()
 {
 console.log("cierra hangman")
 dv_con_play.removeChild(dv_juego_hangman);
@@ -115,8 +113,7 @@ dv_con_play.removeChild(dv_juego_hangman);
 
 
 
-function 
-nuevo_juego(ev)
+function nuevo_juego(ev)
 {
 console.log("nuevo juego")
 var x= ev.clientX-canv.offsetLeft, y= ev.clientY-canv.offsetTop-98;
@@ -131,8 +128,7 @@ aleatoria_wordnik();
 }//nuevo_juego
 
 
-function 
-cargando_juego()
+function cargando_juego()
 {
 console.log("carga juego")
 con_canv.clearRect(0,0,canv.width,canv.height)
@@ -141,8 +137,7 @@ con_canv.strokeRect(90,130,100,20)
 }//cargando_juego
 
 
-function 
-arrancar_nuevo_juego()
+function arrancar_nuevo_juego()
 {
 console.log("arranca nuevo juego")
 dv_definicion_juego.innerHTML= "";
@@ -163,8 +158,7 @@ nfallo=4;
 }//arrancar_nuevo_juego
 
 
-function 
-dentro_de_rango(vx,x1,x2)
+function dentro_de_rango(vx,x1,x2)
 {
 console.log("dentro de rango")
 if(x1<=vx&&vx<=x2)  return true;
@@ -173,8 +167,7 @@ else  return false;
 
 //dibujar_new_game();
 
-function 
-dibujar_new_game()
+function dibujar_new_game()
 {
 console.log("dibuja new game")
 con_canv.clearRect(0,0,canv.width,canv.height)
@@ -184,8 +177,7 @@ canv.onclick= nuevo_juego;
 }//dibujar_new_game
 
 
-function 
-dibujar_definicion()
+function dibujar_definicion()
 {
 console.log("dibuja definicion")
 con_canv.fillText("DEFINITION",25,70);
@@ -193,8 +185,7 @@ con_canv.strokeRect(20,50,100,20);
 }//dibujar_definicion
 
 
-function 
-dibujar_new_game2()
+function dibujar_new_game2()
 {
 console.log("dibuja new game2")
 dibujar_definicion();
@@ -205,8 +196,7 @@ canv.onclick= nuevo_juego2;
 }//dibujar_new_game2
 
 
-function 
-nuevo_juego2(ev)
+function nuevo_juego2(ev)
 {
 console.log("nuevo juego2:"+ev)
 var x= ev.clientX-canv.offsetLeft, y= ev.clientY-canv.offsetTop-98;
@@ -225,8 +215,7 @@ dar_definicion();
 }//nuevo_juego2
 
 
-function 
-dar_definicion()
+function dar_definicion()
 {
 console.log("da definicion")
 definicion_wordnik(word,dv_definicion_juego);
@@ -235,32 +224,27 @@ definicion_wordnik(word,dv_definicion_juego);
 }//dar_definicion
 
 
-function 
-dibujar_base()
+function dibujar_base()
 {
   console.log("dibuja base")
   dibujar_linea(125,120+50,275,120+50)//base
 }//dibujar_base
-function 
-dibujar_poste()
+function dibujar_poste()
 {
   console.log("dibuja poste")
   dibujar_linea(225,120+50,225,25+50)//poste
 }//dibujar_poste
-function 
-dibujar_poste_arriba()
+function dibujar_poste_arriba()
 {
 console.log("dibuja poste arriba")
 dibujar_linea(225,25+50,175,25+50)//poste arriba
 }//dibujar_poste_arriba
-function 
-dibujar_poste_abajo()
+function dibujar_poste_abajo()
 {
 console.log("dibuja poste abajo")
 dibujar_linea(175,25+50,175,50+50)//poste abajo
 }//dibujar_poste_abajo
-function 
-dibujar_cabeza()
+function dibujar_cabeza()
 {
 console.log("dibuja cabeza")
 con_canv.beginPath();
@@ -268,8 +252,7 @@ con_canv.arc(175,60+50,10,0,2*Math.PI);
 con_canv.stroke();
 con_canv.closePath()
 }//dibujar_cabeza
-function 
-dibujar_sonrisa()
+function dibujar_sonrisa()
 {
 console.log("dibuja sonrisa")
 con_canv.beginPath();
@@ -279,8 +262,7 @@ con_canv.stroke();
 con_canv.strokeStyle="black";
 con_canv.closePath()
 }//dibujar_sonrisa
-function 
-dibujar_tristeza()
+function dibujar_tristeza()
 {
 console.log("dibuja sonrisa")
 con_canv.beginPath();
@@ -290,32 +272,27 @@ con_canv.stroke();
 con_canv.strokeStyle="black";
 con_canv.closePath()
 }//dibujar_tristeza
-function 
-dibujar_columna()
+function dibujar_columna()
 {
 console.log("dibuja columna")
 dibujar_linea(175,70+50,175,100+50)//columna
 }//dibujar_columna
-function 
-dibujar_pata_izq()
+function dibujar_pata_izq()
 {
 console.log("dibuja pata izq")
 dibujar_linea(175,100+50,165,110+50)//pata izq
 }//dibujar_pata_izq
-function 
-dibujar_pata_der()
+function dibujar_pata_der()
 {
 console.log("dibuja pata der")
 dibujar_linea(175,100+50,185,110+50)//pata der
 }//dibujar_pata_der
-function 
-dibujar_brazo_izq()
+function dibujar_brazo_izq()
 {
 console.log("dibuja brazo izq")
 dibujar_linea(175,80+50,155,70+50)//brazo izq
 }//dibujar_brazo_izq
-function 
-dibujar_brazo_der()
+function dibujar_brazo_der()
 {
 console.log("dibuja brazo der")
 dibujar_linea(175,80+50,195,70+50)//brazo der
@@ -334,8 +311,7 @@ dibujar_new_game2();
 
 //dibujar_wordlin(word)
 
-function 
-dibujar_wordlin(mwordf)
+function dibujar_wordlin(mwordf)
 {
 console.log("dibuja wordlin :wordf")
 mwordf.forEach(function(v,i)
@@ -345,8 +321,7 @@ dibujar_linea(i*25+25,30,i*25+25+20,30);
 }//dibujar_word
 
 
-function 
-dibujar_letra_en_word(letpos,color)
+function dibujar_letra_en_word(letpos,color)
 {
 console.log("dibuja letra en word:"+letpos+"/-/"+color)
 con_canv.fillStyle= color||con_canv.fillStyle;
@@ -357,8 +332,7 @@ con_canv.fillStyle="black";
 
 //dibujar_abc();
 
-function 
-dibujar_abc()
+function dibujar_abc()
 {
 console.log("dibuja abc")
 for(var l in L){
@@ -368,8 +342,7 @@ dibujar_letra(L[l]);
 
 
 
-function 
-toco_letra(x,y,l)
+function toco_letra(x,y,l)
 {
 console.log("toco letra")
 if(dentro_de_rango(x,l.x*25-5,l.x*25+20))
@@ -412,8 +385,7 @@ console.log("toco letra")
 }//toco_letra
 
 
-function 
-tocar_letra_en_canvas(ev)
+function tocar_letra_en_canvas(ev)
 {
 console.log("toca letra en canvas")
 var x= ev.clientX-canv.offsetLeft, y= ev.clientY-canv.offsetTop-98;
@@ -424,8 +396,7 @@ toco_letra(x,y,L[l]);
 }//tocar_letra_en_canvas
 
 
-function 
-dibujar_letra(l)
+function dibujar_letra(l)
 {
 console.log("dibuja letra:"+l)
 con_canv.fillText(l.v,l.x*25+5,l.y*15+215);
@@ -433,15 +404,13 @@ con_canv.strokeRect(l.x*25,(l.y*15+215)-15,20,15);
 }//dibujar_letra
 
 
-function 
-dibujar_linea_en_letra(l,color)
+function dibujar_linea_en_letra(l,color)
 {
 console.log("dibuja linea en letra:"+l+"/-/"+color)
 dibujar_linea(l.x*25,l.y*15+215,l.x*25+20,l.y*15+215-15,color)
 }//dibujar_linea_en_letra
 
-function 
-dibujar_linea(x1,y1,x2,y2,color)
+function dibujar_linea(x1,y1,x2,y2,color)
 {
 console.log("dibuja linea :x1y1x2y2 color")
 var colant= con_canv.strokeStyle;
@@ -455,8 +424,7 @@ con_canv.strokeStyle= colant;
 }//dibujar_linea
 
 
-function 
-aleatoria_wordnik(wordf)
+function aleatoria_wordnik(wordf)
 {
 //definicion wordnik wordnet.3.0     
 console.log("aleatoria wordnik")
@@ -489,8 +457,7 @@ xhr.send();
 }//aleatoria_wordnik
 
 
-function 
-definicion_wordnik(wordf,dv_resultf)
+function definicion_wordnik(wordf,dv_resultf)
 {
 //definicion wordnik wordnet.3.0     
 console.log("define wordnik")

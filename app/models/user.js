@@ -20,7 +20,8 @@ fecha_de_login: {type: Date, 'default': Date.now, index: true},
 notes: String,
 resetPasswordToken: String,
 resetPasswordExpires: Date,
-chats: mongoose.Schema.Types.Mixed
+chats: mongoose.Schema.Types.Mixed,
+online: { type: Boolean, default: false }
 });//user datos
 //city,in,description,yearborn,monthborn,
 

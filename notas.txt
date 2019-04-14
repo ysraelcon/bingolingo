@@ -115,6 +115,20 @@ heroku:
 
 --soluciones:
 
+14sl..
+
+reset password
+
+debido a: response code 534
+
+marcnovkovic888@gmail.com resetear password
+
+https://stackoverflow.com/questions/33493963/nodemailer-is-not-able-send-mail-using-gmail
+
+http://masashi-k.blogspot.com/2013/06/sending-mail-with-gmail-using-xoauth2.html
+
+..14sl
+
 13sl..
 
 db.users.find().sort({fecha_de_login:-1}).limit(2).forEach(printjson);

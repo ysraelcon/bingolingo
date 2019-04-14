@@ -511,8 +511,7 @@ onclick="entrar_a_room('eng')"> English <span id="sp_chat_cant_eng" class="cl_sp
   
 <script>
   
-function 
-seleccionar_tema()
+function seleccionar_tema()
 {
 //console.log(sl_tema.value);
 ir_a_theme_room(sl_tema.value);
@@ -767,8 +766,7 @@ alt="avatar" ><br>
     
 <script>
 //script user
-function 
-mostrar_edit_profile()
+function mostrar_edit_profile()
 {
 console.log("muestra edit_profile")
 dv_user_profile.style.display= "none";
@@ -789,8 +787,7 @@ btn_edit_profile.removeAttribute("style");
 
 
 //cargar imagen
-function 
-cargar_img()
+function cargar_img()
 {
 console.log("carga img")
 var reader= new FileReader();
@@ -1068,8 +1065,7 @@ onclick="guardar_nota()">
 <script>
         
 //script open tab..
-function 
-abrir_tab(dv_pie_mst,dv_conf,this_tbf)
+function abrir_tab(dv_pie_mst,dv_conf,this_tbf)
 {
 console.log("abre tab:"+dv_pie_mst+"/-/"+dv_conf+"/-/"+this_tbf)
 var col_tab={"dv_tab_chat":["#f5f5f5","black"],
@@ -1104,8 +1100,7 @@ this_tbf.style.color= col_tab[this_tbf.id][1];
       
 <script>
 
-function 
-mostrar_dict(btf)
+function mostrar_dict(btf)
 {
 console.log("muestra dict:"+btf)
 if(btf.style.color=="green")
@@ -1119,8 +1114,7 @@ dv_dict.style.display="block";
 }//mostrar_dict 
 
 
-function 
-mostrar_nota(btf)
+function mostrar_nota(btf)
 {
 console.log("muestra nota:"+btf)
 if(btf.style.color=="green")
@@ -1156,16 +1150,14 @@ by BesTalk Team</span>
     
 <script>
 
-function 
-cerrar_reporte()
+function cerrar_reporte()
 {
 console.log("cierra reporte")
 dv_ng_view.removeChild(dv_reporte_scr);
 }//cerrar_reporte
 
 
-function 
-dar_reporte()
+function dar_reporte()
 {
 console.log("da reporte")
 var dv= document.createElement("div");

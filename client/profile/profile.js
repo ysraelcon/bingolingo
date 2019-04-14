@@ -1,5 +1,6 @@
 
 angular.module('la_App.profile',['ngRoute'])
+
 .config(['$routeProvider',//'$locationProvider',
 function($routeProvider)
 {
@@ -11,6 +12,7 @@ controller:'profileCtrl'
 });//when
 //$locationProvider.html5Mode(true);
 }])//config
+
 .controller('profileCtrl',
 ["$scope","$http","$location","$route",
 function($scope,$http,$location,$route)
