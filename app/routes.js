@@ -233,7 +233,7 @@ html: '<p>Visit the link for set your new password:</p>'+
 //glitch..
 '<a href="https://bestalk-test.glitch.me/reset/'+
 token+
-'">Reset Password</a>'+
+'">Reset Password</a><br>'+
 '<h2>Continue enjoying of BesTalk!</h2>'
 };//mailopts
 transporter.sendMail(mailopts, function(err, info)
