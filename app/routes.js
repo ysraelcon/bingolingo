@@ -18,12 +18,18 @@ appf.get("/home", function(req,res)
 {
 console.log("get /home :req,res")
 var cant_u;
+var cant_uo= 1;
 User.find().find({}, function(err, results)
 {
 cant_u= results.length
-res.json({cant_u:cant_u}) 
-})            
-});
+User.find().find({online:true}, function(err, results)
+{
+cant_uo= results.length
+res.json({cant_u:cant_u, cant_uo:cant_uo}) 
+})//find uo   
+})//find u
+
+});//get home
 
   /*
 appf.get("/sign_up", function(req,res){
@@ -35,6 +41,32 @@ appf.get("/reset/:token", function(req,res)
 console.log("get /reset/:token :req,res")
 res.render("reset.ejs", {token: req.params.token});
 });//get reset
+  
+
+  
+appf.get("/reset_manual", function(req,res)
+{
+console.log("get /reset_manual :req,res")
+ /* 
+User.findOne({ email: "marcnovkovic888@gmail.com" },
+function(err, user)
+{
+if(!user){
+console.log("no esta ese mail en db")
+}else
+{
+user.resetPasswordToken ="BestPass001";
+user.resetPasswordExpires = Date.now() + 3600000*72;
+user.save((err)=>
+{
+if(err) throw err
+})
+console.log("saved reset password")
+}
+})
+*/
+});//get reset_manual
+  
   
   
 appf.post("/reset/:token", function(req,res)
@@ -51,9 +83,9 @@ function(err, user)
 if (!user)
 {
 //heroku 3c..  
-return res.send('Password reset token is invalid or has expired. <a href="https://bestalk.herokuapp.com">home</a>');
+//return res.send('Password reset token is invalid or has expired. <a href="https://bestalk.herokuapp.com">home</a>');
 //glitch..
-//return res.send('Password reset token is invalid or has expired. <a href="https://bestalk-test.glitch.me">home</a>');
+return res.send('Password reset token is invalid or has expired. <a href="https://bestalk-test.glitch.me">home</a>');
 //
 }//if
 //console.log(user);
@@ -65,12 +97,16 @@ user.save((err) =>
 if (err) throw err;
 });//save
 //heroku    
-res.send("Password reseted succesfully! <a href='https://bestalk.herokuapp.com'>Login</a>");
+//res.send("Password reseted succesfully! <a href='https://bestalk.herokuapp.com'>Login</a>");
 //glitch..
-//res.send("Password reseted succesfully! <a href='https://bestalk-test.glitch.me'>Login</a>");
+res.send("Password reseted succesfully! <a href='https://bestalk-test.glitch.me'>Login</a>");
 });//findone
 });//post reset
 
+  
+
+  
+  
 
 appf.get("/login", function(req,res)
 {
@@ -193,11 +229,11 @@ to: req.body.email,//or list
 subject: 'Password Reset',
 html: '<p>Visit the link for set your new password:</p>'+
 //heroku 3c..
-'<a href="https://bestalk.herokuapp.com/reset/'+
+//'<a href="https://bestalk.herokuapp.com/reset/'+
 //glitch..
-//'<a href="https://bestalk-test.glitch.me/reset/'+
+'<a href="https://bestalk-test.glitch.me/reset/'+
 token+
-'">Reset Password</a>'+
+'">Reset Password</a><br>'+
 '<h2>Continue enjoying of BesTalk!</h2>'
 };//mailopts
 transporter.sendMail(mailopts, function(err, info)

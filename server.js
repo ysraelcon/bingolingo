@@ -173,7 +173,19 @@ for( var room in users_room)
 io.to(socket.id).emit("actualizar rooms",
 {users_room: users_room[room],
 room:room});
-}//for actualiza, cuando entra   
+}//for actualiza, cuando entra 
+User.findOne({_id:socket.request.user._id}, (err, user) =>
+{
+if(!user.online)
+{
+user.online= false;
+}
+user.online= true;
+user.save((err)=>
+{
+if (err) throw err;
+})//save
+})//findone  
 }//if user lgged
 //console.log(socket.request.user.logged_in);
 });//skon pedir usuario en chat
@@ -905,6 +917,15 @@ io.sockets.emit("actualizar rooms",
 room:room});   
 }//if
 }//for
+User.findOne({_id:socket.request.user._id}, (err, user) =>
+{
+user.online= false;
+user.save((err)=>
+{
+if (err) throw err;
+})//save
+})//findone    
+console.log(socket.request.user)  
 /* del control total de usuarios, eliminarlo
 delete users_jue[socket.request.user._id];
 io.sockets.emit("manda user al juego",users_jue);*/

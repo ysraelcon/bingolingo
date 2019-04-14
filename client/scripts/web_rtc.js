@@ -1,6 +1,5 @@
 
-function 
-solicitar_llamada(btf,room_bthx)
+function solicitar_llamada(btf,room_bthx)
 {
 console.log("solicita llamada:"+room_bthx)
 if(btf.style.backgroundColor=="green")
@@ -49,8 +48,7 @@ dv_chat_room_con_.appendChild(nudiv);
 
 
 //cancelar llamada enviada
-function 
-cerrar_llamada(roomf)
+function cerrar_llamada(roomf)
 {
 console.log("cierra llamada:"+roomf)
 var dv_chat_room_con_= document.getElementById("dv_chat_room_con_"+roomf);
@@ -65,8 +63,7 @@ dv_chat_room_con_.removeChild(dv_esp_call);
 
 
 //cancelar llamada recibida
-function 
-cancelar_llamada(roomf)
+function cancelar_llamada(roomf)
 {
 console.log("cancela llamada:"+roomf)
 var dv_chat_room_con_= document.getElementById("dv_chat_room_con_"+roomf);
@@ -91,8 +88,7 @@ cancelar_llamada(dt.room_rtc);
 
 
 //se acepta la llamada y empieza a correr
-function 
-aceptar_llamada(roomf)
+function aceptar_llamada(roomf)
 {
 console.log("acepta llamada")
 cancelar_llamada(roomf);
@@ -126,8 +122,7 @@ bt_call.removeAttribute("style");
 
 
 //join group voice chat
-function 
-juntarse_llamada_secret(btf,roomf)
+function juntarse_llamada_secret(btf,roomf)
 {
 console.log("juntarse llamada secret:"+roomf)
 if(btf.style.backgroundColor=="green")
@@ -147,8 +142,7 @@ var room;
 var web_rtc;
 
 // for simplistic metrics gathering
-function 
-track(name, info)
+function track(name, info)
 {
 console.log("track")
 if (web_rtc && web_rtc.connection)
@@ -159,8 +153,7 @@ web_rtc.connection.emit('metrics', name, info || {});
 
 
 
-function 
-doJoin(room) 
+function doJoin(room) 
 {
 console.log("do join:"+room)
 web_rtc.startLocalVideo();
@@ -171,8 +164,7 @@ else{console.log("error",err,room);}
 }//doJoin
 
 
-function 
-iniciar_llamada(roomf)
+function iniciar_llamada(roomf)
 {
 console.log("inicia llamada:"+roomf)
 room=roomf;
@@ -181,8 +173,7 @@ doJoin(room);
 }//iniciar_llamada
 
 
-function 
-hangUp()
+function hangUp()
 {
 console.log("colgad")
 web_rtc.stopLocalVideo();
@@ -190,8 +181,7 @@ web_rtc.leaveRoom();
 }//colgar
 
 
-function 
-GUM()
+function GUM()
 {
 console.log("se ejecuta gum");
 
