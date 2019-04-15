@@ -5,99 +5,14 @@
 var socket_client= io.connect();
 
 
-/*-----indice
 
-f.entrar_a_chat: em.pedir usuario en chat
-.on.recibir usuarios
-f.entrar_lang_room: entrar_a_room, spanear_room
-f.ir_a_theme_room: entrar_a_room, spanear_room
-f.spanear_room
-f.entrar_a_room: crear_room, em.abrir room
-.on.recibir usuarios en el room
-.on.actualizar rooms: spanear_room
-f.minimizar_dv_chat
-f.restaurar_tam_chat
-f.cerrar_dv_chat
-f.es_boton_vacio
-f.enviar_msg: em.enviar msg al room
-.on.recibir msg en room
-f.esta_tipeando: em.typing
-.on.who type
-f.ir_a_secret_room: crear_room, em.entrar a secret room
-f.crear_room
-f.seleccionar_emoji
-f.meter_emoji
-.on.recibir usuarios en secret room
-f.nooP
+//-------chat------
 
-
-f.informar_profile: em.ver su profile
-.on.perfil a ver
-f.mandar_chat_request_profile: em.mandar chat request, cerrar_profile_user
-f.cerrar_profile_user
-f.cerrar_inf_user
-.on.recibir chat request
-f.aceptar_chat_request: eliminar_chat_request_of, em.aceptar chat request
-.on.crear chat privado: crear_chat_privado
-f.cancelar_chat_request_of: em.cancelar chat request of
-.on.cancelar chat request of: cerrar_waiting
-f.crear_chat_privado
-.on.esperar chat request
-f.cerrar_waiting: eliminar_waiting, em.cancel chat request
-.on.cerrar waiting: eliminar_waiting
-f.eliminar_waiting
-.on.eliminar chat request
-f.eliminar_chat_request_of
-.on.acepta chat request
-.on.meter usuarios al chat privado
-f.enviar_msg_prv: em.send message chat r
-.on.new msg chat request
-.on.se desconecto
-
-
-f.mostrar_etw_game_opt
-f.cerrar_game_opt
-f.solicitar_juego: em.solicitar game
-.on.crear juego: crear_juego
-.on.los demas bar jue: dar_bar_jue
-f.dar_bar_jue
-f.juntarse_a_juego: crear_juego
-f.crear_juego: em.entrar roomj
-.on.manda user al juego
-.on.ya comenzo jue
-.on.el del turno
-.on.corre reloj
-.on.los que adivinan
-.on.no se adivino
-.on.actualiza puntaje
-.on.quien gano
-f.restaurar_tam_jue
-f.cerrar_juego
-.on.eliminar game bar
-f.enviar_msg_jue: em.send message jue
-.on.new message jue: em.10 seg
-f.seleccionar_emoji_jue
-
-
-f.enviar_reporte: em.reporte, cerrar_reporte
-f.editar_nota
-f.guardar_nota: em.save note
-f.definir_wordnik
-f.definir_yandex
-f.traducir_frase
-f.dar_img_provisional
-
-*/
-
-
-//====== entra al chat
-function 
-entrar_a_chat()
+function entrar_a_chat()
 {
 console.log("entra a chat")
 socket_client.emit("pedir usuario en chat",socket_client.id);
 }//click tab chat
-
 
 
 //llena tabla users chat
@@ -112,7 +27,7 @@ for(var username in users_cnntf)
 con_user+="<tr id=\'"+users_cnntf[username].skt_id+
 "\' data-user-id='"+username+
 "' onclick='informar_profile(this)' >"+
-"<td><img class='w30p h30p' src='"+
+"<td><img class='img_de_30' src='"+
 (users_cnntf[username].user.avatar||dar_img_provisional() )+"'></td>"+
 "<td>"+users_cnntf[username].user.firstname+
 " "+users_cnntf[username].user.lastname+"</td>"+
@@ -444,7 +359,7 @@ sp_chat_cant_.innerHTML= cnt_users!=0? cnt_users: "";
 });//skcl actualizar rooms
 
 
-
+//-----------
 
 function minimizar_dv_chat(roomx)
 {//roomx
@@ -574,8 +489,7 @@ favicon.href="data:image/x-icon;base64,AAABAAEAEBAAAAEAGABoAwAAFgAAACgAAAAQAAAAI
 
 
 //quien escribe, en evento attached
-function 
-esta_tipeando(in_chat_msgf)
+function esta_tipeando(in_chat_msgf)
 {
 socket_client.emit("typing",
 {room: in_chat_msgf.getAttribute("data-room")});
@@ -594,7 +508,7 @@ socket_client.on("who type",function(obj_roomf)
 //console.log(obj_roomf+" is typing");
 var nudiv= document.createElement("div");
 nudiv.id= "dv_typ_"+obj_roomf.room;
-nudiv.setAttribute("class","pos_abs top w70 bac_whi"); 
+nudiv.setAttribute("class","cl_who_type"); 
 nudiv.innerHTML="<b>"+obj_roomf.firstname+"</b>"+"<span  style='color:grey'> is typing...</span>"+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M491 1536l91-91-235-235-91 91v107h128v128h107zm523-928q0-22-22-22-10 0-17 7l-542 542q-7 7-7 17 0 22 22 22 10 0 17-7l542-542q7-7 7-17zm-54-192l416 416-832 832h-416v-416zm683 96q0 53-37 90l-166 166-416-416 166-165q36-38 90-38 53 0 91 38l235 234q37 39 37 91z"/></svg>';//pencil
 var dv_chat_room_con_user_= document.getElementById("dv_chat_room_con_user_"+obj_roomf.room);
@@ -605,7 +519,7 @@ dv_chat_room_con_user_.removeChild(nudiv);
 });//skcl who type
 
 
-//======secret rooms
+//---------
 
 function ir_a_secret_room()
 {
@@ -631,41 +545,41 @@ dvs[i].classList.remove("al_frente");
 }//for   
 var nudiv=document.createElement("DIV");
 nudiv.id="dv_chat_room_"+roomx;
-nudiv.setAttribute("class","pos_a_i top_10 lef_10 w80 h60 bor_r bor_s bac_whi al_frente")
-nudiv.innerHTML='<div class="tab h30p w pos_a fon_ari bor_r">'+
-'<div class="tab_cel ali_cen ali_mid w70 h cur_mov bac_col_bstlk whi bor_r5000 fon_ari fon_bol">'
+nudiv.setAttribute("class","cl_chat_room_x al_frente")
+nudiv.innerHTML='<div class="cl_chat_room_cab_x">'+
+'<div class="cl_chat_room_tit_x bac_bestalk">'
 +(rooms[roomx]||roomx)+'</div>'+
 '<div id="dv_chat_room_tit_min_'+roomx+
-'" class="tab_cel ali_cen ali_mid w10 h"'+
+'" class="cl_chat_room_tit_bts_x"'+
 ' onclick="minimizar_dv_chat2(this)">-</div>'+//\''+roomx+'\'
-'<div class="tab_cel ali_cen ali_mid w10 h"'+
+'<div class="cl_chat_room_tit_bts_x"'+
 ' onclick="restaurar_tam_chat(\''+roomx+'\')">L</div>'+
-'<div class="tab_cel ali_cen ali_mid w10 h bor_r0500 bac_col_crr_chat_g whi"'+
+'<div class="cl_chat_room_tit_bts_x bor_r0500 bac_col_crr_chat_g whi"'+
 ' onclick="cerrar_dv_chat(\''+roomx+'\')">X</div>'+
 '</div>'+//dv_chat_room_tit
 '<div id="dv_chat_room_con_user_'+roomx+
-'" class="pos_a top_30p bot_30p w">'+
-'<div id="dv_chat_room_con_'+roomx+'" class="h w70 inl_blo pos_r bac_col_con_chat_g wor_wra ove_y"></div>'+
-'<div id="dv_chat_room_user_'+roomx+'" class="h w30 inl_blo pos_r bac_col_usr_chat_g fon_bol wor_wra ove_y">'+
+'" class="cl_chat_room_con_user_x">'+
+'<div id="dv_chat_room_con_'+roomx+'" class="cl_chat_room_con_x bac_col_con_chat_g"></div>'+
+'<div id="dv_chat_room_user_'+roomx+'" class="cl_chat_room_user_x bac_col_usr_chat_g">'+
 '<div id="dv_chat_room_username_'+roomx+
 '" class="pos_a"></div>'+
 '</div>'+//dv_chat_room_user
 '</div>'+ //dv_chat_room_con_user
 '<div id="dv_chat_room_msg_'+roomx+
-'" class="pos_a bot h30p w">'+
-'<div class="h w70 inl_blo pos_r">'+
-'<form class="h w" onsubmit="enviar_msg(event,\''+roomx+'\')">'+
-'<div class="h pos_a lef rig_30p"><input type="text" id="in_chat_room_msg_'+roomx+'" class="w h pos_a" autocorrect="off" autocomplete="off"'+
+'" class="cl_chat_room_msg_x">'+
+'<div class="cl_chat_room_msg_dv70">'+
+'<form class="wh" onsubmit="enviar_msg(event,\''+roomx+'\')">'+
+'<div class="cl_chat_room_msg_dvin"><input type="text" id="in_chat_room_msg_'+roomx+'" class="wh pos_a" autocorrect="off" autocomplete="off"'+
 ' data-room="'+roomx+'" placeholder="write your message"></div>'+
-'<button id="bt_chat_room_msg_'+roomx+'" class="w30p h pos_a rig" type="submit" >'+
+'<button id="bt_chat_room_msg_'+roomx+'" class="cl_bt_chat_room_msg_x" type="submit" >'+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'+//paper-plane
 '</button>'+
 '</form></div>'+ 
-'<div id="dv_chat_room_user_bts_eng" class="h inl_blo pos_a w30 bac_col_usr_chat_g">'+
-'<button class="w30p h" onclick="seleccionar_emoji(\''+roomx+'\')">'+
+'<div id="dv_chat_room_user_bts_eng" class="cl_chat_room_msg_dv30 bac_col_usr_chat_g">'+
+'<button class="cl_bts_chat_room_msg_x" onclick="seleccionar_emoji(\''+roomx+'\')">'+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
 '</button>'+
-'<input type="button" class="w30p h pos_a" value="_" onclick="es_boton_vacio()">'+
+'<input type="button" class="cl_bts_chat_room_msg_x pos_a" value="_" onclick="es_boton_vacio()">'+
 '</div>'+
 '</div>';
 dv_con_chat.appendChild(nudiv);
@@ -1177,16 +1091,14 @@ socket_client.on("dejar prv",function(dt){
 */
 
 
-socket_client.on("se desconecto",function(obj_msgf)
+function dar_img_provisional()
 {
-//obj_msgf{msg}
-console.log("se desconecto: "+ JSON.stringify(obj_msgf));
-alert("lost connection, for appear on the user table again, click on the chat tab"); 
-});//skcl se desconecto o cerro
+console.log("da img provisional")
+return "data:image/png;base64,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";
+}//dar_img_provisional
 
 
-
-//=====juego
+//-------play-----
 
 
 //opciones de juego para crear etw
@@ -1633,43 +1545,14 @@ alert("emojies in construction, write :smile: for :)\n\nlist: https://www.webpag
 
 //https://github.com/encharm/Font-Awesome-SVG-PNG/blob/master/black/svg/pencil.svg
 
-function enviar_reporte()
-{
-console.log("envia reporte")
-socket_client.emit("reporte",{
-tit: in_reporte_tit.value,
-rpt: ta_reporte.value});
-alert("Thanks for your report");
-cerrar_reporte();  
-}//enviar reporte
 
+//-------read-------
 
-//----notas
+//--------learn-----
 
-//editar notas
-function editar_nota()
-{
-console.log("edita nota")
-ta_notes_con.removeAttribute("readonly");
-bt_notes_edit.style.display= "none";
-bt_notes_save.style.display= "inline-block";
-}//editar_nota
+//--------profile-----
 
-
-
-//guardar nota
-function guardar_nota()
-{
-console.log("guarda nota")
-socket_client.emit("save note",{nte: ta_notes_con.value}); 
-ta_notes_con.setAttribute("readonly","");
-bt_notes_edit.style.display= "inline-block";
-bt_notes_save.style.display= "none";
-}//guardar_nota
-
-
-
-//====diccionario
+//-------dict-----
 
 //definicion wordnik wordnet.3.0
 function definir_wordnik(word)
@@ -1753,7 +1636,6 @@ dv_result_dict.innerHTML= result;
 
 
 
-//traducir frase
 function traducir_frase(phr)
 {
 console.log("traduce frase:"+phr)
@@ -1778,13 +1660,41 @@ dv_result_dict.innerHTML= resp.text;
 }//.traducir_frase
 
 
+//----notas-------
 
-//dar image profile provisional
-function dar_img_provisional()
+function editar_nota()
 {
-console.log("da img provisional")
-return "data:image/png;base64,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";
-}//dar_img_provisional
+console.log("edita nota")
+ta_notes_con.removeAttribute("readonly");
+bt_notes_edit.style.display= "none";
+bt_notes_save.style.display= "inline-block";
+}//editar_nota
+
+
+function guardar_nota()
+{
+console.log("guarda nota")
+socket_client.emit("save note",{nte: ta_notes_con.value}); 
+ta_notes_con.setAttribute("readonly","");
+bt_notes_edit.style.display= "inline-block";
+bt_notes_save.style.display= "none";
+}//guardar_nota
+
+
+
+//-----------pie----
+
+function enviar_reporte()
+{
+console.log("envia reporte")
+socket_client.emit("reporte",{
+tit: in_reporte_tit.value,
+rpt: ta_reporte.value});
+alert("Thanks for your report");
+cerrar_reporte();  
+}//enviar reporte
+
+
 
 
 //--------propuestas
