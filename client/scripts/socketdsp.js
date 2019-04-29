@@ -1552,6 +1552,14 @@ alert("emojies in construction, write :smile: for :)\n\nlist: https://www.webpag
 
 //--------profile-----
 
+
+socket_client.on("se desconecto",function(obj_msgf)
+{
+//obj_msgf{msg}
+console.log("se desconecto: "+ JSON.stringify(obj_msgf));
+alert("lost connection, for appear on the user table again, click on the chat tab"); 
+});//skcl se desconecto o cerro
+
 //-------dict-----
 
 //definicion wordnik wordnet.3.0
