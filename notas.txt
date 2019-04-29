@@ -40,7 +40,12 @@ en learn section: poner aprender con Duolingo.com por ejemplo
 --cambios
 lista de cambios:
 
-archivos: routes.js, index.html, home.html
+archivos:
+app/routes.js
+client/index.html
+client/home/home.html
+vies/layout.ejs
+views/privacy_policy.ejs
 
 ** routes.js
 
