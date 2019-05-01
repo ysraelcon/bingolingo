@@ -854,7 +854,41 @@ onclick="jugar_hangman()">
 
 
 <div id="dv_con_read" class="non">
-In future.
+
+<h3>Principles</h3>
+
+<li>simple (proposed by Ysrael)</li>
+<li>cool (proposed by Jonathan)</li>
+<li>potato (proposed by Sara) synonymous: motionless</li>
+<li>playful (proposed by Ural)</li>
+<li>fun (proposed by Yoyo)</li>
+<li>interesting (proposed by Jolia)</li>
+<li>minimalistic (proposed by Veronica)</li>
+<li>entertaining (proposed by Sepehr)</li>
+<li>easy (proposed by Miguel) Cristobal, Juli</li>
+<li>flexible (proposed by Fred)</li>
+<li>catchy (proposed by Jorge)</li>
+<li>useful (proposed by Juro)</li>
+<li>lessonful  (proposed by Larissa)</li>
+<li>serviciable (proposed by Vetu)</li>
+<li>wordful (proposed by Chengwan)</li>
+<li>versatile (proposed by Katherin)</li>
+<li>cozy (proposed by Livia)</li>
+<li>amazing (proposed by Boris)</li>
+<li>llamativa (proposed by Art)</li>
+<li>editable (proposed by Telmith  تلميذ</li>
+<li>convenient (proposed by CC)</li>
+<li>trollfree (proposed by Cristina)</li>
+<li>perfect (proposed by Nina)</li>
+<li>interactive (proposed by Arhis)</li>
+<li>International (proposed by Tanya Jamaica)</li>
+<li>real-time feedback (proposed by Nicola Whitley)</li>
+<li>lovely (proposed by Lily)</li>
+<li>experienceful (proposed by Naya, Karol)</li>
+<li>informative (proposed by Nomnom)</li>
+<li>polite (proposed by Sasha or Sash)</li>
+<p>more in addition.</p>  
+  
 </div><!-- dv con read -->
 
 
@@ -862,10 +896,52 @@ In future.
 
 
 <div id="dv_con_learn" class="non">
-The teacher is taking longer to arrive.
+<div id="dv_con_learn_voc"
+style="
+border-bottom:1px solid;
+text-align:center
+">Vocabulary</div>
+
+<div id="dv_con_learn_voc_con"
+style="
+
+">
+<li onclick="mostrar_lista_voc('nros')">20 numbers</li>
+  <p>more in addition.</p>
+  </div><!-- dv con learn voc con -->
 </div><!-- dv con learn -->
 
 
+<script>
+
+var obj_lists= {"nros":["1 - one","2 - two","3 - three","4 - four","5 - five",
+           "6 - six","7 - seven","8 - eight","9 - nine","10 - ten",
+        "11 - eleven","12 - twelve","13 - thirteen","14 - fourteen","15 - fifteen",
+    "16 - sixteen","17 - seventeen","18 - eighteen","19 - nineteen","20 - twenty"] };
+
+function mostrar_lista_voc(nom_lisx)
+{
+var m_list= obj_lists[nom_lisx];
+var t_list= "<input type='button' value='Back to lists' onclick='volver_a_listas()'>"
+for(var i=0;i<m_list.length;i++)
+{
+t_list+="<li>"+m_list[i]+"</li>"
+}//for
+dv_con_learn_voc_con.innerHTML= t_list;
+}//mostrar_lista_voc
+
+
+function volver_a_listas()
+{
+dv_con_learn_voc_con.innerHTML= `
+<li onclick="mostrar_lista_voc('nros')">20 numbers</li>
+<p>more in addition.</p>
+`;
+}//volver_a_listas
+
+</script> 
+  
+  
 
 
 
