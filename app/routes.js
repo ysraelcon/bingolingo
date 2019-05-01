@@ -112,9 +112,9 @@ function(err, user)
 if (!user)
 {
 //heroku 3c..  
-//return res.send('Password reset token is invalid or has expired. <a href="https://bestalk.herokuapp.com">home</a>');
+return res.send('Password reset token is invalid or has expired. <a href="https://bestalk.herokuapp.com">home</a>');
 //glitch..
-return res.send('Password reset token is invalid or has expired. <a href="https://bestalk-test.glitch.me">home</a>');
+//return res.send('Password reset token is invalid or has expired. <a href="https://bestalk-test.glitch.me">home</a>');
 //
 }//if
 //console.log(user);
@@ -126,9 +126,9 @@ user.save((err) =>
 if (err) throw err;
 });//save
 //heroku    
-//res.send("Password reseted succesfully! <a href='https://bestalk.herokuapp.com'>Login</a>");
+res.send("Password reseted succesfully! <a href='https://bestalk.herokuapp.com'>Login</a>");
 //glitch..
-res.send("Password reseted succesfully! <a href='https://bestalk-test.glitch.me'>Login</a>");
+//res.send("Password reseted succesfully! <a href='https://bestalk-test.glitch.me'>Login</a>");
 });//findone
 });//post reset
 
@@ -258,9 +258,9 @@ to: req.body.email,//or list
 subject: 'Password Reset',
 html: '<p>Visit the link for set your new password:</p>'+
 //heroku 3c..
-//'<a href="https://bestalk.herokuapp.com/reset/'+
+'<a href="https://bestalk.herokuapp.com/reset/'+
 //glitch..
-'<a href="https://bestalk-test.glitch.me/reset/'+
+//'<a href="https://bestalk-test.glitch.me/reset/'+
 token+
 '">Reset Password</a><br>'+
 '<h2>Continue enjoying of BesTalk!</h2>'
