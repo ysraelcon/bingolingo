@@ -40,27 +40,9 @@ appf.get("/sign_up", function(req,res){
 
 appf.get("/privacy_policy", function(req,res)
 {
-console.log("get /reset_manual :req,res")
+console.log("get /privacy_policy :req,res")
 res.render("privacy_policy.ejs", {token: req.params.token});  
- /* 
-User.findOne({ email: "marcnovkovic888@gmail.com" },
-function(err, user)
-{
-if(!user){
-console.log("no esta ese mail en db")
-}else
-{
-user.resetPasswordToken ="BestPass001";
-user.resetPasswordExpires = Date.now() + 3600000*72;
-user.save((err)=>
-{
-if(err) throw err
-})
-console.log("saved reset password")
-}
-})
-*/
-});//get reset_manual
+});//get privacy policy
   
   
   

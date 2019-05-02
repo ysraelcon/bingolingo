@@ -802,11 +802,11 @@ var nudiv= document.createElement("div");
 nudiv.id= "dv_chat_request_of_"+obj_roomf.room_bth;
 nudiv.setAttribute("class","flex_row pos_a top bor_1p_grey bor_r"); 
 nudiv.setAttribute("style","justify-content:space-evenly;width:200px")
-nudiv.innerHTML='<div id="dv_chat_request_of_t" class="ali_cen w80 bac_col_285 whi">Chat request from '+
+nudiv.innerHTML='<div id="dv_chat_request_of_t" class="ali_cen w80 bac_285 whi">Chat request from '+
 obj_roomf.nme_mnd+'</div>'+
 '<div id="dv_chat_request_of_m" class="ali_cen w10" onclick="aceptar_chat_request(\''
 +obj_roomf.room_bth+'\')">+</div>'+
-'<div id="dv_chat_request_of_x" class="ali_cen w10 bac_col_800 whi" onclick="cancelar_chat_request_of(\''+obj_roomf.room_bth+"\',\'"
+'<div id="dv_chat_request_of_x" class="ali_cen w10 bac_800 whi" onclick="cancelar_chat_request_of(\''+obj_roomf.room_bth+"\',\'"
 +obj_roomf.skt_id_rcv+"\',\'"+obj_roomf.skt_id_mnd+'\')">X</div>';
 dv_con_chat.appendChild(nudiv);
 });//skclon recibir chat request
@@ -896,7 +896,7 @@ nudiv.innerHTML='<div class="tab h30p w pos_a fon_ari bor_r">'+
 '<div class="h inl_blo pos_a w30 bac_col_usr_chat_prv">'+  
 '<button class="w30p h"  onclick="seleccionar_emoji(\''+room_bthx+'\')">'+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
-'</button>'+
+'</button>'+/*
 '<button id="bt_call_'+room_bthx+
 '" class="h" onclick="solicitar_llamada(this,\''+room_bthx+'\')">'+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>'+//phone
@@ -904,7 +904,7 @@ nudiv.innerHTML='<div class="tab h30p w pos_a fon_ari bor_r">'+
 '<button id="bt_mte_call_'+room_bthx+'" class="h">'+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M463 945l-101 101q-42-103-42-214v-128q0-26 19-45t45-19 45 19 19 45v128q0 53 15 113zm1114-602l-361 361v128q0 132-94 226t-226 94q-55 0-109-19l-96 96q97 51 205 51 185 0 316.5-131.5t131.5-316.5v-128q0-26 19-45t45-19 45 19 19 45v128q0 221-147.5 384.5t-364.5 187.5v132h256q26 0 45 19t19 45-19 45-45 19h-640q-26 0-45-19t-19-45 19-45 45-19h256v-132q-125-13-235-81l-254 254q-10 10-23 10t-23-10l-82-82q-10-10-10-23t10-23l1234-1234q10-10 23-10t23 10l82 82q10 10 10 23t-10 23zm-380-132l-621 621v-512q0-132 94-226t226-94q102 0 184.5 59t116.5 152z"/></svg>'+//microphhone-slash
 '</button>'+
-'<audio id="lcl_aud" style="display:none" oncontextmenu="return false;" disabled></audio>'+  
+'<audio id="lcl_aud" style="display:none" oncontextmenu="return false;" disabled></audio>'+  */
 '</div>'+//_user_bts
 '</div>';    
 dv_con_chat.appendChild(nudiv);
@@ -1314,6 +1314,7 @@ dv_jue_username_.innerHTML=userj;
 if(obj_gamef.typegame!="Explain The Word")
 {
 var dv_jue_user_bts_= document.getElementById("dv_jue_user_bts_"+obj_gamef.nro_game);
+  /*
 dv_jue_user_bts_.innerHTML= '<button id="bt_call_secret_'+obj_gamef.nro_game+
 //  '" data-room="'+objgamef.room+
 '" onclick="juntarse_llamada_secret(this,\''+obj_gamef.nro_game+'\')">'+
@@ -1323,7 +1324,7 @@ dv_jue_user_bts_.innerHTML= '<button id="bt_call_secret_'+obj_gamef.nro_game+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M463 945l-101 101q-42-103-42-214v-128q0-26 19-45t45-19 45 19 19 45v128q0 53 15 113zm1114-602l-361 361v128q0 132-94 226t-226 94q-55 0-109-19l-96 96q97 51 205 51 185 0 316.5-131.5t131.5-316.5v-128q0-26 19-45t45-19 45 19 19 45v128q0 221-147.5 384.5t-364.5 187.5v132h256q26 0 45 19t19 45-19 45-45 19h-640q-26 0-45-19t-19-45 19-45 45-19h256v-132q-125-13-235-81l-254 254q-10 10-23 10t-23-10l-82-82q-10-10-10-23t10-23l1234-1234q10-10 23-10t23 10l82 82q10 10 10 23t-10 23zm-380-132l-621 621v-512q0-132 94-226t226-94q102 0 184.5 59t116.5 152z"/></svg>'+//microphhone-slash
 '</button>'+
 '<audio id="lcl_aud" style="display:none" oncontextmenu="return false;" disabled></audio>'+
-''; 
+''; */
 }//if es voice  
 });//manda user al juego
 
@@ -1492,7 +1493,7 @@ $("#dv_jue_con").stop().animate(
 });//on receive msg juego
 
 
-
+//----------complementos
 
 //dv dictionary, movible y resizable
 jQuery(function($)
@@ -1534,7 +1535,7 @@ document.querySelector("body").appendChild(scr2);
 }//if no script rtc  
 },2000);//pa mete scripts webrtc
 
-//----------complementos
+
 
 
 function seleccionar_emoji_jue()

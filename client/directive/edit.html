@@ -1,25 +1,24 @@
 
 <style>
-#dv_msg_edt{
-  font-size:20px;
-  color:red;}
+#dv_msg_edt
+{
+font-size:20px;
+color:red;
+}
 #ta_abt_me{width:173px;}  
 </style>
 
 <form
 id="fm_edt">
 
-<div
-id="dv_msg_edt" ng-show="message">{{message}}</div>  
+<div id="dv_msg_edt" ng-show="message">{{message}}</div>  
   
-<img
-id="ig_prf_edi" class="cl_ig_prf_avtr"
+<img id="ig_prf_edi" class="cl_ig_prf_avtr"
 name="avatar"
 ng-src="{{user.avatar}}" alt="avatar"><br>
 
 Change your avatar:<br>
-<input
-type="file" id="in_fl_img"
+<input type="file" id="in_fl_img"
 onchange="cargar_img()"><br>
   
 First Name:<br>
