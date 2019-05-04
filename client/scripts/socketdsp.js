@@ -4,7 +4,19 @@
 //conexión socket
 var socket_client= io.connect();
 
-
+/*indice:
+.chat
+.play
+.complementos
+.read
+.learn
+.profile
+.dict
+.notas
+.pie
+.propuesta
+.reciclaje
+*/
 
 //-------chat------
 
