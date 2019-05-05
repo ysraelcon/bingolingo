@@ -77,20 +77,20 @@ var Chat= require('./app/models/chat');
 var User= require('./app/models/user');
 
 
-var users_cnnt={};
+var users_cnnt= {};
 //users_cnnt{user_id:{user,skt_id}}
 
-var users_room={};
+var users_room= {};
 //users_room{roomf:{user_idf:firstname}}
 
-var users_secret_room={};
-var users_jue={};
+var users_secret_room= {};
+var users_jue= {};
 //users_jue{skt_id:{firstname,skt_id},...}
 
 //user{_id,email,firstname,lastname,chats[]}
 
 //juego
-var jue={};
+var jue= {};
 /*
 jue{jue_nro:{nro_game,tiempo,word_to_guess,type_game,
   list_word_name,list_word,player_trn,nro_player,nro_player_act},...}
@@ -100,37 +100,11 @@ var list_words= require("./wordlists.js");
 
 /*-----indice
 
-.on.pedir usuario en chat: em.recibir usuarios
-.on.abrir room: em.recibir usuarios en el room; actualizar rooms
-.on.enviar msg al room: em.recibir msg en room
-.on.cerrar room: em.recibir usuarios en el room; actualizar rooms
-.on.typing: em.who type
-.on.reporte
-.on.entrar a secret room: em.recibir usuarios en secret room
-.on.ver su profile: em.perfil a ver
-.on.mandar chat request: em.recibir chat request, esperar chat request
-.on.cancelar char request of: em.cancelar chat request of
-.on.cancel chat request: em.eliminar chat request
-.on.abrir chat request: em.acepta chat request
-.on.aceptar chat request: em.crear chat privado
-.on.mandar usuarios al chat privado: em.meter usuarios al chat privado
-.on.users al chat request: em.mete users en chat request
-.on.send message chat r: em.new msg chat request
-.on.solicitar llamada: em.solicitud de aceptacion de la llamada
-.on.cancelar llamada entrante: em.se cancelo llamada
-.on.correr llamada: em.correr web rtc
-.on.colgar llamada: em.se cuelga llamada
-.on.save note
-.on.solicitar game: em.crear juego; los demas bar jue
-.on.entrar roomj: em.eliminar game bar; manda user al juego, los que adivinan, ya comenzo jue
-f.cuenta_abajo: em.los que adivinan; el del turno; quien gano
-f.dar_aleatoria_pos
-.on.10 seg
-.on.send message jue: em.new message jue; actualiza puntaje
-.on.salir del juego: em.elimina game bar; manda user al juego
-.on.disconnect: em.recibir usuarios en el room; recibir usuarios; actualizar rooms
-f.haber_link
-f.taggear_a
+.chat
+.llamada
+.nota
+.play
+
 
 */
 
@@ -144,14 +118,18 @@ for(var juex in jue)
 if(Object.keys(jue[juex].nro_player_act).length!=0)
 {
 io.sockets.emit("los demas bar jue",
-{nro_game: juex,
+{
+nro_game: juex,
 type_game: jue[juex].type_game,
 list_word_name: jue[juex].list_word_name,
-nro_player: jue[juex].nro_player});
+nro_player: jue[juex].nro_player
+});
 }//if hay jugadores
 }//for
   
-//----click on chat
+//---chat---
+
+//---users---  
   
 socket.on("pedir usuario en chat",function()
 {
@@ -171,8 +149,7 @@ io.sockets.emit('recibir usuarios', users_cnnt);
 for( var room in users_room)
 {
 io.to(socket.id).emit("actualizar rooms",
-{users_room: users_room[room],
-room:room});
+{users_room: users_room[room], room:room});
 }//for actualiza, cuando entra 
 User.findOne({_id:socket.request.user._id}, (err, user) =>
 {
@@ -190,9 +167,36 @@ if (err) throw err;
 //console.log(socket.request.user.logged_in);
 });//skon pedir usuario en chat
 
-
+socket.on("ver su profile",function(obj_userf)
+{
+//obj_userf{user_id_rcv,skt_id_rcv,skt_id_mnd}
+console.log("ver su perfil");
+console.log(obj_userf); 
+var user={}; 
+User.findOne({_id:obj_userf.user_id_rcv},(err,user)=>
+{
+//console.log(user);
+user.firstname=user.firstname;
+user.lastname=user.lastname;
+user.avatar=user.avatar;
+user.age=user.age;
+user.gender=user.gender;
+user.country=user.country;
+user.speaks=user.speaks;
+user.learning=user.learning;
+user.about_me=user.about_me;
+io.to(obj_userf.skt_id_mnd).emit("perfil a ver",
+{
+user:user,
+user_id_rcv:obj_userf.user_id_rcv,
+skt_id_rcv:obj_userf.skt_id_rcv
+});
+});//findone  
+});//skon ver su profile    
   
-//---- 2a.. abrir room
+//...users...
+  
+//---rooms---
   
 socket.on('abrir room',function(roomf)
 {
@@ -222,15 +226,19 @@ chatf.save((err)=>
 if(err) throw err;
 //console.log("savedddd");
 io.to(roomf).emit('recibir usuarios en el room',
-{users_room:users_room[roomf],
+{
+users_room:users_room[roomf],
 chat_room:chatf.chats[roomf],
 skt_id:socket.id,
-room:roomf});
+room:roomf
+});
 io.sockets.emit("actualizar rooms",
-{users_room:users_room[roomf],
+{
+users_room:users_room[roomf],
 chat_room:chatf.chats[roomf],
 skt_id:socket.id,
-room:roomf});
+room:roomf
+});
 });//save
 });//findone
 /* creado nuevo objeto, para chats prv, otro para reportes
@@ -273,9 +281,11 @@ if(err) throw err;
 });//findone
 }//if type_room public
 io.to(obj_msgf.room).emit('recibir msg en room',
-{msg:obj_msgf.msg,
+{
+msg:obj_msgf.msg,
 nick:socket.request.user.firstname,
-room:obj_msgf.room});
+room:obj_msgf.room
+});
 });//skon enviar msg al room
 
 
@@ -290,15 +300,13 @@ if(!socket.id) return;
 if(users_room[roomf])
 delete users_room[roomf][socket.request.user._id];
 io.to(roomf).emit('recibir usuarios en el room',
-{users_room:users_room[roomf],
-room:roomf});
+{users_room:users_room[roomf], room:roomf});
 /*
 io.to(socket.id).emit('recibir usuarios en el room',
 {users_room:users_room[roomf],
 room:roomf});*/
 io.sockets.emit("actualizar rooms",
-{users_room:users_room[roomf],
-room:roomf});
+{users_room:users_room[roomf], room:roomf});
 /*else{
 socket.leave(roomf);
 //corregir room privados !!!
@@ -312,30 +320,8 @@ socket.on("typing",function(obj_roomf)
 {
 //obj_roomf{room}
 socket.to(obj_roomf.room).broadcast.emit("who type",
-{firstname: socket.request.user.firstname,
-room:obj_roomf.room});
+{firstname: socket.request.user.firstname, room:obj_roomf.room});
 });//typing
-  
-  
-  
-socket.on("reporte",function(obj_rptf)
-{
-//obj_rptf{tit,rpt}
-console.log("guarda reporte");
-Chat.findOne({_id:"5a3694ecfe052c4f9add75ff"},function(err,chatf){
-chatf.reportes.push(
-[socket.request.user._id,
-socket.request.user.firstname,
-obj_rptf]);
-chatf.save((err)=>
-{
-if(err) throw err;
-});//save
-});//findone
-});//reporte 
-  
-  
-//===== 2b.. secret rooms
   
 socket.on("entrar a secret room",function(room_secretf)
 {
@@ -350,41 +336,18 @@ users_room[room_secretf][socket.request.user._id]= socket.request.user.firstname
 socket.join(room_secretf);
 console.log(io.sockets.adapter.rooms[room_secretf]);
 io.to(room_secretf).emit('recibir usuarios en secret room',
-{users_room:users_room[room_secretf],
+{
+users_room:users_room[room_secretf],
 skt_id:socket.id,
-room:room_secretf});
+room:room_secretf
+});
 });//skon entrar a secret room
-          
+  
+//...rooms...
+  
  
-
-socket.on("ver su profile",function(obj_userf)
-{
-//obj_userf{user_id_rcv,skt_id_rcv,skt_id_mnd}
-console.log("ver su perfil");
-console.log(obj_userf); 
-var user={}; 
-User.findOne({_id:obj_userf.user_id_rcv},(err,user)=>
-{
-//console.log(user);
-user.firstname=user.firstname;
-user.lastname=user.lastname;
-user.avatar=user.avatar;
-user.age=user.age;
-user.gender=user.gender;
-user.country=user.country;
-user.speaks=user.speaks;
-user.learning=user.learning;
-user.about_me=user.about_me;
-io.to(obj_userf.skt_id_mnd).emit("perfil a ver",
-{user:user,
-user_id_rcv:obj_userf.user_id_rcv,
-skt_id_rcv:obj_userf.skt_id_rcv});
-});//findone  
-});//skon ver su profile
   
-  
-  
-//==== 2c.. private chats
+//---chat privado---
   
 socket.on("mandar chat request",function(obj_userf)
 {
@@ -404,7 +367,8 @@ users_room[room_bth][socket.request.user._id]= [socket.request.user.firstname,so
 socket.join(room_bth);
 console.log(io.sockets.adapter.rooms[room_bth]); 
 io.to(obj_userf.skt_id_rcv).emit("recibir chat request",
-{nme_mnd:socket.request.user.firstname,
+{
+nme_mnd:socket.request.user.firstname,
 skt_id_mnd:obj_userf.skt_id_mnd,
 skt_id_rcv:obj_userf.skt_id_rcv,
 room_bth:room_bth
@@ -412,10 +376,12 @@ room_bth:room_bth
 if(users_cnnt[user_id_rcv])
 var nme_rcv= users_cnnt[user_id_rcv].user.firstname;
 io.to(room_bth).emit("esperar chat request",
-{skt_id_mnd:obj_userf.skt_clt_id,
+{
+skt_id_mnd:obj_userf.skt_clt_id,
 skt_id_rcv:obj_userf.skt_id_rcv,
 nme_rcv:nme_rcv,
-room_bth:room_bth});
+room_bth:room_bth
+});
 });//skon mandar chat request
  
 
@@ -460,10 +426,12 @@ break;
 if(users_cnnt[user_id_mnd]) 
 var nme_mnd= users_cnnt[user_id_mnd].user.firstname;
 io.to(obj_userf.skt_id_mnd).emit("acepta chat request",
-{nme_rcv:nme_rcv, nme_mnd:nme_mnd,
+{
+nme_rcv:nme_rcv, nme_mnd:nme_mnd,
 skt_id_rcv:obj_userf.skt_id_rcv,
 skt_id_mnd:obj_userf.skt_id_mnd,
-room_bth:obj_userf.room_bth});
+room_bth:obj_userf.room_bth
+});
 });//skon abrir chat request
 
   
@@ -575,20 +543,27 @@ if(err) throw err;
 });//save  
 });//findone  
 io.to(obj_msgf.room_bth).emit("new msg chat request",
-{msg:obj_msgf.msg,
+{
+msg:obj_msgf.msg,
 nick:socket.request.user.firstname,
-room:obj_msgf.room_bth});
+room:obj_msgf.room_bth
+});
 });//skon send message chat rquest
   
-
+//...chat privado...
+  
+//---llamada---
 
 socket.on("solicitar llamada",function(obj_room_callf)
 {
 //obj_room_callf{room_rtc:room_bth}
 console.log("solicita llamada");
 io.to(obj_room_callf.room_rtc).emit("solicitud de aceptacion de la llamada",
-{room_rtc:obj_room_callf.room_rtc, skt_id_mnd:socket.id,
-nme_mnd: socket.request.user.firstname});
+{
+room_rtc:obj_room_callf.room_rtc, 
+skt_id_mnd:socket.id,
+nme_mnd: socket.request.user.firstname
+});
 });//skon solicitar llamada  
   
  
@@ -597,7 +572,7 @@ socket.on("cancelar llamada entrante", function(obj_room_callf)
 {
 //obj_room_callf{room_rtc}
 console.log("cancelar llamada entrante de: "+obj_room_callf.room_rtc)
-io.to(obj_room_callf.room_rtc).emit("se cancelo llamada",{room_rtc:obj_room_callf.room_rtc});
+io.to(obj_room_callf.room_rtc).emit("se cancelo llamada", {room_rtc:obj_room_callf.room_rtc});
 });//skon cancelar llamada entr  
   
 
@@ -606,7 +581,7 @@ socket.on("correr llamada",function(obj_room_callf)
 {
 //obj_room_callf{room_rtc}
 console.log("correr llamada en: "+obj_room_callf.room_rtc)
-io.to(obj_room_callf.room_rtc).emit("correr web rtc",{room_rtc:obj_room_callf.room_rtc});
+io.to(obj_room_callf.room_rtc).emit("correr web rtc", {room_rtc:obj_room_callf.room_rtc});
 });//skon correr llamada  
   
  
@@ -614,34 +589,14 @@ socket.on("colgar llamada",function(obj_room_callf)
 {
 //obj_room_callf{room_rtc}
 console.log("colgar llamada en: "+obj_room_callf.room_rtc)
-io.to(obj_room_callf.room_rtc).emit("se cuelga llamada",{room_rtc:obj_room_callf.room_rtc});
+io.to(obj_room_callf.room_rtc).emit("se cuelga llamada", {room_rtc:obj_room_callf.room_rtc});
 });//skon colgar llamada 
   
+//...llamada...
   
+
   
-//guardar nota
-socket.on("save note",function(obj_ntef)
-{
-//obj_ntef{nte}
-User.findOne({_id: socket.request.user._id}, function(err,userf)
-{
-if(!userf.notes)
-{
-userf.notes="";
-}
-userf.notes= obj_ntef.nte;
-userf.save((err)=>
-{
-if(err) throw err;
-});//save
-});//findone
-console.log("saved note");
-});//skon save note  
-  
-  
-  
-  
-//===== 2d.. jueg  
+//---play---
   
   
 socket.on("solicitar game",function(obj_gamef)
@@ -650,7 +605,8 @@ socket.on("solicitar game",function(obj_gamef)
 console.log("2solicitar juego");
 console.log(obj_gamef);
 var nro_game= "jue"+Object.keys(jue).length;  
-jue[nro_game]= {nro_game: nro_game,
+jue[nro_game]= {
+nro_game: nro_game,
 tiempo:0,
 mod:"",
 word_to_guess:"",
@@ -662,16 +618,20 @@ nro_player: obj_gamef.nro_player,
 nro_player_act: {}
 };//jue{}
 io.to(socket.id).emit("crear juego",
-{nro_game: nro_game,
+{
+nro_game: nro_game,
 type_game: obj_gamef.type_game,
 list_word: obj_gamef.list_word,
-nro_player: obj_gamef.nro_player });
+nro_player: obj_gamef.nro_player 
+});
 //socket.broadcast.emit("los demas bar jue",
 io.sockets.emit("los demas bar jue",
-{nro_game:nro_game,
+{
+nro_game:nro_game,
 type_game:obj_gamef.type_game,
 list_word_name:obj_gamef.list_word,
-nro_player:obj_gamef.nro_player});
+nro_player:obj_gamef.nro_player
+});
 });//skon solicitar game  
   
   
@@ -699,11 +659,13 @@ users_jue[socket.request.user._id]= {firstname:socket.request.user.firstname,
 skt_id:socket.id};
 var usergame= jue[obj_gamef.nro_game].nro_player_act; 
 io.to(obj_gamef.nro_game).emit("manda user al juego",
-{users_jue:usergame,
+{
+users_jue:usergame,
 nro_game:obj_gamef.nro_game,
 type_game:obj_gamef.type_game,
 list_word:obj_gamef.list_word,
-nro_player:obj_gamef.nro_player});
+nro_player:obj_gamef.nro_player
+});
 }//if nro_player_act<nro_player-1: junta
 else if(nro_in_game== (jue[obj_gamef.nro_game].nro_player-1) )
 {
@@ -712,15 +674,16 @@ jue[obj_gamef.nro_game].nro_player_act[user_id]=[fn,socket.id,0];
 //[fn,skt_id,puntaje]
 socket.join(obj_gamef.nro_game);
 //decir que room_game, para luego eliminarlo en disconnect
-users_jue[socket.request.user._id]= {firstname:socket.request.user.firstname,
-skt_id:socket.id};
+users_jue[socket.request.user._id]= {firstname:socket.request.user.firstname, skt_id:socket.id};
 var usergame= jue[obj_gamef.nro_game].nro_player_act; 
 io.to(obj_gamef.nro_game).emit("manda user al juego",
-{users_jue:usergame,
+{
+users_jue:usergame,
 nro_game:obj_gamef.nro_game,
 type_game:obj_gamef.type_game,
 list_word:obj_gamef.list_word,
-nro_player:obj_gamef.nro_player});
+nro_player:obj_gamef.nro_player
+});
 //str_game(jue[obj_gamef.nro_game]);
 //start playerer 0 va sumando 0%nro_player
 var player_trn= 0;
@@ -734,7 +697,7 @@ io.to(pmr_user[1]).emit("el del turno",{word: jue[obj_gamef.nro_game].word_to_gu
 //nota el tiempo de ese juego jue[obj_gamef.nro_game].tiempo
 jue[obj_gamef.nro_game].tiempo=90;
 jue[obj_gamef.nro_game].mod="ten";
-cuenta_abajo(obj_gamef.nro_game,jue[obj_gamef.nro_game].player_trn);
+cuenta_regresiva(obj_gamef.nro_game,jue[obj_gamef.nro_game].player_trn);
 }//elseif nro_player_act==nro_player-1 : junta y comienza
 else{
 console.log("juego comenzado");
@@ -747,22 +710,21 @@ io.to(socket.id).emit("ya comenzo jue",{msg:"complete game, create a new one"});
   
   
   
-function 
-cuenta_abajo(roomjf)
+function cuenta_regresiva(roomjf)
 {
 io.to(roomjf).emit("corre reloj",{tiempo:jue[roomjf].tiempo});
 jue[roomjf].tiempo-= 1;
 if(jue[roomjf].tiempo> 0)
 {
 setTimeout(function(){
-cuenta_abajo(roomjf);},1000);
+cuenta_regresiva(roomjf);},1000);
 }//if
 else if(jue[roomjf].mod=="ten")
 {
 io.to(roomjf).emit("no se adivino",{word_to_guess: jue[roomjf].word_to_guess});
 jue[roomjf].tiempo= 10;
 jue[roomjf].mod="turn";
-cuenta_abajo(roomjf);
+cuenta_regresiva(roomjf);
 }//else if ten
 else if(jue[roomjf].mod=="turn")
 {
@@ -795,12 +757,11 @@ if(Object.keys(jue[roomjf].nro_player_act).length>1)
 {
 io.to(roomjf).emit("los que adivinan",{userexpl: pmr_user[0]});
 io.to(pmr_user[1]).emit("el del turno",{word: jue[roomjf].word_to_guess});
-cuenta_abajo(roomjf); 
+cuenta_regresiva(roomjf); 
 }//if cantplayer>1
 }//if no winner
 else{
-io.to(roomjf).emit("quien gano",
-{winner_nme:winner});
+io.to(roomjf).emit("quien gano", {winner_nme:winner});
 }//else, quien gano
 }//else if next
 else{
@@ -841,19 +802,21 @@ var pmr_id= Object.keys(jue[obj_msg_gamef.nro_game].nro_player_act)[ jue[obj_msg
 var skt_id_player= jue[obj_msg_gamef.nro_game].nro_player_act[pmr_id][1];//[fn,skt_id]
 var sme_jug= skt_id_player==socket.id;//same jugador ?
 var re=new RegExp(jue[obj_msg_gamef.nro_game].word_to_guess,"i");
-if(re.test(obj_msg_gamef.msg)&&
-jue[obj_msg_gamef.nro_game].mod=="ten"&&
-!(sme_jug))
+if(re.test(obj_msg_gamef.msg)
+&&jue[obj_msg_gamef.nro_game].mod=="ten"
+&&!(sme_jug))
 {
 var guess=true;
 }//if
 obj_msg_gamef.msg= emoji.emojify(obj_msg_gamef.msg);
 obj_msg_gamef.msg= haber_link(obj_msg_gamef.msg);
 io.to(obj_msg_gamef.nro_game).emit('new message jue',
-{msg:obj_msg_gamef.msg,
+{
+msg:obj_msg_gamef.msg,
 nro_game:obj_msg_gamef.nro_game,
 nick:socket.request.user.firstname,
-guess:guess});
+guess:guess
+});
 if(guess)
 {
 var user_id= socket.request.user._id;
@@ -863,8 +826,7 @@ console.log("punteo");
 console.log(jue[obj_msg_gamef.nro_game].nro_player_act);
 var pnt_player= jue[obj_msg_gamef.nro_game].nro_player_act[user_id][2];
 io.to(obj_msg_gamef.nro_game).emit("actualiza puntaje",
-{user_id: user_id,
-pnt_player: pnt_player});  
+{user_id: user_id, pnt_player: pnt_player});  
 }//if adivina, suma 
 });//sk send msg juego
   
@@ -888,12 +850,59 @@ if(nro_in_game==0)
 io.sockets.emit("eliminar game bar",{room_game:obj_room_jf.room});
 }else{
 io.sockets.emit("manda user al juego",
-{users_jue: nro_player_act,
-nro_game: obj_room_jf.room});
+{users_jue: nro_player_act, nro_game: obj_room_jf.room});
 }//else manda user al juego
 });//skon salir del juego
   
   
+//...play...
+  
+
+//---nota---
+  
+//guardar nota
+socket.on("save note",function(obj_ntef)
+{
+//obj_ntef{nte}
+User.findOne({_id: socket.request.user._id}, function(err,userf)
+{
+if(!userf.notes)
+{
+userf.notes="";
+}
+userf.notes= obj_ntef.nte;
+userf.save((err)=>
+{
+if(err) throw err;
+});//save
+});//findone
+console.log("saved note");
+});//skon save note  
+  
+  
+//...nota...  
+  
+//---reporte---
+  
+socket.on("reporte",function(obj_rptf)
+{
+//obj_rptf{tit,rpt}
+console.log("guarda reporte");
+Chat.findOne({_id:"5a3694ecfe052c4f9add75ff"},function(err,chatf){
+chatf.reportes.push(
+[
+socket.request.user._id,
+socket.request.user.firstname,
+obj_rptf
+]);
+chatf.save((err)=>
+{
+if(err) throw err;
+});//save
+});//findone
+});//reporte 
+  
+//...reporte...
   
   
 socket.on('disconnect', function() 
@@ -910,11 +919,9 @@ if(users_room[room][socket.request.user._id]){
 if(!socket.id) return;
 delete users_room[room][socket.request.user._id];
 io.to(room).emit('recibir usuarios en el room',
-{users_room:users_room[room],
-room:room});
+{users_room:users_room[room], room:room});
 io.sockets.emit("actualizar rooms",
-{users_room:users_room[room],
-room:room});   
+{users_room:users_room[room], room:room});   
 }//if
 }//for
 User.findOne({_id:socket.request.user._id}, (err, user) =>

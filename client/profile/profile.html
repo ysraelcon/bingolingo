@@ -815,7 +815,7 @@ value="Slide in" onclick="ir_a_secret_room()">
 <div id="dv_chat_user">
       
 <table id="tbl_users" style="border-collapse:collapse">
-<caption>Users</caption>
+<caption>Connected Users</caption>
 <thead>
 <tr>
 <th>Avatar</th><th>Name</th><th>Gender</th><th>Age</th><th>Country</th><th>Learning</th><th>Speaks</th>
@@ -831,7 +831,38 @@ value="Slide in" onclick="ir_a_secret_room()">
 
 </div><!-- dv con chat -->
 
+<script>
+//---chat---  
+  
+var tema= "dia";
+  
+function cambiar_tema()
+{
+console.log("cambia tema")
+if(tema=="dia")
+{
+btn_tema.removeAttribute("style");
+dv_con_chat.classList.remove("desierto_dia");
+dv_con_chat.classList.add("desierto_noche");
+tema= "noche";
+}else
+{
+btn_tema.style.backgroundColor= "white";
+dv_con_chat.classList.remove("desierto_noche");
+dv_con_chat.classList.add("desierto_dia");
+tema= "dia";
+}//else
+}//cambiar_tema
 
+function seleccionar_tema()
+{
+//console.log(sl_tema.value);
+ir_a_theme_room(sl_tema.value);
+sl_tema.options[0].selected=true;
+};//seleccionar_tema  
+  
+//...chat...  
+</script>
 
 
 
@@ -976,6 +1007,31 @@ type="button" value="Cancel"
 onclick="cancelar_edit_profile()">
 
 </div><!-- dv con user -->
+  
+<script>
+//---profile---
+
+function mostrar_edit_profile()
+{
+console.log("muestra edit_profile")
+dv_user_profile.style.display= "none";
+sp_user_edit_profile.style.display= "inline";
+btn_cancel_edit_profile.style.display= "inline";
+btn_edit_profile.style.display= "none";
+}//mostrar editar perfil
+
+
+function cancelar_edit_profile()
+{
+console.log("cancela edit_profile")
+dv_user_profile.removeAttribute("style");
+sp_user_edit_profile.removeAttribute("style");
+btn_cancel_edit_profile.removeAttribute("style");
+btn_edit_profile.removeAttribute("style");
+}//cancelar edit profile  
+  
+//...profile...  
+</script>  
 
 
 
@@ -997,8 +1053,7 @@ onclick="cancelar_edit_profile()">
 type="text" 
 placeholder="word...">
 
-<input type="submit"
-value="dictENG" 
+<input type="submit" value="dictENG" 
 onclick="definir_wordnik(in_word.value)">
 
 <input type="button" 
@@ -1008,8 +1063,7 @@ value="X" onclick="in_word.value=''">
 
 <div id="dv_dict_trad">
 
-<input type="button" 
-value="Translate" 
+<input type="button" value="Translate" 
 onclick="traducir_frase(in_word.value)">
 
 <input id="in_list_lang_from"
@@ -1117,8 +1171,7 @@ placeholder="to...">
 </datalist><!-- dtlistlang -->
 
       
-<input type="button" 
-value="dictYandex" 
+<input type="button" value="dictYandex" 
 onclick="definir_yandex(in_word.value)">   
 </div><!-- dv dict trad -->
       
@@ -1127,6 +1180,24 @@ onclick="definir_yandex(in_word.value)">
       
 </div><!-- dv dict -->  
 
+<script>
+//---dict---
+  
+function mostrar_dict(btf)
+{
+console.log("muestra dict:"+btf)
+if(btf.style.color=="green")
+{
+btf.removeAttribute("style");
+dv_dict.removeAttribute("style");
+}else{
+btf.style.color="green";
+dv_dict.style.display="block";
+}//else
+}//mostrar_dict 
+  
+//...dict...
+</script>
 
 
 
@@ -1160,6 +1231,25 @@ onclick="guardar_nota()">
       
 </div><!-- dv notes -->  
 </div><!-- dv notes wrapper -->
+  
+<script>
+//---nota---
+  
+function mostrar_nota(btf)
+{
+console.log("muestra nota:"+btf)
+if(btf.style.color=="green")
+{
+btf.removeAttribute("style");
+dv_notes_wrapper.removeAttribute("style");
+}else{
+btf.style.color="green";
+dv_notes_wrapper.style.display="block";
+}//else
+}//mostrar_nota  
+  
+//...nota...  
+</script>  
 
 
 </div><!-- dv cont -->
@@ -1179,12 +1269,49 @@ by BesTalk Team</span>
        
 </div><!-- dv pie  -->
 
+<script>
+//---reporte---
 
+function dar_reporte()
+{
+console.log("da reporte")
+var dv= document.createElement("div");
+dv.id="dv_reporte_scr";
+dv.setAttribute("class","flex_col ali_cen pos_a top w h bac_rgba_7")
+dv.innerHTML='<div id="dv_reporte" class="w_ h_">'
++'<div id="dv_reporte_tit" class="pos_rel flex_row">'
++'<div id="dv_reporte_tit_nm" class="w ali_cen bac_bla yel">Errors or Suggestions</div>'
++'<div id="dv_reporte_tit_x" class="pos_a rig ali_cen bac_whi cur_poi" style="width:50px" onclick="cerrar_reporte()">X</div>'
++'</div>'
++'<input type="text" id="in_reporte_tit" class="cen w"'
++'         placeholder="Title (optional)">'
++'<br>'
++'<textarea id="ta_reporte" class="w h_"'
++'placeholder="write the error or suggestion..."'
++'></textarea>'
++'<br>'
++'<input type="button" id="bt_snd_reporte" class="w"'
++'value="Send"'
++'onclick="enviar_reporte()">'
++'</div>';
+
+dv_ng_view.appendChild(dv);
+}//dar_reporte  
+  
+function cerrar_reporte()
+{
+console.log("cierra reporte")
+dv_ng_view.removeChild(dv_reporte_scr);
+}//cerrar_reporte
+  
+///...reporte...  
+</script>
 
 
 
 <script>
-
+//---generales---
+  
 //------tabs------
 
 function abrir_tab(dv_pie_mst,dv_conf,this_tbf)
@@ -1217,151 +1344,8 @@ this_tbf.style.color= col_tab[this_tbf.id][1];
 }//if hay tab
 }//abrir_tab
 
-//------chat------
-
-var tema= "dia";
-  
-function cambiar_tema()
-{
-console.log("cambia tema")
-if(tema=="dia")
-{
-btn_tema.removeAttribute("style");
-dv_con_chat.classList.remove("desierto_dia");
-dv_con_chat.classList.add("desierto_noche");
-tema= "noche";
-}else{
-btn_tema.style.backgroundColor= "white";
-dv_con_chat.classList.remove("desierto_noche");
-dv_con_chat.classList.add("desierto_dia");
-tema= "dia";
-}//else
-}//cambiar_tema
-
-function seleccionar_tema()
-{
-//console.log(sl_tema.value);
-ir_a_theme_room(sl_tema.value);
-sl_tema.options[0].selected=true;
-};//seleccionar_tema
-
-//-------play------
-
-//-------read------
-
-//-------learn------
 
 
-//-------profile-----
-
-function mostrar_edit_profile()
-{
-console.log("muestra edit_profile")
-dv_user_profile.style.display= "none";
-sp_user_edit_profile.style.display= "inline";
-btn_cancel_edit_profile.style.display= "inline";
-btn_edit_profile.style.display= "none";
-}//mostrar editar perfil
-
-
-function cancelar_edit_profile()
-{
-console.log("cancela edit_profile")
-dv_user_profile.removeAttribute("style");
-sp_user_edit_profile.removeAttribute("style");
-btn_cancel_edit_profile.removeAttribute("style");
-btn_edit_profile.removeAttribute("style");
-}//cancelar edit profile
-
-
-//cargar imagen
-function cargar_img()
-{
-console.log("carga img")
-var reader= new FileReader();
-reader.onloadend= function()
-{
-var img_provisional= new Image();
-img_provisional.onload= function()
-{
-var can= document.createElement("canvas");
-can.width=50;
-can.height=50;
-var coc= can.getContext("2d");
-coc.drawImage(this,0,0, can.width,can.height);
-img_profile_edi.src= can.toDataURL("image/png");
-}//onload img provisional
-img_provisional.src= reader.result;
-}//onloadend reader
-reader.readAsDataURL(in_fl_img.files[0]);
-}//cargar_img
-
-//-----dict--------
-
-function mostrar_dict(btf)
-{
-console.log("muestra dict:"+btf)
-if(btf.style.color=="green")
-{
-btf.removeAttribute("style");
-dv_dict.removeAttribute("style");
-}else{
-btf.style.color="green";
-dv_dict.style.display="block";
-}//else
-}//mostrar_dict 
-
-//--------notes-----------
-
-function mostrar_nota(btf)
-{
-console.log("muestra nota:"+btf)
-if(btf.style.color=="green")
-{
-btf.removeAttribute("style");
-dv_notes_wrapper.removeAttribute("style");
-}else{
-btf.style.color="green";
-dv_notes_wrapper.style.display="block";
-}//else
-}//mostrar_nota
-
-//-------pie------
-
-function cerrar_reporte()
-{
-console.log("cierra reporte")
-dv_ng_view.removeChild(dv_reporte_scr);
-}//cerrar_reporte
-
-
-function dar_reporte()
-{
-console.log("da reporte")
-var dv= document.createElement("div");
-dv.id="dv_reporte_scr";
-dv.setAttribute("class","flex_col ali_cen pos_a top w h bac_rgba_7")
-dv.innerHTML='<div id="dv_reporte" class="w_ h_">'
-+'  <div id="dv_reporte_tit" class="pos_rel flex_row">'
-+'    <div id="dv_reporte_tit_nm" class="w ali_cen bac_bla yel">Errors or Suggestions</div>'
-+'    <div id="dv_reporte_tit_x" class="pos_a rig ali_cen bac_whi cur_poi" style="width:50px" onclick="cerrar_reporte()">X</div>'
-+'  </div>'
-+'  <input type="text" id="in_reporte_tit" class="cen w"'
-+'         placeholder="Title (optional)">'
-+'  <br>'
-+'  <textarea id="ta_reporte" class="w h_"'
-+'    placeholder="write the error or suggestion..."'
-+'  ></textarea>'
-+'  <br>'
-+'  <input type="button" id="bt_snd_reporte" class="w"'
-+'         value="Send"'
-+'         onclick="enviar_reporte()">'
-+'</div>';
-
-dv_ng_view.appendChild(dv);
-}//dar_reporte
-
-// ..generales
 
 </script>
 

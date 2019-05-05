@@ -8,12 +8,12 @@ color:red;
 #ta_abt_me{width:173px;}  
 </style>
 
-<form
-id="fm_edt">
+<form id="fm_edt">
 
 <div id="dv_msg_edt" ng-show="message">{{message}}</div>  
   
-<img id="img_profile_edi" class="cl_ig_prf_avtr"
+<img id="img_profile_edi" 
+class="cl_ig_prf_avtr"
 name="avatar"
 ng-src="{{user.avatar}}" alt="avatar"><br>
 
@@ -22,30 +22,25 @@ Change your avatar:<br>
 onchange="cargar_img()"><br>
   
 First Name:<br>
-<input
-type="text"
+<input type="text"
 ng-model="user.firstname" name="firstname"
 value="{{user.firstname}}"><br>
 
 Last Name:<br>
-<input
-type="text"
+<input type="text"
 name="lastname" ng-model="user.lastname"
 value="{{user.lastname}}"><br>
 
 Gender: 
-<input
-type="radio"
+<input type="radio"
 name="gender" ng-model="user.gender"       
 value="M"> Male
-<input
-type="radio"
+<input type="radio"
 name="gender" ng-model="user.gender"
 value="F"> Female<br>
 
 Age:<br>
-<input
-type="number"
+<input type="number"
 name="age" ng-model="user.age"      
 value="{{user.age}}" required><br>
 
@@ -302,26 +297,48 @@ Country:<br>
 </select><br>
 
 Learning:<br>
-<input
-type="text"
+<input type="text"
 name="learning" ng-model="user.learning"
 value="{{user.learning}}"><br>
 
 Speaks:<br>
-<input
-type="text"
+<input type="text"
 name="speaks" ng-model="user.speaks"
 value="{{user.speaks}}"><br>
 
 About me:<br>
-<textarea
-name="about_me" id="ta_abt_me"
+<textarea id="ta_abt_me"
+name="about_me" 
 ng-model="user.about_me" rows="4"
 value="{{user.about_me}}"></textarea><br>  
 
 
-<input
-type="submit"
+<input type="submit"
 value="Update" ng-click="editar_profile(user)">
 
 </form>
+
+<script>
+
+function cargar_img()
+{
+console.log("carga img")
+var reader= new FileReader();
+reader.onloadend= function()
+{
+var img_provisional= new Image();
+img_provisional.onload= function()
+{
+var can= document.createElement("canvas");
+can.width=50;
+can.height=50;
+var coc= can.getContext("2d");
+coc.drawImage(this,0,0, can.width,can.height);
+img_profile_edi.src= can.toDataURL("image/png");
+}//onload img provisional
+img_provisional.src= reader.result;
+}//onloadend reader
+reader.readAsDataURL(in_fl_img.files[0]);
+}//cargar_img  
+  
+</script>

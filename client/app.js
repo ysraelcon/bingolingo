@@ -1,7 +1,10 @@
 
 var app= angular.module('la_App',
-['ngRoute','la_App.home',
-'la_App.profile'])
+[
+'ngRoute',
+'la_App.home',
+'la_App.profile'
+])
 .config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider)
 {
 $locationProvider.hashPrefix('');
@@ -15,7 +18,7 @@ return {strict:"E",
 templateUrl:"directive/fondo.html"};
 });//app-fondo */
 
-app.directive("appEditProfile",function(){
-return {strict:"E",
-templateUrl:"directive/edit.html"};
+app.directive("appEditProfile",function()
+{
+return {strict:"E", templateUrl:"directive/edit.html"};
 });//app-edit-profile

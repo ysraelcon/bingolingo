@@ -1,5 +1,5 @@
 
-heroku: pl...-ten
+heroku: .-ten
 
 ----------indice
 
@@ -120,6 +120,19 @@ heroku:
 
 
 --soluciones:
+
+
+15sl..
+
+db.users.find().sort({fecha_de_login:-1}).limit(5).forEach(printjson);
+
+User.find().sort({fecha_de_login:-1}).limit(5).exec(function(err,user)
+{
+console.log(user);
+});  
+
+..15sl
+
 
 14sl..
 

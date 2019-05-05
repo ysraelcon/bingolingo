@@ -17,6 +17,7 @@ controller:'profileCtrl'
 ["$scope","$http","$location","$route",
 function($scope,$http,$location,$route)
 {
+  
 //console.log('profilen');
 $http.get("/profile").then(function(res)
 {
@@ -24,14 +25,17 @@ console.log("get /profile :res")
 $scope.user= res.data;
 });//route get /profile
 
+  
 $scope.logout=function()
 {
 console.log("logout")
-$http.get("/logout").then(function(res){
+$http.get("/logout").then(function(res)
+{
 $location.path("/");
 });//then
 };//logout
 
+  
 $scope.editar_profile= function(user)
 {
 console.log("edita profile")
@@ -48,6 +52,7 @@ $scope.edit= false;
 $route.reload();   
 }//if
 });//then post /edit
-};//edit
+};//editar_profile
 
+  
 }]);//controller
