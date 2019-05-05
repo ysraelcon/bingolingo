@@ -79,6 +79,7 @@ var User= require('./app/models/user');
 
 var users_cnnt= {};
 //users_cnnt{user_id:{user,skt_id}}
+var users_5_no_cnnt= [];
 
 var users_room= {};
 //users_room{roomf:{user_idf:firstname}}
@@ -163,6 +164,11 @@ user.save((err)=>
 if (err) throw err;
 })//save
 })//findone  
+User.find().sort({fecha_de_login:-1}).limit(6).exec(function(err,users_5_no)
+{
+console.log("emit: last 5 connected users")
+io.sockets.emit("last 5 connected users", users_5_no)  
+});//find last 5   
 }//if user lgged
 //console.log(socket.request.user.logged_in);
 });//skon pedir usuario en chat
@@ -911,6 +917,11 @@ socket.on('disconnect', function()
 io.to(socket.id).emit("se desconecto",{msg:"desconexión o cerro"});
 if(!socket.id) return;
 delete users_cnnt[socket.request.user._id];
+User.find().sort({fecha_de_login:-1}).limit(6).exec(function(err,users_5_no)
+{
+console.log("emit: last 5 connected users")
+io.sockets.emit("last 5 connected users", users_5_no)  
+});//find last 5 
 io.sockets.emit('recibir usuarios', users_cnnt);
 console.log("se desconecto "+ socket.request.user.firstname);
 for(var room in users_room)

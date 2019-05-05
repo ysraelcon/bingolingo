@@ -55,6 +55,30 @@ con_user+="<tr id=\'"+users_cnntf[username].skt_id+
 tbl_users_bd.innerHTML=con_user;
 });//skon recibir usuarios table
 
+socket_client.on("last 5 connected users", function(users_5_no_cnntx)
+{//users_5_no_cnnt[{user},...]
+console.log("on: last 5 connected users")
+//console.log(users_5_no_cnntx)
+var con_user= "";
+for(var i=1;i<users_5_no_cnntx.length;i++)
+{
+con_user+="<tr id=\'"+users_5_no_cnntx[i]._id+
+"\' data-user-id='"+users_5_no_cnntx[i]._id+
+"' onclick='informar_profile(this)' >"+
+"<td><img class='img_de_30' src='"+
+(users_5_no_cnntx[i].avatar||dar_img_provisional() )+"'></td>"+
+"<td>"+users_5_no_cnntx[i].firstname+
+" "+users_5_no_cnntx[i].lastname+"</td>"+
+"<td>"+(users_5_no_cnntx[i].gender||"-")+"</td>"+
+"<td>"+(users_5_no_cnntx[i].age||"-")+"</td>"+
+"<td>"+(users_5_no_cnntx[i].country||"-")+"</td>"+
+"<td>"+(users_5_no_cnntx[i].learning||"-")+"</td>"+
+"<td>"+(users_5_no_cnntx[i].speaks||"-")+"</td>"+
+"</tr>";  
+}//for
+tbl_users_lc_bd.innerHTML=con_user;
+})//skon last 5 connected users
+
 
 function informar_profile(ele)
 {
