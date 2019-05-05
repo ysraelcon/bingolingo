@@ -1,17 +1,17 @@
 
 <h2>Reset Password</h2>
 
-<form
-action="/reset/<%= token %>" onsubmit="return valpW()"
-method="post">
+<form action="/reset/<%= token %>" 
+method="post"
+onsubmit="return validar_password()">
 
 
 <input
-type="password" id="inpw"
+type="password" id="in_pw"
 placeholder="New password"><br>
 <input
 type="password" name="password"
-id="incpw" placeholder="Repeat password"><br>
+id="in_cpw" placeholder="Repeat password"><br>
 
 <button type="submit" >Reset</button>
 
@@ -21,15 +21,13 @@ id="incpw" placeholder="Repeat password"><br>
 
 
 <script>
-function 
-valpW()
+function validar_password()
 {
 if(in_pw.value==in_cpw.value)
 {
 return true;
 }else{
-in_cpw.
-setCustomValidity("Passwords Don't Match");
+in_cpw.setCustomValidity("Passwords Don't Match");
 //alert("no match");
 return false;
 }//else no match

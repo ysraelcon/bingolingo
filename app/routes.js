@@ -13,7 +13,7 @@ console.log("get / :req,res")
 //res.render("login.ejs",{msg:""});
 });
 
-  
+
 appf.get("/home", function(req,res)
 {
 console.log("get /home :req,res")
@@ -58,6 +58,14 @@ appf.get("/reset_manual", function(req,res)
 {
 console.log("get /reset_manual :req,res")
 res.render("reset.ejs", {token: req.params.token});  
+var m_user= [];  
+  var i=0;
+User.find().sort({fecha_de_login:-1}).limit(5).exec(function(err,user)
+{
+console.log(user)
+  console.log(i++)
+}) 
+  
  /* 
 User.findOne({ email: "marcnovkovic888@gmail.com" },
 function(err, user)
@@ -222,7 +230,8 @@ if(!user)
 {
 //return res.redirect('/mail');
 res.json({message: "No email address exists."});
-}else{
+}else
+{
 user.resetPasswordToken = token;
 user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 user.save((err) =>
@@ -230,9 +239,9 @@ user.save((err) =>
 if (err) throw err;
 });//save
 var transporter= nodemailer.createTransport(
-{service:'gmail',
-auth:{user: process.env.MAILSENDER,
-pass: process.env.MAILSENDERPWD}
+{
+service:'gmail',
+auth:{user: process.env.MAILSENDER, pass: process.env.MAILSENDERPWD}
 });//transporter
 var mailopts= {
 from: process.env.MAILSENDER,
