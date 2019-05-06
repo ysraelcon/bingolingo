@@ -60,7 +60,7 @@ socket_client.on("last 5 connected users", function(users_5_no_cnntx)
 console.log("on: last 5 connected users")
 //console.log(users_5_no_cnntx)
 var con_user= "";
-for(var i=1;i<users_5_no_cnntx.length;i++)
+for(var i=0;i<users_5_no_cnntx.length;i++)
 {
 con_user+="<tr id=\'"+users_5_no_cnntx[i]._id+
 "\' data-user-id='"+users_5_no_cnntx[i]._id+
