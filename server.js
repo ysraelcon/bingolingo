@@ -164,7 +164,7 @@ user.save((err)=>
 if (err) throw err;
 })//save
 })//findone  
-User.find().sort({fecha_de_login:-1}).limit(6).exec(function(err,users_5_no)
+User.find({online: {$eq: false} }).sort({fecha_de_login:-1}).limit(5).exec(function(err,users_5_no)
 {
 console.log("emit: last 5 connected users")
 io.sockets.emit("last 5 connected users", users_5_no)  
@@ -917,7 +917,7 @@ socket.on('disconnect', function()
 io.to(socket.id).emit("se desconecto",{msg:"desconexión o cerro"});
 if(!socket.id) return;
 delete users_cnnt[socket.request.user._id];
-User.find().sort({fecha_de_login:-1}).limit(6).exec(function(err,users_5_no)
+User.find({online: {$eq: false} }).sort({fecha_de_login:-1}).limit(5).exec(function(err,users_5_no)
 {
 console.log("emit: last 5 connected users")
 io.sockets.emit("last 5 connected users", users_5_no)  
