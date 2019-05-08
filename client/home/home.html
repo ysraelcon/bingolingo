@@ -230,31 +230,25 @@ ng-click="entrar_login()">Login</button><br>
 
 <form name="fm_sign_up" onsubmit="return validar_password()">
 
-<input
-type="text"
+<input type="text"
 name="firstname" ng-model="user.firstname"
 placeholder="First Name" required>
-<input
-type="text"
+<input type="text"
 name="lastname" ng-model="user.lastname"
 placeholder="Last Name"><br>
 
-<input
-type="email"
+<input type="email"
 name="email" ng-model="user.email"
 placeholder="Email"><br>
 
-<input
-type="password"
+<input type="password"
 id="in_pw" ng-model="user.password"
 placeholder="Password"><br>
-<input
-type="password"
+<input type="password"
 name="password" id="in_cpw"
 placeholder="Repeat password"><br>
 
-<button
-type="submit" id="bt_sign_up" 
+<button type="submit" id="bt_sign_up" 
 style="background-color:#9370db"
 ng-click="entrar_sign_up()">Sign Up</button>
   
@@ -312,10 +306,11 @@ color:grey;
 function validar_password()
 {
 console.log("valida repeticion de password")
-if(in_pw.value==in_cpw.value)
+if(in_pw.value == in_cpw.value)
 {
 return true;
-}else{
+}else
+{
 in_cpw.setCustomValidity("Passwords Don't Match");
 //alert("no match");
 return false;
@@ -326,12 +321,12 @@ return false;
 function mostrar_log_sign(dvx)
 {
 console.log("muestra dv log sign:"+dvx.id)
-if(dvx.id=="dv_login")
+if(dvx.id == "dv_login")
 {
 dv_login.style.display= "" 
 dv_sign_up.style.display= "none"      
 }//if
-else if(dvx.id=="dv_sign_up")
+else if(dvx.id == "dv_sign_up")
 {
 dv_sign_up.style.display= "" 
 dv_login.style.display= "none"      
@@ -339,15 +334,15 @@ dv_login.style.display= "none"
 }//mostrar_log_sign 
   
 /*
-dv_log_sign.addEventListener("click",function()
+dv_log_sign.addEventListener("click", function()
 {
 event.stopImmediatePropagation();
-},false);//onclick 
+}, false);//onclick 
   
-dv_login_sign_up_scr.addEventListener("click",function()
+dv_login_sign_up_scr.addEventListener("click", function()
 {
-dv_login_sign_up_scr.style.display="none";
-},false);//onclick 
+dv_login_sign_up_scr.style.display= "none";
+}, false);//onclick 
 */
 </script>
 

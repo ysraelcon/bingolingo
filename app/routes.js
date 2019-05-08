@@ -5,18 +5,18 @@ var Chat= require('../app/models/chat');
 var nodemailer= require('nodemailer');
 
 
-module.exports= function(appf,passportf)
+module.exports= function(appf, passportf)
 {
-appf.get("/", function(req,res)
+appf.get("/", function(req, res)
 {
-console.log("get / :req,res")
+console.log("get / : req, res")
 //res.render("login.ejs",{msg:""});
 });
 
 
-appf.get("/home", function(req,res)
+appf.get("/home", function(req, res)
 {
-console.log("get /home :req,res")
+console.log("get /home : req, res")
 var cant_u;
 var cant_uo= 1;
 User.find().find({}, function(err, results)
@@ -25,52 +25,53 @@ cant_u= results.length
 User.find().find({online:true}, function(err, results)
 {
 cant_uo= results.length
-res.json({cant_u:cant_u, cant_uo:cant_uo}) 
+res.json({cant_u: cant_u, cant_uo: cant_uo}) 
 })//find uo   
 })//find u
 
 });//get home
 
   /*
-appf.get("/sign_up", function(req,res){
+appf.get("/sign_up", function(req, res){
  res.render("sign_up.ejs");
 });*/
 
   
 
-appf.get("/privacy_policy", function(req,res)
+appf.get("/privacy_policy", function(req, res)
 {
-console.log("get /privacy_policy :req,res")
+console.log("get /privacy_policy : req, res")
 res.render("privacy_policy.ejs", {token: req.params.token});  
 });//get privacy policy
   
   
   
-appf.get("/reset/:token", function(req,res)
+appf.get("/reset/:token", function(req, res)
 {
-console.log("get /reset/:token :req,res")
+console.log("get /reset/:token : req, res")
 res.render("reset.ejs", {token: req.params.token});
 });//get reset
   
 
   
-appf.get("/reset_manual", function(req,res)
+appf.get("/reset_manual", function(req, res)
 {
-console.log("get /reset_manual :req,res")
+console.log("get /reset_manual : req, res")
 res.render("reset.ejs", {token: req.params.token});  
 var m_user= [];  
-  var i=0;
-User.find().sort({fecha_de_login:-1}).limit(5).exec(function(err,user)
+var i= 0;
+User.find().sort({fecha_de_login:-1}).limit(5).exec(function(err, user)
 {
 console.log(user)
-  console.log(i++)
+console.log(i++)
 }) 
   
  /* 
 User.findOne({ email: "marcnovkovic888@gmail.com" },
 function(err, user)
 {
-if(!user){
+if(!user)
+{
 console.log("no esta ese mail en db")
 }else
 {
@@ -88,9 +89,9 @@ console.log("saved reset password")
   
   
   
-appf.post("/reset/:token", function(req,res)
+appf.post("/reset/:token", function(req, res)
 {
-console.log("post /reset/:token :req,res")
+console.log("post /reset/:token : req, res")
 console.log(req.body.password);
 User.findOne(
 {
@@ -127,9 +128,9 @@ res.send("Password reseted succesfully! <a href='https://bestalk-test.glitch.me'
   
   
 
-appf.get("/login", function(req,res)
+appf.get("/login", function(req, res)
 {
-console.log("get /login :req,res")
+console.log("get /login : req, res")
 //res.render("login.ejs",{msg:req.flash('loginMsg')});
 res.json({message: req.flash("loginMsg")});
 });
@@ -153,26 +154,26 @@ failureFlash: true
 }));//post
 
   
-appf.get('/profile', isLoggedIn, function(req,res)
+appf.get('/profile', isLoggedIn, function(req, res)
 {
-console.log("get /profile :req,res")
+console.log("get /profile : req, res")
 res.json(req.user);
 //res.render('/profile/profile.html',{user:req.user});
 //res.render('profile.ejs',{user:req.user});
 });//get f
   
   
-appf.get('/edit', isLoggedIn, function(req,res)
+appf.get('/edit', isLoggedIn, function(req, res)
 {
-console.log("get /edit :req,res") 
+console.log("get /edit : req, res") 
 res.json({message:req.flash("errors")});
 //res.render('edit.ejs',{user:req.user});
 });//get 
   
   
-appf.post('/edit', isLoggedIn, function(req,res)
+appf.post('/edit', isLoggedIn, function(req, res)
 {
-console.log("post /edit :req,res"); 
+console.log("post /edit : req, res"); 
 // validate information
 req.checkBody('firstname', 'First Name is required.').notEmpty();
 req.checkBody('age', 'Age is required.').notEmpty();
@@ -210,21 +211,21 @@ res.redirect('/profile');
 });//post edit
 
   
-appf.get('/logout', function(req,res)
+appf.get('/logout', function(req, res)
 {
-console.log("get /logout :req,res")
+console.log("get /logout : req, res")
 req.logout();
 res.redirect('/');
 });//get
   
   
-appf.post('/mail', function(req,res)
+appf.post('/mail', function(req, res)
 {
-console.log("post /mail para resetear password :req,res")
+console.log("post /mail para resetear password : req, res")
 var token= Math.random().toString(36)
 .replace(/[^a-z]+/g, '').substr(0, 5);
 console.log(token);
-User.findOne({ email: req.body.email }, function(err, user)
+User.findOne({email: req.body.email}, function(err, user)
 {
 if(!user)
 {
@@ -247,14 +248,14 @@ var mailopts= {
 from: process.env.MAILSENDER,
 to: req.body.email,//or list
 subject: 'Password Reset',
-html: '<p>Visit the link for set your new password:</p>'+
+html: '<p>Visit the link for set your new password:</p>'
 //heroku 3c..
-//'<a href="https://bestalk.herokuapp.com/reset/'+
+//+'<a href="https://bestalk.herokuapp.com/reset/'+
 //glitch..
-'<a href="https://bestalk-test.glitch.me/reset/'+
-token+
-'">Reset Password</a><br>'+
-'<h2>Continue enjoying of BesTalk!</h2>'
++'<a href="https://bestalk-test.glitch.me/reset/'
++token
++'">Reset Password</a><br>'
++'<h2>Continue enjoying of BesTalk!</h2>'
 };//mailopts
 transporter.sendMail(mailopts, function(err, info)
 {
@@ -274,7 +275,7 @@ console.log(user);
 
 
 
-function isLoggedIn(req,res,next)
+function isLoggedIn(req, res, next)
 {
 console.log("esta logeado?")
 if(req.isAuthenticated())

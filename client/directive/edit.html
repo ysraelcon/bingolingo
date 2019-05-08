@@ -330,10 +330,10 @@ var img_provisional= new Image();
 img_provisional.onload= function()
 {
 var can= document.createElement("canvas");
-can.width=50;
-can.height=50;
+can.width= 50;
+can.height= 50;
 var coc= can.getContext("2d");
-coc.drawImage(this,0,0, can.width,can.height);
+coc.drawImage(this, 0, 0, can.width, can.height);
 img_profile_edi.src= can.toDataURL("image/png");
 }//onload img provisional
 img_provisional.src= reader.result;

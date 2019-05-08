@@ -530,8 +530,7 @@ onclick="abrir_tab(dv_con_learn,dv_cont,this)">
 
 <div id="dv_con_chat" class="non desierto_dia">
 
-<button id="btn_tema"
-onclick="cambiar_tema()">
+<button id="btn_tema" onclick="cambiar_tema()">
 <svg width="16" height="16" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1390 1303q-54 9-110 9-182 0-337-90t-245-245-90-337q0-192 104-357-201 60-328.5 229t-127.5 384q0 130 51 248.5t136.5 204 204 136.5 248.5 51q144 0 273.5-61.5t220.5-171.5zm203-85q-94 203-283.5 324.5t-413.5 121.5q-156 0-298-61t-245-164-164-245-61-298q0-153 57.5-292.5t156-241.5 235.5-164.5 290-68.5q44-2 61 39 18 41-15 72-86 78-131.5 181.5t-45.5 218.5q0 148 73 273t198 198 273 73q118 0 228-51 41-18 72 13 14 14 17.5 34t-4.5 38z"/></svg>
 </button><!-- moon-o -->
 
@@ -850,7 +849,7 @@ var tema= "dia";
 function cambiar_tema()
 {
 console.log("cambia tema")
-if(tema=="dia")
+if(tema == "dia")
 {
 btn_tema.removeAttribute("style");
 dv_con_chat.classList.remove("desierto_dia");
@@ -869,7 +868,7 @@ function seleccionar_tema()
 {
 //console.log(sl_tema.value);
 ir_a_theme_room(sl_tema.value);
-sl_tema.options[0].selected=true;
+sl_tema.options[0].selected= true;
 };//seleccionar_tema  
   
 //...chat...  
@@ -879,11 +878,10 @@ sl_tema.options[0].selected=true;
 
 <div id="dv_con_play" class="non">
 
-<input
-type="button" value="Explain The Word" id="btn_crt_gm"
+<input type="button" id="btn_crt_gm"
+value="Explain The Word" 
 onclick="mostrar_etw_game_opt()">
-<input
-type="button"
+<input type="button"
 value="Hangman"
 onclick="jugar_hangman()">  
 <br> 
@@ -964,9 +962,9 @@ function mostrar_lista_voc(nom_lisx)
 {
 var m_list= obj_lists[nom_lisx];
 var t_list= "<input type='button' value='Back to lists' onclick='volver_a_listas()'>"
-for(var i=0;i<m_list.length;i++)
+for(var i=0; i < m_list.length; i++)
 {
-t_list+="<li>"+m_list[i]+"</li>"
+t_list+= "<li>"+m_list[i]+"</li>"
 }//for
 dv_con_learn_voc_con.innerHTML= t_list;
 }//mostrar_lista_voc
@@ -1197,11 +1195,12 @@ onclick="definir_yandex(in_word.value)">
 function mostrar_dict(btf)
 {
 console.log("muestra dict:"+btf)
-if(btf.style.color=="green")
+if(btf.style.color == "green")
 {
 btf.removeAttribute("style");
 dv_dict.removeAttribute("style");
-}else{
+}else
+{
 btf.style.color="green";
 dv_dict.style.display="block";
 }//else
@@ -1249,11 +1248,12 @@ onclick="guardar_nota()">
 function mostrar_nota(btf)
 {
 console.log("muestra nota:"+btf)
-if(btf.style.color=="green")
+if(btf.style.color == "green")
 {
 btf.removeAttribute("style");
 dv_notes_wrapper.removeAttribute("style");
-}else{
+}else
+{
 btf.style.color="green";
 dv_notes_wrapper.style.display="block";
 }//else
@@ -1287,9 +1287,9 @@ function dar_reporte()
 {
 console.log("da reporte")
 var dv= document.createElement("div");
-dv.id="dv_reporte_scr";
+dv.id= "dv_reporte_scr";
 dv.setAttribute("class","flex_col ali_cen pos_a top w h bac_rgba_7")
-dv.innerHTML='<div id="dv_reporte" class="w_ h_">'
+dv.innerHTML= '<div id="dv_reporte" class="w_ h_">'
 +'<div id="dv_reporte_tit" class="pos_rel flex_row">'
 +'<div id="dv_reporte_tit_nm" class="w ali_cen bac_bla yel">Errors or Suggestions</div>'
 +'<div id="dv_reporte_tit_x" class="pos_a rig ali_cen bac_whi cur_poi" style="width:50px" onclick="cerrar_reporte()">X</div>'
@@ -1325,25 +1325,27 @@ dv_ng_view.removeChild(dv_reporte_scr);
   
 //------tabs------
 
-function abrir_tab(dv_pie_mst,dv_conf,this_tbf)
+function abrir_tab(dv_pie_mst, dv_conf, this_tbf)
 {
 console.log("abre tab:"+dv_pie_mst+"/-/"+dv_conf+"/-/"+this_tbf)
-var col_tab={"dv_tab_chat":["#f5f5f5","black"],
+var col_tab= {
+"dv_tab_chat":["#f5f5f5","black"],
 "dv_tab_play":["#D2B48C","black"],
 "dv_tab_read":["#0079a9","white"],
-"dv_tab_learn":["#2f4f4f","white"]};  
+"dv_tab_learn":["#2f4f4f","white"]
+};  
 var dv_msts= document.querySelectorAll("#"+dv_conf.id+">div");
-for(var i=0;i<dv_msts.length;i++)
+for(var i=0; i < dv_msts.length; i++)
 {
-if(dv_msts[i].id!="dvdict"&& // observación!!!
-dv_msts[i].id!="dvnte"&&
-dv_msts[i].id!="dvbtdict"&&
-dv_msts[i].id!="dvbtnote")
+if(dv_msts[i].id != "dvdict"  // observación!!!
+&& dv_msts[i].id != "dvnte"
+&& dv_msts[i].id != "dvbtdict"
+&& dv_msts[i].id != "dvbtnote")
 dv_msts[i].style.display= "none";
 }//for desaparece content
 dv_pie_mst.style.display= "block";
 var dv_tabsq= document.querySelectorAll("#dv_tabs>div");
-for(var i=0;i<dv_tabsq.length;i++)
+for(var i=0; i < dv_tabsq.length; i++)
 {
 dv_tabsq[i].style.backgroundColor= "";
 dv_tabsq[i].style.color= "";

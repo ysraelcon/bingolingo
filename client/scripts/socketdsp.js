@@ -25,7 +25,7 @@ var socket_client= io.connect();
 function entrar_a_chat()
 {
 console.log("entra a chat")
-socket_client.emit("pedir usuario en chat",socket_client.id);
+socket_client.emit("pedir usuario en chat", socket_client.id);
 }//click tab chat
 
 
@@ -383,7 +383,7 @@ break;
 }//if
 }//for
 entrar_a_room(roomf);
-spanear_room(roomf,dv_lang_rooms_con);
+spanear_room(roomf, dv_lang_rooms_con);
 in_list_room.value="";  
 }//entrar_lang_room
 
@@ -392,7 +392,7 @@ function ir_a_theme_room(roomf)
 {
 console.log("va a theme room:"+roomf)
 entrar_a_room(roomf);
-spanear_room(roomf,dv_theme_rooms_con);
+spanear_room(roomf, dv_theme_rooms_con);
 }//ir_a_theme_room
 
 
@@ -456,7 +456,7 @@ dv_chat_room_con_.scrollTo(0, dv_chat_room_con_.scrollHeight);
 
 
 
-socket_client.on("actualizar rooms",function(obj_roomf)
+socket_client.on("actualizar rooms", function(obj_roomf)
 {
 //obj_roomf{users_room,room}
 console.log("on: actualiza rooms");
@@ -464,10 +464,10 @@ if(rooms[obj_roomf.room])
 {
 if(roomsxcls.lang[obj_roomf.room])
 {
-spanear_room(obj_roomf.room,dv_lang_rooms_con);
+spanear_room(obj_roomf.room, dv_lang_rooms_con);
 }else if(roomsxcls.thm[obj_roomf.room])
 {
-spanear_room(obj_roomf.room,dv_theme_rooms_con);
+spanear_room(obj_roomf.room, dv_theme_rooms_con);
 }//else if thm room
 //obj_roomf{users_room,chat_room,skt_id,room} 
 var cnt_users= Object.keys(obj_roomf.users_room).length;
@@ -890,7 +890,7 @@ crear_chat_privado(obj_roomf.room_bth);
 
 
 
-function cancelar_chat_request_of(room_bthx,skt_id_rcvf,skt_id_mndf)
+function cancelar_chat_request_of(room_bthx, skt_id_rcvf, skt_id_mndf)
 {
 console.log("cancela chat request of")
 socket_client.emit("cancelar chat request of",
@@ -969,14 +969,14 @@ nudiv.innerHTML='<div class="tab h30p w pos_a fon_ari bor_r">'
 +'</div>'//_user_bts
 +'</div>';    
 dv_con_chat.appendChild(nudiv);
-nudiv.addEventListener("click",function()
+nudiv.addEventListener("click", function()
 {
 var cls_act= nudiv.getAttribute("class");
-var re= new RegExp("al_frente","i");
+var re= new RegExp("al_frente", "i");
 if(!re.test(cls_act))
 {
 var dvs= document.querySelectorAll("#dv_con_chat>div");
-for(var i=0;i<dvs.length;i++)
+for(var i= 0; i < dvs.length; i++)
 {
 dvs[i].classList.remove("al_frente");
 }//for
@@ -999,12 +999,12 @@ draggableDiv.draggable('enable');
 });
 $(dv_chat_room_).resizable();
 var in_chat_room_msg_= document.getElementById("in_chat_room_msg_"+room_bthx);
-in_chat_room_msg_.addEventListener("keydown",function()
+in_chat_room_msg_.addEventListener("keydown", function()
 {
 esta_tipeando(in_chat_room_msg_);
 });//addeventlistener keydown tyP  
 });//jQuery
-socket_client.emit("mandar usuarios al chat privado", {room_bth:room_bthx})
+socket_client.emit("mandar usuarios al chat privado", {room_bth: room_bthx})
 }//if dv_chat_room_ no creado
 }//crear_chat_privado
 
@@ -1040,7 +1040,7 @@ function cerrar_waiting(skt_id_rcvf,room_bthf)
 console.log("cierra waiting")
 eliminar_waiting(room_bthf)
 socket_client.emit("cancel chat request",
-{skt_id_rcv:skt_id_rcvf,room_bth:room_bthf});
+{skt_id_rcv: skt_id_rcvf, room_bth: room_bthf});
 }//cerrar_waiting
 
 
@@ -1062,7 +1062,7 @@ dv_con_chat.removeChild(dv_waiting)
 
 
 
-socket_client.on("eliminar chat request",function(obj_roomf)
+socket_client.on("eliminar chat request", function(obj_roomf)
 {
 //obj_roomf{room_bth}
 console.log("elimina chat request")
@@ -1092,7 +1092,7 @@ dv_con_chat.removeChild(dv_waiting);
 
 
 
-socket_client.on("meter usuarios al chat privado",function(obj_roomf)
+socket_client.on("meter usuarios al chat privado", function(obj_roomf)
 {
 //obj_user{m_names,room_bth,chat_prv}
 //obj_roomf{nme_mnd,nme_rcv,skt_id_rcv,skt_id_mnd,room_bth,chat_prv}
@@ -1113,7 +1113,7 @@ dv_chat_room_con_.innerHTML= li_chat;
 
 
 
-function enviar_msg_prv(ev,room_bthx)
+function enviar_msg_prv(ev, room_bthx)
 {
 console.log("envia msg prv:"+room_bthx)
 ev.preventDefault();
@@ -1121,15 +1121,15 @@ var in_chat_room_msg_= document.querySelector("#in_chat_room_msg_"+room_bthx);
 if(in_chat_room_msg_.value != "")
 {
 socket_client.emit("send message chat r",
-{msg:in_chat_room_msg_.value, room_bth:room_bthx});
+{msg:in_chat_room_msg_.value, room_bth: room_bthx});
 //inr_msg.getAttribute("data-room")  
 }//if no vacio
-in_chat_room_msg_.value="";
+in_chat_room_msg_.value= "";
 }//enviar_msg_prv chat prv
 
 
 
-socket_client.on("new msg chat request",function(obj_msgf)
+socket_client.on("new msg chat request", function(obj_msgf)
 {
 //obj_msgf{msg,nick,room}
 console.log("on: new msg chat request")
@@ -1153,7 +1153,7 @@ if(typeof(dv_create_game) == "undefined")
 {
 var nudiv= document.createElement("DIV");
 nudiv.id= "dv_create_game";
-nudiv.setAttribute("class","inl_blo ali_cen bor")
+nudiv.setAttribute("class", "inl_blo ali_cen bor")
 nudiv.innerHTML='<div id="dv_tit_opt_game" class="flex_row">'
 +'<div id="dv_tit_opt_game_nme" class="inl_blo ali_cen w bac_bla whi">Game Options</div>'
 +'<div id="dv_tit_opt_game_x" class="inl_blo ali_cen w50p cur_poi" onclick="cerrar_game_opt()">X</div></div>'
@@ -1213,7 +1213,7 @@ nro_player: nro_player
 
 
 
-socket_client.on("crear juego",function(obj_gamef)
+socket_client.on("crear juego", function(obj_gamef)
 {
 //obj_gamef{nro_game,type_game,list_word,nro_player}
 console.log("on: 2crea juego");
@@ -1228,7 +1228,7 @@ obj_gamef.nro_player
 
 
 
-socket_client.on("los demas bar jue",function(obj_bar_juef)
+socket_client.on("los demas bar jue", function(obj_bar_juef)
 {
 //obj_bar_juef{nro_game,type_game,list_word_name,nro_player}
 console.log("on: los demas bar jue");
@@ -1243,7 +1243,7 @@ obj_bar_juef.nro_player
 
 
 
-function dar_bar_jue(roomjf,nme_juef,lis_juef,nro_playerf)
+function dar_bar_jue(roomjf, nme_juef, lis_juef, nro_playerf)
 {
 console.log("da bar jue:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
 var dv_game_bar_= document.getElementById("dv_game_bar_"+roomjf);
@@ -1251,13 +1251,13 @@ if(!dv_game_bar_)
 {
 var nudiv= document.createElement("DIV");
 nudiv.id= "dv_game_bar_"+roomjf;
-nudiv.setAttribute("class","bor");
-nudiv.setAttribute("style","display:table")
-nudiv.setAttribute("onclick","juntarse_a_juego(\'"+roomjf+"\',\'"
+nudiv.setAttribute("class", "bor");
+nudiv.setAttribute("style", "display:table")
+nudiv.setAttribute("onclick", "juntarse_a_juego(\'"+roomjf+"\',\'"
 +nme_juef+"\',\'"
 +lis_juef+"\',\'"
 +nro_playerf+"\')");
-nudiv.setAttribute("data-id-gm",roomjf);
+nudiv.setAttribute("data-id-gm", roomjf);
 nudiv.innerHTML= '<div id="dv_bar_jue_nm" class="inl_blo bor">'
 +nme_juef+'</div>'
 +'<div id="dv_bar_jue_lis" class="inl_blo bor">'+lis_juef
@@ -1271,15 +1271,15 @@ dv_con_play.appendChild(nudiv);
 
 
 
-function juntarse_a_juego(roomjf,nme_juef,lis_juef,nro_playerf)
+function juntarse_a_juego(roomjf, nme_juef, lis_juef, nro_playerf)
 {
 console.log("juntarse a juego:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
-crear_juego(roomjf,nme_juef,lis_juef,nro_playerf);
+crear_juego(roomjf, nme_juef, lis_juef, nro_playerf);
 }//juntarse o spectate
 
 
 
-function crear_juego(roomjf,nme_juef,lis_juef,nro_playerf)
+function crear_juego(roomjf, nme_juef, lis_juef, nro_playerf)
 {
 console.log("2crea juego:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
 if(typeof(dv_jue) == "undefined")
@@ -1353,7 +1353,7 @@ $("#dv_jue").resizable();
 
 
 
-socket_client.on("manda user al juego",function(obj_gamef)
+socket_client.on("manda user al juego", function(obj_gamef)
 {
 /*obj_gamef{users_jue{user_id[fn,skt_id]}},
 nro_game,type_game,list_word,nro_player}*/
@@ -1366,8 +1366,8 @@ userj+= '<div id="dv_jue_pnt_'+nom+'" class="inl_blo ali_cen w30p bor_1p_bla bor
 +obj_gamef.users_jue[nom][0]+"<br>";
 }//for
 var dv_jue_username_= document.getElementById("dv_jue_username_"+obj_gamef.nro_game);
-dv_jue_username_.innerHTML="";
-dv_jue_username_.innerHTML=userj;
+dv_jue_username_.innerHTML= "";
+dv_jue_username_.innerHTML= userj;
 if(obj_gamef.typegame != "Explain The Word")
 {
 var dv_jue_user_bts_= document.getElementById("dv_jue_user_bts_"+obj_gamef.nro_game);
@@ -1387,7 +1387,7 @@ dv_jue_user_bts_.innerHTML= '<button id="bt_call_secret_'+obj_gamef.nro_game+
 
 
 
-socket_client.on("ya comenzo jue",function(obj_msgf)
+socket_client.on("ya comenzo jue", function(obj_msgf)
 {
 //obj_msgf{msg} 
 console.log("on: ya comenzo jue")
@@ -1396,16 +1396,16 @@ alert(obj_msgf.msg);
      
           
 
-socket_client.on("el del turno",function(obj_wordf)
+socket_client.on("el del turno", function(obj_wordf)
 {
 //objwordf{word}
 console.log("on: el del turno, te toca");
-sp_word_to_guess.innerHTML=obj_wordf.word;
+sp_word_to_guess.innerHTML= obj_wordf.word;
 });//skcl el del turno
 
 
 
-socket_client.on("corre reloj",function(obj_tmpf)
+socket_client.on("corre reloj", function(obj_tmpf)
 {
 //objtmpf{tiempo}
 sp_timer.innerHTML= obj_tmpf.tiempo;
@@ -1413,21 +1413,21 @@ sp_timer.innerHTML= obj_tmpf.tiempo;
 
 
 
-socket_client.on("los que adivinan",function(obj_user_explf)
+socket_client.on("los que adivinan", function(obj_user_explf)
 {
 //obj_userexplf{userexpl}
 console.log("on: los que adivinan: "+JSON.stringify(obj_user_explf));
-sp_word_to_guess.innerHTML=obj_user_explf.userexpl;
-dv_jue_con.innerHTML="";
+sp_word_to_guess.innerHTML= obj_user_explf.userexpl;
+dv_jue_con.innerHTML= "";
 });//skcl los que adivinan
 
 
 
-socket_client.on("no se adivino",function(obj_word_to_guessf)
+socket_client.on("no se adivino", function(obj_word_to_guessf)
 {
 //obj_word_to_guessf{word_to_guess}
 console.log("on: no se adivino");
-dv_jue_con.innerHTML+="The word was <b>"
+dv_jue_con.innerHTML+= "The word was <b>"
 +obj_word_to_guessf.word_to_guess+"</b><br>";
 jQuery(function($)
 {
@@ -1437,7 +1437,7 @@ $("#dv_jue_con").stop().animate({scrollTop:$("#dv_jue_con")[0].scrollHeight}, 10
 
 
 
-socket_client.on("actualiza puntaje",function(obj_pntf)
+socket_client.on("actualiza puntaje", function(obj_pntf)
 {
 //obj_pntf{user_id,pnt_player}
 console.log("on: acutaliza puntaje: "+JSON.stringify(obj_pntf))
@@ -1447,7 +1447,7 @@ dv_jue_pnt.innerHTML= obj_pntf.pnt_player;
 
 
 
-socket_client.on("quien gano",function(obj_winnerf)
+socket_client.on("quien gano", function(obj_winnerf)
 {
 //obj_winnerf{winner_nme}
 console.log("on: quien gano: "+obj_winnerf)
@@ -1470,7 +1470,7 @@ dv_jue.style.top= 0;
 else
 {
 dv_jue.removeAttribute("style");
-dv_jue.setAttribute("style","width:270px;height:250px");
+dv_jue.setAttribute("style", "width:270px;height:250px");
 }//else retorna
 }//restaurar tamaño del juego
 
@@ -1479,12 +1479,12 @@ function cerrar_juego(roomj)
 {
 console.log("cierra jue:"+roomj)
 dv_con_play.removeChild(dv_jue);
-socket_client.emit("salir del juego",{room:roomj});
+socket_client.emit("salir del juego", {room: roomj});
 }//cerrar juego
 
 
 
-socket_client.on("eliminar game bar",function(obj_room_gamef)
+socket_client.on("eliminar game bar", function(obj_room_gamef)
 {
 //obj_room_gamef{room_game}
 console.log("on: elimina game bar")
@@ -1532,13 +1532,13 @@ socket_client.on('new message jue', function(obj_msg_gamef)
 console.log("on: new message jue")
 if(obj_msg_gamef.guess)
 {
-dv_jue_con.innerHTML+="<b>"+obj_msg_gamef.nick+":</b> "
+dv_jue_con.innerHTML+= "<b>"+obj_msg_gamef.nick+":</b> "
 +obj_msg_gamef.msg+"<br/>"
 +"BINGO, you guessed the word!<br>";
-socket_client.emit("10 seg",{nro_game: obj_msg_gamef.nro_game});
+socket_client.emit("10 seg", {nro_game: obj_msg_gamef.nro_game});
 }else
 {
-dv_jue_con.innerHTML+="<b>"+obj_msg_gamef.nick+":</b> "+obj_msg_gamef.msg+"<br/>";
+dv_jue_con.innerHTML+= "<b>"+obj_msg_gamef.nick+":</b> "+obj_msg_gamef.msg+"<br/>";
 }//else no bingo
 jQuery(function($)
 {
@@ -1587,9 +1587,9 @@ resp[pr].relatedWords[0].words.forEach(function(v)
 {
 rel_words+= v+", "
 });//for each
-list+= resp[pr].partOfSpeech+". "+
-resp[pr].text+"<br>"+
-"["+rel_words+"]<br>";
+list+= resp[pr].partOfSpeech+". "
++resp[pr].text+"<br>"
++"["+rel_words+"]<br>";
 }//for
 dv_result_dict.innerHTML= list;
 };//onload
@@ -1607,14 +1607,14 @@ var lang_from= in_list_lang_from.value||"en";
 var lang_to= in_list_lang_to.value||"es";
 var url2= "key="+apik+"&text="+word+"&lang="+lang_from+"-"+lang_to;
 var xhr= new XMLHttpRequest();
-xhr.open("POST",url1,true);
+xhr.open("POST", url1, true);
 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xhr.send(url2);
 dv_result_dict.innerHTML="loading...";
-xhr.onload=function()
+xhr.onload= function()
 {
 //console.log(this.response);
-var resp=JSON.parse(this.response);
+var resp= JSON.parse(this.response);
 var result= "";
 for(var i in resp.def)
 {
@@ -1650,7 +1650,7 @@ var lang_from= in_list_lang_from.value||"en";
 var lang_to= in_list_lang_to.value||"es";
 var url2= "key="+apik+"&text="+phr+"&lang="+lang_from+"-"+lang_to;
 var xhr= new XMLHttpRequest();
-xhr.open("POST",url1,true);
+xhr.open("POST", url1, true);
 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xhr.send(url2);
 dv_result_dict.innerHTML= "loading...";
