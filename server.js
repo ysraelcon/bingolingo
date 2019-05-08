@@ -325,7 +325,8 @@ io.to(roomf).emit("dejar prv",roomf);
 socket.on("typing",function(obj_roomf)
 {
 //obj_roomf{room}
-socket.to(obj_roomf.room).broadcast.emit("who type",
+//socket.to(obj_roomf.room).broadcast.emit("who type",
+io.to(obj_roomf.room).emit("who type",
 {firstname: socket.request.user.firstname, room:obj_roomf.room});
 });//typing
   
