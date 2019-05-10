@@ -6,12 +6,10 @@ method="post"
 onsubmit="return validar_password()">
 
 
-<input
-type="password" id="in_pw"
+<input type="password" id="in_pw"
 placeholder="New password"><br>
-<input
-type="password" name="password"
-id="in_cpw" placeholder="Repeat password"><br>
+<input type="password" id="in_cpw"
+name="password"placeholder="Repeat password"><br>
 
 <button type="submit" >Reset</button>
 
@@ -23,10 +21,11 @@ id="in_cpw" placeholder="Repeat password"><br>
 <script>
 function validar_password()
 {
-if(in_pw.value==in_cpw.value)
+if(in_pw.value == in_cpw.value)
 {
 return true;
-}else{
+}else
+{
 in_cpw.setCustomValidity("Passwords Don't Match");
 //alert("no match");
 return false;

@@ -4,8 +4,8 @@
 var y0= 215;
 var y1= 230;
 var y2= 245;
-var x0=25;
-var x1=50;
+var x0= 25;
+var x1= 50;
 
 var L= {
 "a":{"v":"A","x":1,"y":0},
@@ -48,7 +48,7 @@ dibujar_pata_izq, dibujar_pata_der, dibujar_brazo_izq, dibujar_brazo_der
 var word= "COOLING"
 var mword= word.split("")
 
-var nfallo=0;
+var nfallo= 0;
 
 
 var con_canv= canv.getContext("2d");
@@ -60,11 +60,11 @@ con_canv.font= "12px sans-serif"
 function jugar_hangman()
 {
 console.log("juega hangman")
-if(typeof(dv_juego_hangman)=="undefined")
+if(typeof(dv_juego_hangman) == "undefined")
 {
 var dv_hangman= document.createElement("div");
-dv_hangman.id="dv_juego_hangman";
-dv_hangman.style="display:inline-block;background:white";
+dv_hangman.id= "dv_juego_hangman";
+dv_hangman.style= "display:inline-block;background:white";
 dv_hangman.innerHTML=`
 <div
 id="dv_juego_hangman_tit"
@@ -118,7 +118,7 @@ function nuevo_juego(ev)
 console.log("nuevo juego")
 var x= ev.clientX-canv.offsetLeft, y= ev.clientY-canv.offsetTop-98;
 console.log(x+" - "+y)
-if(dentro_de_rango(x,90,90+100)&&dentro_de_rango(y,130,130+20))
+if(dentro_de_rango(x, 90, 90+100) && dentro_de_rango(y, 130, 130+20))
 {
 console.log("nuevo juego")
 cargando_juego();
@@ -131,9 +131,9 @@ aleatoria_wordnik();
 function cargando_juego()
 {
 console.log("carga juego")
-con_canv.clearRect(0,0,canv.width,canv.height)
-con_canv.fillText("LOADING . . .",100,150);
-con_canv.strokeRect(90,130,100,20)
+con_canv.clearRect(0, 0, canv.width, canv.height)
+con_canv.fillText("LOADING . . .", 100, 150);
+con_canv.strokeRect(90, 130, 100, 20)
 }//cargando_juego
 
 
@@ -141,27 +141,27 @@ function arrancar_nuevo_juego()
 {
 console.log("arranca nuevo juego")
 dv_definicion_juego.innerHTML= "";
-con_canv.clearRect(0,0,canv.width,canv.height)
+con_canv.clearRect(0, 0, canv.width, canv.height)
 //word= "happening".toUpperCase().split("");//!!! da nueva palabra
 dibujar_wordlin(mword)
-dibujar_letra_en_word([mword[0],0]);
-mword[0]=1;
-dibujar_letra_en_word([mword[mword.length-1],mword.length-1]);
-mword[mword.length-1]=1;
+dibujar_letra_en_word([mword[0], 0]);
+mword[0]= 1;
+dibujar_letra_en_word([mword[mword.length-1], mword.length-1]);
+mword[mword.length-1]= 1;
 dibujar_abc();
 canv.onclick= tocar_letra_en_canvas;
 m_fun_dibujo[0]();
 m_fun_dibujo[1]();
 m_fun_dibujo[2]();
 m_fun_dibujo[3]();
-nfallo=4;
+nfallo= 4;
 }//arrancar_nuevo_juego
 
 
-function dentro_de_rango(vx,x1,x2)
+function dentro_de_rango(vx, x1, x2)
 {
 console.log("dentro de rango")
-if(x1<=vx&&vx<=x2)  return true;
+if(x1 <= vx && vx <= x2)  return true;
 else  return false;
 }//dentro_de_rango
 
@@ -180,8 +180,8 @@ canv.onclick= nuevo_juego;
 function dibujar_definicion()
 {
 console.log("dibuja definicion")
-con_canv.fillText("DEFINITION",25,70);
-con_canv.strokeRect(20,50,100,20);
+con_canv.fillText("DEFINITION", 25, 70);
+con_canv.strokeRect(20, 50, 100, 20);
 }//dibujar_definicion
 
 
@@ -189,25 +189,25 @@ function dibujar_new_game2()
 {
 console.log("dibuja new game2")
 dibujar_definicion();
-con_canv.clearRect(0,190,canv.width,canv.height)
-con_canv.fillText("NEW GAME",100,150+100);
-con_canv.strokeRect(90,130+100,100,20)
+con_canv.clearRect(0, 190, canv.width, canv.height)
+con_canv.fillText("NEW GAME", 100, 150+100);
+con_canv.strokeRect(90, 130+100, 100, 20)
 canv.onclick= nuevo_juego2;
 }//dibujar_new_game2
 
 
 function nuevo_juego2(ev)
 {
-console.log("nuevo juego2:"+ev)
+console.log("nuevo juego2: "+ev)
 var x= ev.clientX-canv.offsetLeft, y= ev.clientY-canv.offsetTop-98;
-if(dentro_de_rango(x,90,190)&&dentro_de_rango(y,130+100,150+100))
+if(dentro_de_rango(x, 90, 190) && dentro_de_rango(y, 130+100, 150+100))
 {
 console.log("nuevo juego")
 cargando_juego();
 aleatoria_wordnik();    
 //arrancar_nuevo_juego();
 }//if
-else if(dentro_de_rango(x,20,20+100)&&dentro_de_rango(y,50,50+20))
+else if(dentro_de_rango(x, 20, 20+100) && dentro_de_rango(y, 50, 50+20))
 {
 console.log("dar definicion")
 dar_definicion();
@@ -218,7 +218,7 @@ dar_definicion();
 function dar_definicion()
 {
 console.log("da definicion")
-definicion_wordnik(word,dv_definicion_juego);
+definicion_wordnik(word, dv_definicion_juego);
 /*dvdefinicionjuego.innerHTML= word
 +"<br>"+"definicion...";*/
 }//dar_definicion
@@ -227,28 +227,28 @@ definicion_wordnik(word,dv_definicion_juego);
 function dibujar_base()
 {
   console.log("dibuja base")
-  dibujar_linea(125,120+50,275,120+50)//base
+  dibujar_linea(125, 120+50, 275, 120+50)//base
 }//dibujar_base
 function dibujar_poste()
 {
   console.log("dibuja poste")
-  dibujar_linea(225,120+50,225,25+50)//poste
+  dibujar_linea(225, 120+50, 225, 25+50)//poste
 }//dibujar_poste
 function dibujar_poste_arriba()
 {
 console.log("dibuja poste arriba")
-dibujar_linea(225,25+50,175,25+50)//poste arriba
+dibujar_linea(225, 25+50, 175, 25+50)//poste arriba
 }//dibujar_poste_arriba
 function dibujar_poste_abajo()
 {
 console.log("dibuja poste abajo")
-dibujar_linea(175,25+50,175,50+50)//poste abajo
+dibujar_linea(175, 25+50, 175, 50+50)//poste abajo
 }//dibujar_poste_abajo
 function dibujar_cabeza()
 {
 console.log("dibuja cabeza")
 con_canv.beginPath();
-con_canv.arc(175,60+50,10,0,2*Math.PI);
+con_canv.arc(175, 60+50, 10, 0, 2*Math.PI);
 con_canv.stroke();
 con_canv.closePath()
 }//dibujar_cabeza
@@ -256,8 +256,8 @@ function dibujar_sonrisa()
 {
 console.log("dibuja sonrisa")
 con_canv.beginPath();
-con_canv.strokeStyle="green";
-con_canv.arc(175,60+50,6,0,1*Math.PI);
+con_canv.strokeStyle= "green";
+con_canv.arc(175, 60+50, 6, 0, 1*Math.PI);
 con_canv.stroke();
 con_canv.strokeStyle="black";
 con_canv.closePath()
@@ -266,40 +266,40 @@ function dibujar_tristeza()
 {
 console.log("dibuja sonrisa")
 con_canv.beginPath();
-con_canv.strokeStyle="red";
-con_canv.arc(175,60+50+6,6,1*Math.PI,2*Math.PI);
+con_canv.strokeStyle= "red";
+con_canv.arc(175, 60+50+6, 6, 1*Math.PI, 2*Math.PI);
 con_canv.stroke();
-con_canv.strokeStyle="black";
+con_canv.strokeStyle= "black";
 con_canv.closePath()
 }//dibujar_tristeza
 function dibujar_columna()
 {
 console.log("dibuja columna")
-dibujar_linea(175,70+50,175,100+50)//columna
+dibujar_linea(175, 70+50, 175, 100+50)//columna
 }//dibujar_columna
 function dibujar_pata_izq()
 {
 console.log("dibuja pata izq")
-dibujar_linea(175,100+50,165,110+50)//pata izq
+dibujar_linea(175, 100+50, 165, 110+50)//pata izq
 }//dibujar_pata_izq
 function dibujar_pata_der()
 {
 console.log("dibuja pata der")
-dibujar_linea(175,100+50,185,110+50)//pata der
+dibujar_linea(175, 100+50, 185, 110+50)//pata der
 }//dibujar_pata_der
 function dibujar_brazo_izq()
 {
 console.log("dibuja brazo izq")
-dibujar_linea(175,80+50,155,70+50)//brazo izq
+dibujar_linea(175, 80+50, 155, 70+50)//brazo izq
 }//dibujar_brazo_izq
 function dibujar_brazo_der()
 {
 console.log("dibuja brazo der")
-dibujar_linea(175,80+50,195,70+50)//brazo der
+dibujar_linea(175, 80+50, 195, 70+50)//brazo der
 alert("HANGED!\n\n"+word)
 dibujar_tristeza();
-word.toUpperCase().split("").forEach(function(v,i){
-dibujar_letra_en_word([v,i],"red");
+word.toUpperCase().split("").forEach(function(v, i){
+dibujar_letra_en_word([v,i], "red");
 });//foreach recolor word
 //dar definicion!!!
 dibujar_new_game2();
@@ -313,20 +313,20 @@ dibujar_new_game2();
 
 function dibujar_wordlin(mwordf)
 {
-console.log("dibuja wordlin :wordf")
-mwordf.forEach(function(v,i)
+console.log("dibuja wordlin : wordf")
+mwordf.forEach(function(v, i)
 {
-dibujar_linea(i*25+25,30,i*25+25+20,30);
+dibujar_linea(i*25+25, 30, i*25+25+20, 30);
 });
 }//dibujar_word
 
 
-function dibujar_letra_en_word(letpos,color)
+function dibujar_letra_en_word(letpos, color)
 {
 console.log("dibuja letra en word:"+letpos+"/-/"+color)
-con_canv.fillStyle= color||con_canv.fillStyle;
-con_canv.fillText(letpos[0],letpos[1]*25+25+5,30)
-con_canv.fillStyle="black";
+con_canv.fillStyle= color || con_canv.fillStyle;
+con_canv.fillText(letpos[0], letpos[1]*25+25+5, 30)
+con_canv.fillStyle= "black";
 }//dibujar_letra_en_word
 
 
@@ -335,26 +335,28 @@ con_canv.fillStyle="black";
 function dibujar_abc()
 {
 console.log("dibuja abc")
-for(var l in L){
+for(var l in L)
+{
 dibujar_letra(L[l]);
 }//for L
 }//dibujar_abc
 
 
 
-function toco_letra(x,y,l)
+function toco_letra(x, y, l)
 {
 console.log("toco letra")
-if(dentro_de_rango(x,l.x*25-5,l.x*25+20))
+if(dentro_de_rango(x, l.x*25-5, l.x*25+20))
 {
-if(dentro_de_rango(y,l.y*15+215-15,l.y*15+215) )
+if(dentro_de_rango(y, l.y*15+215-15, l.y*15+215) )
 {
-var menc=[];
-for(var i=0;i<mword.length;i++)
+var menc= [];
+for(var i=0; i < mword.length; i++)
 {
-if(mword[i]==l.v){
+if(mword[i] == l.v)
+{
 menc.push([mword[i],i])
-mword[i]=1;
+mword[i]= 1;
 }//if
 }//for mword
 menc.forEach(function(letpos)
@@ -362,19 +364,19 @@ menc.forEach(function(letpos)
 dibujar_letra_en_word(letpos);
 dibujar_linea_en_letra(l,"green")
 })
-if(menc.length==0)
+if(menc.length == 0)
 {
-dibujar_linea_en_letra(l,"red")
+dibujar_linea_en_letra(l, "red")
 m_fun_dibujo[nfallo]();
 nfallo++;
 //dibujar ahorcadero
 }//if
-if(mword.reduce(function(a,b){return a+b})==word.length)
+if(mword.reduce(function(a, b){return a+b}) == word.length)
 {
 dibujar_sonrisa();
-word.toUpperCase().split("").forEach(function(v,i)
+word.toUpperCase().split("").forEach(function(v, i)
 {
-dibujar_letra_en_word([v,i],"green");
+dibujar_letra_en_word([v, i], "green");
 });//foreach recolor word
 //alert("Guessed!\n\n"+word)
 dibujar_new_game2();
@@ -391,7 +393,7 @@ console.log("toca letra en canvas")
 var x= ev.clientX-canv.offsetLeft, y= ev.clientY-canv.offsetTop-98;
 for(var l in L)
 {
-toco_letra(x,y,L[l]);
+toco_letra(x, y, L[l]);
 }//for
 }//tocar_letra_en_canvas
 
@@ -399,25 +401,25 @@ toco_letra(x,y,L[l]);
 function dibujar_letra(l)
 {
 console.log("dibuja letra:"+l)
-con_canv.fillText(l.v,l.x*25+5,l.y*15+215);
-con_canv.strokeRect(l.x*25,(l.y*15+215)-15,20,15);
+con_canv.fillText(l.v, l.x*25+5, l.y*15+215);
+con_canv.strokeRect(l.x*25, (l.y*15+215)-15, 20, 15);
 }//dibujar_letra
 
 
-function dibujar_linea_en_letra(l,color)
+function dibujar_linea_en_letra(l, color)
 {
 console.log("dibuja linea en letra:"+l+"/-/"+color)
-dibujar_linea(l.x*25,l.y*15+215,l.x*25+20,l.y*15+215-15,color)
+dibujar_linea(l.x*25, l.y*15+215, l.x*25+20, l.y*15+215-15, color)
 }//dibujar_linea_en_letra
 
-function dibujar_linea(x1,y1,x2,y2,color)
+function dibujar_linea(x1, y1, x2, y2, color)
 {
-console.log("dibuja linea :x1y1x2y2 color")
+console.log("dibuja linea : x1y1x2y2 color")
 var colant= con_canv.strokeStyle;
-con_canv.strokeStyle= color||"black";
+con_canv.strokeStyle= color || "black";
 con_canv.beginPath()
-con_canv.moveTo(x1,y1);
-con_canv.lineTo(x2,y2);
+con_canv.moveTo(x1, y1);
+con_canv.lineTo(x2, y2);
 con_canv.closePath()
 con_canv.stroke();
 con_canv.strokeStyle= colant;
@@ -428,20 +430,20 @@ function aleatoria_wordnik(wordf)
 {
 //definicion wordnik wordnet.3.0     
 console.log("aleatoria wordnik")
-var hk="https://cors-anywhere.herokuapp.com/";     
+var hk= "https://cors-anywhere.herokuapp.com/";     
 //var url1="http://api.wordnik.com:80/v4/word.json/";//definicion
-var url1="https://api.wordnik.com/v4/words.json/";//aleatorio
+var url1= "https://api.wordnik.com/v4/words.json/";//aleatorio
 //var url2="/hyphenation?useCanonical=true&limit=50&api_key="+
 //var url2="/definitions?sourceDictionaries=wordnet&useCanonical=true&includeRelated=true"
 var url2= "/randomWord?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=10"
 +"&api_key=b986324a786a6d94d00060ded100c020a49a6a49d8f93c9b3";
 //"a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";  //de prueba
-var xhr=new XMLHttpRequest();  
+var xhr= new XMLHttpRequest();  
 xhr.open("GET", hk+url1+/*wordf+*/url2, true);
 xhr.onload = function()
 {
 // console.log(this.response)          
-var resp=JSON.parse(this.response);//matriz objetos{id,word}
+var resp= JSON.parse(this.response);//matriz objetos{id,word}
 word= resp.word.toUpperCase();
 mword= word.split("");
 arrancar_nuevo_juego();
@@ -461,35 +463,36 @@ function definicion_wordnik(wordf,dv_resultf)
 {
 //definicion wordnik wordnet.3.0     
 console.log("define wordnik")
-var hk="https://cors-anywhere.herokuapp.com/";          
-var url1="http://api.wordnik.com:80/v4/word.json/";
+var hk= "https://cors-anywhere.herokuapp.com/";          
+var url1= "http://api.wordnik.com:80/v4/word.json/";
 //var url2="/hyphenation?useCanonical=true&limit=50&api_key="+
-var url2="/definitions?sourceDictionaries=wordnet&useCanonical=true&includeRelated=true"+"&api_key=b986324a786a6d94d00060ded100c020a49a6a49d8f93c9b3";
+var url2= "/definitions?sourceDictionaries=wordnet&useCanonical=true&includeRelated=true"+"&api_key=b986324a786a6d94d00060ded100c020a49a6a49d8f93c9b3";
 //"a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";  //de prueba      
-var xhr=new XMLHttpRequest();   
+var xhr= new XMLHttpRequest();   
 xhr.open("GET", hk+url1+wordf+url2, true);    
-dv_resultf.innerHTML ="loading...";    
+dv_resultf.innerHTML = "loading...";    
 xhr.onload = function()
 {
 console.log("found: "+wordf);
-var resp=JSON.parse(this.response);//matriz objetos
+var resp= JSON.parse(this.response);//matriz objetos
 console.log(resp)    
-var list="";
+var list= "";
 for(var pr in resp)
 {
 var rel_words="";    
 //console.log(resp[pr].relatedWords[0].words)
-if(resp[pr].relatedWords.length!==0)
+if(resp[pr].relatedWords.length !== 0)
 {
-resp[pr].relatedWords[0].words.forEach(function(v){
-rel_words+=v+", "
+resp[pr].relatedWords[0].words.forEach(function(v)
+{
+rel_words+= v+", "
 });//for each
 }//if related words  
-list+=resp[pr].partOfSpeech+". "
+list+= resp[pr].partOfSpeech+". "
 +resp[pr].text+"<br>"
 +"["+rel_words+"]<br>";
 }//for
-dv_resultf.innerHTML=list;
+dv_resultf.innerHTML= list;
 };//onload
 xhr.onerror= function(){
 dv_resultf.innerHTML= "no found";

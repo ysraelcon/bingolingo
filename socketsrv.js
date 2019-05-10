@@ -1,6 +1,6 @@
 //socket server
 
-module.exports=function()
+module.exports= function()
 {
   
 };//exports

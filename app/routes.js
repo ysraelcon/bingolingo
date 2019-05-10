@@ -60,7 +60,7 @@ console.log("get /reset_manual : req, res")
 res.render("reset.ejs", {token: req.params.token});  
 var m_user= [];  
 var i= 0;
-User.find().sort({fecha_de_login:-1}).limit(5).exec(function(err, user)
+User.find().sort({fecha_de_login: -1}).limit(5).exec(function(err, user)
 {
 console.log(user)
 console.log(i++)

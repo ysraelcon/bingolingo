@@ -30,12 +30,12 @@ socket_client.emit("pedir usuario en chat", socket_client.id);
 
 
 //llena tabla users chat
-socket_client.on("recibir usuarios",function(users_cnntf)
+socket_client.on("recibir usuarios", function(users_cnntf)
 {
 //users_cnnt{socket_client_id:user}
 //user{_id,email,firstname,lastname,chats[]}
 console.log("on: recibe usuarios")
-var con_user="";
+var con_user= "";
 for(var username in users_cnntf)
 {
 con_user+= "<tr id=\'"+users_cnntf[username].skt_id
@@ -52,7 +52,7 @@ con_user+= "<tr id=\'"+users_cnntf[username].skt_id
 +"<td>"+(users_cnntf[username].user.speaks||"-")+"</td>"
 +"</tr>";
 }//for
-tbl_users_bd.innerHTML=con_user;
+tbl_users_bd.innerHTML= con_user;
 });//skon recibir usuarios table
 
 socket_client.on("last 5 connected users", function(users_5_no_cnntx)
@@ -60,7 +60,7 @@ socket_client.on("last 5 connected users", function(users_5_no_cnntx)
 console.log("on: last 5 connected users")
 //console.log(users_5_no_cnntx)
 var con_user= "";
-for(var i=0;i<users_5_no_cnntx.length;i++)
+for(var i=0; i < users_5_no_cnntx.length; i++)
 {
 con_user+= "<tr id=\'"+users_5_no_cnntx[i]._id
 +"\' data-user-id='"+users_5_no_cnntx[i]._id
@@ -76,13 +76,13 @@ con_user+= "<tr id=\'"+users_5_no_cnntx[i]._id
 +"<td>"+(users_5_no_cnntx[i].speaks||"-")+"</td>"
 +"</tr>";  
 }//for
-tbl_users_lc_bd.innerHTML=con_user;
+tbl_users_lc_bd.innerHTML= con_user;
 })//skon last 5 connected users
 
 
 function informar_profile(ele)
 {
-console.log("informa profile:"+ele)
+console.log("informa profile: "+ele)
 if(ele.id != socket_client.id)
 {//if no es el mismo 
 
@@ -90,15 +90,15 @@ var user_id_rcv= ele.getAttribute("data-user-id");
 var skt_id_rcv= ele.id;
 socket_client.emit("ver su profile",
 {
-user_id_rcv:user_id_rcv,
-skt_id_rcv:skt_id_rcv,
-skt_id_mnd:socket_client.id
+user_id_rcv: user_id_rcv,
+skt_id_rcv: skt_id_rcv,
+skt_id_mnd: socket_client.id
 });
 }//if no el mismo
 }//informar_profile
 
 
-socket_client.on("perfil a ver",function(obj_userf)
+socket_client.on("perfil a ver", function(obj_userf)
 {
 //obj_userf{user,user_id_rcv,skt_id_rcv}
 console.log("on: perfil a ver");
@@ -107,9 +107,9 @@ if(typeof(dv_profile_user) == "undefined")
 {
 var nudiv= document.createElement("div");
 nudiv.id= "dv_profile_user";
-nudiv.setAttribute("class","pos_a_i bor_1p_gre bor_r bac_whi al_frente")
+nudiv.setAttribute("class", "pos_a_i bor_1p_gre bor_r bac_whi al_frente")
 //    nudiv.classList.add("al_frente");  
-nudiv.setAttribute("style","top:20%;left:20%;width:60%;height:60%")
+nudiv.setAttribute("style", "top:20%;left:20%;width:60%;height:60%")
 nudiv.innerHTML= '<div id="dv_profile_user_tit" class="pos_r h30p" style="border-radius:5px 5px 0 0">'
 +'<div id="dv_profile_user_tit_nme" class="ali_cen pos_a lef rig_30p h cur_mov bac_col_ccc">'
 +obj_userf.user.firstname+" "+obj_userf.user.lastname
@@ -160,7 +160,7 @@ return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAQoE
 
 //---rooms---
 
-var rooms={
+var rooms= {
 "gnrl":"General",
 
 "abk":"Abkhazian","aar":"Afar",
@@ -264,7 +264,7 @@ var rooms={
            "bstlk":"BesTalk"
 };//rooms
 
-var roomsxcls={lang:{
+var roomsxcls= {lang: {
 "abk":"Abkhazian","aar":"Afar",
 "afr":"Afrikaans","aka":"Akan",
 "sqi":"Albanian","amh":"Amharic",
@@ -360,7 +360,7 @@ var roomsxcls={lang:{
   
 "mul":"MULTILINGUAL"},
                
-thm:{
+thm: {
 "gnrl":"General",   
 "Musics":"Musics","TV":"TV",
 "Travel":"Travel","News":"News",
@@ -384,30 +384,30 @@ break;
 }//for
 entrar_a_room(roomf);
 spanear_room(roomf, dv_lang_rooms_con);
-in_list_room.value="";  
+in_list_room.value= "";  
 }//entrar_lang_room
 
 
 function ir_a_theme_room(roomf)
 {
-console.log("va a theme room:"+roomf)
+console.log("va a theme room: "+roomf)
 entrar_a_room(roomf);
 spanear_room(roomf, dv_theme_rooms_con);
 }//ir_a_theme_room
 
 
 
-function spanear_room(roomf,dv_a_metf)
+function spanear_room(roomf, dv_a_metf)
 {
-console.log("spanea room:"+roomf)
+console.log("spanea room: "+roomf)
 if(!document.getElementById("sp_room_"+roomf) )
 {
 var sp_room= document.createElement("span");
-sp_room.id="sp_room_"+roomf;
-sp_room.setAttribute("class","cl_sp_chat_room");
-sp_room.setAttribute("onclick","entrar_a_room(\'"+roomf+"\')");  
-sp_room.innerHTML= rooms[roomf]+' <span id="sp_chat_cant_'+roomf+
-'" class="cl_sp_chat_cant"></span><svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M704 384q-153 0-286 52t-211.5 141-78.5 191q0 82 53 158t149 132l97 56-35 84q34-20 62-39l44-31 53 10q78 14 153 14 153 0 286-52t211.5-141 78.5-191-78.5-191-211.5-141-286-52zm0-128q191 0 353.5 68.5t256.5 186.5 94 257-94 257-256.5 186.5-353.5 68.5q-86 0-176-16-124 88-278 128-36 9-86 16h-3q-11 0-20.5-8t-11.5-21q-1-3-1-6.5t.5-6.5 2-6l2.5-5 3.5-5.5 4-5 4.5-5 4-4.5q5-6 23-25t26-29.5 22.5-29 25-38.5 20.5-44q-124-72-195-177t-71-224q0-139 94-257t256.5-186.5 353.5-68.5zm822 1169q10 24 20.5 44t25 38.5 22.5 29 26 29.5 23 25q1 1 4 4.5t4.5 5 4 5 3.5 5.5l2.5 5 2 6 .5 6.5-1 6.5q-3 14-13 22t-22 7q-50-7-86-16-154-40-278-128-90 16-176 16-271 0-472-132 58 4 88 4 161 0 309-45t264-129q125-92 192-212t67-254q0-77-23-152 129 71 204 178t75 230q0 120-71 224.5t-195 176.5z" fill="#fff"/>';//comments-o
+sp_room.id= "sp_room_"+roomf;
+sp_room.setAttribute("class", "cl_sp_chat_room");
+sp_room.setAttribute("onclick", "entrar_a_room(\'"+roomf+"\')");  
+sp_room.innerHTML= rooms[roomf]+' <span id="sp_chat_cant_'+roomf
++'" class="cl_sp_chat_cant"></span><svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M704 384q-153 0-286 52t-211.5 141-78.5 191q0 82 53 158t149 132l97 56-35 84q34-20 62-39l44-31 53 10q78 14 153 14 153 0 286-52t211.5-141 78.5-191-78.5-191-211.5-141-286-52zm0-128q191 0 353.5 68.5t256.5 186.5 94 257-94 257-256.5 186.5-353.5 68.5q-86 0-176-16-124 88-278 128-36 9-86 16h-3q-11 0-20.5-8t-11.5-21q-1-3-1-6.5t.5-6.5 2-6l2.5-5 3.5-5.5 4-5 4.5-5 4-4.5q5-6 23-25t26-29.5 22.5-29 25-38.5 20.5-44q-124-72-195-177t-71-224q0-139 94-257t256.5-186.5 353.5-68.5zm822 1169q10 24 20.5 44t25 38.5 22.5 29 26 29.5 23 25q1 1 4 4.5t4.5 5 4 5 3.5 5.5l2.5 5 2 6 .5 6.5-1 6.5q-3 14-13 22t-22 7q-50-7-86-16-154-40-278-128-90 16-176 16-271 0-472-132 58 4 88 4 161 0 309-45t264-129q125-92 192-212t67-254q0-77-23-152 129 71 204 178t75 230q0 120-71 224.5t-195 176.5z" fill="#fff"/>';//comments-o
 dv_a_metf.appendChild(sp_room);
 }//if no esta 
 }//spanear_room span room
@@ -416,15 +416,15 @@ dv_a_metf.appendChild(sp_room);
 
 function entrar_a_room(roomx)
 {
-console.log("entra a room:"+roomx)
+console.log("entra a room: "+roomx)
 crear_room(roomx);
 //juntarlo al room: gnrl !!!
-socket_client.emit("abrir room",roomx);
+socket_client.emit("abrir room", roomx);
 }//entrar_a_room
 
 
 
-socket_client.on("recibir usuarios en el room",function(obj_roomf)
+socket_client.on("recibir usuarios en el room", function(obj_roomf)
 {
 //obj_roomf{users_room,chat_room,skt_id,room} 
 console.log("on: recibe usuarios en el room")
@@ -533,7 +533,7 @@ dv_chat_room_.removeAttribute("style");
 
 function cerrar_dv_chat(roomx)
 {//roomx
-console.log("cierra dv chat:"+roomx)
+console.log("cierra dv chat: "+roomx)
 var dv_chat_room_= document.querySelector("#dv_chat_room_"+roomx);
 dv_con_chat.removeChild(dv_chat_room_);
 socket_client.emit("cerrar room",roomx);  
@@ -554,7 +554,7 @@ alert("Empty Button :)");
 //........
 
 
-function enviar_msg(ev,roomx)
+function enviar_msg(ev, roomx)
 {//event,roomx
 console.log("envia msg:ev, "+roomx)
 ev.preventDefault();
@@ -562,22 +562,22 @@ var in_chat_room_msg_= document.querySelector("#in_chat_room_msg_"+roomx);
 var type_room;
 if(rooms[roomx])
 {
-type_room="public";
+type_room= "public";
 }else
 {
-type_room="secret";
+type_room= "secret";
 }//else
 if(in_chat_room_msg_.value != "")
 {
 socket_client.emit("enviar msg al room",
 {
-msg:in_chat_room_msg_.value,
-room:roomx,
-type_room:type_room
+msg: in_chat_room_msg_.value,
+room: roomx,
+type_room: type_room
 });
 //in_chat_room_msg_.getAttribute("data-room")
 }//if no vacio
-in_chat_room_msg_.value="";
+in_chat_room_msg_.value= "";
 }//enviar_msg
 
 
@@ -613,16 +613,16 @@ favicon.href="data:image/x-icon;base64,AAABAAEAEBAAAAEAGABoAwAAFgAAACgAAAAQAAAAI
 function esta_tipeando(in_chat_msgf)
 {
 socket_client.emit("typing", {room: in_chat_msgf.getAttribute("data-room")});
-in_chat_msgf.removeEventListener("keydown",esta_tipeando);
+in_chat_msgf.removeEventListener("keydown", esta_tipeando);
 setTimeout(function()
 {
-in_chat_msgf.addEventListener("keydown",esta_tipeando);
+in_chat_msgf.addEventListener("keydown", esta_tipeando);
 },1000)
 }//esta_tipeando typing
 
 
 
-socket_client.on("who type",function(obj_roomf)
+socket_client.on("who type", function(obj_roomf)
 {
 //obj_roomf{firstname,room}
 //console.log(obj_roomf+" is typing");
@@ -668,19 +668,19 @@ socket_client.emit("entrar a secret room", secret_room);
 
 function crear_room(roomx)
 {
-console.log("crea room:"+roomx)
+console.log("crea room: "+roomx)
 var dv_chat_room_= document.getElementById("dv_chat_room_"+roomx);
 if(!dv_chat_room_)
 {
 var dvs= document.querySelectorAll("#dv_con_chat>div");
-for(var i=0;i<dvs.length;i++)
+for(var i=0; i < dvs.length; i++)
 {
 dvs[i].classList.remove("al_frente");
 }//for   
-var nudiv=document.createElement("DIV");
-nudiv.id="dv_chat_room_"+roomx;
-nudiv.setAttribute("class","cl_chat_room_x al_frente")
-nudiv.innerHTML='<div class="cl_chat_room_cab_x">'
+var nudiv= document.createElement("DIV");
+nudiv.id= "dv_chat_room_"+roomx;
+nudiv.setAttribute("class", "cl_chat_room_x al_frente")
+nudiv.innerHTML= '<div class="cl_chat_room_cab_x">'
 +'<div class="cl_chat_room_tit_x bac_bestalk">'
 +(rooms[roomx]||roomx)+'</div>'
 +'<div id="dv_chat_room_tit_min_'+roomx
@@ -717,14 +717,14 @@ nudiv.innerHTML='<div class="cl_chat_room_cab_x">'
 +'</div>'
 +'</div>';
 dv_con_chat.appendChild(nudiv);
-nudiv.addEventListener("click",function()
+nudiv.addEventListener("click", function()
 {
 var cls_act= nudiv.getAttribute("class");
-var re= new RegExp("al_frente","i");
+var re= new RegExp("al_frente", "i");
 if(!re.test(cls_act))
 {
 var dvs= document.querySelectorAll("#dv_con_chat>div");
-for(var i=0;i<dvs.length;i++)
+for(var i=0; i < dvs.length; i++)
 {
 dvs[i].classList.remove("al_frente");
 }//for
@@ -781,9 +781,9 @@ dv_chat_room_user_.removeChild(dv_emj_);
 
 function meter_emoji(roomf,pal_emj)
 {
-console.log("mete emoji:"+roomf+"/-/"+pal_emj)
+console.log("mete emoji: "+roomf+"/-/"+pal_emj)
 var in_chat_room_msg_= document.getElementById("in_chat_room_msg_"+roomf);
-in_chat_room_msg_.value+=":"+pal_emj+":";
+in_chat_room_msg_.value+= ":"+pal_emj+":";
 var dv_emj_= document.getElementById("dv_emj_"+roomf);
 var dv_chat_room_user_= document.getElementById("dv_chat_room_user_"+roomf);
 dv_chat_room_user_.removeChild(dv_emj_);
@@ -792,14 +792,14 @@ dv_chat_room_user_.removeChild(dv_emj_);
 
 
 
-socket_client.on("recibir usuarios en secret room",function(obj_room_secretf)
+socket_client.on("recibir usuarios en secret room", function(obj_room_secretf)
 {
 //obj_room_secretf{users_room,skt_id,room}
 console.log("on: recibe usuarios en secret room")
 var usersg= "";
 for(var nombr in obj_room_secretf.users_room)
 {
-usersg+=obj_room_secretf.users_room[nombr]+"<br>";
+usersg+= obj_room_secretf.users_room[nombr]+"<br>";
 }//for
 var dv_chat_room_username_= document.getElementById("dv_chat_room_username_"+obj_room_secretf.room);
 dv_chat_room_username_.innerHTML= "";
@@ -828,9 +828,9 @@ var skt_id_rcv= ele.getAttribute("data-skt-id-rcv");
 var user_id_rcv= ele.getAttribute("data-user-id-rcv");  
 socket_client.emit("mandar chat request",
 {
-skt_id_rcv:skt_id_rcv,
+skt_id_rcv: skt_id_rcv,
 user_id_rcv: user_id_rcv,
-skt_id_mnd:socket_client.id
+skt_id_mnd: socket_client.id
 });
 cerrar_profile_user();
 }//mandar_chat_request_profile
@@ -860,7 +860,7 @@ var nudiv= document.createElement("div");
 nudiv.id= "dv_chat_request_of_"+obj_roomf.room_bth;
 nudiv.setAttribute("class","flex_row pos_a top bor_1p_grey bor_r"); 
 nudiv.setAttribute("style","justify-content:space-evenly;width:200px")
-nudiv.innerHTML='<div id="dv_chat_request_of_t" class="ali_cen w80 bac_285 whi">Chat request from '
+nudiv.innerHTML= '<div id="dv_chat_request_of_t" class="ali_cen w80 bac_285 whi">Chat request from '
 +obj_roomf.nme_mnd+'</div>'
 +'<div id="dv_chat_request_of_m" class="ali_cen w10" onclick="aceptar_chat_request(\''
 +obj_roomf.room_bth+'\')">+</div>'
@@ -874,7 +874,7 @@ dv_con_chat.appendChild(nudiv);
 function aceptar_chat_request(room_bthx)
 {
 eliminar_chat_request_of(room_bthx)
-socket_client.emit("aceptar chat request", {room_bth:room_bthx})
+socket_client.emit("aceptar chat request", {room_bth: room_bthx})
 }//aceptar_chat_request
 
 
@@ -895,19 +895,19 @@ function cancelar_chat_request_of(room_bthx, skt_id_rcvf, skt_id_mndf)
 console.log("cancela chat request of")
 socket_client.emit("cancelar chat request of",
 {
-skt_id_mnd:skt_id_mndf,
-skt_id_rcv:skt_id_rcvf,
-room_bth:room_bthx
+skt_id_mnd: skt_id_mndf,
+skt_id_rcv: skt_id_rcvf,
+room_bth: room_bthx
 })
 }//cancelar_chat_request_of
 
 
 
-socket_client.on("cancelar chat request of",function(obj_roomf)
+socket_client.on("cancelar chat request of", function(obj_roomf)
 {
 //obj_roomf{room_bth,skt_id_mnd,skt_id_rcv}
 console.log("on: cancela chat request of")
-cerrar_waiting(obj_roomf.skt_id_rcv,obj_roomf.room_bth)
+cerrar_waiting(obj_roomf.skt_id_rcv, obj_roomf.room_bth)
 });//skon cancelar chat request of
 
 
@@ -919,14 +919,14 @@ var dv_chat_room_= document.getElementById("dv_chat_room_"+room_bthx);
 if(!dv_chat_room_)
 {
 var dvs= document.querySelectorAll("#dv_con_chat>div");
-for(var i=0;i<dvs.length;i++)
+for(var i=0; i < dvs.length; i++)
 {
 dvs[i].classList.remove("al_frente");
 }//for    
-var nudiv=document.createElement("DIV");
-nudiv.id="dv_chat_room_"+room_bthx;
+var nudiv= document.createElement("DIV");
+nudiv.id= "dv_chat_room_"+room_bthx;
 nudiv.setAttribute("class","pos_a_i top_10 lef_10 w80 h60 bor_r bor_s bac_whi")
-nudiv.innerHTML='<div class="tab h30p w pos_a fon_ari bor_r">'
+nudiv.innerHTML= '<div class="tab h30p w pos_a fon_ari bor_r">'
 +'<div class="tab_cel ali_cen ali_mid w70 pos_r h cur_mov bac_col_tit_chat_prv whi bor_r5000 fon_ari fon_bol">Chat with</div>'
 +'<div id="dv_chat_room_tit_min_'+room_bthx
 +'" class="tab_cel ali_cen ali_mid w10 pos_r h"'
@@ -1010,7 +1010,7 @@ socket_client.emit("mandar usuarios al chat privado", {room_bth: room_bthx})
 
 
 
-socket_client.on("esperar chat request",function(obj_roomf)
+socket_client.on("esperar chat request", function(obj_roomf)
 {
 //obj_roomf{id_mnd,id_rcv,skt_id_mnd,skt_id_rcv,nme_rcv,room_bth}
 //if(obj_roomf.skt_id_mnd == socket_client.id){
@@ -1021,9 +1021,9 @@ if(!dv_waiting_)
 { 
 var nudiv= document.createElement("div");
 nudiv.id= "dv_waiting_"+obj_roomf.room_bth;
-nudiv.setAttribute("class","flex_row pos_a bot bor_1p_grey bor_r");
-nudiv.setAttribute("style","justify-content:space-evenly;width:200px")
-nudiv.innerHTML='<div id="dv_waiting_t" class="ali_cen w90 bac_285 whi">Waiting for '+obj_roomf.nme_rcv+'...</div>'
+nudiv.setAttribute("class", "flex_row pos_a bot bor_1p_grey bor_r");
+nudiv.setAttribute("style", "justify-content:space-evenly;width:200px")
+nudiv.innerHTML= '<div id="dv_waiting_t" class="ali_cen w90 bac_285 whi">Waiting for '+obj_roomf.nme_rcv+'...</div>'
 +'<div id="dv_waiting_x" class="ali_cen w10 bac_800 whi" onclick=\'cerrar_waiting("'
 +obj_roomf.skt_id_rcv+'","'
 +obj_roomf.room_bth
@@ -1115,13 +1115,13 @@ dv_chat_room_con_.innerHTML= li_chat;
 
 function enviar_msg_prv(ev, room_bthx)
 {
-console.log("envia msg prv:"+room_bthx)
+console.log("envia msg prv: "+room_bthx)
 ev.preventDefault();
 var in_chat_room_msg_= document.querySelector("#in_chat_room_msg_"+room_bthx);
 if(in_chat_room_msg_.value != "")
 {
 socket_client.emit("send message chat r",
-{msg:in_chat_room_msg_.value, room_bth: room_bthx});
+{msg: in_chat_room_msg_.value, room_bth: room_bthx});
 //inr_msg.getAttribute("data-room")  
 }//if no vacio
 in_chat_room_msg_.value= "";
@@ -1137,7 +1137,7 @@ jQuery(function($)
 {
 var dv_chat_room_con_= "#dv_chat_room_con_"+obj_msgf.room;
 $(dv_chat_room_con_).append('<b>'+obj_msgf.nick+":</b> "+obj_msgf.msg+"<br/>");
-$(dv_chat_room_con_).stop().animate({scrollTop:$(dv_chat_room_con_)[0].scrollHeight}, 200);
+$(dv_chat_room_con_).stop().animate({scrollTop: $(dv_chat_room_con_)[0].scrollHeight}, 200);
 });//jQuery
 });//skcl new msg chat request msg privado
 
@@ -1154,7 +1154,7 @@ if(typeof(dv_create_game) == "undefined")
 var nudiv= document.createElement("DIV");
 nudiv.id= "dv_create_game";
 nudiv.setAttribute("class", "inl_blo ali_cen bor")
-nudiv.innerHTML='<div id="dv_tit_opt_game" class="flex_row">'
+nudiv.innerHTML= '<div id="dv_tit_opt_game" class="flex_row">'
 +'<div id="dv_tit_opt_game_nme" class="inl_blo ali_cen w bac_bla whi">Game Options</div>'
 +'<div id="dv_tit_opt_game_x" class="inl_blo ali_cen w50p cur_poi" onclick="cerrar_game_opt()">X</div></div>'
 +'<div style="display:inline-block">'
@@ -1199,7 +1199,7 @@ function solicitar_juego()
 {
 console.log("solicita juego")
 //var typegame= sltypgame.options[sltypgame.selectedIndex].value;
-var type_game= in_ch_vce.checked? "Explain The Word (By Voice)": "Explain The Word"; 
+var type_game= in_ch_vce.checked ? "Explain The Word (By Voice)" : "Explain The Word"; 
 var list_word= sl_list.options[sl_list.selectedIndex].id;
 var nro_player= sl_nro_player.options[sl_nro_player.selectedIndex].value;
 dv_con_play.removeChild(dv_create_game);  
@@ -1286,10 +1286,10 @@ if(typeof(dv_jue) == "undefined")
 {
 var nudivj= document.createElement("DIV");
 nudivj.id= "dv_jue";
-nudivj.setAttribute("class","flex_col pos_a_i top_10 bor_r bor_1p_grey bac_db82")
+nudivj.setAttribute("class", "flex_col pos_a_i top_10 bor_r bor_1p_grey bac_db82")
 //nudivj.classList.add("flex_col","pos_absi","top_10","bor_r","bor_1p_grey","bac_col_db82")
-nudivj.setAttribute("style","width:270px;height:250px")
-nudivj.innerHTML='<div id="dv_jue_cab">'
+nudivj.setAttribute("style", "width:270px;height:250px")
+nudivj.innerHTML= '<div id="dv_jue_cab">'
 +'<div id="dv_jue_tit" class="flex_row ali_cen fon_ari">'
 +'<div id="dv_jue_tit_nm" class="w ali_cen bor_r5000 bac_285 whi cur_mov">'+nme_juef+'</div>'
 +'<div id="dv_jue_tit_rsz" class="ali_cen w30p cur_poi" onclick="restaurar_tam_jue()">L</div>'
@@ -1321,10 +1321,10 @@ nudivj.innerHTML='<div id="dv_jue_cab">'
 dv_con_play.appendChild(nudivj);
 socket_client.emit("entrar roomj",
 {
-nro_game:roomjf, //idjue
-type_game:nme_juef,
-list_word:lis_juef,
-nro_player:nro_playerf
+nro_game: roomjf, //idjue
+type_game: nme_juef,
+list_word: lis_juef,
+nro_player: nro_playerf
 });
 jQuery(function($)
 {
@@ -1431,7 +1431,7 @@ dv_jue_con.innerHTML+= "The word was <b>"
 +obj_word_to_guessf.word_to_guess+"</b><br>";
 jQuery(function($)
 {
-$("#dv_jue_con").stop().animate({scrollTop:$("#dv_jue_con")[0].scrollHeight}, 100);
+$("#dv_jue_con").stop().animate({scrollTop: $("#dv_jue_con")[0].scrollHeight}, 100);
 });//jquery
 });//skcl si no se adivina
 
@@ -1513,15 +1513,15 @@ alert("can't say the word, explain it!");
 else
 {
 socket_client.emit("send message jue",
-{msg:in_jue_msg.value, nro_game:in_jue_msg.getAttribute("data-room")});
+{msg: in_jue_msg.value, nro_game: in_jue_msg.getAttribute("data-room")});
 }//else
 }//if pal val true p dif P
 else{
 socket_client.emit("send message jue",
-{msg:in_jue_msg.value, nro_game:in_jue_msg.getAttribute("data-room")});
+{msg: in_jue_msg.value, nro_game: in_jue_msg.getAttribute("data-room")});
 }//else enviar normal
 }//if no vacio
-in_jue_msg.value="";
+in_jue_msg.value= "";
 }//on send msg jue, del form enviar_msg_jue(event)
 
 
@@ -1542,7 +1542,7 @@ dv_jue_con.innerHTML+= "<b>"+obj_msg_gamef.nick+":</b> "+obj_msg_gamef.msg+"<br/
 }//else no bingo
 jQuery(function($)
 {
-$("#dv_jue_con").stop().animate({scrollTop:$("#dv_jue_con")[0].scrollHeight}, 100);
+$("#dv_jue_con").stop().animate({scrollTop: $("#dv_jue_con")[0].scrollHeight}, 100);
 });//jquery
 });//on receive msg juego
 
@@ -1646,8 +1646,8 @@ function traducir_frase(phr)
 console.log("traduce frase:"+phr)
 var apik= "trnsl.1.1.20151020T150119Z.a9c85d2a39f6fe5d.c34e526096f815916127444ce3d86ab82e945c35";
 var url1= "https://translate.yandex.net/api/v1.5/tr.json/translate?";
-var lang_from= in_list_lang_from.value||"en";
-var lang_to= in_list_lang_to.value||"es";
+var lang_from= in_list_lang_from.value || "en";
+var lang_to= in_list_lang_to.value || "es";
 var url2= "key="+apik+"&text="+phr+"&lang="+lang_from+"-"+lang_to;
 var xhr= new XMLHttpRequest();
 xhr.open("POST", url1, true);
@@ -1738,8 +1738,8 @@ if(typeof(scr_rtc) == "undefined")
 {
 console.log("mete scripts rtc");
 var scr1= document.createElement("script");
-scr1.id="scr_rtc"
-scr1.src="https://simplewebrtc.com/latest-v2.js";
+scr1.id= "scr_rtc"
+scr1.src= "https://simplewebrtc.com/latest-v2.js";
 var scr2= document.createElement("script");
 scr2.id= "scr_rtc_hec"
 scr2.src= "scripts/web_rtc.js";
@@ -1749,7 +1749,7 @@ document.querySelector("body").appendChild(scr2);
 },2000);//pa mete scripts webrtc
 
 
-socket_client.on("se desconecto",function(obj_msgf)
+socket_client.on("se desconecto", function(obj_msgf)
 {
 //obj_msgf{msg}
 console.log("on: se desconecto: "+ JSON.stringify(obj_msgf));
