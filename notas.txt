@@ -4,8 +4,10 @@ heroku: .-ten
 ----------indice
 
 .por hacer
+.ideas
 .cambios
 .soluciones
+
 
 ---------------
 --por hacer
@@ -36,6 +38,13 @@ avisar cuando haya desconexión
 que link de videos de youtube se abra en ventana emergente
 
 en learn section: poner aprender con Duolingo.com por ejemplo
+
+
+---ideas---
+
+cuando escriba en el room, se ponga el usuario de primero en la lista de nombres de usuarios mas el icono del lapiz
+
+...ideas...
 
 --cambios
 lista de cambios:

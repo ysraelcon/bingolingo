@@ -41,8 +41,8 @@ for(var username in users_cnntf)
 con_user+= "<tr id=\'"+users_cnntf[username].skt_id
 +"\' data-user-id='"+username
 +"' onclick='informar_profile(this)' >"
-+"<td><img class='img_de_30' src='"
-+(users_cnntf[username].user.avatar||dar_img_provisional() )+"'></td>"
++'<td><img style="width: 30px; height: 30px" src="'
++(users_cnntf[username].user.avatar||dar_img_provisional() )+'"></td>'
 +"<td>"+users_cnntf[username].user.firstname
 +" "+users_cnntf[username].user.lastname+"</td>"
 +"<td>"+(users_cnntf[username].user.gender||"-")+"</td>"
@@ -65,8 +65,8 @@ for(var i=0; i < users_5_no_cnntx.length; i++)
 con_user+= "<tr id=\'"+users_5_no_cnntx[i]._id
 +"\' data-user-id='"+users_5_no_cnntx[i]._id
 +"' onclick='informar_profile(this)' >"
-+"<td><img class='img_de_30' src='"
-+(users_5_no_cnntx[i].avatar||dar_img_provisional() )+"'></td>"
++'<td><img style="width: 30px; height: 30px" src="'
++(users_5_no_cnntx[i].avatar||dar_img_provisional() )+'"></td>'
 +"<td>"+users_5_no_cnntx[i].firstname
 +" "+users_5_no_cnntx[i].lastname+"</td>"
 +"<td>"+(users_5_no_cnntx[i].gender||"-")+"</td>"
@@ -107,15 +107,15 @@ if(typeof(dv_profile_user) == "undefined")
 {
 var nudiv= document.createElement("div");
 nudiv.id= "dv_profile_user";
-nudiv.setAttribute("class", "pos_a_i bor_1p_gre bor_r bac_whi al_frente")
+nudiv.setAttribute("class", "pos_a_i bordado_r_gris bac_col_whi al_frente")
 //    nudiv.classList.add("al_frente");  
-nudiv.setAttribute("style", "top:20%;left:20%;width:60%;height:60%")
-nudiv.innerHTML= '<div id="dv_profile_user_tit" class="pos_r h30p" style="border-radius:5px 5px 0 0">'
-+'<div id="dv_profile_user_tit_nme" class="ali_cen pos_a lef rig_30p h cur_mov bac_col_ccc">'
+nudiv.setAttribute("style", "top: 20%; left: 20%; width: 60%; height: 60%")
+nudiv.innerHTML= '<div id="dv_profile_user_tit" class="pos_r" style="border-radius:5px 5px 0 0; height: 30px">'
++'<div id="dv_profile_user_tit_nme" class="tex_cen pos_a lef h cur_mov bac_col_emerg_profile" style="right: 30px">'
 +obj_userf.user.firstname+" "+obj_userf.user.lastname
-+'</div><div id="dv_profile_user_tit_cerrar" class="ali_cen pos_a rig w30p h bor_1p_grey bor_r0500 cur_poi" onclick="cerrar_profile_user()">X</div>'
++'</div><div id="dv_profile_user_tit_cerrar" class="tex_cen pos_a rig h cur_poi" style="border-radius: 0 5px 0 0; width: 30px" onclick="cerrar_profile_user()">X</div>'
 +'</div>'
-+'<div id="dv_profile_user_con" class="flex_col ali_cen ove_y pos_a top_30p bot_30p w bac_bla whi">'
++'<div id="dv_profile_user_con" class="flex_col tex_cen ove_y pos_a top_30p bot_30p w bac_col_bla col_whi">'
 +'<img id="img_profile_user" class="w50p h50p bor_r_" style="border:2px solid white" src="'
 +(obj_userf.user.avatar||dar_img_provisional())
 +'" alt="img_profile"><p>'
@@ -125,7 +125,7 @@ nudiv.innerHTML= '<div id="dv_profile_user_tit" class="pos_r h30p" style="border
 +'</p><p>'+obj_userf.user.learning
 +'</p><p>'+obj_userf.user.about_me
 +'</div>'
-+'<div id="dv_profile_user_chat_request" class="flex_row ali_cen pos_a bot w h30p bac_col_ccc" style="border-radius:0 0 5px 5px">'
++'<div id="dv_profile_user_chat_request" class="flex_row tex_cen pos_a bot w bac_col_emerg_profile" style="border-radius: 0 0 5px 5px; height: 30px">'
 +'<input type="button" value="Chat Request" '
 +' data-user-id-rcv="'+obj_userf.user_id_rcv
 +'" data-skt-id-rcv="'+obj_userf.skt_id_rcv
@@ -500,7 +500,7 @@ $(dv_chat_room_).css('z-index', 9999);
 }//if -
 else
 {
-$(dv_chat_room_).height(200);
+$(dv_chat_room_).height(320);
 $(dv_chat_room_tit_min_).html('-');
 $(dv_chat_room_con_user_).show();
 $(dv_chat_room_msg_).show();
@@ -685,7 +685,7 @@ nudiv.innerHTML= '<div class="cl_chat_room_cab_x">'
 +(rooms[roomx]||roomx)+'</div>'
 +'<div id="dv_chat_room_tit_min_'+roomx
 +'" class="cl_chat_room_tit_bts_x"'
-+' onclick="minimizar_dv_chat2(this)">-</div>'//\''+roomx+'\'
++' onclick="minimizar_dv_chat(\''+roomx+'\')">-</div>'//\''+roomx+'\'
 +'<div class="cl_chat_room_tit_bts_x"'
 +' onclick="restaurar_tam_chat(\''+roomx+'\')">L</div>'
 +'<div class="cl_chat_room_tit_bts_x bor_r0500 bac_col_crr_chat_g whi"'
