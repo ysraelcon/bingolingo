@@ -250,13 +250,12 @@ to: req.body.email,//or list
 subject: 'Password Reset',
 html: '<p>Visit the link for set your new password:</p>'
 //heroku 3c..
-'<a href="https://bestalk.herokuapp.com/reset/'+
++'<a href="https://bestalk.herokuapp.com/reset/'
 //glitch..
-//'<a href="https://bestalk-test.glitch.me/reset/'+
-token+
-'">Reset Password</a><br>'+
-'<h2>Continue enjoying of BesTalk!</h2>'
-
+//+'<a href="https://bestalk-test.glitch.me/reset/'
++token
++'">Reset Password</a><br>'
++'<h2>Continue enjoying of BesTalk!</h2>'
 };//mailopts
 transporter.sendMail(mailopts, function(err, info)
 {
