@@ -40,7 +40,7 @@ gtag('config', 'UA-110169179-1');
   
 <meta name="author" content="BesTalk">
 <meta name="keywords" content="BesTalk, Chat, Voice Chat, Games, Language Exchange, Intercambio de Idiomas, Learn Languages, Language Learning, Learn English, Talk">
-<meta name="description" content="When you use BesTalk, you can chat in language rooms as well voice call them in private chats.You can also play word games  being this an amusing way to exchange languages with other BesTalk users around the world.">
+<meta name="description" content="When you use BesTalk, you can chat in language rooms as well in private chats.You can also play word games  being this an amusing way to exchange languages with other BesTalk users around the world.">
  
 
 <meta property="og:url" content="https://bestalk.herokuapp.com">
@@ -96,13 +96,13 @@ background-color:white;}
 /*estilos compacto con clases*/
   
 /*display*/
-.inl_blo {display:inline-block} .blo {display:block} .non {display:none}
+
 .tab {display:table} .tab_row {display:table-row} .tab_cel {display:table-cell}
 .flex_col {display: -webkit-flex; -webkit-flex-direction:column;display:flex; flex-direction:column}
 .flex_row {display: -webkit-flex; -webkit-flex-direction:row;display:flex; flex-direction:row}
 
 /* posicion pos_abs con top y bottom left right para adaptar medida*/
-.pos_a {position:absolute} .pos_a_i {position:absolute !important} .pos_r {position:relative}
+ 
 .flo_rig {float:right}
 .tra {transform:translate(-50%,-50%)}
 .ali_cen {text-align:center} .ali_mid {vertical-align:middle}
@@ -123,7 +123,7 @@ background-color:white;}
   
 .marg {margin:0px}
   
-.al_frente{z-index:100;}  
+ 
 
 
 .bor {border:1px dashed;}
@@ -139,32 +139,89 @@ background-color:white;}
 .fon_ari {font-family:arial} .fon_bol {font-weight:bold}
 .fon_15p {font-size:15px}
 
-.cur_mov {cursor:move} .cur_poi {cursor:pointer}
+
 
 .bac_97d,.bac_col_bstlk {background-color: #9370db} .bac_bfd,.bac_col_con_chat_g {background-color: #ffdab9}
 .bac_fff,.bac_col_usr_chat_g {background-color: #fff0f5} .bac_438,.bac_col_crr_chat_g {background-color: #433d8b}
 .bac_285,.bac_col_tit_chat_prv {background-color:#2e8b57} .bac_800,.bac_col_crr_chat_p {background-color:#800000}
 .bac_db8,.bac_col_con_chat_prv {background-color:#deb887} .bac_fa7,.bac_col_usr_chat_prv {background-color:#ffa07a}
 .bac_whi {background-color:white} .bac_bla {background-color:black}
-.bac_rgba_7,.bac_col_desv {background:rgba(0,0,0,0.7)}
+.bac_rgba_7,.bac_col_desvanecido {background:rgba(0,0,0,0.7)}
 .bac_db82,.bac_col_gme {background-color:#d2b48c}
-.bac_345,.bac_col_tbl_u {background-color:#34495e} .bac_ccc,.bac_col_prf_u {background-color:#ccc}
+.bac_345, {background-color:#34495e} .bac_ccc,.bac_col_prf_u {background-color:#ccc}
 .bac_col_bac_hom {background-color:#e0ccb7}
   
 
 .whi {color:white} .yel {color:yellow} .bla {color:black} .gre {color:grey} .gree {color:green}
 .col_244,.col_lrn {color:#2f4f4f} .col_345,.col_tbl_u {color:#34495e}
 
+/* ---index--- */
+
+/* muestra */
+.inl_blo {display: inline-block} .blo {display: block} .non {display: none}
+
+/* posicion */
+.pos_a {position: absolute} .pos_r {position: relative} .pos_a_i {position:absolute !important} 
+
+/* tamaño */
+.w {width: 100%} .w_ {width: 50%} 
+.h {height: 100%} .h_ {height: 50%}  
+.wh {width: 100%; height: 100%}
+
+.bot {bottom: 0px} .bot_ {bottom: 50%}
+.top {top: 0px} .top_ {top: 50%}
+.rig {right: 0px} .rig_ {right: 50%} 
+.lef {left: 0px} .lef_ {left: 50%}
+.t-b {top: 0px; bottom: 0px} .l-r {left: 0px; right: 0px}
+.ltrb {left: 0px; top: 0px; right: 0px; bottom: 0px}
+ 
+/* color */
+.col_whi {color: white} .col_bla {color: black} .col_grey {color: grey}
+.col_yel {color: yellow} .col_blue {color: blue} .col_red {color: red}
+.col_green {color: green}
+
+.bac_col_whi {background-color: white} .bac_col_bla {background-color: black} .bac_col_grey {background-color: grey}
+.bac_col_yel {background-color: yellow} .bac_col_blue {background-color: blue} .bac_col_red {background-color: red}
+.bac_col_green {background-color: green}
+
+/* otros */
+
+.ove_y {overflow-y:auto}
+
+.tex_cen {text-align: center}
+
+.bac_col_bestalk {background-color: #9370db}
+.bac_col_desvanecido {background:rgba(0,0,0,0.7)}
+.bac_col_emerg_profile {background-color: #ccc}
+.bac_col_tbl_u {background-color:#34495e}
+.bac_col_tbl_u_desv {background: rgba(52,73,94,0.3)}
+  
+.cur_poi {cursor: pointer} .cur_mov {cursor: move}
+  
+  /* flex_col flex_row */
+
+.al_frente {z-index: 100} 
+
+.bordado_r_gris
+{
+border: 1px solid grey;
+border-radius: 5px;
+}  
+  
+/* ...index... */
 
 </style>
-  
+    
+ 
  
 </head>
 <body>
 
  
 
-<div id="dv_ng_view" ng-view class="pos_r w h marg"></div>
+<div id="dv_ng_view" ng-view class="pos_r w h marg">
+
+</div><!-- dv ng view -->
   
  
 
@@ -174,8 +231,8 @@ background-color:white;}
 
  
   
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
