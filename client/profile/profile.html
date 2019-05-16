@@ -609,7 +609,7 @@ style="border-radius: 5px; border-collapse: collapse">
 </tbody>
 </table>
   
-<table id="tbl_users_lc" class="w bac_col_tbl_u"
+<table id="tbl_users_lc" class="w bac_col_tbl_u_desv"
 style="border-radius: 5px; border-collapse: collapse">
 
 <caption class="titulado_de_tabla">Last 5 Connected Users</caption>
@@ -639,7 +639,7 @@ var tema= "dia";
   
 function cambiar_tema()
 {
-console.log("cambia tema")
+console.log("a cambiar_tema")
 if(tema == "dia")
 {
 btn_tema.removeAttribute("style");
@@ -657,7 +657,7 @@ tema= "dia";
 
 function seleccionar_tema()
 {
-//console.log(sl_tema.value);
+console.log("a seleccionar_tema")
 ir_a_theme_room(sl_tema.value);
 sl_tema.options[0].selected= true;
 };//seleccionar_tema  
@@ -755,6 +755,7 @@ var obj_lists= {"nros":["1 - one","2 - two","3 - three","4 - four","5 - five",
 
 function mostrar_lista_voc(nom_lisx)
 {
+console.log("a mostrar_lista_voc")
 var m_list= obj_lists[nom_lisx];
 var t_list= "<input type='button' value='Back to lists' onclick='volver_a_listas()'>"
 for(var i=0; i < m_list.length; i++)
@@ -767,6 +768,7 @@ dv_con_learn_voc_con.innerHTML= t_list;
 
 function volver_a_listas()
 {
+console.log("a volver_a_listas")
 dv_con_learn_voc_con.innerHTML= `
 <li onclick="mostrar_lista_voc('nros')">20 numbers</li>
 <p>more in addition.</p>
@@ -885,7 +887,7 @@ onclick="cancelar_edit_profile()">
 
 function mostrar_edit_profile()
 {
-console.log("muestra edit_profile")
+console.log("a mostrar_edit_profile")
 dv_user_profile.style.display= "none";
 sp_user_edit_profile.style.display= "inline";
 btn_cancel_edit_profile.style.display= "inline";
@@ -895,7 +897,7 @@ btn_edit_profile.style.display= "none";
 
 function cancelar_edit_profile()
 {
-console.log("cancela edit_profile")
+console.log("a cancelar_edit_profile")
 dv_user_profile.removeAttribute("style");
 sp_user_edit_profile.removeAttribute("style");
 btn_cancel_edit_profile.removeAttribute("style");
@@ -1104,7 +1106,7 @@ onclick="definir_yandex(in_word.value)">
   
 function mostrar_dict(btf)
 {
-console.log("muestra dict:"+btf)
+console.log("a mostrar_dict:"+btf)
 if(btf.style.color == "green")
 {
 btf.removeAttribute("style");
@@ -1194,7 +1196,7 @@ onclick="guardar_nota()">
   
 function mostrar_nota(btf)
 {
-console.log("muestra nota:"+btf)
+console.log("a mostrar_nota:"+btf)
 if(btf.style.color == "green")
 {
 btf.removeAttribute("style");
@@ -1252,7 +1254,7 @@ onclick="dar_reporte()">Suggestions
 
 function dar_reporte()
 {
-console.log("a dar reporte")
+console.log("a dar_reporte")
 var dv= document.createElement("div");
 dv.id= "dv_reporte_scr";
 dv.setAttribute("class", "flex_col ali_i_cen pos_a top w h bac_col_desvanecido")
@@ -1278,7 +1280,7 @@ dv_ng_view.appendChild(dv);
   
 function cerrar_reporte()
 {
-console.log("cierra reporte")
+console.log("a cerrar_reporte")
 dv_ng_view.removeChild(dv_reporte_scr);
 }//cerrar_reporte
   
@@ -1294,7 +1296,7 @@ dv_ng_view.removeChild(dv_reporte_scr);
 
 function abrir_tab(dv_pie_mst, dv_conf, this_tbf)
 {
-console.log("abre tab:"+dv_pie_mst+"/-/"+dv_conf+"/-/"+this_tbf)
+console.log("a abrir_tab:"+dv_pie_mst+"/-/"+dv_conf+"/-/"+this_tbf)
 var col_tab= {
 "dv_tab_chat": ["#f5f5f5", "black"],
 "dv_tab_play": ["#D2B48C", "black"],

@@ -5,6 +5,7 @@ heroku: .-ten
 
 .por hacer
 .ideas
+.errores
 .cambios
 .soluciones
 
@@ -45,6 +46,12 @@ en learn section: poner aprender con Duolingo.com por ejemplo
 cuando escriba en el room, se ponga el usuario de primero en la lista de nombres de usuarios mas el icono del lapiz
 
 ...ideas...
+
+---errores---
+
+canv is not defined (from hangman.js)
+
+...errores...
 
 --cambios
 lista de cambios:

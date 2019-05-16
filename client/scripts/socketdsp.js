@@ -24,7 +24,7 @@ var socket_client= io.connect();
 
 function entrar_a_chat()
 {
-console.log("entra a chat")
+console.log("a entrar_a_chat")
 socket_client.emit("pedir usuario en chat", socket_client.id);
 }//click tab chat
 
@@ -82,7 +82,7 @@ tbl_users_lc_bd.innerHTML= con_user;
 
 function informar_profile(ele)
 {
-console.log("informa profile: "+ele)
+console.log("a informar_profile: "+ele)
 if(ele.id != socket_client.id)
 {//if no es el mismo 
 
@@ -115,7 +115,7 @@ nudiv.innerHTML= '<div id="dv_profile_user_tit" class="pos_r" style="border-radi
 +obj_userf.user.firstname+" "+obj_userf.user.lastname
 +'</div><div id="dv_profile_user_tit_cerrar" class="tex_cen pos_a rig h cur_poi" style="border-radius: 0 5px 0 0; width: 30px" onclick="cerrar_profile_user()">X</div>'
 +'</div>'
-+'<div id="dv_profile_user_con" class="flex_col tex_cen ove_y pos_a top_30p bot_30p w bac_col_bla col_whi">'
++'<div id="dv_profile_user_con" class="tex_cen ove_y pos_a top_30p bot_30p w bac_col_bla col_whi">'
 +'<img id="img_profile_user" class="w50p h50p bor_r_" style="border:2px solid white" src="'
 +(obj_userf.user.avatar||dar_img_provisional())
 +'" alt="img_profile"><p>'
@@ -125,7 +125,7 @@ nudiv.innerHTML= '<div id="dv_profile_user_tit" class="pos_r" style="border-radi
 +'</p><p>'+obj_userf.user.learning
 +'</p><p>'+obj_userf.user.about_me
 +'</div>'
-+'<div id="dv_profile_user_chat_request" class="flex_row tex_cen pos_a bot w bac_col_emerg_profile" style="border-radius: 0 0 5px 5px; height: 30px">'
++'<div id="dv_profile_user_chat_request" class="tex_cen pos_a bot w bac_col_emerg_profile" style="border-radius: 0 0 5px 5px; height: 30px">'
 +'<input type="button" value="Chat Request" '
 +' data-user-id-rcv="'+obj_userf.user_id_rcv
 +'" data-skt-id-rcv="'+obj_userf.skt_id_rcv
@@ -151,7 +151,7 @@ $("#dv_profile_user").resizable();
 
 function dar_img_provisional()
 {
-console.log("da img provisional")
+console.log("a dar_img_provisional")
 return "data:image/png;base64,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";
 }//dar_img_provisional
 
@@ -373,7 +373,7 @@ thm: {
 
 function entrar_lang_room()
 {
-console.log("entra lang room")
+console.log("a entrar_lang_room")
 for(var opt in dt_list_room.options)
 {
 if(dt_list_room.options[opt].value == in_list_room.value)
@@ -390,7 +390,7 @@ in_list_room.value= "";
 
 function ir_a_theme_room(roomf)
 {
-console.log("va a theme room: "+roomf)
+console.log("a ir_a_theme_room: "+roomf)
 entrar_a_room(roomf);
 spanear_room(roomf, dv_theme_rooms_con);
 }//ir_a_theme_room
@@ -399,7 +399,7 @@ spanear_room(roomf, dv_theme_rooms_con);
 
 function spanear_room(roomf, dv_a_metf)
 {
-console.log("spanea room: "+roomf)
+console.log("a spanear_room: "+roomf)
 if(!document.getElementById("sp_room_"+roomf) )
 {
 var sp_room= document.createElement("span");
@@ -416,7 +416,7 @@ dv_a_metf.appendChild(sp_room);
 
 function entrar_a_room(roomx)
 {
-console.log("entra a room: "+roomx)
+console.log("a entrar_a_room: "+roomx)
 crear_room(roomx);
 //juntarlo al room: gnrl !!!
 socket_client.emit("abrir room", roomx);
@@ -427,8 +427,8 @@ socket_client.emit("abrir room", roomx);
 socket_client.on("recibir usuarios en el room", function(obj_roomf)
 {
 //obj_roomf{users_room,chat_room,skt_id,room} 
-console.log("on: recibe usuarios en el room")
-console.log(JSON.stringify(obj_roomf))
+console.log("on: recibir usuarios en el room")
+//console.log(JSON.stringify(obj_roomf))
 var usersg= "";
 for(var nombr in obj_roomf.users_room)
 {
@@ -459,7 +459,7 @@ dv_chat_room_con_.scrollTo(0, dv_chat_room_con_.scrollHeight);
 socket_client.on("actualizar rooms", function(obj_roomf)
 {
 //obj_roomf{users_room,room}
-console.log("on: actualiza rooms");
+console.log("on: actualizar rooms");
 if(rooms[obj_roomf.room])
 {
 if(roomsxcls.lang[obj_roomf.room])
@@ -481,7 +481,7 @@ sp_chat_cant_.innerHTML= cnt_users != 0 ? cnt_users : "";
 
 function minimizar_dv_chat(roomx)
 {//roomx
-console.log("minimiza dv chat:"+roomx)
+console.log("a minimizar_dv_chat:"+roomx)
 jQuery(function($)
 {
 var dv_chat_room_tit_min_= "#dv_chat_room_tit_min_"+roomx;
@@ -514,7 +514,7 @@ $(dv_chat_room_).resizable("enable");
 
 function restaurar_tam_chat(roomx)
 {//roomx
-console.log("restaura tam chat:"+roomx)
+console.log("a restaurar_tam_chat:"+roomx)
 var dv_chat_room_= document.querySelector("#dv_chat_room_"+roomx);
 if(dv_chat_room_.offsetWidth < dv_con_chat.offsetWidth)
 {
@@ -533,7 +533,7 @@ dv_chat_room_.removeAttribute("style");
 
 function cerrar_dv_chat(roomx)
 {//roomx
-console.log("cierra dv chat: "+roomx)
+console.log("a cerrar_dv_chat: "+roomx)
 var dv_chat_room_= document.querySelector("#dv_chat_room_"+roomx);
 dv_con_chat.removeChild(dv_chat_room_);
 socket_client.emit("cerrar room",roomx);  
@@ -545,7 +545,7 @@ socket_client.emit("cerrar room",roomx);
 
 function es_boton_vacio()
 {
-console.log("es boton vacio")
+console.log("a es_boton_vacio")
 alert("Empty Button :)");
 }//es_boton_vacio
 
@@ -556,7 +556,7 @@ alert("Empty Button :)");
 
 function enviar_msg(ev, roomx)
 {//event,roomx
-console.log("envia msg:ev, "+roomx)
+console.log("a enviar_msg: ev, "+roomx)
 ev.preventDefault();
 var in_chat_room_msg_= document.querySelector("#in_chat_room_msg_"+roomx);
 var type_room;
@@ -657,7 +657,7 @@ sp_escr_.removeChild(nu_sp_escr_);
 
 function ir_a_secret_room()
 {
-console.log("va a secret room")
+console.log("a ir_a_secret_room")
 var secret_room= in_secret_room.value.replace(/\s/g,"_");
 crear_room(secret_room);
 in_secret_room.value="";
@@ -668,7 +668,7 @@ socket_client.emit("entrar a secret room", secret_room);
 
 function crear_room(roomx)
 {
-console.log("crea room: "+roomx)
+console.log("a crear_room: "+roomx)
 var dv_chat_room_= document.getElementById("dv_chat_room_"+roomx);
 if(!dv_chat_room_)
 {
@@ -709,7 +709,7 @@ nudiv.innerHTML= '<div class="cl_chat_room_cab_x">'
 +'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'//paper-plane
 +'</button>'
 +'</form></div>'
-+'<div id="dv_chat_room_user_bts_eng" class="cl_chat_room_msg_dv30 bac_col_usr_chat_g">'
++'<div id="dv_chat_room_user_bts_'+roomx+'" class="cl_chat_room_msg_dv30 bac_col_usr_chat_g">'
 +'<button class="cl_bts_chat_room_msg_x" onclick="seleccionar_emoji(\''+roomx+'\')">'
 +'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'//smile-o
 +'</button>'
@@ -758,7 +758,7 @@ esta_tipeando(in_chat_room_msg_);
 function seleccionar_emoji(roomf)
 {
 //hay div, no, crea div
-console.log("selecciona emoji")
+console.log("a seleccionar_emoji")
 var dv_chat_room_user_= document.getElementById("dv_chat_room_user_"+roomf);
 var dv_emj_= document.getElementById("dv_emj_"+roomf);
 if(!dv_emj_)
@@ -781,7 +781,7 @@ dv_chat_room_user_.removeChild(dv_emj_);
 
 function meter_emoji(roomf,pal_emj)
 {
-console.log("mete emoji: "+roomf+"/-/"+pal_emj)
+console.log("a meter_emoji: "+roomf+"/-/"+pal_emj)
 var in_chat_room_msg_= document.getElementById("in_chat_room_msg_"+roomf);
 in_chat_room_msg_.value+= ":"+pal_emj+":";
 var dv_emj_= document.getElementById("dv_emj_"+roomf);
@@ -795,15 +795,19 @@ dv_chat_room_user_.removeChild(dv_emj_);
 socket_client.on("recibir usuarios en secret room", function(obj_room_secretf)
 {
 //obj_room_secretf{users_room,skt_id,room}
-console.log("on: recibe usuarios en secret room")
+console.log("on: recibir usuarios en secret room")
 var usersg= "";
 for(var nombr in obj_room_secretf.users_room)
 {
-usersg+= obj_room_secretf.users_room[nombr]+"<br>";
+usersg+= '<span id="sp_escr_'+obj_room_secretf.room+'_'
++obj_room_secretf.users_room[nombr]
++'"></span>'+obj_room_secretf.users_room[nombr]
++"<br>";
 }//for
 var dv_chat_room_username_= document.getElementById("dv_chat_room_username_"+obj_room_secretf.room);
 dv_chat_room_username_.innerHTML= "";
 dv_chat_room_username_.innerHTML= usersg;
+/*
 var dv_chat_room_user_bts_= document.getElementById("dv_chat_room_user_bts_"+obj_room_secretf.room);
 dv_chat_room_user_bts_.innerHTML= '<button id="bt_call_secret_'+obj_room_secretf.room
 //  '" data-room="'+obj_room_secretf.room+
@@ -814,6 +818,7 @@ dv_chat_room_user_bts_.innerHTML= '<button id="bt_call_secret_'+obj_room_secretf
 +'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M463 945l-101 101q-42-103-42-214v-128q0-26 19-45t45-19 45 19 19 45v128q0 53 15 113zm1114-602l-361 361v128q0 132-94 226t-226 94q-55 0-109-19l-96 96q97 51 205 51 185 0 316.5-131.5t131.5-316.5v-128q0-26 19-45t45-19 45 19 19 45v128q0 221-147.5 384.5t-364.5 187.5v132h256q26 0 45 19t19 45-19 45-45 19h-640q-26 0-45-19t-19-45 19-45 45-19h256v-132q-125-13-235-81l-254 254q-10 10-23 10t-23-10l-82-82q-10-10-10-23t10-23l1234-1234q10-10 23-10t23 10l82 82q10 10 10 23t-10 23zm-380-132l-621 621v-512q0-132 94-226t226-94q102 0 184.5 59t116.5 152z"/></svg>'//microphhone-slash
 +'</button>'
 +'<audio id="lclaud" style="display:none" oncontextmenu="return false;" disabled></audio>'+''; 
+*/  
 });//skcl recibir usuarios en secret room
           
 
@@ -823,7 +828,7 @@ dv_chat_room_user_bts_.innerHTML= '<button id="bt_call_secret_'+obj_room_secretf
 
 function mandar_chat_request_profile(ele)
 {
-console.log("manda chat request profile");
+console.log("a mandar_chat_request_profile");
 var skt_id_rcv= ele.getAttribute("data-skt-id-rcv");
 var user_id_rcv= ele.getAttribute("data-user-id-rcv");  
 socket_client.emit("mandar chat request",
@@ -838,14 +843,14 @@ cerrar_profile_user();
 
 function cerrar_profile_user()
 {
-console.log("cierra profile user")
+console.log("a cerrar_profile_user")
 dv_con_chat.removeChild(dv_profile_user);
 }//cerrar_profile_user
 
 
 function cerrar_inf_user()
 {
-console.log("cierra inf user")
+console.log("a cerrar_inf_user")
 dv_con_chat.removeChild(dv_inf_user);
 }//cerrar inf profile y chat request
 
@@ -873,6 +878,7 @@ dv_con_chat.appendChild(nudiv);
 
 function aceptar_chat_request(room_bthx)
 {
+console.log("a aceptar_chat_request")
 eliminar_chat_request_of(room_bthx)
 socket_client.emit("aceptar chat request", {room_bth: room_bthx})
 }//aceptar_chat_request
@@ -892,7 +898,7 @@ crear_chat_privado(obj_roomf.room_bth);
 
 function cancelar_chat_request_of(room_bthx, skt_id_rcvf, skt_id_mndf)
 {
-console.log("cancela chat request of")
+console.log("a cancelar_chat_request_of")
 socket_client.emit("cancelar chat request of",
 {
 skt_id_mnd: skt_id_mndf,
@@ -914,7 +920,7 @@ cerrar_waiting(obj_roomf.skt_id_rcv, obj_roomf.room_bth)
 
 function crear_chat_privado(room_bthx)
 {
-console.log("crea chat privado")
+console.log("a crear_chat_privado")
 var dv_chat_room_= document.getElementById("dv_chat_room_"+room_bthx);
 if(!dv_chat_room_)
 {
@@ -1037,7 +1043,7 @@ dv_con_chat.appendChild(nudiv);
 
 function cerrar_waiting(skt_id_rcvf,room_bthf)
 {
-console.log("cierra waiting")
+console.log("a cerrar_waiting")
 eliminar_waiting(room_bthf)
 socket_client.emit("cancel chat request",
 {skt_id_rcv: skt_id_rcvf, room_bth: room_bthf});
@@ -1055,7 +1061,7 @@ eliminar_waiting(obj_roomf.room_bth)
 
 function eliminar_waiting(room_bthx)
 {
-console.log("elimina waiting")
+console.log("a eliminar_waiting")
 var dv_waiting= document.getElementById("dv_waiting_"+room_bthx);
 dv_con_chat.removeChild(dv_waiting)
 }//eliminar_waiting
@@ -1065,7 +1071,7 @@ dv_con_chat.removeChild(dv_waiting)
 socket_client.on("eliminar chat request", function(obj_roomf)
 {
 //obj_roomf{room_bth}
-console.log("elimina chat request")
+console.log("on: eliminar chat request")
 var dv_chat_request_of= document.getElementById("dv_chat_request_of_"+obj_roomf.room_bth);
 dv_con_chat.removeChild(dv_chat_request_of);
 });//skcl eliminar chat request
@@ -1074,7 +1080,7 @@ dv_con_chat.removeChild(dv_chat_request_of);
 
 function eliminar_chat_request_of(room_bthx)
 {
-console.log("elimina chat request of")
+console.log("a eliminar_chat_request_of")
 var dv_chat_request_of= document.getElementById("dv_chat_request_of_"+room_bthx);
 dv_con_chat.removeChild(dv_chat_request_of);
 }//eliminar_chat_request
@@ -1098,10 +1104,16 @@ socket_client.on("meter usuarios al chat privado", function(obj_roomf)
 //obj_roomf{nme_mnd,nme_rcv,skt_id_rcv,skt_id_mnd,room_bth,chat_prv}
 console.log("on: 7meter usuarios al chat privado");
 console.log(obj_roomf);
+//m_names[[firstname, skt_id], ...]
 var dv_chat_room_username_= document.getElementById("dv_chat_room_username_"+obj_roomf.room_bth);
-dv_chat_room_username_.innerHTML= obj_roomf.m_names[1][0]+"<br id='br_rcv' data-skt-id='"
+dv_chat_room_username_.innerHTML= '<span id="sp_escr_'+obj_roomf.room_bth+'_'
++obj_roomf.m_names[1][0]+'"></span>'+obj_roomf.m_names[1][0]+"<br>"
++'<span id="sp_escr_'+obj_roomf.room_bth+'_'
++obj_roomf.m_names[0][0]+'"></span>'+obj_roomf.m_names[0][0]+"<br>";
+  
+  /*obj_roomf.m_names[1][0]+"<br id='br_rcv' data-skt-id='"
 +obj_roomf.m_names[1][1]+"'/>"
-+obj_roomf.m_names[0][0]+"<br id='br_mnd' data-skt-id='"+obj_roomf.m_names[0][1]+"'/>";
++obj_roomf.m_names[0][0]+"<br id='br_mnd' data-skt-id='"+obj_roomf.m_names[0][1]+"'/>";*/
 var li_chat="";
 for(var msg_chat in obj_roomf.chat_prv)
 {
@@ -1115,7 +1127,7 @@ dv_chat_room_con_.innerHTML= li_chat;
 
 function enviar_msg_prv(ev, room_bthx)
 {
-console.log("envia msg prv: "+room_bthx)
+console.log("a enviar_msg_prv: "+room_bthx)
 ev.preventDefault();
 var in_chat_room_msg_= document.querySelector("#in_chat_room_msg_"+room_bthx);
 if(in_chat_room_msg_.value != "")
@@ -1148,7 +1160,7 @@ $(dv_chat_room_con_).stop().animate({scrollTop: $(dv_chat_room_con_)[0].scrollHe
 
 function mostrar_etw_game_opt()
 {
-console.log("muestra etw game opt");
+console.log("a mostrar_etw_game_opt");
 if(typeof(dv_create_game) == "undefined")
 {
 var nudiv= document.createElement("DIV");
@@ -1189,7 +1201,7 @@ dv_con_play.appendChild(nudiv);
 
 function cerrar_game_opt()
 {
-console.log("cierra game opt")
+console.log("a cerrar_game_opt")
 dv_con_play.removeChild(dv_create_game);
 }//cerrar_gameopt
 
@@ -1197,7 +1209,7 @@ dv_con_play.removeChild(dv_create_game);
 
 function solicitar_juego()
 {
-console.log("solicita juego")
+console.log("a solicitar_juego")
 //var typegame= sltypgame.options[sltypgame.selectedIndex].value;
 var type_game= in_ch_vce.checked ? "Explain The Word (By Voice)" : "Explain The Word"; 
 var list_word= sl_list.options[sl_list.selectedIndex].id;
@@ -1245,7 +1257,7 @@ obj_bar_juef.nro_player
 
 function dar_bar_jue(roomjf, nme_juef, lis_juef, nro_playerf)
 {
-console.log("da bar jue:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
+console.log("a dar_bar_jue:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
 var dv_game_bar_= document.getElementById("dv_game_bar_"+roomjf);
 if(!dv_game_bar_)
 {
@@ -1273,7 +1285,7 @@ dv_con_play.appendChild(nudiv);
 
 function juntarse_a_juego(roomjf, nme_juef, lis_juef, nro_playerf)
 {
-console.log("juntarse a juego:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
+console.log("a juntarse_a_juego:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
 crear_juego(roomjf, nme_juef, lis_juef, nro_playerf);
 }//juntarse o spectate
 
@@ -1281,7 +1293,7 @@ crear_juego(roomjf, nme_juef, lis_juef, nro_playerf);
 
 function crear_juego(roomjf, nme_juef, lis_juef, nro_playerf)
 {
-console.log("2crea juego:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
+console.log("a crear_juego:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
 if(typeof(dv_jue) == "undefined")
 {
 var nudivj= document.createElement("DIV");
@@ -1459,7 +1471,7 @@ dv_jue_con.innerHTML= "The winner is: <b>"+obj_winnerf.winner_nme+"</b>!<br>";
 
 function restaurar_tam_jue()
 {
-console.log("restaura tam jue")
+console.log("a restaurar_tam_jue")
 if(dv_jue.offsetWidth<dv_con_play.offsetWidth)
 {
 dv_jue.style.height= dv_con_play.offsetHeight+"px";
@@ -1477,7 +1489,7 @@ dv_jue.setAttribute("style", "width:270px;height:250px");
 
 function cerrar_juego(roomj)
 {
-console.log("cierra jue:"+roomj)
+console.log("a cerrar_juego:"+roomj)
 dv_con_play.removeChild(dv_jue);
 socket_client.emit("salir del juego", {room: roomj});
 }//cerrar juego
@@ -1496,7 +1508,7 @@ dv_con_play.removeChild(dv_game_bar);
 
 function enviar_msg_jue(ev)
 {
-console.log("envia msg jue")
+console.log("a enviar_msg_jue")
 ev.preventDefault();
 if(in_jue_msg.value != "")
 {
@@ -1549,7 +1561,7 @@ $("#dv_jue_con").stop().animate({scrollTop: $("#dv_jue_con")[0].scrollHeight}, 1
 
 function seleccionar_emoji_jue()
 {
-console.log("selecciona emoji jue")
+console.log("a seleccionar_emoji_jue")
 alert("emojies in construction, write :smile: for :)\n\nlist: https://www.webpagefx.com/tools/emoji-cheat-sheet/");
 }//select emjoy
 
@@ -1563,7 +1575,7 @@ alert("emojies in construction, write :smile: for :)\n\nlist: https://www.webpag
 //definicion wordnik wordnet.3.0
 function definir_wordnik(word)
 {
-console.log("difine wordnik:"+word)
+console.log("a definir_wordnik:"+word)
 var hk= "https://cors-anywhere.herokuapp.com/";     
 var url1= "http://api.wordnik.com:80/v4/word.json/";
 //var url2="/hyphenation?useCanonical=true&limit=50&api_key="+
@@ -1600,7 +1612,7 @@ xhr.send();
 
 function definir_yandex(word)
 {
-console.log("define yandex:"+word)
+console.log("a definir_yandex:"+word)
 var apik= "dict.1.1.20171201T200832Z.77f7f25aec7d41b6.7bf840f1b594d83a20e756ec3117a3f6393466b0";
 var url1= "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?";
 var lang_from= in_list_lang_from.value||"en";
@@ -1643,7 +1655,7 @@ dv_result_dict.innerHTML= result;
 
 function traducir_frase(phr)
 {
-console.log("traduce frase:"+phr)
+console.log("a traducir_frase:"+phr)
 var apik= "trnsl.1.1.20151020T150119Z.a9c85d2a39f6fe5d.c34e526096f815916127444ce3d86ab82e945c35";
 var url1= "https://translate.yandex.net/api/v1.5/tr.json/translate?";
 var lang_from= in_list_lang_from.value || "en";
@@ -1669,7 +1681,7 @@ dv_result_dict.innerHTML= resp.text;
 
 function editar_nota()
 {
-console.log("edita nota")
+console.log("a editar_nota")
 ta_notes_con.removeAttribute("readonly");
 bt_notes_edit.style.display= "none";
 bt_notes_save.style.display= "inline-block";
@@ -1678,7 +1690,7 @@ bt_notes_save.style.display= "inline-block";
 
 function guardar_nota()
 {
-console.log("guarda nota")
+console.log("a guardar_nota")
 socket_client.emit("save note",{nte: ta_notes_con.value}); 
 ta_notes_con.setAttribute("readonly","");
 bt_notes_edit.style.display= "inline-block";
@@ -1691,7 +1703,7 @@ bt_notes_save.style.display= "none";
 
 function enviar_reporte()
 {
-console.log("envia reporte")
+console.log("a enviar_reporte")
 socket_client.emit("reporte",
 {tit: in_reporte_tit.value, rpt: ta_reporte.value});
 alert("Thanks for your report");
@@ -1732,6 +1744,7 @@ $('#dv_nts_wrp').resizable();
 });//dvdict y dvntswrp, movibles y resizable
 
 
+/*
 setTimeout(function()
 {
 if(typeof(scr_rtc) == "undefined")
@@ -1747,6 +1760,7 @@ document.querySelector("body").appendChild(scr1);
 document.querySelector("body").appendChild(scr2);
 }//if no script rtc  
 },2000);//pa mete scripts webrtc
+*/
 
 
 socket_client.on("se desconecto", function(obj_msgf)

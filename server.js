@@ -112,7 +112,7 @@ var list_words= require("./wordlists.js");
 //socket connection, poner variable afuera
 io.sockets.on('connection', function(socket)
 {
-console.log("en conexion "+ socket.request.user.firstname);
+console.log("on: connection: "+ socket.request.user.firstname);
 console.log("lanza barras de juego");
 for(var juex in jue)
 {
@@ -135,7 +135,7 @@ nro_player: jue[juex].nro_player
 socket.on("pedir usuario en chat", function()
 {
 //socket.id, socket.request.user, socket.rooms, socket.adapter
-console.log("entro a chat "+ socket.request.user.firstname);
+console.log("on: pedir usuario en chat"+ socket.request.user.firstname);
 //console.log(socket.request.user) 
 console.log(Object.keys(socket.adapter.rooms).length)//cantidad de usuarios online
 /*
@@ -176,8 +176,8 @@ io.sockets.emit("last 5 connected users", users_5_no)
 socket.on("ver su profile", function(obj_userf)
 {
 //obj_userf{user_id_rcv,skt_id_rcv,skt_id_mnd}
-console.log("ver su perfil");
-console.log(obj_userf); 
+console.log("on: ver su perfil");
+//console.log(obj_userf); 
 var user={}; 
 User.findOne({_id: obj_userf.user_id_rcv}, (err, user)=>
 {
@@ -207,7 +207,7 @@ skt_id_rcv: obj_userf.skt_id_rcv
 socket.on('abrir room', function(roomf)
 {
 //roomf="gnrl" roomf
-console.log("abre room: "+roomf)
+console.log("on: abrir room: "+roomf)
 if(!users_room[roomf])
 {
 users_room[roomf]= {};
@@ -263,7 +263,7 @@ if(err) throw err;
 socket.on('enviar msg al room', function(obj_msgf)
 {
 //obj_msgf{msg(in_msg_val),room,type_room}
-console.log("enviar msg a room: "+obj_msgf.type_room)
+console.log("on: enviar msg al room: "+obj_msgf.type_room)
 obj_msgf.msg= emoji.emojify(obj_msgf.msg);
 obj_msgf.msg= reemplazarMayor_o_menor(obj_msgf.msg);  
 obj_msgf.msg= haber_link(obj_msgf.msg);
@@ -300,7 +300,7 @@ room: obj_msgf.room
 socket.on("cerrar room", function(roomf)
 {
 //roomf="room_bth o gnrl" room
-console.log("cierra room:"+roomf);
+console.log("on: cerrar room:"+roomf);
 socket.leave(roomf);
 if(!socket.id) return;
 //console.log(users_room[roomf]);
@@ -334,7 +334,7 @@ io.to(obj_roomf.room).emit("who type",
 socket.on("entrar a secret room", function(room_secretf)
 {
 //room_secretf=secret name's room
-console.log("entra a secret room: "+room_secretf)
+console.log("on: entrar a secret room: "+room_secretf)
 if(!users_room[room_secretf])
 {
 users_room[room_secretf]={};
@@ -360,7 +360,7 @@ room: room_secretf
 socket.on("mandar chat request",function(obj_userf)
 {
 //obj_userf{skt_id_rcv,user_id_rcv,skt_id_mnd}
-console.log("2hizo chat request");
+console.log("on: mandar chat request");
 console.log(obj_userf);
 var id_mnd= socket.request.user._id;
 var user_id_rcv= obj_userf.user_id_rcv;
@@ -397,7 +397,7 @@ room_bth: room_bth
 socket.on("cancelar chat request of", function(obj_roomf)
 {
 //obj_roomf{room_bth,skt_id_rcv,skt_id_mnd}
-console.log("cancela chat request of")
+console.log("on: cancelar chat request of")
 socket.to(obj_roomf.skt_id_mnd).emit("cancelar chat request of", obj_roomf)
 });//skon cancelar chat request of  
   
@@ -405,7 +405,7 @@ socket.to(obj_roomf.skt_id_mnd).emit("cancelar chat request of", obj_roomf)
 socket.on("cancel chat request", function(obj_userf)
 {
 //obj_userf{skt_id_rcv,room_bth}
-console.log("cancelo chat request")
+console.log("on: cancel chat request")
 //y sacarlo del room
 socket.to(obj_userf.skt_id_rcv).emit("eliminar chat request",
 {room_bth: obj_userf.room_bth});
@@ -417,7 +417,7 @@ socket.to(obj_userf.skt_id_rcv).emit("eliminar chat request",
 socket.on("abrir chat request", function(obj_userf)
 {
 //obj_userf{room_bth,skt_id_mnd}
-console.log("4abre chat request");
+console.log("on: abrir chat request");
 users_room[obj_userf.room_bth][socket.request.user._id]= socket.request.user.firstname;
 socket.join(obj_userf.room_bth);
 console.log(io.sockets.adapter.rooms[obj_userf.room_bth]);
@@ -446,7 +446,7 @@ room_bth: obj_userf.room_bth
   
 socket.on("aceptar chat request", function(obj_roomf)
 {
-console.log("aceptar chat request")
+console.log("on: aceptar chat request")
 //console.log(socket.id)
 var room_bth= obj_roomf.room_bth;
 io.to(room_bth).emit("cerrar waiting", {room_bth: room_bth}) 
@@ -461,12 +461,13 @@ io.to(room_bth).emit("crear chat privado", obj_roomf);
 socket.on("mandar usuarios al chat privado", function(obj_roomf)
 {
 //obj_roomf{room_bth}
-console.log("mandar usuarios al chat privado")
+console.log("on: mandar usuarios al chat privado")
 var room_bth= obj_roomf.room_bth;
 var m_names= [];
 for(var ele in users_room[room_bth])
 {
-m_names.push(users_room[room_bth][ele])
+//ele - user_id
+m_names.push(users_room[room_bth][ele])// [firstname, skt_id]
 }//for
 var obj_user= {};
 obj_user.m_names= m_names;
@@ -491,7 +492,7 @@ obj_user["chat_prv"]= chatprv;
 io.to(room_bth).emit("meter usuarios al chat privado", obj_user);
 });//save
 });//findOne
-//obj_user{m_names,room_bth,chat_prv}
+//obj_user{m_names[[firstname, skt_id], room_bth, chat_prv}
 });//skon mandar usuarios al chat privado 
  
   
@@ -499,7 +500,7 @@ io.to(room_bth).emit("meter usuarios al chat privado", obj_user);
 socket.on("users al chat request", function(obj_userf)
 {
 //obj_userf{nme_mnd,nme_rcv,skt_id_rcv,skt_id_mnd,room_bth}
-console.log("6users para chat request");
+console.log("on: users al chat request");
 console.log(obj_userf)
 //buscar 30 lines chat historial aqui !!!
 var id12= obj_userf.room_bth.split("_");
@@ -530,7 +531,7 @@ io.to(obj_userf.room_bth).emit("mete users en chat request", obj_userf);
 socket.on("send message chat r", function(obj_msgf)
 {
 //obj_msgf{msg,room_bth}
-console.log("envio message chat r")
+console.log("on: send message chat r")
 var id12= obj_msgf.room_bth.split("_");
 obj_msgf.msg= emoji.emojify(obj_msgf.msg);
 obj_msgf.msg= haber_link(obj_msgf.msg);
@@ -566,7 +567,7 @@ room: obj_msgf.room_bth
 socket.on("solicitar llamada", function(obj_room_callf)
 {
 //obj_room_callf{room_rtc:room_bth}
-console.log("solicita llamada");
+console.log("on: solicitar llamada");
 io.to(obj_room_callf.room_rtc).emit("solicitud de aceptacion de la llamada",
 {
 room_rtc: obj_room_callf.room_rtc, 
@@ -580,7 +581,7 @@ nme_mnd: socket.request.user.firstname
 socket.on("cancelar llamada entrante", function(obj_room_callf)
 {
 //obj_room_callf{room_rtc}
-console.log("cancelar llamada entrante de: "+obj_room_callf.room_rtc)
+console.log("on: cancelar llamada entrante: "+obj_room_callf.room_rtc)
 io.to(obj_room_callf.room_rtc).emit("se cancelo llamada", {room_rtc: obj_room_callf.room_rtc});
 });//skon cancelar llamada entr  
   
@@ -589,7 +590,7 @@ io.to(obj_room_callf.room_rtc).emit("se cancelo llamada", {room_rtc: obj_room_ca
 socket.on("correr llamada", function(obj_room_callf)
 {
 //obj_room_callf{room_rtc}
-console.log("correr llamada en: "+obj_room_callf.room_rtc)
+console.log("on: correr llamada: "+obj_room_callf.room_rtc)
 io.to(obj_room_callf.room_rtc).emit("correr web rtc", {room_rtc: obj_room_callf.room_rtc});
 });//skon correr llamada  
   
@@ -597,7 +598,7 @@ io.to(obj_room_callf.room_rtc).emit("correr web rtc", {room_rtc: obj_room_callf.
 socket.on("colgar llamada", function(obj_room_callf)
 {
 //obj_room_callf{room_rtc}
-console.log("colgar llamada en: "+obj_room_callf.room_rtc)
+console.log("on: colgar llamada: "+obj_room_callf.room_rtc)
 io.to(obj_room_callf.room_rtc).emit("se cuelga llamada", {room_rtc: obj_room_callf.room_rtc});
 });//skon colgar llamada 
   
@@ -611,7 +612,7 @@ io.to(obj_room_callf.room_rtc).emit("se cuelga llamada", {room_rtc: obj_room_cal
 socket.on("solicitar game", function(obj_gamef)
 {
 //obj_gamef{type_game,list_word,nro_player}
-console.log("2solicitar juego");
+console.log("on: solicitar game");
 console.log(obj_gamef);
 var nro_game= "jue"+Object.keys(jue).length;  
 jue[nro_game]= {
@@ -647,7 +648,7 @@ nro_player: obj_gamef.nro_player
 socket.on('entrar roomj', function(obj_gamef)
 {
 //obj_gamef{nro_game,type_game,list_word,nro_player}
-console.log("3entrando al juego");
+console.log("on: entrar roomj");
 console.log(obj_gamef);
 var user_id= socket.request.user._id;
 var fn=  socket.request.user.firstname;
@@ -781,8 +782,7 @@ console.log("else");
 
 
 
-function 
-dar_aleatoria_pos(a, b)
+function dar_aleatoria_pos(a, b)
 {
 return Math.floor(Math.random() * b) + a;
 };//random number entre 0 y m.length
@@ -792,7 +792,7 @@ return Math.floor(Math.random() * b) + a;
 socket.on("10 seg", function(objnro_gamef)
 {
 //objnro_gamef{nro_game}
-console.log("10 seg next turn");
+console.log("on: 10 seg, next turn");
 console.log(jue[objnro_gamef.nro_game].tiempo);
 jue[objnro_gamef.nro_game].tiempo= 10;
 jue[objnro_gamef.nro_game].mod= "turn";
@@ -807,7 +807,7 @@ jue[objnro_gamef.nro_game].mod= "turn";
 socket.on('send message jue', function(obj_msg_gamef)
 {
 //obj_msg_gamef{msg,nro_game}
-console.log("enviar msg jue: "+obj_msg_gamef)
+console.log("on: send message jue: "+obj_msg_gamef)
 var pmr_id= Object.keys(jue[obj_msg_gamef.nro_game].nro_player_act)[ jue[obj_msg_gamef.nro_game].player_trn% Object.keys(jue[obj_msg_gamef.nro_game].nro_player_act).length ];
 var skt_id_player= jue[obj_msg_gamef.nro_game].nro_player_act[pmr_id][1];//[fn,skt_id]
 var sme_jug= skt_id_player == socket.id;//same jugador ?
@@ -845,7 +845,7 @@ io.to(obj_msg_gamef.nro_game).emit("actualiza puntaje",
 socket.on("salir del juego", function(obj_room_jf)
 {
 //obj_room_jf{room}
-console.log("sale del jue: "+obj_room_jf),
+console.log("on: salir del juego: "+obj_room_jf),
 socket.leave(obj_room_jf.room);
 var user_id= socket.request.user._id;
 if(!socket.id) return;
@@ -874,6 +874,7 @@ io.sockets.emit("manda user al juego",
 socket.on("save note", function(obj_ntef)
 {
 //obj_ntef{nte}
+console.log("on: save note")
 User.findOne({_id: socket.request.user._id}, function(err, userf)
 {
 if(!userf.notes)
@@ -886,7 +887,6 @@ userf.save((err)=>
 if(err) throw err;
 });//save
 });//findone
-console.log("saved note");
 });//skon save note  
   
   
@@ -897,7 +897,7 @@ console.log("saved note");
 socket.on("reporte", function(obj_rptf)
 {
 //obj_rptf{tit,rpt}
-console.log("guarda reporte");
+console.log("on: reporte");
 Chat.findOne({_id: "5a3694ecfe052c4f9add75ff"}, function(err, chatf){
 chatf.reportes.push(
 [
@@ -927,7 +927,7 @@ console.log("emit: last 5 connected users")
 io.sockets.emit("last 5 connected users", users_5_no)  
 });//find last 5 
 io.sockets.emit('recibir usuarios', users_cnnt);
-console.log("se desconecto "+ socket.request.user.firstname);
+console.log("on: disconnet: "+ socket.request.user.firstname);
 for(var room in users_room)
 {
 if(users_room[room][socket.request.user._id]){
