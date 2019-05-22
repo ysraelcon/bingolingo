@@ -468,22 +468,22 @@ dv_chat_room_con_.scrollTo(0, dv_chat_room_con_.scrollHeight);
 });//on recibir usuarios en el room
 
 
-socket_client.on("actualizar rooms", function(obj_roomf)
+socket_client.on("actualizar rooms", function(o_roomx)
 {
-//obj_roomf{users_room,room}
+//o_roomx{users_room,room}
 console.log("on: actualizar rooms");
-if(rooms[obj_roomf.room])
+if(rooms[o_roomx.room])
 {
-if(roomsxcls.lang[obj_roomf.room])
+if(roomsxcls.lang[o_roomx.room])
 {
-spanear_room(obj_roomf.room, dv_lang_rooms_con)
-}else if(roomsxcls.thm[obj_roomf.room])
+spanear_room(o_roomx.room, dv_lang_rooms_con)
+}else if(roomsxcls.thm[o_roomx.room])
 {
-spanear_room(obj_roomf.room, dv_theme_rooms_con)
+spanear_room(o_roomx.room, dv_theme_rooms_con)
 }//else if thm room
-//obj_roomf{users_room,chat_room,skt_id,room} 
-var cnt_users= Object.keys(obj_roomf.users_room).length;
-var sp_chat_cant_= document.getElementById("sp_chat_cant_"+obj_roomf.room);
+//o_roomx{users_room,chat_room,skt_id,room} 
+var cnt_users= Object.keys(o_roomx.users_room).length;
+var sp_chat_cant_= document.getElementById("sp_chat_cant_"+o_roomx.room);
 sp_chat_cant_.innerHTML= cnt_users != 0 ? cnt_users : "";
 }//if no secret
 });//skcl actualizar rooms
@@ -595,18 +595,18 @@ in_chat_room_msg_.value= "";
 
 
 
-socket_client.on('recibir msg en room', function(obj_msgf) 
+socket_client.on('recibir msg en room', function(o_msgx) 
 {
-//obj_msgf{msg,nick,room}
+//o_msgx{msg,nick,room}
 console.log("on: recibe msg en room")
 if(!document.hasFocus())
 {
 favicon.href= dar_favicon_n();
 }//if not focus
-var dv_chat_room_con_= "#dv_chat_room_con_"+obj_msgf.room;
+var dv_chat_room_con_= "#dv_chat_room_con_"+o_msgx.room;
 jQuery(function($)
 {
-$(dv_chat_room_con_).append('<b>'+obj_msgf.nick+":</b> "+obj_msgf.msg+"<br/>");
+$(dv_chat_room_con_).append('<b>'+o_msgx.nick+":</b> "+o_msgx.msg+"<br/>");
 $(dv_chat_room_con_).stop().animate({scrollTop: $(dv_chat_room_con_)[0].scrollHeight}, 200);
 });//jQuery
 });//skcl recibir msg en room
@@ -821,41 +821,7 @@ dv_chat_room_user_.removeChild(dv_emj_);
 }//meter_emoji
 
 
-
-
-socket_client.on("recibir usuarios en secret room", function(obj_room_secretf)
-{
-//obj_room_secretf{users_room,skt_id,room}
-console.log("on: recibir usuarios en secret room")
-var usersg= "";
-for(var nombr in obj_room_secretf.users_room)
-{
-usersg+= '<span id="sp_escr_'+obj_room_secretf.room+'_'
-+obj_room_secretf.users_room[nombr]
-+'"></span>'+obj_room_secretf.users_room[nombr]
-+"<br>";
-}//for
-var dv_chat_room_username_= document.getElementById("dv_chat_room_username_"+obj_room_secretf.room);
-dv_chat_room_username_.innerHTML= "";
-dv_chat_room_username_.innerHTML= usersg;
-/*
-var dv_chat_room_user_bts_= document.getElementById("dv_chat_room_user_bts_"+obj_room_secretf.room);
-dv_chat_room_user_bts_.innerHTML= '<button id="bt_call_secret_'+obj_room_secretf.room
-//  '" data-room="'+obj_room_secretf.room+
-+'" onclick="juntarse_llamada_secret(this,\''+obj_room_secretf.room+'\')">'
-+'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>'//phone
-+'</button>'
-+'<button id="bt_mte_call_secret_'+obj_room_secretf.room+'" class="cl_bt_mte_call">'
-+'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M463 945l-101 101q-42-103-42-214v-128q0-26 19-45t45-19 45 19 19 45v128q0 53 15 113zm1114-602l-361 361v128q0 132-94 226t-226 94q-55 0-109-19l-96 96q97 51 205 51 185 0 316.5-131.5t131.5-316.5v-128q0-26 19-45t45-19 45 19 19 45v128q0 221-147.5 384.5t-364.5 187.5v132h256q26 0 45 19t19 45-19 45-45 19h-640q-26 0-45-19t-19-45 19-45 45-19h256v-132q-125-13-235-81l-254 254q-10 10-23 10t-23-10l-82-82q-10-10-10-23t10-23l1234-1234q10-10 23-10t23 10l82 82q10 10 10 23t-10 23zm-380-132l-621 621v-512q0-132 94-226t226-94q102 0 184.5 59t116.5 152z"/></svg>'//microphhone-slash
-+'</button>'
-+'<audio id="lclaud" style="display:none" oncontextmenu="return false;" disabled></audio>'+''; 
-*/  
-});//skcl recibir usuarios en secret room
-          
-
-
-
-
+ 
 
 function mandar_chat_request_profile(btx)
 {
@@ -944,7 +910,7 @@ d.childNodes[1].childNodes[1].classList.add("bac_col_usr_chat_prv")
 d.childNodes[2].childNodes[1].classList.add("bac_col_usr_chat_prv")
 dv_con_chat.appendChild(d)
 }
-//crear_chat_privado(obj_roomf.room_bth);
+//crear_chat_privado(o_roomx.room_bth);
 socket_client.emit("mandar usuarios al chat privado", {room_bth: o_roomx.room_bth})
 });//skclon crear chat privado
 
@@ -965,11 +931,11 @@ room_bth: room_bthx
 
 
 
-socket_client.on("cancelar chat request of", function(obj_roomf)
+socket_client.on("cancelar chat request of", function(o_roomx)
 {
-//obj_roomf{room_bth,skt_id_mnd,skt_id_rcv}
+//o_roomx{room_bth,skt_id_mnd,skt_id_rcv}
 console.log("on: cancela chat request of")
-cerrar_waiting(obj_roomf.skt_id_rcv, obj_roomf.room_bth)
+cerrar_waiting(o_roomx.skt_id_rcv, o_roomx.room_bth)
 });//skon cancelar chat request of
 
 
@@ -1075,9 +1041,9 @@ socket_client.emit("mandar usuarios al chat privado", {room_bth: room_bthx})
 socket_client.on("esperar chat request", function(o_roomx)
 {
 //o_roomx{id_mnd,id_rcv,skt_id_mnd,skt_id_rcv,nme_rcv,room_bth}
-//if(obj_roomf.skt_id_mnd == socket_client.id){
+//if(o_roomx.skt_id_mnd == socket_client.id){
 console.log("on: 3espera chat request");
-//console.log(JSON.stringify(obj_roomf));
+//console.log(JSON.stringify(o_roomx));
 var dv_waiting_= document.getElementById("dv_waiting_"+o_roomx.room_bth);
 if(!dv_waiting_)
 { 
@@ -1113,10 +1079,10 @@ socket_client.emit("cancel chat request",
 
 
 
-socket_client.on("cerrar waiting", function(obj_roomf)
+socket_client.on("cerrar waiting", function(o_roomx)
 {
 console.log("on: cerrar waiting")
-eliminar_waiting(obj_roomf.room_bth)
+eliminar_waiting(o_roomx.room_bth)
 });//skclon cerrar waiting
 
 
@@ -1130,11 +1096,11 @@ dv_con_chat.removeChild(dv_waiting)
 
 
 
-socket_client.on("eliminar chat request", function(obj_roomf)
+socket_client.on("eliminar chat request", function(o_roomx)
 {
-//obj_roomf{room_bth}
+//o_roomx{room_bth}
 console.log("on: eliminar chat request")
-var dv_chat_request_of= document.getElementById("dv_chat_request_of_"+obj_roomf.room_bth);
+var dv_chat_request_of= document.getElementById("dv_chat_request_of_"+o_roomx.room_bth);
 dv_con_chat.removeChild(dv_chat_request_of);
 });//skcl eliminar chat request
 
@@ -1148,42 +1114,16 @@ dv_con_chat.removeChild(dv_chat_request_of);
 }//eliminar_chat_request
 
 
-socket_client.on("acepta chat request",function(obj_roomf)
+socket_client.on("acepta chat request",function(o_roomx)
 {
-//obj_roomf{nme_mnd,nme_rcv,skt_id_rcv,skt_id_mnd,room_bth}
+//o_roomx{nme_mnd,nme_rcv,skt_id_rcv,skt_id_mnd,room_bth}
 console.log("on: 5acepta chat request");
-console.log(JSON.stringify(obj_roomf));
-var dv_waiting= document.getElementById("dv_waiting_"+obj_roomf.room_bth);
+console.log(JSON.stringify(o_roomx));
+var dv_waiting= document.getElementById("dv_waiting_"+o_roomx.room_bth);
 dv_con_chat.removeChild(dv_waiting);
-//socket_client.emit("users al chat request",obj_roomf);  
+//socket_client.emit("users al chat request",o_roomx);  
 });//skcon acepta chat reqquest
 
-
-
-socket_client.on("meter usuarios al chat privado", function(obj_roomf)
-{
-//obj_user{m_names,room_bth,chat_prv}
-//obj_roomf{nme_mnd,nme_rcv,skt_id_rcv,skt_id_mnd,room_bth,chat_prv}
-console.log("on: 7meter usuarios al chat privado");
-console.log(obj_roomf);
-//m_names[[firstname, skt_id], ...]
-var dv_chat_room_username_= document.getElementById("dv_chat_room_username_"+obj_roomf.room_bth);
-dv_chat_room_username_.innerHTML= '<span id="sp_escr_'+obj_roomf.room_bth+'_'
-+obj_roomf.m_names[1][0]+'"></span>'+obj_roomf.m_names[1][0]+"<br>"
-+'<span id="sp_escr_'+obj_roomf.room_bth+'_'
-+obj_roomf.m_names[0][0]+'"></span>'+obj_roomf.m_names[0][0]+"<br>";
-  
-  /*obj_roomf.m_names[1][0]+"<br id='br_rcv' data-skt-id='"
-+obj_roomf.m_names[1][1]+"'/>"
-+obj_roomf.m_names[0][0]+"<br id='br_mnd' data-skt-id='"+obj_roomf.m_names[0][1]+"'/>";*/
-var li_chat="";
-for(var msg_chat in obj_roomf.chat_prv)
-{
-li_chat+= obj_roomf.chat_prv[msg_chat]+"<br>";
-}//for
-var dv_chat_room_con_= document.getElementById("dv_chat_room_con_"+obj_roomf.room_bth);
-dv_chat_room_con_.innerHTML= li_chat;
-});//skcl meter users chat request
 
 
 
@@ -1203,14 +1143,14 @@ in_chat_room_msg_.value= "";
 
 
 
-socket_client.on("new msg chat request", function(obj_msgf)
+socket_client.on("new msg chat request", function(o_msgx)
 {
-//obj_msgf{msg,nick,room}
+//o_msgx{msg,nick,room}
 console.log("on: new msg chat request")
 jQuery(function($)
 {
-var dv_chat_room_con_= "#dv_chat_room_con_"+obj_msgf.room;
-$(dv_chat_room_con_).append('<b>'+obj_msgf.nick+":</b> "+obj_msgf.msg+"<br/>");
+var dv_chat_room_con_= "#dv_chat_room_con_"+o_msgx.room;
+$(dv_chat_room_con_).append('<b>'+o_msgx.nick+":</b> "+o_msgx.msg+"<br/>");
 $(dv_chat_room_con_).stop().animate({scrollTop: $(dv_chat_room_con_)[0].scrollHeight}, 200);
 });//jQuery
 });//skcl new msg chat request msg privado
@@ -1287,57 +1227,57 @@ nro_player: nro_player
 
 
 
-socket_client.on("crear juego", function(obj_gamef)
+socket_client.on("crear juego", function(o_gamex)
 {
-//obj_gamef{nro_game,type_game,list_word,nro_player}
+//o_gamex{nro_game,type_game,list_word,nro_player}
 console.log("on: 2crea juego");
-console.log(JSON.stringify(obj_gamef));
+console.log(JSON.stringify(o_gamex));
 crear_juego(
-obj_gamef.nro_game,
-obj_gamef.type_game,
-obj_gamef.list_word,
-obj_gamef.nro_player
+o_gamex.nro_game,
+o_gamex.type_game,
+o_gamex.list_word,
+o_gamex.nro_player
 ); 
 });//skcl crear juego
 
 
 
-socket_client.on("los demas bar jue", function(obj_bar_juef)
+socket_client.on("los demas bar jue", function(o_bar_juex)
 {
-//obj_bar_juef{nro_game,type_game,list_word_name,nro_player}
+//o_bar_juex{nro_game,type_game,list_word_name,nro_player}
 console.log("on: los demas bar jue");
-console.log(JSON.stringify(obj_bar_juef));
+console.log(JSON.stringify(o_bar_juex));
 dar_bar_jue(
-obj_bar_juef.nro_game,
-obj_bar_juef.type_game,
-obj_bar_juef.list_word_name,
-obj_bar_juef.nro_player
+o_bar_juex.nro_game,
+o_bar_juex.type_game,
+o_bar_juex.list_word_name,
+o_bar_juex.nro_player
 );
 });//skcl los demas bar jue
 
 
 
-function dar_bar_jue(roomjf, nme_juef, lis_juef, nro_playerf)
+function dar_bar_jue(roomjx, nme_juex, lis_juex, nro_playerx)
 {
-console.log("a dar_bar_jue:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
-var dv_game_bar_= document.getElementById("dv_game_bar_"+roomjf);
+console.log("a dar_bar_jue:"+roomjx+"/-/"+nme_juex+"/-/"+lis_juex+"/-/"+nro_playerx);
+var dv_game_bar_= document.getElementById("dv_game_bar_"+roomjx);
 if(!dv_game_bar_)
 {
 var nudiv= document.createElement("DIV");
-nudiv.id= "dv_game_bar_"+roomjf;
+nudiv.id= "dv_game_bar_"+roomjx;
 nudiv.setAttribute("class", "bor");
 nudiv.setAttribute("style", "display:table")
-nudiv.setAttribute("onclick", "juntarse_a_juego(\'"+roomjf+"\',\'"
-+nme_juef+"\',\'"
-+lis_juef+"\',\'"
-+nro_playerf+"\')");
-nudiv.setAttribute("data-id-gm", roomjf);
+nudiv.setAttribute("onclick", "juntarse_a_juego(\'"+roomjx+"\',\'"
++nme_juex+"\',\'"
++lis_juex+"\',\'"
++nro_playerx+"\')");
+nudiv.setAttribute("data-id-gm", roomjx);
 nudiv.innerHTML= '<div id="dv_bar_jue_nm" class="inl_blo bor">'
-+nme_juef+'</div>'
-+'<div id="dv_bar_jue_lis" class="inl_blo bor">'+lis_juef
++nme_juex+'</div>'
++'<div id="dv_bar_jue_lis" class="inl_blo bor">'+lis_juex
 +'</div>'
 +'<div id="dv_bar_jue_nro_player" class="inl_blo bor">1/' //nrojug/totjug
-+'<span id="sp_nro_player">'+ nro_playerf
++'<span id="sp_nro_player">'+ nro_playerx
 +'</span>'+'</div>';
 dv_con_play.appendChild(nudiv);
 }//if no esta la barra
@@ -1345,17 +1285,17 @@ dv_con_play.appendChild(nudiv);
 
 
 
-function juntarse_a_juego(roomjf, nme_juef, lis_juef, nro_playerf)
+function juntarse_a_juego(roomjx, nme_juex, lis_juex, nro_playerx)
 {
-console.log("a juntarse_a_juego:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
-crear_juego(roomjf, nme_juef, lis_juef, nro_playerf);
+console.log("a juntarse_a_juego:"+roomjx+"/-/"+nme_juex+"/-/"+lis_juex+"/-/"+nro_playerx);
+crear_juego(roomjx, nme_juex, lis_juex, nro_playerx);
 }//juntarse o spectate
 
 
 
-function crear_juego(roomjf, nme_juef, lis_juef, nro_playerf)
+function crear_juego(roomjx, nme_juex, lis_juex, nro_playerx)
 {
-console.log("a crear_juego:"+roomjf+"/-/"+nme_juef+"/-/"+lis_juef+"/-/"+nro_playerf);
+console.log("a crear_juego:"+roomjx+"/-/"+nme_juex+"/-/"+lis_juex+"/-/"+nro_playerx);
 if(typeof(dv_jue) == "undefined")
 {
 var nudivj= document.createElement("DIV");
@@ -1365,9 +1305,9 @@ nudivj.setAttribute("class", "flex_col pos_a_i top_10 bor_r bor_1p_grey bac_db82
 nudivj.setAttribute("style", "width:270px;height:250px")
 nudivj.innerHTML= '<div id="dv_jue_cab">'
 +'<div id="dv_jue_tit" class="flex_row ali_cen fon_ari">'
-+'<div id="dv_jue_tit_nm" class="w ali_cen bor_r5000 bac_285 whi cur_mov">'+nme_juef+'</div>'
++'<div id="dv_jue_tit_nm" class="w ali_cen bor_r5000 bac_285 whi cur_mov">'+nme_juex+'</div>'
 +'<div id="dv_jue_tit_rsz" class="ali_cen w30p cur_poi" onclick="restaurar_tam_jue()">L</div>'
-+'<div id="dv_jue_tit_cerrar" class="ali_cen w30p cur_poi bac_800 whi bor_r0500" onclick="cerrar_juego(\''+roomjf+'\')">X</div>'
++'<div id="dv_jue_tit_cerrar" class="ali_cen w30p cur_poi bac_800 whi bor_r0500" onclick="cerrar_juego(\''+roomjx+'\')">X</div>'
 +'</div>'
 +'<div id="dv_jue_exp">Explains: <span id="sp_word_to_guess">wordX</span'
 +'><span id="sp_timer" class="flo_rig bor_1p_bla">00</span></div>'
@@ -1375,8 +1315,8 @@ nudivj.innerHTML= '<div id="dv_jue_cab">'
 +'<div id="dv_jue_con_user" class="flex_row pos_a top_50p bot_30p w">'
 +'<div id="dv_jue_con" class="ove_y wor_wra w bor_1p_grey"></div>'
 +'<div id="dv_jue_user" class="wor_wra pos_rel fon_bol bor_1p_grey" style="width:100px">'
-+'<div id="dv_jue_username_'+roomjf+'" class="cl_dv_chat_room_username"></div>'
-+'<div id="dv_jue_user_bts_'+roomjf+'" class="cl_dv_chat_room_user_bts">'
++'<div id="dv_jue_username_'+roomjx+'" class="cl_dv_chat_room_username"></div>'
++'<div id="dv_jue_user_bts_'+roomjx+'" class="cl_dv_chat_room_user_bts">'
 +'<input type="button" value="_"'
 +' onclick="es_boton_vacio()"></div>'
 +'</div>'
@@ -1384,7 +1324,7 @@ nudivj.innerHTML= '<div id="dv_jue_cab">'
 +'<div id="dv_jue_msg" class="pos_a bot h30p flex_row w90">'
 +'<form id="fm_jue_msg" class="pos_a lef top bot rig_30p" onsubmit="enviar_msg_jue(event)">'
 +'<div class="pos_a top bot lef rig_30p">'
-+'<input type="text" id="in_jue_msg" class="w h" placeholder="write your text..." data-room="'+roomjf+'"></div>'
++'<input type="text" id="in_jue_msg" class="w h" placeholder="write your text..." data-room="'+roomjx+'"></div>'
 +'<button id="btn_jue_snd_msg" class="pos_a rig h w30p" type="submit" >'
 +'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'//paper-plane
 +'</button></form>'
@@ -1395,10 +1335,10 @@ nudivj.innerHTML= '<div id="dv_jue_cab">'
 dv_con_play.appendChild(nudivj);
 socket_client.emit("entrar roomj",
 {
-nro_game: roomjf, //idjue
-type_game: nme_juef,
-list_word: lis_juef,
-nro_player: nro_playerf
+nro_game: roomjx, //idjue
+type_game: nme_juex,
+list_word: lis_juex,
+nro_player: nro_playerx
 });
 jQuery(function($)
 {
@@ -1427,31 +1367,31 @@ $("#dv_jue").resizable();
 
 
 
-socket_client.on("manda user al juego", function(obj_gamef)
+socket_client.on("manda user al juego", function(o_gamex)
 {
-/*obj_gamef{users_jue{user_id[fn,skt_id]}},
+/*o_gamex{users_jue{user_id[fn,skt_id]}},
 nro_game,type_game,list_word,nro_player}*/
 console.log("on: 4manda user al juego");
-console.log(JSON.stringify(obj_gamef));
+console.log(JSON.stringify(o_gamex));
 var userj= "";
-for(var nom in obj_gamef.users_jue)
+for(var nom in o_gamex.users_jue)
 {
 userj+= '<div id="dv_jue_pnt_'+nom+'" class="inl_blo ali_cen w30p bor_1p_bla bor_r_">0</div>'
-+obj_gamef.users_jue[nom][0]+"<br>";
++o_gamex.users_jue[nom][0]+"<br>";
 }//for
-var dv_jue_username_= document.getElementById("dv_jue_username_"+obj_gamef.nro_game);
+var dv_jue_username_= document.getElementById("dv_jue_username_"+o_gamex.nro_game);
 dv_jue_username_.innerHTML= "";
 dv_jue_username_.innerHTML= userj;
-if(obj_gamef.typegame != "Explain The Word")
+if(o_gamex.typegame != "Explain The Word")
 {
-var dv_jue_user_bts_= document.getElementById("dv_jue_user_bts_"+obj_gamef.nro_game);
+var dv_jue_user_bts_= document.getElementById("dv_jue_user_bts_"+o_gamex.nro_game);
   /*
-dv_jue_user_bts_.innerHTML= '<button id="bt_call_secret_'+obj_gamef.nro_game+
+dv_jue_user_bts_.innerHTML= '<button id="bt_call_secret_'+o_gamex.nro_game+
 //  '" data-room="'+objgamef.room+
-'" onclick="juntarse_llamada_secret(this,\''+obj_gamef.nro_game+'\')">'+
+'" onclick="juntarse_llamada_secret(this,\''+o_gamex.nro_game+'\')">'+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>'+//phone
 '</button>'+
-'<button id="bt_mte_call_secret_'+obj_gamef.nro_game+'" class="cl_bt_mte_call">'+
+'<button id="bt_mte_call_secret_'+o_gamex.nro_game+'" class="cl_bt_mte_call">'+
 '<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M463 945l-101 101q-42-103-42-214v-128q0-26 19-45t45-19 45 19 19 45v128q0 53 15 113zm1114-602l-361 361v128q0 132-94 226t-226 94q-55 0-109-19l-96 96q97 51 205 51 185 0 316.5-131.5t131.5-316.5v-128q0-26 19-45t45-19 45 19 19 45v128q0 221-147.5 384.5t-364.5 187.5v132h256q26 0 45 19t19 45-19 45-45 19h-640q-26 0-45-19t-19-45 19-45 45-19h256v-132q-125-13-235-81l-254 254q-10 10-23 10t-23-10l-82-82q-10-10-10-23t10-23l1234-1234q10-10 23-10t23 10l82 82q10 10 10 23t-10 23zm-380-132l-621 621v-512q0-132 94-226t226-94q102 0 184.5 59t116.5 152z"/></svg>'+//microphhone-slash
 '</button>'+
 '<audio id="lcl_aud" style="display:none" oncontextmenu="return false;" disabled></audio>'+
@@ -1461,48 +1401,47 @@ dv_jue_user_bts_.innerHTML= '<button id="bt_call_secret_'+obj_gamef.nro_game+
 
 
 
-socket_client.on("ya comenzo jue", function(obj_msgf)
+socket_client.on("ya comenzo jue", function(o_msgx)
 {
-//obj_msgf{msg} 
+//o_msgx{msg} 
 console.log("on: ya comenzo jue")
-alert(obj_msgf.msg);
+alert(o_msgx.msg);
 });//skcl ya comenzo juego, esta completo
      
           
 
-socket_client.on("el del turno", function(obj_wordf)
+socket_client.on("el del turno", function(o_wordx)
 {
-//objwordf{word}
+//o_wordx{word}
 console.log("on: el del turno, te toca");
-sp_word_to_guess.innerHTML= obj_wordf.word;
+sp_word_to_guess.innerHTML= o_wordx.word;
 });//skcl el del turno
 
 
 
-socket_client.on("corre reloj", function(obj_tmpf)
+socket_client.on("corre reloj", function(o_tmpx)
 {
-//objtmpf{tiempo}
-sp_timer.innerHTML= obj_tmpf.tiempo;
+//o_tmpx{tiempo}
+sp_timer.innerHTML= o_tmpx.tiempo;
 });//skcl empieza a correr el reloj
 
 
 
-socket_client.on("los que adivinan", function(obj_user_explf)
+socket_client.on("los que adivinan", function(o_user_explx)
 {
-//obj_userexplf{userexpl}
-console.log("on: los que adivinan: "+JSON.stringify(obj_user_explf));
-sp_word_to_guess.innerHTML= obj_user_explf.userexpl;
+//o_user_explx{userexpl}
+console.log("on: los que adivinan: "+JSON.stringify(o_user_explx));
+sp_word_to_guess.innerHTML= o_user_explx.userexpl;
 dv_jue_con.innerHTML= "";
 });//skcl los que adivinan
 
 
 
-socket_client.on("no se adivino", function(obj_word_to_guessf)
+socket_client.on("no se adivino", function(o_word_to_guessx)
 {
-//obj_word_to_guessf{word_to_guess}
+//o_word_to_guessx{word_to_guess}
 console.log("on: no se adivino");
-dv_jue_con.innerHTML+= "The word was <b>"
-+obj_word_to_guessf.word_to_guess+"</b><br>";
+dv_jue_con.innerHTML+= "The word was <b>"+o_word_to_guessx.word_to_guess+"</b><br>";
 jQuery(function($)
 {
 $("#dv_jue_con").stop().animate({scrollTop: $("#dv_jue_con")[0].scrollHeight}, 100);
@@ -1511,21 +1450,21 @@ $("#dv_jue_con").stop().animate({scrollTop: $("#dv_jue_con")[0].scrollHeight}, 1
 
 
 
-socket_client.on("actualiza puntaje", function(obj_pntf)
+socket_client.on("actualiza puntaje", function(o_pntx)
 {
-//obj_pntf{user_id,pnt_player}
-console.log("on: acutaliza puntaje: "+JSON.stringify(obj_pntf))
-var dv_jue_pnt= document.getElementById("dv_jue_pnt_"+obj_pntf.user_id);
-dv_jue_pnt.innerHTML= obj_pntf.pnt_player;
+//o_pntx{user_id,pnt_player}
+console.log("on: acutaliza puntaje: "+JSON.stringify(o_pntx))
+var dv_jue_pnt= document.getElementById("dv_jue_pnt_"+o_pntx.user_id);
+dv_jue_pnt.innerHTML= o_pntx.pnt_player;
 });//skcl actualiza puntaje
 
 
 
-socket_client.on("quien gano", function(obj_winnerf)
+socket_client.on("quien gano", function(o_winnerx)
 {
-//obj_winnerf{winner_nme}
-console.log("on: quien gano: "+obj_winnerf)
-dv_jue_con.innerHTML= "The winner is: <b>"+obj_winnerf.winner_nme+"</b>!<br>";
+//o_winnerx{winner_nme}
+console.log("on: quien gano: "+o_winnerx)
+dv_jue_con.innerHTML= "The winner is: <b>"+o_winnerx.winner_nme+"</b>!<br>";
 });//skcl quien gano
 
 
@@ -1558,11 +1497,11 @@ socket_client.emit("salir del juego", {room: roomj});
 
 
 
-socket_client.on("eliminar game bar", function(obj_room_gamef)
+socket_client.on("eliminar game bar", function(o_room_gamex)
 {
-//obj_room_gamef{room_game}
+//o_room_gamex{room_game}
 console.log("on: elimina game bar")
-var dv_game_bar= document.getElementById("dv_game_bar_"+obj_room_gamef.room_game);
+var dv_game_bar= document.getElementById("dv_game_bar_"+o_room_gamex.room_game);
 dv_con_play.removeChild(dv_game_bar);
 });//skcl eliminar game bar
 
@@ -1600,19 +1539,19 @@ in_jue_msg.value= "";
 
 
 
-socket_client.on('new message jue', function(obj_msg_gamef)
+socket_client.on('new message jue', function(o_msg_gamex)
 {
-//obj_msg_gamef{msg,nro_game,nick,guess}
+//o_msg_gamex{msg,nro_game,nick,guess}
 console.log("on: new message jue")
-if(obj_msg_gamef.guess)
+if(o_msg_gamex.guess)
 {
-dv_jue_con.innerHTML+= "<b>"+obj_msg_gamef.nick+":</b> "
-+obj_msg_gamef.msg+"<br/>"
+dv_jue_con.innerHTML+= "<b>"+o_msg_gamex.nick+":</b> "
++o_msg_gamex.msg+"<br/>"
 +"BINGO, you guessed the word!<br>";
-socket_client.emit("10 seg", {nro_game: obj_msg_gamef.nro_game});
+socket_client.emit("10 seg", {nro_game: o_msg_gamex.nro_game});
 }else
 {
-dv_jue_con.innerHTML+= "<b>"+obj_msg_gamef.nick+":</b> "+obj_msg_gamef.msg+"<br/>";
+dv_jue_con.innerHTML+= "<b>"+o_msg_gamex.nick+":</b> "+o_msg_gamex.msg+"<br/>";
 }//else no bingo
 jQuery(function($)
 {
@@ -1825,10 +1764,10 @@ document.querySelector("body").appendChild(scr2);
 */
 
 
-socket_client.on("se desconecto", function(obj_msgf)
+socket_client.on("se desconecto", function(o_msgx)
 {
-//obj_msgf{msg}
-console.log("on: se desconecto: "+ JSON.stringify(obj_msgf));
+//o_msgx{msg}
+console.log("on: se desconecto: "+ JSON.stringify(o_msgx));
 alert("lost connection, for appear on the user table again, click on the chat tab"); 
 });//skcl se desconecto o cerro
 

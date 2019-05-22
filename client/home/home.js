@@ -25,6 +25,7 @@ $scope.cant_u= res.data;
 $scope.entrar_login= function()
 {
 console.log("entra login")
+$scope.user.email= $scope.user.email.toLowerCase()
 $http.post("/login", $scope.user).then(function(res)
 {
 $scope.message= res.data.message;
