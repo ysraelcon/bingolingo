@@ -322,7 +322,7 @@ io.to(roomf).emit("dejar prv",roomf);
 });//skon cerrar room  
   
   
-  
+/*  
 socket.on("typing", function(obj_roomf)
 {
 //obj_roomf{room}
@@ -330,6 +330,15 @@ socket.on("typing", function(obj_roomf)
 io.to(obj_roomf.room).emit("who type",
 {firstname: socket.request.user.firstname, room: obj_roomf.room});
 });//typing
+*/
+socket.on("typing", function(o_roomx)
+{
+//o_roomx{room}
+//socket.to(o_roomx.room).broadcast.emit("who type",
+io.to(o_roomx.room).emit("who type",
+{u_id: socket.request.user._id, room: o_roomx.room});
+});//typing  
+  
   
 socket.on("entrar a secret room", function(room_secretf)
 {
@@ -343,12 +352,21 @@ users_room[room_secretf]={};
 users_room[room_secretf][socket.request.user._id]= socket.request.user.firstname;
 socket.join(room_secretf);
 console.log(io.sockets.adapter.rooms[room_secretf]);
+/*  
 io.to(room_secretf).emit('recibir usuarios en secret room',
 {
 users_room: users_room[room_secretf],
 skt_id: socket.id,
 room: room_secretf
 });
+*/
+io.to(room_secretf).emit('recibir usuarios en el room',
+{
+users_room: users_room[room_secretf],
+skt_id: socket.id,
+room: room_secretf,
+chat_room: []
+});  
 });//skon entrar a secret room
   
 //...rooms...
@@ -371,7 +389,7 @@ if(!users_room[room_bth])
 users_room[room_bth]= {};
 }//if indef
 //users_room{room_nme{user_id:firstname,...},...}
-users_room[room_bth][socket.request.user._id]= [socket.request.user.firstname, socket.id];
+users_room[room_bth][socket.request.user._id]= socket.request.user.firstname;
 socket.join(room_bth);
 console.log(io.sockets.adapter.rooms[room_bth]); 
 io.to(obj_userf.skt_id_rcv).emit("recibir chat request",
@@ -450,7 +468,7 @@ console.log("on: aceptar chat request")
 //console.log(socket.id)
 var room_bth= obj_roomf.room_bth;
 io.to(room_bth).emit("cerrar waiting", {room_bth: room_bth}) 
-users_room[room_bth][socket.request.user._id]= [socket.request.user.firstname, socket.id];
+users_room[room_bth][socket.request.user._id]= socket.request.user.firstname;
 socket.join(room_bth);
 io.to(room_bth).emit("crear chat privado", obj_roomf);
 //io.to(skt_mnd).emit("acepta chat request",obj_roomf);
@@ -489,7 +507,17 @@ chatf.save((err)=>
 {
 if(err) throw err;  
 obj_user["chat_prv"]= chatprv;
+/*  
 io.to(room_bth).emit("meter usuarios al chat privado", obj_user);
+*/
+io.to(room_bth).emit("recibir usuarios en el room",
+{
+users_room: users_room[room_bth],
+skt_id: null,
+room: room_bth,
+chat_room: chatprv,
+prv: "privado"
+});  
 });//save
 });//findOne
 //obj_user{m_names[[firstname, skt_id], room_bth, chat_prv}
