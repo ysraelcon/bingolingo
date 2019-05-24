@@ -1167,7 +1167,7 @@ if(typeof(dv_create_game) == "undefined")
 {
 var nudiv= document.createElement("DIV");
 nudiv.id= "dv_create_game";
-nudiv.setAttribute("class", "inl_blo ali_cen bor")
+nudiv.setAttribute("class", "inl_blo ali_cen bor_1p_bla")
 nudiv.innerHTML= '<div id="dv_tit_opt_game" class="flex_row">'
 +'<div id="dv_tit_opt_game_nme" class="inl_blo ali_cen w bac_bla whi">Game Options</div>'
 +'<div id="dv_tit_opt_game_x" class="inl_blo ali_cen w50p cur_poi" onclick="cerrar_game_opt()">X</div></div>'
@@ -1191,7 +1191,7 @@ nudiv.innerHTML= '<div id="dv_tit_opt_game" class="flex_row">'
 +'<option id="opt6">6</option>'
 +'<option id="opt8">8</option>'
 +'</select></div><br>'
-+'<label><input type="checkbox" id="in_ch_vce">By Voice</label><br>'
+/*+'<label><input type="checkbox" id="in_ch_vce">By Voice</label><br>'*/
 +'<div id="dv_rdy_game" class="ali_cen">'
 +'<input type="button" id="bt_rdy_game" class="w_" value="Create" onclick="solicitar_juego()">'
 +'</div></div>';
@@ -1213,7 +1213,7 @@ function solicitar_juego()
 {
 console.log("a solicitar_juego")
 //var typegame= sltypgame.options[sltypgame.selectedIndex].value;
-var type_game= in_ch_vce.checked ? "Explain The Word (By Voice)" : "Explain The Word"; 
+var type_game= /*in_ch_vce.checked!!!*/ null ? "Explain The Word (By Voice)" : "Explain The Word"; 
 var list_word= sl_list.options[sl_list.selectedIndex].id;
 var nro_player= sl_nro_player.options[sl_nro_player.selectedIndex].value;
 dv_con_play.removeChild(dv_create_game);  
@@ -1265,7 +1265,7 @@ if(!dv_game_bar_)
 {
 var nudiv= document.createElement("DIV");
 nudiv.id= "dv_game_bar_"+roomjx;
-nudiv.setAttribute("class", "bor");
+nudiv.setAttribute("class", "bor_1p_bla");
 nudiv.setAttribute("style", "display:table")
 nudiv.setAttribute("onclick", "juntarse_a_juego(\'"+roomjx+"\',\'"
 +nme_juex+"\',\'"
@@ -1315,16 +1315,16 @@ nudivj.innerHTML= '<div id="dv_jue_cab">'
 +'<div id="dv_jue_con_user" class="flex_row pos_a top_50p bot_30p w">'
 +'<div id="dv_jue_con" class="ove_y wor_wra w bor_1p_grey"></div>'
 +'<div id="dv_jue_user" class="wor_wra pos_rel fon_bol bor_1p_grey" style="width:100px">'
-+'<div id="dv_jue_username_'+roomjx+'" class="cl_dv_chat_room_username"></div>'
-+'<div id="dv_jue_user_bts_'+roomjx+'" class="cl_dv_chat_room_user_bts">'
++'<div id="dv_jue_username_'+roomjx+'" ></div>'
+/*+'<div id="dv_jue_user_bts_'+roomjx+'" class="cl_dv_chat_room_user_bts">'
 +'<input type="button" value="_"'
-+' onclick="es_boton_vacio()"></div>'
++' onclick="es_boton_vacio()"></div>'*/
 +'</div>'
 +'</div>'//_con_user
 +'<div id="dv_jue_msg" class="pos_a bot h30p flex_row w90">'
 +'<form id="fm_jue_msg" class="pos_a lef top bot rig_30p" onsubmit="enviar_msg_jue(event)">'
 +'<div class="pos_a top bot lef rig_30p">'
-+'<input type="text" id="in_jue_msg" class="w h" placeholder="write your text..." data-room="'+roomjx+'"></div>'
++'<input type="text" id="in_jue_msg" onkeydown="esta_tipeando(this)" class="w h" placeholder="write your text..." data-room="'+roomjx+'"></div>'
 +'<button id="btn_jue_snd_msg" class="pos_a rig h w30p" type="submit" >'
 +'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'//paper-plane
 +'</button></form>'
@@ -1374,10 +1374,11 @@ nro_game,type_game,list_word,nro_player}*/
 console.log("on: 4manda user al juego");
 console.log(JSON.stringify(o_gamex));
 var userj= "";
-for(var nom in o_gamex.users_jue)
+for(var u_idx in o_gamex.users_jue)
 {
-userj+= '<div id="dv_jue_pnt_'+nom+'" class="inl_blo ali_cen w30p bor_1p_bla bor_r_">0</div>'
-+o_gamex.users_jue[nom][0]+"<br>";
+userj+= '<div id="dv_jue_pnt_'+u_idx+'" class="inl_blo ali_cen w30p bor_1p_bla bor_r_">0</div>'
++'<span id="sp_typ_ico_'+o_gamex.nro_game+'_'+u_idx+'"></span>'
++'<span id="sp_user_name_'+o_gamex.nro_game+'_'+u_idx+'">'+o_gamex.users_jue[u_idx][0]+'</span>'+"<br>";
 }//for
 var dv_jue_username_= document.getElementById("dv_jue_username_"+o_gamex.nro_game);
 dv_jue_username_.innerHTML= "";

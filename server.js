@@ -163,12 +163,13 @@ user.save((err)=>
 {
 if (err) throw err;
 })//save
-})//findone  
+  
 User.find({online: {$eq: false} }).sort({fecha_de_login: -1}).limit(5).exec(function(err, users_5_no)
 {
 console.log("emit: last 5 connected users")
 io.sockets.emit("last 5 connected users", users_5_no)  
-});//find last 5   
+});//find last 5  
+})//findone  
 }//if user lgged
 //console.log(socket.request.user.logged_in);
 });//skon pedir usuario en chat
