@@ -341,13 +341,9 @@ dv_profile_user_.innerHTML= '<div id="dv_profile_user_tit_'+o_userx.user._id+'" 
 +' data-user-id-rcv="'+o_userx.user_id_rcv
 +'" data-skt-id-rcv="'+o_userx.skt_id_rcv
 +'" onclick="mandar_chat_request_profile(this)">'
++'<div class="pos_a bot rig bac_col_bla" style="width:10px; height:10px; cursor: se-resize;"'
++' onmousedown="empezar_a_resizar(event,this.parentElement.parentElement)" onmouseup="terminar_de_resizar()"></div>'  
 +'</div>'; 
-
-jQuery(function($)
-{
-
-$("#dv_profile_user_"+o_userx.user._id).resizable();
-});//jQuery
 
 return dv_profile_user_;
 }//dar_ventana_profile
@@ -688,21 +684,11 @@ dv_chat_room_.innerHTML= '<div id="dv_chat_room_tit_'+roomx+'" class="tab w h30p
 +'</button>'
 +'<input type="button" class="pos_a h w30p" value="_" onclick="es_boton_vacio()">'
 +'</div>'
++'<div class="pos_a bot rig bac_col_bla" style="width:10px; height:10px; cursor: se-resize;"'
++' onmousedown="empezar_a_resizar(event,this.parentElement.parentElement)" onmouseup="terminar_de_resizar()"></div>'
 +'</div>'
 
 dv_chat_room_.addEventListener("click", traer_al_frente.bind(null, dv_chat_room_))
-/*
-var in_chat_room_msg_= document.getElementById("in_chat_room_msg_"+roomx);
-in_chat_room_msg_.addEventListener("keydown", function()
-{
-esta_tipeando(in_chat_room_msg_);
-});//addeventlistener keydown tipeando
-*/
-jQuery(function($)
-{
-  
-$('#dv_chat_room_'+roomx).resizable();
-});//jQuery
 
 return dv_chat_room_;
 }//dar_dv_chat_room
@@ -761,6 +747,38 @@ window.removeEventListener(
 "mousemove", mover_dv, true
 )
 }//terminar_de_mover
+
+
+var ws=0;
+var hs=0;
+
+
+function empezar_a_resizar(e, d)
+{//onmousedown
+o_d= d;
+xp= e.clientX;
+yp= e.clientY;
+ws= parseInt( document.defaultView.getComputedStyle(d).width, 10)
+hs= parseInt( document.defaultView.getComputedStyle(d).height, 10)
+
+window.addEventListener(
+"mousemove", resizar_dv, true
+)
+}//empezar_a_resizar
+
+function resizar_dv(e)
+{
+o_d.style.width= (ws+e.clientX-xp)+"px";
+o_d.style.height= (hs+e.clientY-yp)+"px";
+}//resizar_dv
+
+function terminar_de_resizar()
+{//onmouseup
+window.removeEventListener(
+"mousemove", resizar_dv, true
+)
+}//terminar_de_resizar
+
 
 
 function seleccionar_emoji(roomf)
@@ -1193,6 +1211,7 @@ nudivj.innerHTML= '<div id="dv_jue_cab">'
 +' onclick="es_boton_vacio()"></div>'*/
 +'</div>'
 +'</div>'//_con_user
+  
 +'<div id="dv_jue_msg" class="pos_a bot h30p flex_row w90">'
 +'<form id="fm_jue_msg" class="pos_a lef top bot rig_30p" onsubmit="enviar_msg_jue(event)">'
 +'<div class="pos_a top bot lef rig_30p">'
@@ -1203,7 +1222,9 @@ nudivj.innerHTML= '<div id="dv_jue_cab">'
 +'<button class="pos_a rig h"  onclick="seleccionar_emoji_jue()">'
 +'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'//smile-o
 +'</button>'
-+'</div>';
++'</div>'
++'<div class="pos_a bot rig bac_col_bla" style="width:10px; height:10px; cursor: se-resize;"'
++' onmousedown="empezar_a_resizar(event,this.parentElement)" onmouseup="terminar_de_resizar()"></div>';
 dv_con_play.appendChild(nudivj);
 socket_client.emit("entrar roomj",
 {
@@ -1212,11 +1233,7 @@ type_game: nme_juex,
 list_word: lis_juex,
 nro_player: nro_playerx
 });
-jQuery(function($)
-{
 
-$("#dv_jue").resizable();
-});//jQuery
 }//if no esta, crea
 };//crear_juego
 
@@ -1573,14 +1590,6 @@ cerrar_reporte();
 
 function nooP(){}//no operations, for swap functions
 
-//dv dictionary, movible y resizable
-jQuery(function($)
-{
-
-$('#dv_dict').resizable();
-
-$('#dv_nts_wrp').resizable();  
-});//dvdict y dvntswrp, movibles y resizable
 
 
 /*
