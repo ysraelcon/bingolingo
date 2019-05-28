@@ -285,14 +285,14 @@ return tr;
 }//dar_tr_user
 
 
-function informar_profile(ele)
+function informar_profile(trx)
 {
-console.log("a informar_profile: "+ele)
-if(ele.id != socket_client.id)
+console.log("a informar_profile: "+trx)
+if(trx.id != socket_client.id)
 {//if no es el mismo 
 
-var user_id_rcv= ele.getAttribute("data-user-id");
-var skt_id_rcv= ele.id;
+var user_id_rcv= trx.getAttribute("data-user-id");
+var skt_id_rcv= trx.id;
 socket_client.emit("ver su profile",
 {
 user_id_rcv: user_id_rcv,
@@ -307,11 +307,11 @@ socket_client.on("perfil a ver", function(o_userx)
 {
 //o_userx{user,user_id_rcv,skt_id_rcv}
 console.log("on: perfil a ver");
-//console.log(JSON.stringify(o_userx.user));
-if(typeof(dv_profile_user) == "undefined")
+var dv_profile_user_ = document.querySelector("#dv_profile_user_"+o_userx.user_id_rcv)
+if(typeof(dv_profile_user_) == "undefined" || dv_profile_user_ == null)
 {
 dv_con_chat.appendChild(dar_ventana_profile(o_userx)); 
-}//if no dv_profile_user
+}//if no dv_profile_user_
 });//skcl perfil a ver
 
 
@@ -322,7 +322,8 @@ var dv_profile_user_= document.createElement("div")
 dv_profile_user_.id= "dv_profile_user_"+o_userx.user._id;
 dv_profile_user_.setAttribute("class", "pos_a_i top_20 lef_20 w60 h60 bordado_r_gris bac_col_whi al_frente")
 dv_profile_user_.innerHTML= '<div id="dv_profile_user_tit_'+o_userx.user._id+'" class="pos_r h30p bor_r5500">'
-+'<div id="dv_profile_user_tit_nme_'+o_userx.user._id+'" class="tex_cen pos_a lef rig_30p h cur_mov bac_col_emerg_profile">'+o_userx.user.firstname+" "+o_userx.user.lastname+'</div>'
++'<div id="dv_profile_user_tit_nme_'+o_userx.user._id+'" class="tex_cen pos_a lef rig_30p h cur_mov bac_col_emerg_profile" '
++' onmousedown="empezar_a_mover(event, this.parentElement.parentElement)" onmouseup="terminar_de_mover()">'+o_userx.user.firstname+" "+o_userx.user.lastname+'</div>'
 +'<div id="dv_profile_user_tit_cerrar_'+o_userx.user._id+'" class="tex_cen pos_a rig h w30p cur_poi bor_r0500" onclick="cerrar_profile_user(\''+o_userx.user._id+'\')">X</div>'
 +'</div>'
 
@@ -344,14 +345,7 @@ dv_profile_user_.innerHTML= '<div id="dv_profile_user_tit_'+o_userx.user._id+'" 
 
 jQuery(function($)
 {
-var draggableDiv= $("#dv_profile_user_"+o_userx.user._id).draggable();
-$('#dv_profile_user_con_'+o_userx.user._id, draggableDiv).mousedown(function(ev)
-{
-draggableDiv.draggable('disable');
-}).mouseup(function(ev)
-{
-draggableDiv.draggable('enable');
-});
+
 $("#dv_profile_user_"+o_userx.user._id).resizable();
 });//jQuery
 
@@ -440,14 +434,14 @@ socket_client.emit("abrir room", roomx);
 
 socket_client.on("recibir usuarios en el room", function(o_roomx)
 {
-//o_roomx{users_room{u_id}, chat_room[], skt_id, room, prv}
+//o_roomx{o_rooms_user{u_id}, chat_room[], skt_id, room, prv}
 console.log("on: recibir usuarios en el room")
 var users= ""
-for(var u_idx in o_roomx.users_room)
+for(var u_idx in o_roomx.o_rooms_user)
 {
 users+= '<span id="sp_user_'+o_roomx.room+'_'+u_idx+'">'
 +'<span id="sp_typ_ico_'+o_roomx.room+'_'+u_idx+'"></span>'
-+'<span id="sp_user_name_'+o_roomx.room+'_'+u_idx+'">'+o_roomx.users_room[u_idx]+'</span>'
++'<span id="sp_user_name_'+o_roomx.room+'_'+u_idx+'">'+o_roomx.o_rooms_user[u_idx]+'</span>'
 +'</span><br>'
 }//for
 var dv_chat_room_user_= document.getElementById("dv_chat_room_user_"+o_roomx.room);
@@ -470,7 +464,7 @@ dv_chat_room_con_.scrollTo(0, dv_chat_room_con_.scrollHeight);
 
 socket_client.on("actualizar rooms", function(o_roomx)
 {
-//o_roomx{users_room,room}
+//o_roomx{o_rooms_user,room}
 console.log("on: actualizar rooms");
 if(rooms[o_roomx.room])
 {
@@ -481,8 +475,8 @@ spanear_room(o_roomx.room, dv_lang_rooms_con)
 {
 spanear_room(o_roomx.room, dv_theme_rooms_con)
 }//else if thm room
-//o_roomx{users_room,chat_room,skt_id,room} 
-var cnt_users= Object.keys(o_roomx.users_room).length;
+//o_roomx{o_rooms_user,chat_room,skt_id,room} 
+var cnt_users= Object.keys(o_roomx.o_rooms_user).length;
 var sp_chat_cant_= document.getElementById("sp_chat_cant_"+o_roomx.room);
 sp_chat_cant_.innerHTML= cnt_users != 0 ? cnt_users : "";
 }//if no secret
@@ -491,36 +485,7 @@ sp_chat_cant_.innerHTML= cnt_users != 0 ? cnt_users : "";
 
 //-----------
 
-/* a eliminar !!! */
-function minimizar_dv_chat(roomx)
-{//roomx
-console.log("a minimizar_dv_chat:"+roomx)
-jQuery(function($)
-{
-var dv_chat_room_tit_min_= "#dv_chat_room_tit_min_"+roomx;
-var dv_chat_room_= "#dv_chat_room_"+roomx;
-var dv_chat_room_con_user_= "#dv_chat_room_con_user_"+roomx;
-var dv_chat_room_msg_= "#dv_chat_room_msg_"+roomx;
-if($(dv_chat_room_tit_min_).html() == '-')
-{
-$(dv_chat_room_).height(30);
-$(dv_chat_room_tit_min_).html('+');
-$(dv_chat_room_con_user_).hide();
-$(dv_chat_room_msg_).hide();
-$(dv_chat_room_).resizable("disable");
-$(dv_chat_room_).css('z-index', 9999);
 
-}//if -
-else
-{
-$(dv_chat_room_).height(320);
-$(dv_chat_room_tit_min_).html('-');
-$(dv_chat_room_con_user_).show();
-$(dv_chat_room_msg_).show();
-$(dv_chat_room_).resizable("enable");
-}//else +
-});//jQuery
-}//minimizar_dv_chat
 
 
 
@@ -694,7 +659,8 @@ dv_chat_room_.setAttribute("class", "pos_a_i top_10 lef_10 w320p h270p bor_s bor
 dv_chat_room_.setAttribute("style", "height: 270px;")
 
 dv_chat_room_.innerHTML= '<div id="dv_chat_room_tit_'+roomx+'" class="tab w h30p pos_a bor_r fon_ari bac_col_whi" style="z-index: 1">'
-+'<div id="dv_chat_room_tit_n_'+roomx+'" class="tab_cel tex_cen ali_mid w70 h cur_mov col_whi fon_ari fon_bol bor_r5000" >'+(rooms[roomx] || roomx)+'</div>'
++'<div id="dv_chat_room_tit_n_'+roomx+'" class="tab_cel tex_cen ali_mid w70 h cur_mov col_whi fon_ari fon_bol bor_r5000"'
++' onmousedown="empezar_a_mover(event, this.parentElement.parentElement)" onmouseup="terminar_de_mover()" >'+(rooms[roomx] || roomx)+'</div>'
 +'<div id="dv_chat_room_tit_min_'+roomx+'" class="tab_cel tex_cen ali_mid w10 h cur_poi" onclick="minimizar_dv_chat_r(\''+roomx+'\')">-</div>'
 +'<div id="dv_chat_room_tit_tam_'+roomx+'" class="tab_cel tex_cen ali_mid w10 h cur_poi" onclick="restaurar_tam_chat(\''+roomx+'\')">L</div>'
 +'<div id="dv_chat_room_tit_x_'+roomx+'" class="tab_cel tex_cen ali_mid w10 h cur_poi bor_r0500" onclick="cerrar_dv_chat(\''+roomx+'\')">X</div>'
@@ -734,17 +700,7 @@ esta_tipeando(in_chat_room_msg_);
 */
 jQuery(function($)
 {
-var draggableDiv =  $('#dv_chat_room_'+roomx).draggable();
-$('#dv_chat_room_con_'+roomx, draggableDiv)
-.mousedown(function(ev)
-{
-draggableDiv.draggable('disable');
-})//mousedown
-.mouseup(function(ev)
-{
-draggableDiv.draggable('enable');
-});//mouseup
-
+  
 $('#dv_chat_room_'+roomx).resizable();
 });//jQuery
 
@@ -777,6 +733,34 @@ dv_chat_room_.style= "height: 270px"
 dv_chat_room_tit_min_.innerHTML= "-";
 }//else
 }//minimizar_dv_chat_r
+
+var xp=0;
+var yp=0;
+var o_d= null;
+
+function empezar_a_mover(e, dvx)
+{//onmousedown
+o_d= dvx
+xp=e.clientX-o_d.offsetLeft
+yp=e.clientY-o_d.offsetTop
+window.addEventListener(
+"mousemove", mover_dv, true
+)
+}//empezar_a_mover
+
+function mover_dv(e)
+{
+o_d.style.position= "absolute"
+o_d.style.top=(e.clientY-yp)+"px"
+o_d.style.left=(e.clientX-xp)+"px"
+}//mover_dv
+
+function terminar_de_mover()
+{//onmouseup
+window.removeEventListener(
+"mousemove", mover_dv, true
+)
+}//terminar_de_mover
 
 
 function seleccionar_emoji(roomf)
@@ -846,11 +830,6 @@ dv_con_chat.removeChild(dv_profile_user_);
 }//cerrar_profile_user
 
 
-function cerrar_inf_user()
-{
-console.log("a cerrar_inf_user")
-dv_con_chat.removeChild(dv_inf_user);
-}//cerrar inf profile y chat request
 
 
 
@@ -940,101 +919,6 @@ cerrar_waiting(o_roomx.skt_id_rcv, o_roomx.room_bth)
 
 
 
-function crear_chat_privado(room_bthx)
-{
-console.log("a crear_chat_privado")
-var dv_chat_room_= document.getElementById("dv_chat_room_"+room_bthx);
-if(!dv_chat_room_)
-{
-var dvs= document.querySelectorAll("#dv_con_chat>div");
-for(var i=0; i < dvs.length; i++)
-{
-dvs[i].classList.remove("al_frente");
-}//for    
-var nudiv= document.createElement("DIV");
-nudiv.id= "dv_chat_room_"+room_bthx;
-nudiv.setAttribute("class","pos_a_i top_10 lef_10 w80 h60 bor_r bor_s bac_whi")
-nudiv.innerHTML= '<div class="tab h30p w pos_a fon_ari bor_r">'
-+'<div class="tab_cel ali_cen ali_mid w70 pos_r h cur_mov bac_col_tit_chat_prv whi bor_r5000 fon_ari fon_bol">Chat with</div>'
-+'<div id="dv_chat_room_tit_min_'+room_bthx
-+'" class="tab_cel ali_cen ali_mid w10 pos_r h"'
-+' onclick="minimizar_dv_chat(\''+room_bthx+'\')">-</div>'
-+'<div class="tab_cel ali_cen ali_mid w10 pos_r h"'
-+' onclick="restaurar_tam_chat(\''+room_bthx+'\')">L</div>'
-+'<div class="tab_cel ali_cen ali_mid w10 pos_r h bor_r0500 bac_col_crr_chat_p whi"'
-+' onclick="cerrar_dv_chat(\''+room_bthx+'\')">x</div>'
-+'</div>'//dv_chat_room_tit
-+'<div id="dv_chat_room_con_user_'+room_bthx
-+'" class="pos_a top_30p bot_30p w">'
-+'<div id="dv_chat_room_con_'+room_bthx+'" class="h w70 inl_blo pos_r bac_col_con_chat_prv wor_wra ove_y"></div>'
-+'<div id="dv_chat_room_user_'+room_bthx+'" class="h w30 inl_blo pos_r bac_col_usr_chat_prv fon_bol wor_wra ove_y">'
-+'<div id="dv_chat_room_username_'+room_bthx+'" class="cl_dv_chat_room_username" class="pos_a"></div>'
-+'</div>'//_user
-+'</div>'//_con_user
-+'<div id="dv_chat_room_msg_'+room_bthx+'" class="pos_a bot h30p w">'
-+'<div class="h w70 inl_blo pos_r">'
-+'<form class="h w" onsubmit="enviar_msg_prv(event,\''+room_bthx+'\')">'
-+'<div class="h pos_a lef rig_30p">'
-+'<input type="text" id="in_chat_room_msg_'+room_bthx+'" class="w h pos_a" autocorrect="off" autocomplete="off"'
-+' data-room="'+room_bthx
-+'" placeholder="write your message..."></div>'
-+'<button id="btn_chat_room_msg_'+room_bthx+'" class="w30p h pos_a rig" type="submit" >'
-+'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'//paper-plane
-+'</button>'
-+'</form></div>'
-+'<div class="h inl_blo pos_a w30 bac_col_usr_chat_prv">'
-+'<button class="w30p h"  onclick="seleccionar_emoji(\''+room_bthx+'\')">'
-+'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'+//smile-o
-'</button>'/*
-'<button id="bt_call_'+room_bthx+
-'" class="h" onclick="solicitar_llamada(this,\''+room_bthx+'\')">'+
-'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z"/></svg>'+//phone
-'</button>'+
-'<button id="bt_mte_call_'+room_bthx+'" class="h">'+
-'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M463 945l-101 101q-42-103-42-214v-128q0-26 19-45t45-19 45 19 19 45v128q0 53 15 113zm1114-602l-361 361v128q0 132-94 226t-226 94q-55 0-109-19l-96 96q97 51 205 51 185 0 316.5-131.5t131.5-316.5v-128q0-26 19-45t45-19 45 19 19 45v128q0 221-147.5 384.5t-364.5 187.5v132h256q26 0 45 19t19 45-19 45-45 19h-640q-26 0-45-19t-19-45 19-45 45-19h256v-132q-125-13-235-81l-254 254q-10 10-23 10t-23-10l-82-82q-10-10-10-23t10-23l1234-1234q10-10 23-10t23 10l82 82q10 10 10 23t-10 23zm-380-132l-621 621v-512q0-132 94-226t226-94q102 0 184.5 59t116.5 152z"/></svg>'+//microphhone-slash
-'</button>'+
-'<audio id="lcl_aud" style="display:none" oncontextmenu="return false;" disabled></audio>'+  */
-+'</div>'//_user_bts
-+'</div>';    
-dv_con_chat.appendChild(nudiv);
-nudiv.addEventListener("click", function()
-{
-var cls_act= nudiv.getAttribute("class");
-var re= new RegExp("al_frente", "i");
-if(!re.test(cls_act))
-{
-var dvs= document.querySelectorAll("#dv_con_chat>div");
-for(var i= 0; i < dvs.length; i++)
-{
-dvs[i].classList.remove("al_frente");
-}//for
-this.classList.add("al_frente");
-//console.log("al frente");
-}//if no la tiene
-});//click, poner al frente     
-jQuery(function($)
-{
-var dv_chat_room_= "#dv_chat_room_"+room_bthx;
-var dv_chat_room_con_= "#dv_chat_room_con_"+room_bthx;  
-var draggableDiv= $(dv_chat_room_).draggable();
-$(dv_chat_room_con_, draggableDiv)
-.mousedown(function(ev)
-{
-draggableDiv.draggable('disable');
-}).mouseup(function(ev)
-{
-draggableDiv.draggable('enable');
-});
-$(dv_chat_room_).resizable();
-var in_chat_room_msg_= document.getElementById("in_chat_room_msg_"+room_bthx);
-in_chat_room_msg_.addEventListener("keydown", function()
-{
-esta_tipeando(in_chat_room_msg_);
-});//addeventlistener keydown tyP  
-});//jQuery
-socket_client.emit("mandar usuarios al chat privado", {room_bth: room_bthx})
-}//if dv_chat_room_ no creado
-}//crear_chat_privado
 
 
 
@@ -1127,19 +1011,6 @@ dv_con_chat.removeChild(dv_waiting);
 
 
 
-function enviar_msg_prv(ev, room_bthx)
-{
-console.log("a enviar_msg_prv: "+room_bthx)
-ev.preventDefault();
-var in_chat_room_msg_= document.querySelector("#in_chat_room_msg_"+room_bthx);
-if(in_chat_room_msg_.value != "")
-{
-socket_client.emit("send message chat r",
-{msg: in_chat_room_msg_.value, room_bth: room_bthx});
-//inr_msg.getAttribute("data-room")  
-}//if no vacio
-in_chat_room_msg_.value= "";
-}//enviar_msg_prv chat prv
 
 
 
@@ -1305,7 +1176,8 @@ nudivj.setAttribute("class", "flex_col pos_a_i top_10 bor_r bor_1p_grey bac_db82
 nudivj.setAttribute("style", "width:270px;height:250px")
 nudivj.innerHTML= '<div id="dv_jue_cab">'
 +'<div id="dv_jue_tit" class="flex_row ali_cen fon_ari">'
-+'<div id="dv_jue_tit_nm" class="w ali_cen bor_r5000 bac_285 whi cur_mov">'+nme_juex+'</div>'
++'<div id="dv_jue_tit_nm" class="w ali_cen bor_r5000 bac_285 whi cur_mov" '
++' onmousedown="empezar_a_mover(event, this.parentElement.parentElement.parentElement)" onmouseup="terminar_de_mover()" >'+nme_juex+'</div>'
 +'<div id="dv_jue_tit_rsz" class="ali_cen w30p cur_poi" onclick="restaurar_tam_jue()">L</div>'
 +'<div id="dv_jue_tit_cerrar" class="ali_cen w30p cur_poi bac_800 whi bor_r0500" onclick="cerrar_juego(\''+roomjx+'\')">X</div>'
 +'</div>'
@@ -1342,24 +1214,7 @@ nro_player: nro_playerx
 });
 jQuery(function($)
 {
-var draggableDiv = $('#dv_jue').draggable();
-$('#dv_jue_con', draggableDiv)
-.mousedown(function(ev)
-{
-draggableDiv.draggable('disable');
-}).mouseup(function(ev)
-{
-draggableDiv.draggable('enable');
-});
-var draggableDiv = $('#dv_jue').draggable(); 
-$('#dv_jue_exp', draggableDiv)
-.mousedown(function(ev)
-{
-draggableDiv.draggable('disable');
-}).mouseup(function(ev)
-{
-draggableDiv.draggable('enable');
-});  
+
 $("#dv_jue").resizable();
 });//jQuery
 }//if no esta, crea
@@ -1721,27 +1576,9 @@ function nooP(){}//no operations, for swap functions
 //dv dictionary, movible y resizable
 jQuery(function($)
 {
-var draggableDiv = $('#dv_dict').draggable();
-$('#dv_result_dict', draggableDiv)
-.mousedown(function(ev)
-{
-draggableDiv.draggable('disable');
-})//mousedown
-.mouseup(function(ev)
-{
-draggableDiv.draggable('enable');
-});//mouseup
+
 $('#dv_dict').resizable();
-var draggableDivnts = $('#dv_nts_wrp').draggable();
-$('#dv_nts_con', draggableDivnts)
-.mousedown(function(ev)
-{
-draggableDivnts.draggable('disable');
-})//mousedown
-.mouseup(function(ev)
-{
-draggableDivnts.draggable('enable');
-});//mouseup
+
 $('#dv_nts_wrp').resizable();  
 });//dvdict y dvntswrp, movibles y resizable
 

@@ -81,8 +81,8 @@ var users_cnnt= {};
 //users_cnnt{user_id:{user,skt_id}}
 var users_5_no_cnnt= [];
 
-var users_room= {};
-//users_room{roomf:{user_idf:firstname}}
+var o_rooms_user= {};//c_rooms_user , collection_rooms_user
+//o_rooms_user{roomf:{user_idf:firstname}}
 
 var users_secret_room= {};
 var users_jue= {};
@@ -116,7 +116,7 @@ console.log("on: connection: "+ socket.request.user.firstname);
 console.log("lanza barras de juego");
 for(var juex in jue)
 {
-if(Object.keys(jue[juex].nro_player_act).length!=0)
+if(Object.keys(jue[juex].nro_player_act).length != 0)
 {
 io.sockets.emit("los demas bar jue",
 {
@@ -131,7 +131,7 @@ nro_player: jue[juex].nro_player
 //---chat---
 
 //---users---  
-  
+
 socket.on("pedir usuario en chat", function()
 {
 //socket.id, socket.request.user, socket.rooms, socket.adapter
@@ -145,12 +145,12 @@ bstlk: Room { sockets: { 'OoGV-XjIt2V8k2kmAAAA': true }, length: 1 } }
 if(socket.request.user)
 {
 users_cnnt[socket.request.user._id]= {user: socket.request.user, //!!!no mandar el user
-skt_id:socket.id};
+skt_id: socket.id};
 io.sockets.emit('recibir usuarios', users_cnnt);
-for( var room in users_room)
+for( var room in o_rooms_user)
 {
 io.to(socket.id).emit("actualizar rooms",
-{users_room: users_room[room], room: room});
+{o_rooms_user: o_rooms_user[room], room: room});
 }//for actualiza, cuando entra 
 User.findOne({_id: socket.request.user._id}, (err, user) =>
 {
@@ -209,12 +209,12 @@ socket.on('abrir room', function(roomf)
 {
 //roomf="gnrl" roomf
 console.log("on: abrir room: "+roomf)
-if(!users_room[roomf])
+if(!o_rooms_user[roomf])
 {
-users_room[roomf]= {};
+o_rooms_user[roomf]= {};
 }//if indef
-//console.log(users_room[roomf])
-users_room[roomf][socket.request.user._id]= socket.request.user.firstname;
+//console.log(o_rooms_user[roomf])
+o_rooms_user[roomf][socket.request.user._id]= socket.request.user.firstname;
 socket.join(roomf);
 console.log("joined in "+roomf);
 //console.log(io.sockets.adapter.rooms[roomf]);   
@@ -234,14 +234,14 @@ if(err) throw err;
 //console.log("savedddd");
 io.to(roomf).emit('recibir usuarios en el room',
 {
-users_room: users_room[roomf],
+o_rooms_user: o_rooms_user[roomf],
 chat_room: chatf.chats[roomf],
 skt_id: socket.id,
 room: roomf
 });
 io.sockets.emit("actualizar rooms",
 {
-users_room: users_room[roomf],
+o_rooms_user: o_rooms_user[roomf],
 chat_room: chatf.chats[roomf],
 skt_id: socket.id,
 room: roomf
@@ -304,17 +304,17 @@ socket.on("cerrar room", function(roomf)
 console.log("on: cerrar room:"+roomf);
 socket.leave(roomf);
 if(!socket.id) return;
-//console.log(users_room[roomf]);
-if(users_room[roomf])
-delete users_room[roomf][socket.request.user._id];
+//console.log(o_rooms_user[roomf]);
+if(o_rooms_user[roomf])
+delete o_rooms_user[roomf][socket.request.user._id];
 io.to(roomf).emit('recibir usuarios en el room',
-{users_room: users_room[roomf], room: roomf});
+{o_rooms_user: o_rooms_user[roomf], room: roomf});
 /*
 io.to(socket.id).emit('recibir usuarios en el room',
-{users_room:users_room[roomf],
+{o_rooms_user:o_rooms_user[roomf],
 room:roomf});*/
 io.sockets.emit("actualizar rooms",
-{users_room: users_room[roomf], room: roomf});
+{o_rooms_user: o_rooms_user[roomf], room: roomf});
 /*else{
 socket.leave(roomf);
 //corregir room privados !!!
@@ -337,18 +337,18 @@ socket.on("entrar a secret room", function(room_secretf)
 {
 //room_secretf=secret name's room
 console.log("on: entrar a secret room: "+room_secretf)
-if(!users_room[room_secretf])
+if(!o_rooms_user[room_secretf])
 {
-users_room[room_secretf]={};
+o_rooms_user[room_secretf]={};
 }//if indef
-//console.log(users_room[room_secretf])
-users_room[room_secretf][socket.request.user._id]= socket.request.user.firstname;
+//console.log(o_rooms_user[room_secretf])
+o_rooms_user[room_secretf][socket.request.user._id]= socket.request.user.firstname;
 socket.join(room_secretf);
 console.log(io.sockets.adapter.rooms[room_secretf]);
 
 io.to(room_secretf).emit('recibir usuarios en el room',
 {
-users_room: users_room[room_secretf],
+o_rooms_user: o_rooms_user[room_secretf],
 skt_id: socket.id,
 room: room_secretf,
 chat_room: []
@@ -370,12 +370,12 @@ var id_mnd= socket.request.user._id;
 var user_id_rcv= o_userx.user_id_rcv;
 var room_bth= id_mnd > user_id_rcv 
 ? id_mnd+"_"+user_id_rcv : user_id_rcv+"_"+id_mnd;
-if(!users_room[room_bth])
+if(!o_rooms_user[room_bth])
 {
-users_room[room_bth]= {};
+o_rooms_user[room_bth]= {};
 }//if indef
-//users_room{room_nme{user_id:firstname,...},...}
-users_room[room_bth][socket.request.user._id]= socket.request.user.firstname;
+//o_rooms_user{room_nme{user_id:firstname,...},...}
+o_rooms_user[room_bth][socket.request.user._id]= socket.request.user.firstname;
 socket.join(room_bth);
 console.log(io.sockets.adapter.rooms[room_bth]); 
 io.to(o_userx.skt_id_rcv).emit("recibir chat request",
@@ -422,7 +422,7 @@ socket.on("abrir chat request", function(o_userx)
 {
 //o_userx{room_bth,skt_id_mnd}
 console.log("on: abrir chat request");
-users_room[o_userx.room_bth][socket.request.user._id]= socket.request.user.firstname;
+o_rooms_user[o_userx.room_bth][socket.request.user._id]= socket.request.user.firstname;
 socket.join(o_userx.room_bth);
 console.log(io.sockets.adapter.rooms[o_userx.room_bth]);
 var nme_rcv= socket.request.user.firstname;
@@ -454,7 +454,7 @@ console.log("on: aceptar chat request")
 //console.log(socket.id)
 var room_bth= o_roomx.room_bth;
 io.to(room_bth).emit("cerrar waiting", {room_bth: room_bth}) 
-users_room[room_bth][socket.request.user._id]= socket.request.user.firstname;
+o_rooms_user[room_bth][socket.request.user._id]= socket.request.user.firstname;
 socket.join(room_bth);
 io.to(room_bth).emit("crear chat privado", o_roomx);
 //io.to(skt_mnd).emit("acepta chat request",o_roomx);
@@ -468,10 +468,10 @@ socket.on("mandar usuarios al chat privado", function(o_roomx)
 console.log("on: mandar usuarios al chat privado")
 var room_bth= o_roomx.room_bth;
 var m_names= [];
-for(var ele in users_room[room_bth])
+for(var ele in o_rooms_user[room_bth])
 {
 //ele - user_id
-m_names.push(users_room[room_bth][ele])// [firstname, skt_id]
+m_names.push(o_rooms_user[room_bth][ele])// [firstname, skt_id]
 }//for
 var o_user= {};
 o_user.m_names= m_names;
@@ -498,7 +498,7 @@ io.to(room_bth).emit("meter usuarios al chat privado", o_user);
 */
 io.to(room_bth).emit("recibir usuarios en el room",
 {
-users_room: users_room[room_bth],
+o_rooms_user: o_rooms_user[room_bth],
 skt_id: null,
 room: room_bth,
 chat_room: chatprv,
@@ -775,7 +775,8 @@ if(winner == "")
 jue[roomjf].player_trn++;
 jue[roomjf].tiempo= 90;
 jue[roomjf].mod= "ten";
-var pmr_id= Object.keys(jue[roomjf].nro_player_act)[ jue[roomjf].player_trn% Object.keys(jue[roomjf].nro_player_act).length ];
+var pmr_id= Object.keys(jue[roomjf].nro_player_act)[ jue[roomjf].player_trn
+ % Object.keys(jue[roomjf].nro_player_act).length ];
 var pmr_user= jue[roomjf].nro_player_act[pmr_id];//[fn,skt_id]
 jue[roomjf].word_to_guess= jue[roomjf].list_word[dar_aleatoria_pos(0, jue[roomjf].list_word.length)];  
 if(Object.keys(jue[roomjf].nro_player_act).length > 1)
@@ -822,13 +823,14 @@ socket.on('send message jue', function(o_msg_gamex)
 {
 //o_msg_gamex{msg,nro_game}
 console.log("on: send message jue: "+o_msg_gamex)
-var pmr_id= Object.keys(jue[o_msg_gamex.nro_game].nro_player_act)[ jue[o_msg_gamex.nro_game].player_trn% Object.keys(jue[o_msg_gamex.nro_game].nro_player_act).length ];
+var pmr_id= Object.keys(jue[o_msg_gamex.nro_game].nro_player_act)[ jue[o_msg_gamex.nro_game].player_trn 
+ % Object.keys(jue[o_msg_gamex.nro_game].nro_player_act).length ];
 var skt_id_player= jue[o_msg_gamex.nro_game].nro_player_act[pmr_id][1];//[fn,skt_id]
 var sme_jug= skt_id_player == socket.id;//same jugador ?
 var re= new RegExp(jue[o_msg_gamex.nro_game].word_to_guess, "i");
 if(re.test(o_msg_gamex.msg)
-&&jue[o_msg_gamex.nro_game].mod == "ten"
-&&!(sme_jug))
+ && jue[o_msg_gamex.nro_game].mod == "ten"
+ && !(sme_jug))
 {
 var guess= true;
 }//if
@@ -942,15 +944,15 @@ io.sockets.emit("last 5 connected users", users_5_no)
 });//find last 5 
 io.sockets.emit('recibir usuarios', users_cnnt);
 console.log("on: disconnet: "+ socket.request.user.firstname);
-for(var room in users_room)
+for(var room in o_rooms_user)
 {
-if(users_room[room][socket.request.user._id]){
+if(o_rooms_user[room][socket.request.user._id]){
 if(!socket.id) return;
-delete users_room[room][socket.request.user._id];
+delete o_rooms_user[room][socket.request.user._id];
 io.to(room).emit('recibir usuarios en el room',
-{users_room: users_room[room], room: room});
+{o_rooms_user: o_rooms_user[room], room: room});
 io.sockets.emit("actualizar rooms",
-{users_room: users_room[room], room: room});   
+{o_rooms_user: o_rooms_user[room], room: room});   
 }//if
 }//for
 User.findOne({_id: socket.request.user._id}, (err, user) =>
