@@ -95,52 +95,110 @@ background-color:white;}
 <style>
 /*estilos compacto con clases*/
   
-/*display*/
-
+/* ---display--- */
+.inl_blo {display: inline-block} .blo {display: block} .non {display: none}
 .tab {display:table} .tab_row {display:table-row} .tab_cel {display:table-cell}
 .flex_col {display: -webkit-flex; -webkit-flex-direction:column;display:flex; flex-direction:column}
 .flex_row {display: -webkit-flex; -webkit-flex-direction:row;display:flex; flex-direction:row}
 
-/* posicion pos_abs con top y bottom left right para adaptar medida*/
- 
-.flo_rig {float:right}
+.ove_y {overflow-y:auto}
+.wor_wra {word-wrap:break-word}  
+
+.tex_cen {text-align: center}  
+
 .tra {transform:translate(-50%,-50%)}
 .ali_cen {text-align:center} .ali_mid {vertical-align:middle}
-.jus_cen {justify-content:center} .ali_i_cen {align-items:center}  
+.jus_cen {justify-content:center} .ali_i_cen {align-items:center}   
   
-/*tamaño*/
+/* ...display... */
+  
+/* ---posicion--- */
+  
+.pos_a {position: absolute} .pos_r {position: relative} .pos_a_i {position:absolute !important}  
+
+.bot {bottom:0px} .bot_ {bottom:50%} .bot_30p {bottom:30px}
+.top {top:0px} .top_ {top:50%} .top_20 {top:20%} .top_10 {top:10%}  .top_30p {top:30px} .top_50p {top:50px}
+.rig {right:0px} .rig_ {right:50%} .rig_30p {right:30px} .rig_30 {right:30%} .rig_20p {right:20px} .rig_10p {right:10px}
+.lef {left:0px} .lef_ {left:50%} .lef_20 {left:20%} .lef_10 {left:10%} .lef_10p {left:10px}
+.t-b {top:0px;bottom:0px} .l-r {left:0px;right:0px} .ltrb {left:0px;top:0px;right:0px;bottom:0px}  
+
+.flo_rig {float:right}  
+  
+/* ...pisicion... */  
+  
+/* ---tamaño--- */
+
 .w {width:100%} .w90 {width:90%} .w80 {width:80%} .w70 {width:70%} .w60 {width:60%} .w_ {width:50%} .w30 {width:30%} .w20 {width:20%} .w10 {width:10%}
 .w50p {width:50px} .w30p {width:30px} .max_w600p {max-width:600px} .w320p {width: 320px}
 .h {height: 100%} .h60 {height:60%} .h_ {height:50%} 
 .h50p {height:50px} .h30p {height:30px} .h270p {height: 270px} 
 .wh {width:100%;height:100%}
 
-.bot {bottom:0px} .bot_ {bottom:50%} .bot_30p {bottom:30px}
-.top {top:0px} .top_ {top:50%} .top_20 {top:20%} .top_10 {top:10%}  .top_30p {top:30px} .top_50p {top:50px}
-.rig {right:0px} .rig_ {right:50%} .rig_30p {right:30px} .rig_30 {right:30%} .rig_20p {right:20px} .rig_10p {right:10px}
-.lef {left:0px} .lef_ {left:50%} .lef_20 {left:20%} .lef_10 {left:10%} .lef_10p {left:10px}
-.t-b {top:0px;bottom:0px} .l-r {left:0px;right:0px} .ltrb {left:0px;top:0px;right:0px;bottom:0px}
-  
-.marg {margin:0px}
-  
- 
+/* ...tamaño... */  
 
+
+/* ---fuentes--- */
+  
+.fon_ari {font-family:arial} .fon_bol {font-weight:bold}
+.fon_cons {font-family: consolas}
+.fon_15p {font-size: 15px}
+.fon_25p {font-size: 25px}
+
+/* ...fuentes... */
+
+
+/* ---bordes--- */
 
 .bor {border:1px dashed;}
 .bor_r {border-radius:5px} .bor_r5000 {border-radius:5px 0 0 0} .bor_r0500 {border-radius:0 5px 0 0}
 .bor_r_ {border-radius:50%}
 .bor_s {box-shadow: 0 0 5px #444}
 .bor_bot {border-bottom:1px solid black}
-.bor_1p_grey {border: 1px solid grey} .bor_1p_bla {border:1px solid black}
+.bor_1p_grey {border: 1px solid grey} .bor_1p_bla {border:1px solid black}  
+  
+.bor_bot_bla {border-bottom: 1px solid black}
+.bor_bot2p_bla {border-bottom: 2px solid black}
+.bor_rad5p {border-radius: 5px}
+.bor_rad10p {border-radius: 10px}
+.bor_rad20 {border-radius: 20%}
+.bor_rad50 {border-radius: 50%}
+.bor_rad10p_14 {border-radius: 10px 0 0 10px}
+.bor_rad5500 {border-radius: 5px 5px 0 0}
+.bor_bla {border: 1px solid black}
+.bor_grey {border: 1px solid grey}
+.bor_2p_whi {border: 2px solid white}
+.bor_non {border: none}
 
-.ove_y {overflow-y:auto}
-.wor_wra {word-wrap:break-word}
+.marg {margin:0px}  
+.marg_aut {margin: auto}  
+.marg_5050p {margin:5px 0px 5px 0px;}
+  
+/* ...bordes... */
+  
 
-.fon_ari {font-family:arial} .fon_bol {font-weight:bold}
-.fon_15p {font-size:15px}
+/* ---colores--- */  
 
+.col_whi {color: white} .col_bla {color: black} .col_grey {color: grey}
+.col_yel {color: yellow} .col_blue {color: blue} .col_red {color: red}
+.col_green {color: green}
+  
+.col_sp_room {color: #2f4f4f}
+.col_tit_tbl {color: #34495e}
 
-
+.bac_col_whi {background-color: white} .bac_col_bla {background-color: black} .bac_col_grey {background-color: grey}
+.bac_col_yel {background-color: yellow} .bac_col_blue {background-color: blue} .bac_col_red {background-color: red}
+.bac_col_green {background-color: green}
+  
+.bac_col_sp_room {background-color: #2f4f4f}  
+  
+.bac_col_bestalk {background-color: #9370db}
+.bac_col_desvanecido {background:rgba(0,0,0,0.7)}
+.bac_col_emerg_profile {background-color: #ccc}
+.bac_col_tbl_u {background-color:#34495e}
+.bac_col_tbl_u_desv {background: rgba(52,73,94,0.3)}
+.bac_col_cuadr_logsig {color: #f5f5f5}
+.bac_non {background: none}
+  
 .bac_97d,.bac_col_bstlk {background-color: #9370db} .bac_bfd,.bac_col_con_chat_g {background-color: #ffdab9}
 .bac_fff,.bac_col_usr_chat_g {background-color: #fff0f5} .bac_438,.bac_col_crr_chat_g {background-color: #433d8b}
 .bac_285,.bac_col_tit_chat_prv {background-color:#2e8b57} .bac_800,.bac_col_crr_chat_p {background-color:#800000}
@@ -154,47 +212,15 @@ background-color:white;}
 
 .whi {color:white} .yel {color:yellow} .bla {color:black} .gre {color:grey} .gree {color:green}
 .col_244,.col_lrn {color:#2f4f4f} .col_345,.col_tbl_u {color:#34495e}
+  
+.bac_col_play {background-color:#D2B48C;}
+.bac_col_read {background-color:#0079a9;}
+.bac_col_learn {background-color:#2f4f4f;}
+.bac_col_tabla_notas {background:#F0E68C;}
 
-/* ---index--- */
+/* ...colores... */
 
-/* muestra */
-.inl_blo {display: inline-block} .blo {display: block} .non {display: none}
-
-/* posicion */
-.pos_a {position: absolute} .pos_r {position: relative} .pos_a_i {position:absolute !important} 
-
-/* tamaño */
-.w {width: 100%} .w_ {width: 50%} 
-.h {height: 100%} .h_ {height: 50%}  
-.wh {width: 100%; height: 100%}
-
-.bot {bottom: 0px} .bot_ {bottom: 50%}
-.top {top: 0px} .top_ {top: 50%}
-.rig {right: 0px} .rig_ {right: 50%} 
-.lef {left: 0px} .lef_ {left: 50%}
-.t-b {top: 0px; bottom: 0px} .l-r {left: 0px; right: 0px}
-.ltrb {left: 0px; top: 0px; right: 0px; bottom: 0px}
- 
-/* color */
-.col_whi {color: white} .col_bla {color: black} .col_grey {color: grey}
-.col_yel {color: yellow} .col_blue {color: blue} .col_red {color: red}
-.col_green {color: green}
-
-.bac_col_whi {background-color: white} .bac_col_bla {background-color: black} .bac_col_grey {background-color: grey}
-.bac_col_yel {background-color: yellow} .bac_col_blue {background-color: blue} .bac_col_red {background-color: red}
-.bac_col_green {background-color: green}
-
-/* otros */
-
-.ove_y {overflow-y:auto}
-
-.tex_cen {text-align: center}
-
-.bac_col_bestalk {background-color: #9370db}
-.bac_col_desvanecido {background:rgba(0,0,0,0.7)}
-.bac_col_emerg_profile {background-color: #ccc}
-.bac_col_tbl_u {background-color:#34495e}
-.bac_col_tbl_u_desv {background: rgba(52,73,94,0.3)}
+/* ---otros--- */
   
 .cur_poi {cursor: pointer} .cur_mov {cursor: move}
   
@@ -202,19 +228,14 @@ background-color:white;}
 
 .al_frente {z-index: 100} 
 
-.bordado_r_gris
-{
-border: 1px solid grey;
-border-radius: 5px;
-}  
-  
-.bor_r5500 {border-radius:5px 5px 0 0}
+.tex_dec_und {text-decoration: underline}
+
   
 /* ...index... */
 
 </style>
     
- 
+
  
 </head>
 <body>
@@ -233,17 +254,16 @@ border-radius: 5px;
 
  
   
-
+<!-- -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
-
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   
+<!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+-->
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script> 
- 
 
   
 <script src="app.js"></script>

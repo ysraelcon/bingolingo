@@ -1,48 +1,39 @@
 
-<style>
-#dv_msg_edt
-{
-font-size:20px;
-color:red;
-}
-#ta_abt_me{width:173px;}  
-</style>
-
 <form id="fm_edt">
 
-<div id="dv_msg_edt" ng-show="message">{{message}}</div>  
+<div id="fon_25p col_red" ng-show="message">{{message}}</div>  
   
 <img id="img_profile_edi" 
-class="cl_ig_prf_avtr"
-name="avatar"
-ng-src="{{user.avatar}}" alt="avatar"><br>
+ class="w50p h50p bor_rad50 bor_2p_whi"
+ name="avatar"
+ ng-src="{{user.avatar}}" alt="avatar"><br>
 
 Change your avatar:<br>
 <input type="file" id="in_fl_img"
-onchange="cargar_img()"><br>
+ onchange="cargar_img()"><br>
   
 First Name:<br>
 <input type="text"
-ng-model="user.firstname" name="firstname"
-value="{{user.firstname}}"><br>
+ ng-model="user.firstname" name="firstname"
+ value="{{user.firstname}}"><br>
 
 Last Name:<br>
 <input type="text"
-name="lastname" ng-model="user.lastname"
-value="{{user.lastname}}"><br>
+ name="lastname" ng-model="user.lastname"
+ value="{{user.lastname}}"><br>
 
 Gender: 
 <input type="radio"
-name="gender" ng-model="user.gender"       
-value="M"> Male
+ name="gender" ng-model="user.gender"       
+ value="M"> Male
 <input type="radio"
-name="gender" ng-model="user.gender"
-value="F"> Female<br>
+ name="gender" ng-model="user.gender"
+ value="F"> Female<br>
 
 Age:<br>
 <input type="number"
-name="age" ng-model="user.age"      
-value="{{user.age}}" required><br>
+ name="age" ng-model="user.age"      
+ value="{{user.age}}" required><br>
 
 Country:<br>
 <select name="country" ng-model="user.country">
@@ -298,23 +289,24 @@ Country:<br>
 
 Learning:<br>
 <input type="text"
-name="learning" ng-model="user.learning"
-value="{{user.learning}}"><br>
+ name="learning" ng-model="user.learning"
+ value="{{user.learning}}"><br>
 
 Speaks:<br>
 <input type="text"
-name="speaks" ng-model="user.speaks"
-value="{{user.speaks}}"><br>
+ name="speaks" ng-model="user.speaks"
+ value="{{user.speaks}}"><br>
 
 About me:<br>
 <textarea id="ta_abt_me"
-name="about_me" 
-ng-model="user.about_me" rows="4"
-value="{{user.about_me}}"></textarea><br>  
+ name="about_me" 
+ style="width:173px"
+ ng-model="user.about_me" rows="4"
+ value="{{user.about_me}}"></textarea><br>  
 
 
 <input type="submit"
-value="Update" ng-click="editar_profile(user)">
+ value="Update" ng-click="editar_profile(user)">
 
 </form>
 

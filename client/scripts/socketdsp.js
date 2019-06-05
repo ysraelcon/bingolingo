@@ -273,7 +273,7 @@ tbl_users_lc_bd.innerHTML= con_user;
 function dar_tr_user(userx, skt_idx)
 {//
 var tr= "<tr id=\'"+(skt_idx || userx._id)+"\' data-user-id='"+userx._id+"' onclick='informar_profile(this)' >"
-+"<td><img class='img_de_30' src='"+(userx.avatar||dar_img_provisional() )+"'></td>"
++"<td><img class='w30p h30p' src='"+(userx.avatar||dar_img_provisional() )+"'></td>"
 +"<td>"+userx.firstname+" "+userx.lastname+"</td>"
 +"<td>"+(userx.gender||"-")+"</td>"
 +"<td>"+(userx.age||"-")+"</td>"
@@ -320,8 +320,8 @@ function dar_ventana_profile(o_userx)
 console.log("a da ventana_profile")
 var dv_profile_user_= document.createElement("div")
 dv_profile_user_.id= "dv_profile_user_"+o_userx.user._id;
-dv_profile_user_.setAttribute("class", "pos_a_i top_20 lef_20 w60 h60 bordado_r_gris bac_col_whi al_frente")
-dv_profile_user_.innerHTML= '<div id="dv_profile_user_tit_'+o_userx.user._id+'" class="pos_r h30p bor_r5500">'
+dv_profile_user_.setAttribute("class", "pos_a_i top_20 lef_20 w60 h60 bor_rad5p bor_grey bac_col_whi al_frente")
+dv_profile_user_.innerHTML= '<div id="dv_profile_user_tit_'+o_userx.user._id+'" class="pos_r h30p bor_rad5500">'
 +'<div id="dv_profile_user_tit_nme_'+o_userx.user._id+'" class="tex_cen pos_a lef rig_30p h cur_mov bac_col_emerg_profile" '
 +' onmousedown="empezar_a_mover(event, this.parentElement.parentElement)" onmouseup="terminar_de_mover()">'+o_userx.user.firstname+" "+o_userx.user.lastname+'</div>'
 +'<div id="dv_profile_user_tit_cerrar_'+o_userx.user._id+'" class="tex_cen pos_a rig h w30p cur_poi bor_r0500" onclick="cerrar_profile_user(\''+o_userx.user._id+'\')">X</div>'
@@ -395,7 +395,7 @@ sp_room.id= "sp_room_"+roomf;
 sp_room.setAttribute("class", "cl_sp_chat_room");
 sp_room.setAttribute("onclick", "entrar_a_room(\'"+roomf+"\')");  
 sp_room.innerHTML= rooms[roomf]+' <span id="sp_chat_cant_'+roomf
-+'" class="cl_sp_chat_cant"></span><svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M704 384q-153 0-286 52t-211.5 141-78.5 191q0 82 53 158t149 132l97 56-35 84q34-20 62-39l44-31 53 10q78 14 153 14 153 0 286-52t211.5-141 78.5-191-78.5-191-211.5-141-286-52zm0-128q191 0 353.5 68.5t256.5 186.5 94 257-94 257-256.5 186.5-353.5 68.5q-86 0-176-16-124 88-278 128-36 9-86 16h-3q-11 0-20.5-8t-11.5-21q-1-3-1-6.5t.5-6.5 2-6l2.5-5 3.5-5.5 4-5 4.5-5 4-4.5q5-6 23-25t26-29.5 22.5-29 25-38.5 20.5-44q-124-72-195-177t-71-224q0-139 94-257t256.5-186.5 353.5-68.5zm822 1169q10 24 20.5 44t25 38.5 22.5 29 26 29.5 23 25q1 1 4 4.5t4.5 5 4 5 3.5 5.5l2.5 5 2 6 .5 6.5-1 6.5q-3 14-13 22t-22 7q-50-7-86-16-154-40-278-128-90 16-176 16-271 0-472-132 58 4 88 4 161 0 309-45t264-129q125-92 192-212t67-254q0-77-23-152 129 71 204 178t75 230q0 120-71 224.5t-195 176.5z" fill="#fff"/>';//comments-o
++'" class="bor_grey bor_rad20 fon_cons"></span><svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M704 384q-153 0-286 52t-211.5 141-78.5 191q0 82 53 158t149 132l97 56-35 84q34-20 62-39l44-31 53 10q78 14 153 14 153 0 286-52t211.5-141 78.5-191-78.5-191-211.5-141-286-52zm0-128q191 0 353.5 68.5t256.5 186.5 94 257-94 257-256.5 186.5-353.5 68.5q-86 0-176-16-124 88-278 128-36 9-86 16h-3q-11 0-20.5-8t-11.5-21q-1-3-1-6.5t.5-6.5 2-6l2.5-5 3.5-5.5 4-5 4.5-5 4-4.5q5-6 23-25t26-29.5 22.5-29 25-38.5 20.5-44q-124-72-195-177t-71-224q0-139 94-257t256.5-186.5 353.5-68.5zm822 1169q10 24 20.5 44t25 38.5 22.5 29 26 29.5 23 25q1 1 4 4.5t4.5 5 4 5 3.5 5.5l2.5 5 2 6 .5 6.5-1 6.5q-3 14-13 22t-22 7q-50-7-86-16-154-40-278-128-90 16-176 16-271 0-472-132 58 4 88 4 161 0 309-45t264-129q125-92 192-212t67-254q0-77-23-152 129 71 204 178t75 230q0 120-71 224.5t-195 176.5z" fill="#fff"/>';//comments-o
 dv_a_metf.appendChild(sp_room);
 }//if no esta 
 }//spanear_room span room
@@ -564,12 +564,13 @@ if(!document.hasFocus())
 {
 favicon.href= dar_favicon_n();
 }//if not focus
-var dv_chat_room_con_= "#dv_chat_room_con_"+o_msgx.room;
-jQuery(function($)
-{
-$(dv_chat_room_con_).append('<b>'+o_msgx.nick+":</b> "+o_msgx.msg+"<br/>");
-$(dv_chat_room_con_).stop().animate({scrollTop: $(dv_chat_room_con_)[0].scrollHeight}, 200);
-});//jQuery
+var dv_chat_room_con_= document.querySelector("#dv_chat_room_con_"+o_msgx.room);
+var sp_ch = document.createElement("span")
+sp_ch.innerHTML= '<b>'+o_msgx.nick+":--</b> "+o_msgx.msg+"<br/>"
+dv_chat_room_con_.appendChild(sp_ch)
+//dv_chat_room_con_.scrollTop = dv_chat_room_con_.scrollHeight;
+dv_chat_room_con_.scrollTo(0, dv_chat_room_con_.scrollHeight)
+
 });//skcl recibir msg en room
 
 
@@ -1030,20 +1031,6 @@ dv_con_chat.removeChild(dv_waiting);
 
 
 
-
-
-socket_client.on("new msg chat request", function(o_msgx)
-{
-//o_msgx{msg,nick,room}
-console.log("on: new msg chat request")
-jQuery(function($)
-{
-var dv_chat_room_con_= "#dv_chat_room_con_"+o_msgx.room;
-$(dv_chat_room_con_).append('<b>'+o_msgx.nick+":</b> "+o_msgx.msg+"<br/>");
-$(dv_chat_room_con_).stop().animate({scrollTop: $(dv_chat_room_con_)[0].scrollHeight}, 200);
-});//jQuery
-});//skcl new msg chat request msg privado
-
 //...chat...
 
 //---play---
@@ -1315,10 +1302,8 @@ socket_client.on("no se adivino", function(o_word_to_guessx)
 //o_word_to_guessx{word_to_guess}
 console.log("on: no se adivino");
 dv_jue_con.innerHTML+= "The word was <b>"+o_word_to_guessx.word_to_guess+"</b><br>";
-jQuery(function($)
-{
-$("#dv_jue_con").stop().animate({scrollTop: $("#dv_jue_con")[0].scrollHeight}, 100);
-});//jquery
+dv_jue_con.scrollTo(0, dv_jue_con.scrollHeight)  
+  
 });//skcl si no se adivina
 
 
@@ -1426,10 +1411,8 @@ socket_client.emit("10 seg", {nro_game: o_msg_gamex.nro_game});
 {
 dv_jue_con.innerHTML+= "<b>"+o_msg_gamex.nick+":</b> "+o_msg_gamex.msg+"<br/>";
 }//else no bingo
-jQuery(function($)
-{
-$("#dv_jue_con").stop().animate({scrollTop: $("#dv_jue_con")[0].scrollHeight}, 100);
-});//jquery
+dv_jue_con.scrollTo(0, dv_jue_con.scrollHeight) //correr animadamente
+
 });//on receive msg juego
 
 

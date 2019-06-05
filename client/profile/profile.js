@@ -17,6 +17,7 @@ controller: 'profileCtrl'
 ["$scope", "$http", "$location", "$route",
 function($scope, $http, $location, $route)
 {
+
   
 //console.log('profilen');
 $http.get("/profile").then(function(res)
@@ -56,3 +57,5 @@ $route.reload();
 
   
 }]);//controller
+
+
