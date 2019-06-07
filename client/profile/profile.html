@@ -631,14 +631,39 @@ sl_tema.options[0].selected= true;
 </script>
 
 
+  
+  
+  
+<style>
+/* st-play--- */
+  
+#dv_con_play_tit:after
+{
+display:block;
+width:inherit;
+height:inherit;
+content:"";
+border-bottom:1px solid white;  
+transform: scaleX(0);  
+transition: transform 250ms ease-in-out;
+transform-origin:  0% 50%;
+}
 
-<div id="dv_con_play" class="non ove_y pos_a wh bac_col_play"
+#dv_con_play_tit:after
+{
+animation-name:mikeyfr;
+animation-duration:1s;
+animation-fill-mode:forwards;
+}
+  
+</style>    
+
+<div id="dv_con_play" class="non ove_y pos_a wh bac_col_play col_whi"
  style="padding: 10px">
 
-<div class="tex_cen fon_bol" 
- style="
-border-bottom: 1px solid
-">Games</div>  
+<div id="dv_con_play_tit"
+ class="tex_cen fon_bol" 
+>Games</div>  
   
 <input type="button" id="btn_crt_gm"
  value="Explain The Word" 
@@ -652,12 +677,39 @@ border-bottom: 1px solid
 
 
 
+<style>
+/* st-read--- */
+  
+#dv_con_read_tit:after
+{
+display:block;
+width:inherit;
+height:inherit;
+content:"";
+border-bottom:1px solid black;  
+transform: scaleX(0);  
+transition: transform 250ms ease-in-out;
+transform-origin:  0% 50%;
+}
 
+#dv_con_read_tit:after
+{
+animation-name:mikeyfr;
+animation-duration:1s;
+animation-fill-mode:forwards;
+}
+  
+</style>  
 
 <div id="dv_con_read" class="non tex_cen ove_y pos_a wh bac_col_read"
  style="padding: 10px">
 
-<h3>Principles</h3>
+<div id="dv_con_read_tit" 
+ class="tex_cen fon_bol" 
+>Principles</div>   
+
+<div class="pos_a lef rig bot ove_y"
+ style="top:29px">
 
 <li>simple (proposed by Ysrael)</li>
 <li>cool (proposed by Jonathan)</li>
@@ -690,26 +742,47 @@ border-bottom: 1px solid
 <li>informative (proposed by Nomnom)</li>
 <li>polite (proposed by Sasha or Sash)</li>
 <p>more in addition.</p>  
+
+</div>
   
 </div><!-- dv con read -->
 
 
 
+<style>
+/* st-learn--- */
+  
+#dv_con_learn_voc:after
+{
+display:block;
+width:inherit;
+height:inherit;
+content:"";
+border-bottom:1px solid white;  
+transform: scaleX(0);  
+transition: transform 250ms ease-in-out;
+transform-origin:  0% 50%;
+}
 
+#dv_con_learn_voc:after
+{
+animation-name:mikeyfr;
+animation-duration:1s;
+animation-fill-mode:forwards;
+}
+  
+</style>  
 
 <div id="dv_con_learn" class="non tex_cen ove_y pos_a wh bac_col_learn col_whi"
  style="padding: 10px">
 
 <div id="dv_con_learn_voc"
- style="
-border-bottom:1px solid;
-text-align:center
-">Vocabulary</div>
+ class="tex_cen"
+>Vocabulary</div>
 
 <div id="dv_con_learn_voc_con"
- style="
-
-">
+ class="pos_a lef rig bot ove_y"
+ style="top:29px">
 <li onclick="mostrar_lista_voc('nros')">20 numbers</li>
   <p>more in addition.</p>
   </div><!-- dv con learn voc con -->
@@ -765,11 +838,6 @@ color:white;
 text-align:center
 }
 
-#dv_user_i
-{
-text-align:center;
-font-family:arial;
-}
 
 #dv_user_profile
 {
@@ -788,7 +856,7 @@ display:block;
 width:inherit;
 height:inherit;
 content:"";
-border-bottom:1px solid grey;  
+border-bottom:1px solid white;  
 transform: scaleX(0);  
 transition: transform 250ms ease-in-out;
 transform-origin:  0% 50%;
@@ -813,7 +881,7 @@ to {transform: scaleX(1);}
 
 <div id="dv_con_user">
 
-<div id="dv_user_i">User info</div>
+<div id="dv_user_i" class="tex_cen fon_ari fon_bol">Profile</div>
 
 <div id="dv_user_profile">
      
@@ -1194,7 +1262,7 @@ color:white;
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIoSURBVEhL5ZJPTxNBGMYXjCZ68cDRb+DJD0CCISjWNkLbXVpp9n8Zg3S3wkFC2zDdglDprp5NNIYrRuSkiRy4ePFTcOLOgeihMePM+C50t0Oz4JEneTKZP89v3n13pKupdwjdClwz6zvlBb9angwW5Zuw9X/CGA8HjvkicK3jwLVJj4/euLYOxy4nVmXg2F9i4Ih9196C4xcTxsqNwLG+i6Bx+1W7ALFk2lGUa7Qln0Uw5leoxB3Ofcc+ZK2E+GARSRqioY9hWOT4Bcydqn0fEOfrX+Vi+PPMeN9axI61DBixeM9d65MwnMDtudltQPWLvXHftb6Jgkn8el4jTS27D7io4LUciIKDXFfzfKTPlKyWnhBPz30AZFT0wNt4OIkbmszHliGTFeURWSsXxwF5pmBRu0Or78bDoVd1mbTndeEeq3zNVDi8Xsx02esD7Jn8imWIwqFRaoxfEl/vVEyC1WkOZ27q+V1ARrVenvXoJZFw2FuRfcck69YMqRUen8JrhfSfjQV1BJBRtXTFqNPDLNSpGBwS9jY0q3bzWYn9RFKbSZ2COZyatmkDcP3CkjTceJr5FR6mvaQvYop/PqYjm/cC426quZ+AOl8tI78sCjMvTU2QuQejwj2sZX8ghK4DZrCaWm5PBEEPR0nq3t3IWq2Y7tJ2tSGaXDT0slHMnPTCek3b9ZsV0kbKbYhcTp4lpz0t+x6rua/0X+x6Wn7LM+Ux2L4SkqS/5cRzDLlpspQAAAAASUVORK5CYII=" title="Potato" width="24" height="24">
 by BesTalk Team</span> 
         
-<span id="sp_err" class="pos_a"
+<span id="sp_err" class="pos_a bot"
  style="right: 10px"
  onclick="dar_reporte()">Suggestions 
 <svg style="cursor: pointer" width="16" height="16" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 654v978q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-978q0-15 11-24 8-7 39-34.5t41.5-36 45.5-37.5 70-55.5 96-73 143.5-107 192.5-140.5q5-4 52.5-40t71.5-52.5 64-35 69-18.5 69 18.5 65 35.5 71 52 52 40q110 80 192.5 140.5t143.5 107 96 73 70 55.5 45.5 37.5 41.5 36 39 34.5q11 9 11 24zm-564 585q263-191 345-252 11-8 12.5-20.5t-6.5-23.5l-38-52q-8-11-21-12.5t-24 6.5q-231 169-343 250-5 3-52 39t-71.5 52.5-64.5 35-69 18.5-69-18.5-64.5-35-71.5-52.5-52-39q-186-134-343-250-11-8-24-6.5t-21 12.5l-38 52q-8 11-6.5 23.5t12.5 20.5q82 61 345 252 10 8 50 38t65 47 64 39.5 77.5 33.5 75.5 11 75.5-11 79-34.5 64.5-39.5 65-47.5 48-36.5z" fill="yellow"/></svg>

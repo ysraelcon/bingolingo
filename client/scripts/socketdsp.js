@@ -1088,7 +1088,7 @@ dv_con_play.removeChild(dv_create_game);
 function solicitar_juego()
 {
 console.log("a solicitar_juego")
-//var typegame= sltypgame.options[sltypgame.selectedIndex].value;
+//var typegame= sl_typ_game.options[sl_typ_game.selectedIndex].value;
 var type_game= /*in_ch_vce.checked!!!*/ null ? "Explain The Word (By Voice)" : "Explain The Word"; 
 var list_word= sl_list.options[sl_list.selectedIndex].id;
 var nro_player= sl_nro_player.options[sl_nro_player.selectedIndex].value;
@@ -1180,18 +1180,19 @@ nudivj.setAttribute("class", "flex_col pos_a_i top_10 bor_r bor_1p_grey bac_db82
 //nudivj.classList.add("flex_col","pos_absi","top_10","bor_r","bor_1p_grey","bac_col_db82")
 nudivj.setAttribute("style", "width:270px;height:250px")
 nudivj.innerHTML= '<div id="dv_jue_cab">'
-+'<div id="dv_jue_tit" class="flex_row ali_cen fon_ari">'
-+'<div id="dv_jue_tit_nm" class="w ali_cen bor_r5000 bac_285 whi cur_mov" '
++'<div id="dv_jue_tit" class="w tab ali_cen h30p fon_ari">'
++'<div id="dv_jue_tit_nm" class="w80 tab_cel ali_mid bor_r5000 bac_285 whi cur_mov" '
 +' onmousedown="empezar_a_mover(event, this.parentElement.parentElement.parentElement)" onmouseup="terminar_de_mover()" >'+nme_juex+'</div>'
-+'<div id="dv_jue_tit_rsz" class="ali_cen w30p cur_poi" onclick="restaurar_tam_jue()">L</div>'
-+'<div id="dv_jue_tit_cerrar" class="ali_cen w30p cur_poi bac_800 whi bor_r0500" onclick="cerrar_juego(\''+roomjx+'\')">X</div>'
++'<div id="dv_jue_tit_rsz" class="tab_cel ali_mid w10 cur_poi" onclick="restaurar_tam_jue()">L</div>'
++'<div id="dv_jue_tit_cerrar" class="tab_cel ali_mid w10 cur_poi bac_800 whi bor_r0500" onclick="cerrar_juego(\''+roomjx+'\')">X</div>'
 +'</div>'
 +'<div id="dv_jue_exp">Explains: <span id="sp_word_to_guess">wordX</span'
 +'><span id="sp_timer" class="flo_rig bor_1p_bla">00</span></div>'
 +'</div>'//dv_jue_cab
-+'<div id="dv_jue_con_user" class="flex_row pos_a top_50p bot_30p w">'
-+'<div id="dv_jue_con" class="ove_y wor_wra w bor_1p_grey"></div>'
-+'<div id="dv_jue_user" class="wor_wra pos_rel fon_bol bor_1p_grey" style="width:100px">'
+  
++'<div id="dv_jue_con_user" class="pos_a top_50p bot_30p w">'
++'<div id="dv_jue_con" class="pos_r w70 h inl_blo ove_y wor_wra bor_1p_grey"></div>'
++'<div id="dv_chat_room_user_'+roomjx+'" class="pos_a w30 h inl_blo wor_wra fon_bol bor_1p_grey">'
 +'<div id="dv_jue_username_'+roomjx+'" ></div>'
 /*+'<div id="dv_jue_user_bts_'+roomjx+'" class="cl_dv_chat_room_user_bts">'
 +'<input type="button" value="_"'
@@ -1199,19 +1200,27 @@ nudivj.innerHTML= '<div id="dv_jue_cab">'
 +'</div>'
 +'</div>'//_con_user
   
-+'<div id="dv_jue_msg" class="pos_a bot h30p flex_row w90">'
-+'<form id="fm_jue_msg" class="pos_a lef top bot rig_30p" onsubmit="enviar_msg_jue(event)">'
-+'<div class="pos_a top bot lef rig_30p">'
-+'<input type="text" id="in_jue_msg" onkeydown="esta_tipeando(this)" class="w h" placeholder="write your text..." data-room="'+roomjx+'"></div>'
-+'<button id="btn_jue_snd_msg" class="pos_a rig h w30p" type="submit" >'
++'<div id="dv_chat_room_msg_'+roomjx+'" class="pos_a bot h30p w">'
++'<div class="inl_blo pos_r h w70">'
++'<form class="wh" onsubmit="enviar_msg_jue(event,\''+roomjx+'\')">'
++'<div class="pos_a h lef rig_30p">'
++'<input type="text" id="in_chat_room_msg_'+roomjx+'" class="pos_a wh" onkeydown="esta_tipeando(this)" autocorrect="off" autocomplete="off" data-room="'+roomjx+'" placeholder="write your message">'
++'</div>'
++'<button id="bt_chat_room_msg_'+roomjx+'" class="pos_a rig h w30p" type="submit">'
 +'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-453-185-242 295q-18 23-49 23-13 0-22-4-19-7-30.5-23.5t-11.5-36.5v-349l864-1059-1069 925-395-162q-37-14-40-55-2-40 32-59l1664-960q15-9 32-9 20 0 36 11z"/></svg>'//paper-plane
-+'</button></form>'
-+'<button class="pos_a rig h"  onclick="seleccionar_emoji_jue()">'
++'</button>'
++'</form>'
++'</div>'
++'<div id="dv_chat_room_user_bts_'+roomjx+'" class="inl_blo pos_a h w30">'
++'<button class="h w30p" onclick="seleccionar_emoji(\''+roomjx+'\')">'
 +'<svg width="16" height="16" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1262 1075q-37 121-138 195t-228 74-228-74-138-195q-8-25 4-48.5t38-31.5q25-8 48.5 4t31.5 38q25 80 92.5 129.5t151.5 49.5 151.5-49.5 92.5-129.5q8-26 32-38t49-4 37 31.5 4 48.5zm-494-435q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm512 0q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm256 256q0-130-51-248.5t-136.5-204-204-136.5-248.5-51-248.5 51-204 136.5-136.5 204-51 248.5 51 248.5 136.5 204 204 136.5 248.5 51 248.5-51 204-136.5 136.5-204 51-248.5zm128 0q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>'//smile-o
 +'</button>'
++'<input type="button" class="pos_a h w30p" value="_" onclick="es_boton_vacio()">'
 +'</div>'
 +'<div class="pos_a bot rig bac_col_bla" style="width:10px; height:10px; cursor: se-resize;"'
-+' onmousedown="empezar_a_resizar(event,this.parentElement)" onmouseup="terminar_de_resizar()"></div>';
++' onmousedown="empezar_a_resizar(event,this.parentElement.parentElement)" onmouseup="terminar_de_resizar()"></div>'
++'</div>'
+  
 dv_con_play.appendChild(nudivj);
 socket_client.emit("entrar roomj",
 {
@@ -1365,13 +1374,16 @@ dv_con_play.removeChild(dv_game_bar);
 
 
 
-function enviar_msg_jue(ev)
+function enviar_msg_jue(ev,roomx)
 {
 console.log("a enviar_msg_jue")
 ev.preventDefault();
-if(in_jue_msg.value != "")
+
+var in_chat_room_msg_= document.querySelector("#in_chat_room_msg_"+roomx)
+  
+if(in_chat_room_msg_.value != "")
 {
-var msg= in_jue_msg.value;	
+var msg= in_chat_room_msg_.value;	
 var pal= sp_word_to_guess.innerHTML;
 var pal_val= pal[0] != pal[0].toUpperCase();
 if(pal_val)
@@ -1384,15 +1396,15 @@ alert("can't say the word, explain it!");
 else
 {
 socket_client.emit("send message jue",
-{msg: in_jue_msg.value, nro_game: in_jue_msg.getAttribute("data-room")});
+{msg: in_chat_room_msg_.value, nro_game: in_chat_room_msg_.getAttribute("data-room")});
 }//else
 }//if pal val true p dif P
 else{
 socket_client.emit("send message jue",
-{msg: in_jue_msg.value, nro_game: in_jue_msg.getAttribute("data-room")});
+{msg: in_chat_room_msg_.value, nro_game: in_chat_room_msg_.getAttribute("data-room")});
 }//else enviar normal
 }//if no vacio
-in_jue_msg.value= "";
+in_chat_room_msg_.value= "";
 }//on send msg jue, del form enviar_msg_jue(event)
 
 
