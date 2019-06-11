@@ -244,6 +244,7 @@ socket_client.emit("pedir usuario en chat", socket_client.id);
 }//click tab chat
 
 
+
 //llena tabla users chat
 socket_client.on("recibir usuarios", function(users_cnntx)
 {
@@ -251,21 +252,27 @@ socket_client.on("recibir usuarios", function(users_cnntx)
 //user{_id,email,firstname,lastname,chats[]}
 console.log("on: recibe usuarios")
 var con_user= "";
+  
 for(var u_idx in users_cnntx)
 {
 con_user+= dar_tr_user(users_cnntx[u_idx].user,users_cnntx[u_idx].skt_id)
 }//for
+  
 tbl_users_bd.innerHTML= con_user;
 });//skon recibir usuarios table
+
+
 
 socket_client.on("last 5 connected users", function(users_5_no_cnntx)
 {//users_5_no_cnnt[{user},...]
 console.log("on: last 5 connected users")
 var con_user= "";
+  
 for(var i in users_5_no_cnntx)
 {
 con_user+= dar_tr_user(users_5_no_cnntx[i]) 
 }//for
+  
 tbl_users_lc_bd.innerHTML= con_user;
 })//skon last 5 connected users
 
@@ -293,6 +300,7 @@ if(trx.id != socket_client.id)
 
 var user_id_rcv= trx.getAttribute("data-user-id");
 var skt_id_rcv= trx.id;
+  
 socket_client.emit("ver su profile",
 {
 user_id_rcv: user_id_rcv,
@@ -321,6 +329,7 @@ console.log("a da ventana_profile")
 var dv_profile_user_= document.createElement("div")
 dv_profile_user_.id= "dv_profile_user_"+o_userx.user._id;
 dv_profile_user_.setAttribute("class", "pos_a_i top_20 lef_20 w60 h60 bor_rad5p bor_grey bac_col_whi al_frente")
+  
 dv_profile_user_.innerHTML= '<div id="dv_profile_user_tit_'+o_userx.user._id+'" class="pos_r h30p bor_rad5500">'
 +'<div id="dv_profile_user_tit_nme_'+o_userx.user._id+'" class="tex_cen pos_a lef rig_30p h cur_mov bac_col_emerg_profile" '
 +' onmousedown="empezar_a_mover(event, this.parentElement.parentElement)" onmouseup="terminar_de_mover()">'+o_userx.user.firstname+" "+o_userx.user.lastname+'</div>'
@@ -370,6 +379,7 @@ var roomx= dt_list_room.options[opt].id.slice(3,6);
 break;
 }//if
 }//for
+  
 entrar_a_room(roomx);
 spanear_room(roomx, dv_lang_rooms_con)
 in_list_room.value= "";  
@@ -433,6 +443,7 @@ socket_client.on("recibir usuarios en el room", function(o_roomx)
 //o_roomx{o_rooms_user{u_id}, chat_room[], skt_id, room, prv}
 console.log("on: recibir usuarios en el room")
 var users= ""
+
 for(var u_idx in o_roomx.o_rooms_user)
 {
 users+= '<span id="sp_user_'+o_roomx.room+'_'+u_idx+'">'
@@ -440,14 +451,17 @@ users+= '<span id="sp_user_'+o_roomx.room+'_'+u_idx+'">'
 +'<span id="sp_user_name_'+o_roomx.room+'_'+u_idx+'">'+o_roomx.o_rooms_user[u_idx]+'</span>'
 +'</span><br>'
 }//for
+  
 var dv_chat_room_user_= document.getElementById("dv_chat_room_user_"+o_roomx.room);
 dv_chat_room_user_.innerHTML= "";
 dv_chat_room_user_.innerHTML= users;
+  
 if(o_roomx.skt_id == socket_client.id || o_roomx.hasOwnProperty("prv") )
 {
 var dv_chat_room_con_= document.getElementById("dv_chat_room_con_"+o_roomx.room); 
 var li_chat= "";
 //15 lines of chat
+  
 for(var msg_chatx of o_roomx.chat_room)
 {
 li_chat+= msg_chatx+"<br>";
@@ -892,6 +906,7 @@ socket_client.on("crear chat privado", function(o_roomx)
 //o_roomx{room_bth}
 console.log("on: crear chat privado")
 var dv_chat_room_= document.getElementById("dv_chat_room_"+o_roomx.room_bth);
+  
 if(!dv_chat_room_)
 {
 var d= dar_dv_chat_room(o_roomx.room_bth)
@@ -919,6 +934,7 @@ socket_client.emit("mandar usuarios al chat privado", {room_bth: o_roomx.room_bt
 function cancelar_chat_request_of(room_bthx, skt_id_rcvf, skt_id_mndf)
 {
 console.log("a cancelar_chat_request_of")
+  
 socket_client.emit("cancelar chat request of",
 {
 skt_id_mnd: skt_id_mndf,
@@ -976,8 +992,8 @@ function cerrar_waiting(skt_id_rcvf,room_bthf)
 {
 console.log("a cerrar_waiting")
 eliminar_waiting(room_bthf)
-socket_client.emit("cancel chat request",
-{skt_id_rcv: skt_id_rcvf, room_bth: room_bthf});
+  
+socket_client.emit("cancel chat request", {skt_id_rcv: skt_id_rcvf, room_bth: room_bthf});
 }//cerrar_waiting
 
 
@@ -1044,6 +1060,7 @@ if(typeof(dv_create_game) == "undefined")
 var nudiv= document.createElement("DIV");
 nudiv.id= "dv_create_game";
 nudiv.setAttribute("class", "inl_blo ali_cen bor_1p_bla")
+  
 nudiv.innerHTML= '<div id="dv_tit_opt_game" class="flex_row">'
 +'<div id="dv_tit_opt_game_nme" class="inl_blo ali_cen w bac_bla whi">Game Options</div>'
 +'<div id="dv_tit_opt_game_x" class="inl_blo ali_cen w50p cur_poi" onclick="cerrar_game_opt()">X</div></div>'
@@ -1071,6 +1088,7 @@ nudiv.innerHTML= '<div id="dv_tit_opt_game" class="flex_row">'
 +'<div id="dv_rdy_game" class="ali_cen">'
 +'<input type="button" id="bt_rdy_game" class="w_" value="Create" onclick="solicitar_juego()">'
 +'</div></div>';
+  
 dv_con_play.appendChild(nudiv);
 }//if dv_create_game no existe
 }//mostrar_etwgameopt
@@ -1093,6 +1111,7 @@ var type_game= /*in_ch_vce.checked!!!*/ null ? "Explain The Word (By Voice)" : "
 var list_word= sl_list.options[sl_list.selectedIndex].id;
 var nro_player= sl_nro_player.options[sl_nro_player.selectedIndex].value;
 dv_con_play.removeChild(dv_create_game);  
+  
 socket_client.emit("solicitar game",
 {
 type_game: type_game,
@@ -1108,6 +1127,7 @@ socket_client.on("crear juego", function(o_gamex)
 //o_gamex{nro_game,type_game,list_word,nro_player}
 console.log("on: 2crea juego");
 console.log(JSON.stringify(o_gamex));
+  
 crear_juego(
 o_gamex.nro_game,
 o_gamex.type_game,
@@ -1123,6 +1143,7 @@ socket_client.on("los demas bar jue", function(o_bar_juex)
 //o_bar_juex{nro_game,type_game,list_word_name,nro_player}
 console.log("on: los demas bar jue");
 console.log(JSON.stringify(o_bar_juex));
+  
 dar_bar_jue(
 o_bar_juex.nro_game,
 o_bar_juex.type_game,
@@ -1137,17 +1158,21 @@ function dar_bar_jue(roomjx, nme_juex, lis_juex, nro_playerx)
 {
 console.log("a dar_bar_jue:"+roomjx+"/-/"+nme_juex+"/-/"+lis_juex+"/-/"+nro_playerx);
 var dv_game_bar_= document.getElementById("dv_game_bar_"+roomjx);
+  
 if(!dv_game_bar_)
 {
 var nudiv= document.createElement("DIV");
 nudiv.id= "dv_game_bar_"+roomjx;
 nudiv.setAttribute("class", "bor_1p_bla");
 nudiv.setAttribute("style", "display:table")
+  
 nudiv.setAttribute("onclick", "juntarse_a_juego(\'"+roomjx+"\',\'"
 +nme_juex+"\',\'"
 +lis_juex+"\',\'"
 +nro_playerx+"\')");
+  
 nudiv.setAttribute("data-id-gm", roomjx);
+  
 nudiv.innerHTML= '<div id="dv_bar_jue_nm" class="inl_blo bor">'
 +nme_juex+'</div>'
 +'<div id="dv_bar_jue_lis" class="inl_blo bor">'+lis_juex
@@ -1155,6 +1180,7 @@ nudiv.innerHTML= '<div id="dv_bar_jue_nm" class="inl_blo bor">'
 +'<div id="dv_bar_jue_nro_player" class="inl_blo bor">1/' //nrojug/totjug
 +'<span id="sp_nro_player">'+ nro_playerx
 +'</span>'+'</div>';
+  
 dv_con_play.appendChild(nudiv);
 }//if no esta la barra
 }//dar_bar_jue
@@ -1179,6 +1205,7 @@ nudivj.id= "dv_jue";
 nudivj.setAttribute("class", "flex_col pos_a_i top_10 bor_r bor_1p_grey bac_db82")
 //nudivj.classList.add("flex_col","pos_absi","top_10","bor_r","bor_1p_grey","bac_col_db82")
 nudivj.setAttribute("style", "width:270px;height:250px")
+  
 nudivj.innerHTML= '<div id="dv_jue_cab">'
 +'<div id="dv_jue_tit" class="w tab ali_cen h30p fon_ari">'
 +'<div id="dv_jue_tit_nm" class="w80 tab_cel ali_mid bor_r5000 bac_285 whi cur_mov" '
@@ -1222,6 +1249,7 @@ nudivj.innerHTML= '<div id="dv_jue_cab">'
 +'</div>'
   
 dv_con_play.appendChild(nudivj);
+  
 socket_client.emit("entrar roomj",
 {
 nro_game: roomjx, //idjue
@@ -1242,15 +1270,18 @@ nro_game,type_game,list_word,nro_player}*/
 console.log("on: 4manda user al juego");
 console.log(JSON.stringify(o_gamex));
 var userj= "";
+  
 for(var u_idx in o_gamex.users_jue)
 {
 userj+= '<div id="dv_jue_pnt_'+u_idx+'" class="inl_blo ali_cen w30p bor_1p_bla bor_r_">0</div>'
 +'<span id="sp_typ_ico_'+o_gamex.nro_game+'_'+u_idx+'"></span>'
 +'<span id="sp_user_name_'+o_gamex.nro_game+'_'+u_idx+'">'+o_gamex.users_jue[u_idx][0]+'</span>'+"<br>";
 }//for
+  
 var dv_jue_username_= document.getElementById("dv_jue_username_"+o_gamex.nro_game);
 dv_jue_username_.innerHTML= "";
 dv_jue_username_.innerHTML= userj;
+  
 if(o_gamex.typegame != "Explain The Word")
 {
 var dv_jue_user_bts_= document.getElementById("dv_jue_user_bts_"+o_gamex.nro_game);
@@ -1395,13 +1426,13 @@ alert("can't say the word, explain it!");
 }//if esta, alerta
 else
 {
-socket_client.emit("send message jue",
-{msg: in_chat_room_msg_.value, nro_game: in_chat_room_msg_.getAttribute("data-room")});
+socket_client.emit("send message jue", 
+ {msg: in_chat_room_msg_.value, nro_game: in_chat_room_msg_.getAttribute("data-room")});
 }//else
 }//if pal val true p dif P
 else{
 socket_client.emit("send message jue",
-{msg: in_chat_room_msg_.value, nro_game: in_chat_room_msg_.getAttribute("data-room")});
+ {msg: in_chat_room_msg_.value, nro_game: in_chat_room_msg_.getAttribute("data-room")});
 }//else enviar normal
 }//if no vacio
 in_chat_room_msg_.value= "";
@@ -1415,9 +1446,11 @@ socket_client.on('new message jue', function(o_msg_gamex)
 console.log("on: new message jue")
 if(o_msg_gamex.guess)
 {
+  
 dv_jue_con.innerHTML+= "<b>"+o_msg_gamex.nick+":</b> "
 +o_msg_gamex.msg+"<br/>"
 +"BINGO, you guessed the word!<br>";
+  
 socket_client.emit("10 seg", {nro_game: o_msg_gamex.nro_game});
 }else
 {
@@ -1452,12 +1485,14 @@ var url2= "/definitions?sourceDictionaries=wordnet&useCanonical=true&includeRela
 //"a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";  //de prueba
 var xhr= new XMLHttpRequest();
 xhr.open("GET", hk+url1+word+url2, true);   
-dv_result_dict.innerHTML= "loading...";    
+dv_result_dict.innerHTML= "loading..."; 
+  
 xhr.onload = function()
 {  
 //console.log(this.response);
 var resp= JSON.parse(this.response);//matriz objetos
 var list= "";
+  
 for(var pr in resp)
 {
 var rel_words= "";
@@ -1492,11 +1527,13 @@ xhr.open("POST", url1, true);
 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xhr.send(url2);
 dv_result_dict.innerHTML="loading...";
+  
 xhr.onload= function()
 {
 //console.log(this.response);
 var resp= JSON.parse(this.response);
 var result= "";
+  
 for(var i in resp.def)
 {
 result+= resp.def[i].pos+". "
@@ -1535,6 +1572,7 @@ xhr.open("POST", url1, true);
 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xhr.send(url2);
 dv_result_dict.innerHTML= "loading...";
+  
 xhr.onload= function()
 {
 //console.log(this.response);
@@ -1573,8 +1611,10 @@ bt_notes_save.style.display= "none";
 function enviar_reporte()
 {
 console.log("a enviar_reporte")
+  
 socket_client.emit("reporte",
-{tit: in_reporte_tit.value, rpt: ta_reporte.value});
+ {tit: in_reporte_tit.value, rpt: ta_reporte.value});
+  
 alert("Thanks for your report");
 cerrar_reporte();  
 }//enviar_reporte

@@ -42,7 +42,8 @@ $scope.editar_profile= function(user)
 console.log("edita profile")
 $scope.user= user;
 $scope.user.avatar= img_profile_edi.src;
-console.log($scope.user); 
+console.log($scope.user);
+  
 $http.post("/edit", $scope.user).then(function(res)
 {
 $scope.message= res.data.message;

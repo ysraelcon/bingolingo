@@ -316,9 +316,11 @@ function cargar_img()
 {
 console.log("a cargar_img")
 var reader= new FileReader();
+  
 reader.onloadend= function()
 {
 var img_provisional= new Image();
+  
 img_provisional.onload= function()
 {
 var can= document.createElement("canvas");

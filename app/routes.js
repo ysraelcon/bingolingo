@@ -19,9 +19,11 @@ appf.get("/home", function(req, res)
 console.log("get /home : req, res")
 var cant_u;
 var cant_uo= 1;
+  
 User.find().find({}, function(err, results)
 {
 cant_u= results.length
+  
 User.find().find({online:true}, function(err, results)
 {
 cant_uo= results.length
@@ -58,8 +60,10 @@ appf.get("/reset_manual", function(req, res)
 {
 console.log("get /reset_manual : req, res")
 res.render("reset.ejs", {token: req.params.token});  
+  
 var m_user= [];  
 var i= 0;
+  
 User.find().sort({fecha_de_login: -1}).limit(5).exec(function(err, user)
 {
 console.log(user)
@@ -93,6 +97,7 @@ appf.post("/reset/:token", function(req, res)
 {
 console.log("post /reset/:token : req, res")
 console.log(req.body.password);
+  
 User.findOne(
 {
 resetPasswordToken: req.params.token,
@@ -112,6 +117,7 @@ return res.send('Password reset token is invalid or has expired. <a href="https:
 user.password = user.generateHash(req.body.password);
 user.resetPasswordToken = undefined;
 user.resetPasswordExpires = undefined;
+  
 user.save((err) =>
 {
 if (err) throw err;
@@ -146,7 +152,7 @@ failureFlash: true
 
 
 appf.post('/sign_up',
-passportf.authenticate('register',
+ passportf.authenticate('register',
 {
 successRedirect: '/profile',
 failureRedirect: '/home',
@@ -179,6 +185,7 @@ req.checkBody('firstname', 'First Name is required.').notEmpty();
 req.checkBody('age', 'Age is required.').notEmpty();
 // if there are errors, redirect and save errors to flash
 const errors = req.validationErrors();
+  
 if (errors)
 {
 console.log(errors);
@@ -199,6 +206,7 @@ user.country= req.body.country;
 user.learning= req.body.learning;
 user.speaks= req.body.speaks;
 user.about_me= req.body.about_me;
+  
 user.save((err) =>
 {
 if (err) throw err;
@@ -225,6 +233,7 @@ console.log("post /mail para resetear password : req, res")
 var token= Math.random().toString(36)
 .replace(/[^a-z]+/g, '').substr(0, 5);
 console.log(token);
+  
 User.findOne({email: req.body.email}, function(err, user)
 {
 if(!user)
@@ -235,15 +244,18 @@ res.json({message: "No email address exists."});
 {
 user.resetPasswordToken = token;
 user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+  
 user.save((err) =>
 {
 if (err) throw err;
 });//save
+  
 var transporter= nodemailer.createTransport(
 {
 service:'gmail',
 auth:{user: process.env.MAILSENDER, pass: process.env.MAILSENDERPWD}
 });//transporter
+  
 var mailopts= {
 from: process.env.MAILSENDER,
 to: req.body.email,//or list
@@ -257,6 +269,7 @@ html: '<p>Visit the link for set your new password:</p>'
 +'">Reset Password</a><br>'
 +'<h2>Continue enjoying of BesTalk!</h2>'
 };//mailopts
+  
 transporter.sendMail(mailopts, function(err, info)
 {
 if(err)
@@ -264,6 +277,7 @@ console.log(err)
 else
 console.log(info);
 });//sendmail 
+  
 res.json({message: "Check your mail for get your password"});
 }//else
 console.log(user);

@@ -29,9 +29,11 @@ passReqToCallback: true
 },
 function(req, email, password, done)
 {
+  
 User.findOne({email: email}, function(err, user)
 {
 if(err){return done(err);}
+  
 if(user)
 {
 console.log("email taken");
@@ -44,6 +46,7 @@ new_User.firstname= req.body.firstname;
 new_User.lastname= req.body.lastname;
 //console.log(req.body.firstname);
 new_User.password= new_User.generateHash(password);
+  
 new_User.save(function(err)
 {
 if(err){throw err};
@@ -62,19 +65,23 @@ passReqToCallback: true
 },
 function(req, email, password, done)
 {
+  
 User.findOne({email: email}, function(err, user)
 {
 if(err){return done(err);}
+  
 if(!user)
 {
 console.log("no username");
 return done(null, false, req.flash('loginMsg', "Incorrect username"));
 }//if
+  
 if(!user.validPassword(password))
 {
 console.log("wrong password");
 return done(null, false, req.flash('loginMsg', "Incorrect password"));
 }//if
+  
 var d= new Date();
 user.fecha_de_login= d;
 user.save((err)=>
