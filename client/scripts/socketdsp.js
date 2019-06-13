@@ -432,7 +432,7 @@ d.childNodes[2].childNodes[1].classList.add("bac_col_usr_chat_g")
 
 dv_con_chat.appendChild(d)
 
-}
+}//if 
 //juntarlo al room: gnrl !!!
 socket_client.emit("abrir room", roomx);
 }//entrar_a_room
@@ -542,7 +542,7 @@ alert("Empty Button :)");
 //........
 
 
-function enviar_msg(ev, roomx)
+function enviar_msg(ev, roomx, fmx)
 {//event,roomx
 console.log("a enviar_msg: ev, "+roomx)
 ev.preventDefault();
@@ -553,7 +553,14 @@ if(rooms[roomx])
 type_room= "public";
 }else
 {
-type_room= "secret";
+if(fmx.getAttribute("data-type-room") === "private")
+{
+type_room= "private"
+}
+else{
+type_room= "secret";    
+}
+
 }//else
 if(in_chat_room_msg_.value != "")
 {
@@ -684,7 +691,7 @@ dv_chat_room_.innerHTML= '<div id="dv_chat_room_tit_'+roomx+'" class="tab w h30p
 
 +'<div id="dv_chat_room_msg_'+roomx+'" class="pos_a bot h30p w">'
 +'<div class="inl_blo pos_r h w70">'
-+'<form class="wh" onsubmit="enviar_msg(event,\''+roomx+'\')">'
++'<form id="fm_msg_"'+roomx+' data-type-room class="wh" onsubmit="enviar_msg(event,\''+roomx+'\', this)">'
 +'<div class="pos_a h lef rig_30p">'
 +'<input type="text" id="in_chat_room_msg_'+roomx+'" class="pos_a wh" onkeydown="esta_tipeando(this)" autocorrect="off" autocomplete="off" data-room="'+roomx+'" placeholder="write your message">'
 +'</div>'
@@ -921,6 +928,8 @@ d.childNodes[1].childNodes[0].classList.add("bac_col_con_chat_prv")
 d.childNodes[1].childNodes[1].classList.add("bac_col_usr_chat_prv")
 //dv_chat_room_user_bts_
 d.childNodes[2].childNodes[1].classList.add("bac_col_usr_chat_prv")
+d.childNodes[2].childNodes[0].childNodes[0]
+ .setAttribute("data-type-room", "private")
 dv_con_chat.appendChild(d)
 }
 //crear_chat_privado(o_roomx.room_bth);
@@ -1086,7 +1095,7 @@ nudiv.innerHTML= '<div id="dv_tit_opt_game" class="flex_row">'
 +'</select></div><br>'
 /*+'<label><input type="checkbox" id="in_ch_vce">By Voice</label><br>'*/
 +'<div id="dv_rdy_game" class="ali_cen">'
-+'<input type="button" id="bt_rdy_game" class="w_" value="Create" onclick="solicitar_juego()">'
++'<input type="button" id="bt_rdy_game" class="w_" value="Create" onclick="crear_juego()">'
 +'</div></div>';
   
 dv_con_play.appendChild(nudiv);
@@ -1103,38 +1112,71 @@ dv_con_play.removeChild(dv_create_game);
 
 
 
-function solicitar_juego()
+function crear_juego()
 {
-console.log("a solicitar_juego")
+console.log("a crear_juego")
 //var typegame= sl_typ_game.options[sl_typ_game.selectedIndex].value;
 var type_game= /*in_ch_vce.checked!!!*/ null ? "Explain The Word (By Voice)" : "Explain The Word"; 
 var list_word= sl_list.options[sl_list.selectedIndex].id;
 var nro_player= sl_nro_player.options[sl_nro_player.selectedIndex].value;
 dv_con_play.removeChild(dv_create_game);  
   
-socket_client.emit("solicitar game",
+socket_client.emit("crear juego",
 {
 type_game: type_game,
 list_word: list_word,
 nro_player: nro_player
 });
-}//solicitar_juego
+}//crear_juego
 
 
 
-socket_client.on("crear juego", function(o_gamex)
+socket_client.on("ver puerta de juego", function(o_gamex)
 {
 //o_gamex{nro_game,type_game,list_word,nro_player}
-console.log("on: 2crea juego");
+console.log("on: ver puerta de juego");
 console.log(JSON.stringify(o_gamex));
   
+  /*
 crear_juego(
 o_gamex.nro_game,
 o_gamex.type_game,
 o_gamex.list_word,
 o_gamex.nro_player
 ); 
-});//skcl crear juego
+*/
+
+socket_client.emit("tocar puerta de juego",
+{
+nro_game: o_gamex.nro_game, //idjue
+type_game: o_gamex.type_game,
+list_word: o_gamex.list_word,
+nro_player: o_gamex.nro_player
+});  
+  
+});//skcl entrar en juego
+
+
+
+socket_client.on("crear room de juego", function(o_gamex){
+  
+  console.log("on: crear room de juego")
+
+crear_room_de_juego(
+o_gamex.nro_game,
+o_gamex.type_game,
+o_gamex.list_word,
+o_gamex.nro_player
+); 
+  
+socket_client.emit("pedir usuarios al room de juego", {
+nro_game: o_gamex.nro_game, //idjue
+type_game: o_gamex.type_game,
+list_word: o_gamex.list_word,
+nro_player: o_gamex.nro_player
+})
+  
+})//skon crear room de juego
 
 
 
@@ -1190,14 +1232,22 @@ dv_con_play.appendChild(nudiv);
 function juntarse_a_juego(roomjx, nme_juex, lis_juex, nro_playerx)
 {
 console.log("a juntarse_a_juego:"+roomjx+"/-/"+nme_juex+"/-/"+lis_juex+"/-/"+nro_playerx);
-crear_juego(roomjx, nme_juex, lis_juex, nro_playerx);
+//crear_room_de_juego(roomjx, nme_juex, lis_juex, nro_playerx);
+  
+  socket_client.emit("tocar puerta de juego",
+{
+nro_game: roomjx, //idjue
+type_game: nme_juex,
+list_word: lis_juex,
+nro_player: nro_playerx
+});
 }//juntarse o spectate
 
 
 
-function crear_juego(roomjx, nme_juex, lis_juex, nro_playerx)
+function crear_room_de_juego(roomjx, nme_juex, lis_juex, nro_playerx)
 {
-console.log("a crear_juego:"+roomjx+"/-/"+nme_juex+"/-/"+lis_juex+"/-/"+nro_playerx);
+console.log("a crear_room_de_juego:"+roomjx+"/-/"+nme_juex+"/-/"+lis_juex+"/-/"+nro_playerx);
 if(typeof(dv_jue) == "undefined")
 {
 var nudivj= document.createElement("DIV");
@@ -1250,6 +1300,7 @@ nudivj.innerHTML= '<div id="dv_jue_cab">'
   
 dv_con_play.appendChild(nudivj);
   
+  /*
 socket_client.emit("entrar roomj",
 {
 nro_game: roomjx, //idjue
@@ -1257,9 +1308,10 @@ type_game: nme_juex,
 list_word: lis_juex,
 nro_player: nro_playerx
 });
+*/
 
 }//if no esta, crea
-};//crear_juego
+};//crear_room_de_juego
 
 
 

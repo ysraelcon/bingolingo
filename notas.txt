@@ -8,6 +8,7 @@ heroku: .-ten
 .errores
 .cambios
 .soluciones
+.socket
 
 
 ---------------
@@ -321,3 +322,14 @@ for(var opt in dtlstx.options){
 </script>
 
 ...2sl
+
+---socket---
+
+reenviarse a si mismo
+io.to(socket.id).emit("on evento a mi")
+
+enviar a todos y a si mismo
+io.sockets.emit("on evento a todos")
+
+enviar a room
+io.to(roomx).emit("on evento a roomx")
